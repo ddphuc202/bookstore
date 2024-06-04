@@ -13,6 +13,9 @@ const app = express();
 const port = process.env.PORT || 6969;
 const hostname = process.env.HOSTNAME;
 
+var cors = require('cors');
+app.use(cors());
+
 // Config 
 configViewEngine(app);
 configStaticFiles(app);
