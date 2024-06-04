@@ -1,9 +1,9 @@
 // Import any necessary modules or dependencies
 const Book = require('../models/Book');
 
-// Define your book controller object
+// Define book controller object
 const BookController = {
-    // Define your controller methods here
+    // Define controller methods here
     getAllBooks: (req, res) => {
         // Use the book model to get all books from the database
         Book.getAllBooks()

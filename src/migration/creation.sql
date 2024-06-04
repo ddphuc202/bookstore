@@ -34,7 +34,7 @@ CREATE TABLE genres (
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 );
 
--- Table for storing blog post categories
+-- Table for storing post categories
 CREATE TABLE post_categories (
     id INT AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(255) NOT NULL,

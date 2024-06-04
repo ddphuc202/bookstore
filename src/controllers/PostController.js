@@ -1,8 +1,6 @@
 const Post = require('../models/Post');
 
-// Import any necessary modules or dependencies
-
-// Define your post controller object
+// Define post controller object
 const PostController = {
     // Define your controller methods here
     getAllPosts: (req, res) => {
