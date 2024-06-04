@@ -1,6 +1,6 @@
 const homeController = {
     getIndex: (req, res) => {
-        res.send('Welcome to the homepage');
+        return res.render('home.ejs');
     },
     getAbout: (req, res) => {
         res.render('About page');
