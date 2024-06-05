@@ -1,17 +1,13 @@
 const pool = require('../config/database');
 
-class Book {
-    constructor(title, description, price, author, stock) {
-        this.title = title;
-        this.description = description;
-        this.price = price;
-        this.author = author;
-        this.stock = stock;
+class Genre {
+    constructor(name) {
+        this.name = name;
     }
 
-    static getAllBooks() {
+    static getAllGenres() {
         return new Promise((resolve, reject) => {
-            pool.query('SELECT * FROM books WHERE deleted_at IS NULL', (err, results) => {
+            pool.query('SELECT * FROM genres WHERE deleted_at IS NULL', (err, results) => {
                 if (err) {
                     return reject(err);
                 }
@@ -20,9 +16,9 @@ class Book {
         });
     }
 
-    static getBookById(id) {
+    static getGenreById(id) {
         return new Promise((resolve, reject) => {
-            pool.query('SELECT * FROM books WHERE id = ? AND deleted_at IS NULL', id, (err, results) => {
+            pool.query('SELECT * FROM genres WHERE id = ? AND deleted_at IS NULL', id, (err, results) => {
                 if (err) {
                     return reject(err);
                 }
@@ -31,9 +27,9 @@ class Book {
         });
     }
 
-    static createBook(book) {
+    static createGenre(genre) {
         return new Promise((resolve, reject) => {
-            pool.query('INSERT INTO books SET ?', book, (err, results) => {
+            pool.query('INSERT INTO genres SET ?', genre, (err, results) => {
                 if (err) {
                     return reject(err);
                 }
@@ -42,9 +38,9 @@ class Book {
         });
     }
 
-    static updateBook(id, book) {
+    static updateGenre(id, genre) {
         return new Promise((resolve, reject) => {
-            pool.query('UPDATE books SET ? WHERE id = ?', [book, id], (err, results) => {
+            pool.query('UPDATE genres SET ? WHERE id = ?', [genre, id], (err, results) => {
                 if (err) {
                     return reject(err);
                 }
@@ -53,9 +49,9 @@ class Book {
         });
     }
 
-    static deleteBook(id) {
+    static deleteGenre(id) {
         return new Promise((resolve, reject) => {
-            pool.query('UPDATE books SET deleted_at = NOW() WHERE id = ?', [id], (err, results) => {
+            pool.query('UPDATE genres SET deleted_at = NOW() WHERE id = ?', [id], (err, results) => {
                 if (err) {
                     return reject(err);
                 }
@@ -65,4 +61,4 @@ class Book {
     }
 }
 
-module.exports = Book;
+module.exports = Genre;

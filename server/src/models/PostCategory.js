@@ -7,7 +7,7 @@ class PostCategory {
 
     static getAllPostCategories() {
         return new Promise((resolve, reject) => {
-            pool.query('SELECT * FROM post_categories', (err, results) => {
+            pool.query('SELECT * FROM post_categories WHERE deleted_at IS NULL', (err, results) => {
                 if (err) {
                     return reject(err);
                 }
@@ -18,7 +18,7 @@ class PostCategory {
 
     static getPostCategoryById(id) {
         return new Promise((resolve, reject) => {
-            pool.query('SELECT * FROM post_categories WHERE id = ?', [id], (err, results) => {
+            pool.query('SELECT * FROM post_categories WHERE id = ? AND deleted_at IS NULL', [id], (err, results) => {
                 if (err) {
                     return reject(err);
                 }
@@ -51,7 +51,7 @@ class PostCategory {
 
     static deletePostCategory(id) {
         return new Promise((resolve, reject) => {
-            pool.query('DELETE FROM post_categories WHERE id = ?', [id], (err, results) => {
+            pool.query('UPDATE post_categories SET deleted_at = NOW() WHERE id = ?', [id], (err, results) => {
                 if (err) {
                     return reject(err);
                 }

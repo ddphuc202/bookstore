@@ -8,7 +8,7 @@ class Post {
 
     static getAllPosts() {
         return new Promise((resolve, reject) => {
-            pool.query('SELECT * FROM posts', (err, results) => {
+            pool.query('SELECT * FROM posts WHERE deleted_at IS NULL', (err, results) => {
                 if (err) {
                     return reject(err);
                 }
@@ -19,7 +19,7 @@ class Post {
 
     static getPostById(id) {
         return new Promise((resolve, reject) => {
-            pool.query('SELECT * FROM posts WHERE id = ?', id, (err, results) => {
+            pool.query('SELECT * FROM posts WHERE id = ? AND deleted_at IS NULL', id, (err, results) => {
                 if (err) {
                     return reject(err);
                 }
@@ -52,7 +52,7 @@ class Post {
 
     static deletePost(id) {
         return new Promise((resolve, reject) => {
-            pool.query('DELETE FROM posts WHERE id = ?', id, (err, results) => {
+            pool.query('UPDATE posts SET deleted_at = NOW() WHERE id = ?', id, (err, results) => {
                 if (err) {
                     return reject(err);
                 }
