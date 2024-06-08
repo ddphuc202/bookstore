@@ -1,4 +1,3 @@
-require('dotenv').config();
 const express = require('express');
 
 const configViewEngine = require('./config/viewEngine');
@@ -11,8 +10,6 @@ const postRoutes = require('./routes/posts');
 const postCategoryRoutes = require('./routes/post_categories');
 
 const app = express();
-const port = process.env.PORT || 6969;
-const hostname = process.env.HOSTNAME;
 
 const cors = require('cors');
 app.use(cors());
@@ -32,6 +29,4 @@ app.use('/genres', genreRoutes);
 app.use('/posts', postRoutes);
 app.use('/post-categories', postCategoryRoutes);
 
-app.listen(port, () => {
-    console.log(`Server running at http://${hostname}:${port}`);
-}); 
+module.exports = app;
