@@ -1,0 +1,43 @@
+.section_info {
+    padding: 80px 0 50px
+}
+
+.section_info h2 {
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-weight: bold;
+    color: green;;
+    font-size: 28px;
+    display: block;
+    margin-bottom: 3px
+}
+
+.section_info span {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-weight: bold;
+    color: limegreen;
+    font-size: 16px;
+    line-height: 26px;
+    display: block;
+    font-style: italic
+}
+
+.section_info .short-content {
+    padding-top: 19px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 18px;
+    line-height: 26px;
+    color: black;
+    padding-right: 137px;
+    margin-bottom: 41px
+}
+
+/*  */
+
+.section_info .button-default {
+    width: 177px;
+    border-radius: 3px;
+    line-height: 48px;
+    background-color: green;
+    color: white;
+    font-size: 18px;
+}

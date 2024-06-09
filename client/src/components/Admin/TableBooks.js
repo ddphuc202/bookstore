@@ -1,55 +1,74 @@
 import Table from 'react-bootstrap/Table';
 import { Button } from 'react-bootstrap';
-import App from '../App';
-import ModalEditUser from './ModalEditUser';
-import { useState } from 'react';
-const TableBooks = (props) =>{
+import { useEffect, useState } from 'react';
+import axios from 'axios';
+import { Link, Route, useNavigate } from 'react-router-dom';
+import ModalEditBooks from './ModalEditBooks';
+import ModalDeleteBooks from './ModalDeleteBooks';
+const TableBooks = (props) => {
 
-    const [isShowModalEdit, setIsShowModalEdit] = useState(false);
-    const handleClose = () =>{
-        setIsShowModalEdit(false);
+  const [columns, setColmns] = useState([]);
+  const [records, setRecords] = useState([]);
+  const navigate = useNavigate();
+
+
+  const handleSubmit = (id) =>{
+    const conf = window.confirm('Do you want to delete?');
+    if(conf) {
+      axios.delete('http://localhost:3030/books/'+id)
+      .then(res => {
+        alert('Item has deleted!');
+        navigate('/')
+      }).catch(err => console.log(err))
     }
-    return(
-        <Table striped bordered hover>
+  }
+
+  useEffect(() => {
+    axios.get('http://localhost:3030/books').then(res => {
+      setColmns(Object.keys(res.data[0]))
+      setRecords(res.data)
+    })
+  }, [])
+
+  const [isShowModalEdit, setIsShowModalEdit] = useState(false);
+  const handleClose = () => {
+    setIsShowModalEdit(false);
+  }
+  return (
+    <Table striped bordered hover>
       <thead>
         <tr>
-          <th>#</th>
-          <th>Title</th>
-          <th>Author</th>
-          <th>Price</th>
-          <th>Description</th>
+          {columns.map((c, i) => (
+            <th key={i}> {c} </th>
+          ))}
+          <th>Action</th>
         </tr>
       </thead>
       <tbody>
-        <tr>
-          <td>1</td>
-          <td>Mark</td>
-          <td>@mdo</td>
-          <td>Otto</td>
-          <td>2</td>
-          <td><Button onClick={() => setIsShowModalEdit(true)} variant="warning">Edit</Button></td>
-        </tr>
-        <tr>
-          <td>2</td>
-          <td>Jacob</td>
-          <td>@fat</td>
-          <td>Thornton</td>
-          <td>1</td>
-          <td><Button variant="warning">Edit</Button></td>
-        </tr>
-        <tr>
-          <td>3</td>
-          <td>Jayce</td>
-          <td>@twitter</td>
-          <td>Larry the Bird</td>
-          <td>2</td>
-          <td><Button variant="warning">Edit</Button></td>
-        </tr>
+        {
+          records.map((d, i) => (
+            <tr key={i}>
+              <td>{d.id}</td>
+              <td>{d.title}</td>
+              <td>{d.author}</td>
+              <td>{d.description}</td>
+              <td>{d.price}</td>
+              <td>{d.sale_percent}</td>
+              <td>{d.is_active}</td>
+              <td>{d.genre_id}</td>
+              <td>{d.stock}</td>
+              <td>{d.created_at}</td>
+              <td>{d.updated_at}</td>
+              <td>
+                <Link to={`/manage-edit-books/${d.id}`} className='btn btn-warning'>Update</Link>
+                <button onClick={event => handleSubmit(d.id)} className='btn btn-danger'>Delete</button>
+              </td>
+            </tr>
+          ))
+        }
       </tbody>
-        <ModalEditUser
-            show={isShowModalEdit}
-            handleClose={handleClose} />
+
     </Table>
-    )
+  )
 }
 export default TableBooks;

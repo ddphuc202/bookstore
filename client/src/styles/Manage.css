@@ -1,0 +1,17 @@
+body .button-add{
+    align-items: center;
+    display: flex;
+    justify-content: space-between ;
+}
+
+.button-add h1{
+    color: red;
+      margin-left: 50px;
+      margin-top: 20px;
+}
+
+.button-add button{
+    margin-right: 40px;
+      margin-top: 20px;
+      margin-bottom: 5px;
+}

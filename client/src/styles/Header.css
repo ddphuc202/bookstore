@@ -1,6 +1,6 @@
 header {
     height: 90px;
-    border-bottom: solid 2px var(--main-color);
+    border-bottom: solid 1px green;
     position: relative
 }
 
@@ -10,12 +10,12 @@ header .logo {
     display: flex
 }
 
-header .logo img {
+/* header .logo img {
     vertical-align: middle;
     border-style: none
-}
+} */
 
-header .logo span {
+/* header .logo span {
     position: absolute;
     bottom: 8px;
     left: 90px;
@@ -23,12 +23,11 @@ header .logo span {
     font-family: var(--font-base);
     font-style: italic;
     color: var(--main-color)
-}
+} */
 
 header .search-bar {
     height: 40px;
     margin: 24px 0 -0 -38px;
-    padding: 0;
     position: relative;
     border-radius: 30px;
     overflow: hidden;
@@ -37,11 +36,11 @@ header .search-bar {
     margin-right: 70px
 }
 
-@media (min-width: 1200px) {
+/* @media (min-width: 1200px) {
     header .search-bar {
         float: right
     }
-}
+} */
 
 header .search-bar input {
     height: 40px;
