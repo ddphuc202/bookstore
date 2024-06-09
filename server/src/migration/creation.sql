@@ -38,15 +38,6 @@ CREATE TABLE genres (
     deleted_at TIMESTAMP NULL
 );
 
--- Table for storing post categories
-CREATE TABLE post_categories (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    name VARCHAR(255) NOT NULL,
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-    deleted_at TIMESTAMP NULL
-);
-
 -- Table for storing books
 CREATE TABLE books (
     id INT AUTO_INCREMENT PRIMARY KEY,
@@ -54,7 +45,7 @@ CREATE TABLE books (
     author VARCHAR(255) NOT NULL,
     description TEXT,
     price DECIMAL(10, 2) NOT NULL,
-    sale_percent DECIMAL(5, 2) DEFAULT 0,
+    discount DECIMAL(5, 2) DEFAULT 0,
     genre_id INT,
     stock INT DEFAULT 0,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
@@ -70,9 +61,9 @@ CREATE TABLE posts (
     content TEXT NOT NULL,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-    category_id INT, -- added to link with categories
+    admin_id INT,
     deleted_at TIMESTAMP NULL,
-    FOREIGN KEY (category_id) REFERENCES post_categories(id)
+    FOREIGN KEY (admin_id) REFERENCES admins(id)
 );
 
 -- Table for storing book images
