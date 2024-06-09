@@ -76,7 +76,7 @@ CREATE TABLE posts (
 );
 
 -- Table for storing book images
-CREATE TABLE book_images (
+CREATE TABLE images (
     id INT AUTO_INCREMENT PRIMARY KEY,
     book_id INT,
     image_url VARCHAR(255) NOT NULL,
@@ -85,15 +85,6 @@ CREATE TABLE book_images (
     FOREIGN KEY (book_id) REFERENCES books(id)
 );
 
--- Table for storing post images
-CREATE TABLE post_images (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    post_id INT,
-    image_url VARCHAR(255) NOT NULL,
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    deleted_at TIMESTAMP NULL,
-    FOREIGN KEY (post_id) REFERENCES posts(id)
-);
 
 -- Table for storing orders
 CREATE TABLE orders (
