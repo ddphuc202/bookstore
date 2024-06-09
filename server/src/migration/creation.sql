@@ -54,8 +54,8 @@ CREATE TABLE books (
     FOREIGN KEY (genre_id) REFERENCES genres(id)
 );
 
--- Table for storing blog posts
-CREATE TABLE posts (
+-- Table for storing articles
+CREATE TABLE articles (
     id INT AUTO_INCREMENT PRIMARY KEY,
     title VARCHAR(255) NOT NULL,
     content TEXT NOT NULL,

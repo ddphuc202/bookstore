@@ -1,14 +1,13 @@
 const pool = require('../config/database');
 
-class Post {
-    constructor(title, content) {
-        this.title = title;
-        this.content = content;
+class Customer {
+    constructor(name) {
+        this.name = name;
     }
 
-    static getAllPosts() {
+    static getAllCustomers() {
         return new Promise((resolve, reject) => {
-            pool.query('SELECT * FROM posts WHERE deleted_at IS NULL', (err, results) => {
+            pool.query('SELECT * FROM customers WHERE deleted_at IS NULL', (err, results) => {
                 if (err) {
                     return reject(err);
                 }
@@ -17,9 +16,9 @@ class Post {
         });
     }
 
-    static getPostById(id) {
+    static getCustomerById(id) {
         return new Promise((resolve, reject) => {
-            pool.query('SELECT * FROM posts WHERE id = ? AND deleted_at IS NULL', id, (err, results) => {
+            pool.query('SELECT * FROM customers WHERE id = ? AND deleted_at IS NULL', [id], (err, results) => {
                 if (err) {
                     return reject(err);
                 }
@@ -28,9 +27,9 @@ class Post {
         });
     }
 
-    static createPost(post) {
+    static createCustomer(newCategory) {
         return new Promise((resolve, reject) => {
-            pool.query('INSERT INTO posts SET ?', post, (err, results) => {
+            pool.query('INSERT INTO customers SET ?', newCategory, (err, results) => {
                 if (err) {
                     return reject(err);
                 }
@@ -39,27 +38,27 @@ class Post {
         });
     }
 
-    static updatePost(id, post) {
+    static updateCustomer(id, updatedCategory) {
         return new Promise((resolve, reject) => {
-            pool.query('UPDATE posts SET ? WHERE id = ?', [post, id], (err, results) => {
+            pool.query('UPDATE customers SET ? WHERE id = ?', [updatedCategory, id], (err, results) => {
                 if (err) {
                     return reject(err);
                 }
-                return resolve(results.changedRows);
+                return resolve(results);
             });
         });
     }
 
-    static deletePost(id) {
+    static deleteCustomer(id) {
         return new Promise((resolve, reject) => {
-            pool.query('UPDATE posts SET deleted_at = NOW() WHERE id = ?', id, (err, results) => {
+            pool.query('UPDATE customers SET deleted_at = NOW() WHERE id = ?', [id], (err, results) => {
                 if (err) {
                     return reject(err);
                 }
-                return resolve(results.affectedRows);
+                return resolve(results);
             });
         });
     }
 }
 
-module.exports = Post;
+module.exports = Customer;

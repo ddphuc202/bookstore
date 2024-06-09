@@ -6,8 +6,8 @@ const configStaticFiles = require('./config/staticFiles');
 const webRoutes = require('./routes/web');
 const bookRoutes = require('./routes/books');
 const genreRoutes = require('./routes/genres');
-const postRoutes = require('./routes/posts');
-const postCategoryRoutes = require('./routes/post_categories');
+const articleRoutes = require('./routes/articles');
+const customerRoutes = require('./routes/customers');
 
 const app = express();
 
@@ -26,7 +26,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use('/', webRoutes);
 app.use('/books', bookRoutes);
 app.use('/genres', genreRoutes);
-app.use('/posts', postRoutes);
-app.use('/post-categories', postCategoryRoutes);
+app.use('/articles', articleRoutes);
+app.use('/customers', customerRoutes);
 
 module.exports = app;

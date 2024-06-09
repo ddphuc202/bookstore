@@ -1,13 +1,14 @@
 const pool = require('../config/database');
 
-class PostCategory {
-    constructor(name) {
-        this.name = name;
+class Article {
+    constructor(title, content) {
+        this.title = title;
+        this.content = content;
     }
 
-    static getAllPostCategories() {
+    static getAllArticles() {
         return new Promise((resolve, reject) => {
-            pool.query('SELECT * FROM post_categories WHERE deleted_at IS NULL', (err, results) => {
+            pool.query('SELECT * FROM articles WHERE deleted_at IS NULL', (err, results) => {
                 if (err) {
                     return reject(err);
                 }
@@ -16,9 +17,9 @@ class PostCategory {
         });
     }
 
-    static getPostCategoryById(id) {
+    static getArticleById(id) {
         return new Promise((resolve, reject) => {
-            pool.query('SELECT * FROM post_categories WHERE id = ? AND deleted_at IS NULL', [id], (err, results) => {
+            pool.query('SELECT * FROM articles WHERE id = ? AND deleted_at IS NULL', id, (err, results) => {
                 if (err) {
                     return reject(err);
                 }
@@ -27,9 +28,9 @@ class PostCategory {
         });
     }
 
-    static createPostCategory(newCategory) {
+    static createArticle(article) {
         return new Promise((resolve, reject) => {
-            pool.query('INSERT INTO post_categories SET ?', newCategory, (err, results) => {
+            pool.query('INSERT INTO articles SET ?', article, (err, results) => {
                 if (err) {
                     return reject(err);
                 }
@@ -38,27 +39,27 @@ class PostCategory {
         });
     }
 
-    static updatePostCategory(id, updatedCategory) {
+    static updateArticle(id, article) {
         return new Promise((resolve, reject) => {
-            pool.query('UPDATE post_categories SET ? WHERE id = ?', [updatedCategory, id], (err, results) => {
+            pool.query('UPDATE articles SET ? WHERE id = ?', [article, id], (err, results) => {
                 if (err) {
                     return reject(err);
                 }
-                return resolve(results);
+                return resolve(results.changedRows);
             });
         });
     }
 
-    static deletePostCategory(id) {
+    static deleteArticle(id) {
         return new Promise((resolve, reject) => {
-            pool.query('UPDATE post_categories SET deleted_at = NOW() WHERE id = ?', [id], (err, results) => {
+            pool.query('UPDATE articles SET deleted_at = NOW() WHERE id = ?', id, (err, results) => {
                 if (err) {
                     return reject(err);
                 }
-                return resolve(results);
+                return resolve(results.affectedRows);
             });
         });
     }
 }
 
-module.exports = PostCategory;
+module.exports = Article;

@@ -1,4 +1,3 @@
-// Import any necessary modules or dependencies
 const Book = require('../models/Book');
 
 // Define book controller object
