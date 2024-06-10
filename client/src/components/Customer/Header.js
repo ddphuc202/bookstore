@@ -68,7 +68,7 @@ const Header = () => {
                                             </ul>
                                         </li>
                                         <li className="nav-item has-child   has-mega">
-                                            <a className="a-img caret-down" href="/collections/all" title="Sách Nhã Nam">
+                                            <a className="a-img caret-down" href="/books" title="Sách Nhã Nam">
                                                 Sách Nhã Nam
                                             </a>
                                             <i className="fa fa-angle-down"></i>
@@ -201,57 +201,13 @@ const Header = () => {
 
                                                 </ul>
                                             </div>			</li>
+                                        
                                         <li className="nav-item ">
-                                            <a className="a-img" href="/tac-gia" title="Tác giả">
-                                                Tác giả
-                                            </a>
-                                        </li>
-                                        <li className="nav-item has-child  ">
-                                            <a className="a-img caret-down" href="/cuoc-thi" title="Cuộc Thi">
-                                                Cuộc Thi
-                                            </a>
-                                            <i className="fa fa-angle-down"></i>
-                                            <ul className="item_small">
-                                                <li>
-                                                    <a className="" href="/ai-do-doc-cung-ta" title="AI ĐÓ ĐỌC CÙNG TA">
-                                                        AI ĐÓ ĐỌC CÙNG TA
-                                                    </a>
-                                                </li>
-                                            </ul>
-                                        </li>
-                                        <li className="nav-item ">
-                                            <a className="a-img" href="/gioi-thieu" title="Về Nhã Nam">
+                                            <a className="a-img" href="/about-page" title="Về Nhã Nam">
                                                 Về Nhã Nam
                                             </a>
                                         </li>
-                                        <li className="nav-item has-child  ">
-                                            <a className="a-img caret-down" href="/lien-he" title="Liên hệ">
-                                                Liên hệ
-                                            </a>
-                                            <i className="fa fa-angle-down"></i>
-                                            <ul className="item_small">
-                                                <li>
-                                                    <a className="" href="/he-thong-hieu-sach" title="Hệ Thống Hiệu Sách">
-                                                        Hệ Thống Hiệu Sách
-                                                    </a>
-                                                </li>
-                                                <li>
-                                                    <a className="" href="/he-thong-cua-hang" title="Hệ Thống Phát Hành">
-                                                        Hệ Thống Phát Hành
-                                                    </a>
-                                                </li>
-                                                <li>
-                                                    <a className="" href="/gui-thu-cho-nha-nam" title="Gửi Thư Cho Nhã Nam">
-                                                        Gửi Thư Cho Nhã Nam
-                                                    </a>
-                                                </li>
-                                                <li>
-                                                    <a className="" href="/tuyen-dung" title="Tuyển Dụng">
-                                                        Tuyển Dụng
-                                                    </a>
-                                                </li>
-                                            </ul>
-                                        </li>
+                                        
                                     </ul>
                                 </nav>
                             </div>
