@@ -1,0 +1,14 @@
+.admin-container {
+    display: flex;
+} 
+
+.admin_sidebar{
+    height: 1000px;
+    background-image: url('../image/background-banner.png');
+}
+
+.admin-content{
+    padding-left: 20px;
+    padding-right: 20px;
+}
+

@@ -1,0 +1,33 @@
+.blogpage h1 {
+    margin-bottom: 30px;
+    margin-top: 0;
+    padding: 0
+}
+
+.blogpage .aside-item {
+    margin-top: 5px
+}
+
+.blogpage .item_blog_base {
+    margin-bottom: 45px
+}
+
+.blogpage .item_blog_base .thumb {
+    display: block;
+    border-radius: 5px;
+    margin-bottom: 15px
+}
+
+.blogpage .item_blog_base .tagname {
+    margin-bottom: 11px;
+    border-radius: 0 5px 5px 0
+}
+
+.blogpage .item_blog_base h3 {
+    font-family: var(--font-base-medium);
+    margin-bottom: 10px
+}
+
+.blogpage .item_blog_base p {
+    display: none
+}
