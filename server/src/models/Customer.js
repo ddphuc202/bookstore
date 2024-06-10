@@ -7,7 +7,7 @@ class Customer {
 
     static getAllCustomers() {
         return new Promise((resolve, reject) => {
-            pool.query('SELECT * FROM customers WHERE deleted_at IS NULL', (err, results) => {
+            pool.query('SELECT * FROM customers WHERE deleted_at IS NULL ORDER BY updated_at DESC', (err, results) => {
                 if (err) {
                     return reject(err);
                 }
