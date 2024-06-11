@@ -8,9 +8,6 @@ import { useParams } from 'react-router-dom';
 
 
 function ModalEditArticles() {
-    const [show, setShow] = useState(false);
-    const handleClose = () => setShow(false);
-    const handleShow = () => setShow(true);
 
     const { id } = useParams();
     const [data, setData] = useState([]);
@@ -38,7 +35,7 @@ function ModalEditArticles() {
             >
 
                 <Modal.Dialog>
-                    <Modal.Header closeButton>
+                    <Modal.Header >
                         <Modal.Title>Edit Articles</Modal.Title>
                     </Modal.Header>
                     <Modal.Body>
@@ -62,7 +59,6 @@ function ModalEditArticles() {
 
                     </Modal.Body>
                     <Modal.Footer>
-                        <Button variant="secondary" closeButton>Close</Button>
                         <Button variant="primary" onClick={(event) => handleSubmit(event)}>Save update</Button>
                     </Modal.Footer>
                 </Modal.Dialog>

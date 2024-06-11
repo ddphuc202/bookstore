@@ -5,6 +5,7 @@ import ModalAddNewArticles from '../../components/Admin/ModalAddNewArticles';
 import Header from '../../components/Admin/Header';
 import SideBar from '../../components/Admin/SideBar';
 import { Container } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
 
 const ManageArticles = (props) => {
     return (
@@ -17,7 +18,7 @@ const ManageArticles = (props) => {
                 <div className='admin-content'>
                     <div className='button-add'>
                         <h1><b>Manage Articles</b></h1>
-                        <ModalAddNewArticles />
+                        <Link to={'/manage-add-articles'} className='btn btn-primary'>Add New Article</Link>
                     </div>
                     <br></br>
                     <TableArticles />

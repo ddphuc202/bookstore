@@ -14,7 +14,7 @@ const NewBooks = () => {
 			setColmns(Object.keys(res.data[0]))
 			setRecords(res.data)
 		})
-	}, [])
+	}, [] )
 
 	const responsive = {
 		superLargeDesktop: {

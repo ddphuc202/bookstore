@@ -5,6 +5,7 @@ import ModalAddNewCustomers from '../../components/Admin/ModalAddNewCustomers';
 import Header from '../../components/Admin/Header';
 import SideBar from '../../components/Admin/SideBar';
 import { Container } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
 
 const ManageCustomers = (props) => {
     return (
@@ -14,10 +15,10 @@ const ManageCustomers = (props) => {
                 <div className='admin_sidebar'>
                     <SideBar />
                 </div>
-                <div className='admin-content'>
+                <div className='admin-content' style={{width: "100%"}}>
                     <div className='button-add'>
                         <h1><b>Manage Customers</b></h1>
-                        <ModalAddNewCustomers />
+                        <Link to={'/manage-add-customers'} className='btn btn-primary'>Add New Customer</Link>
                     </div>
                     <br></br>
                     <TableCustomers />

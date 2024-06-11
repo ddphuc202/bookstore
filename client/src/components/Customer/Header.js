@@ -69,7 +69,7 @@ const Header = () => {
                                         </li>
                                         <li className="nav-item has-child   has-mega">
                                             <a className="a-img caret-down" href="/books" title="Sách Nhã Nam">
-                                                Sách Nhã Nam
+                                                Sách Khai Tâm
                                             </a>
                                             <i className="fa fa-angle-down"></i>
                                             <div className="mega-content">

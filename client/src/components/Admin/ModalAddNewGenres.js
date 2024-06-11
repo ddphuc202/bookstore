@@ -6,15 +6,7 @@ import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
 function ModalAddNewGenres() {
-    const [show, setShow] = useState(false);
-
-    const handleClose = () => setShow(false);
-    const handleShow = () => setShow(true);
-
-
     const [name, setName] = useState('');
-    
-
     const navigate = useNavigate();
 
 
@@ -31,34 +23,29 @@ function ModalAddNewGenres() {
 
     return (
         <>
-            <Button variant="primary" onClick={handleShow}>
-                Add New Books
-            </Button>
+            <div
+                className="modal show"
+                style={{ display: 'block', position: 'initial' }}
+            >
+                <Modal.Dialog>
+                    <Modal.Header >
+                        <Modal.Title>Add New Genres</Modal.Title>
+                    </Modal.Header>
 
-            <Modal show={show} onHide={handleClose}>
-                <Modal.Header closeButton>
-                    <Modal.Title>New Genres</Modal.Title>
-                </Modal.Header>
-                <Modal.Body>
+                    <Modal.Body>
+                        <Form>
+                            <Form.Group className="mb-3" controlId="formBasicEmail" >
+                                <Form.Label>Genres Name</Form.Label>
+                                <Form.Control type="text" placeholder="Enter Genres" value={name} onChange={(event) => setName(event.target.value)} />
+                            </Form.Group>
+                        </Form>
+                    </Modal.Body>
 
-                    <Form>
-                        <Form.Group className="mb-3" controlId="formBasicEmail" >
-                            <Form.Label>Genres Name</Form.Label>
-                            <Form.Control type="text" placeholder="Enter Genres" value={name} onChange={(event) => setName(event.target.value)} />
-                        </Form.Group>
-                    </Form>
-
-
-                </Modal.Body>
-                <Modal.Footer>
-                    <Button variant="secondary" onClick={handleClose}>
-                        Close
-                    </Button>
-                    <Button variant="primary" onClick={(event) => handleSubmit(event)}>
-                        Save Changes
-                    </Button>
-                </Modal.Footer>
-            </Modal>
+                    <Modal.Footer>
+                        <Button variant="primary" onClick={(event) => handleSubmit(event)}>Save changes</Button>
+                    </Modal.Footer>
+                </Modal.Dialog>
+            </div>
         </>
     );
 }

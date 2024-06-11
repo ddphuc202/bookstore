@@ -7,11 +7,7 @@ import { useNavigate } from 'react-router-dom';
 import { useParams } from 'react-router-dom';
 
 
-function ModalEditGenres() {
-    const [show, setShow] = useState(false);
-    const handleClose = () => setShow(false);
-    const handleShow = () => setShow(true);
-
+function ModalEditGenres() {    
     const { id } = useParams();
     const [data, setData] = useState([]);
     const navigate = useNavigate();
@@ -38,7 +34,7 @@ function ModalEditGenres() {
             >
 
                 <Modal.Dialog>
-                    <Modal.Header closeButton>
+                    <Modal.Header >
                         <Modal.Title>Edit Genres</Modal.Title>
                     </Modal.Header>
                     <Modal.Body>
@@ -58,7 +54,6 @@ function ModalEditGenres() {
 
                     </Modal.Body>
                     <Modal.Footer>
-                        <Button variant="secondary" closeButton>Close</Button>
                         <Button variant="primary" onClick={(event) => handleSubmit(event)}>Save update</Button>
                     </Modal.Footer>
                 </Modal.Dialog>

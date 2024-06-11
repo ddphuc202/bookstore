@@ -6,12 +6,6 @@ import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
 function ModalAddNewCustomers() {
-    const [show, setShow] = useState(false);
-
-    const handleClose = () => setShow(false);
-    const handleShow = () => setShow(true);
-
-
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPass] = useState('');
@@ -38,54 +32,50 @@ function ModalAddNewCustomers() {
 
     return (
         <>
-            <Button variant="primary" onClick={handleShow}>
-                Add New Customers
-            </Button>
+            <div
+                className="modal show"
+                style={{ display: 'block', position: 'initial' }}
+            >
+                <Modal.Dialog>
+                    <Modal.Header >
+                        <Modal.Title>Add New Customer</Modal.Title>
+                    </Modal.Header>
 
-            <Modal show={show} onHide={handleClose}>
-                <Modal.Header closeButton>
-                    <Modal.Title>New Customers</Modal.Title>
-                </Modal.Header>
-                <Modal.Body>
+                    <Modal.Body>
+                        <Form>
+                            <Form.Group className="mb-3" controlId="formBasicEmail" >
+                                <Form.Label>Name</Form.Label>
+                                <Form.Control type="text" placeholder="Enter name" value={name} onChange={(event) => setName(event.target.value)} />
+                            </Form.Group>
 
-                    <Form>
-                        <Form.Group className="mb-3" controlId="formBasicEmail" >
-                            <Form.Label>Name</Form.Label>
-                            <Form.Control type="text" placeholder="Enter name" value={name} onChange={(event) => setName(event.target.value)} />
-                        </Form.Group>
+                            <Form.Group className="mb-3" controlId="formBasicPassword">
+                                <Form.Label>Email</Form.Label>
+                                <Form.Control type="text" placeholder="Email" value={email} onChange={(event) => setEmail(event.target.value)} />
+                            </Form.Group>
 
-                        <Form.Group className="mb-3" controlId="formBasicPassword">
-                            <Form.Label>Email</Form.Label>
-                            <Form.Control type="text" placeholder="Email" value={email} onChange={(event) => setEmail(event.target.value)} />
-                        </Form.Group>
+                            <Form.Group className="mb-3" controlId="formBasicPassword">
+                                <Form.Label>Password</Form.Label>
+                                <Form.Control type="text" placeholder="Password" value={password} onChange={(event) => setPass(event.target.value)} />
+                            </Form.Group>
 
-                        <Form.Group className="mb-3" controlId="formBasicPassword">
-                            <Form.Label>Password</Form.Label>
-                            <Form.Control type="text" placeholder="Password" value={password} onChange={(event) => setPass(event.target.value)} />
-                        </Form.Group>
+                            <Form.Group className="mb-3" controlId="formBasicPassword">
+                                <Form.Label>Address</Form.Label>
+                                <Form.Control type="text" placeholder="Address" value={address} onChange={(event) => setAddress(event.target.value)} />
+                            </Form.Group>
 
-                        <Form.Group className="mb-3" controlId="formBasicPassword">
-                            <Form.Label>Address</Form.Label>
-                            <Form.Control type="text" placeholder="Address" value={address} onChange={(event) => setAddress(event.target.value)} />
-                        </Form.Group>
+                            <Form.Group className="mb-3" controlId="formBasicPassword">
+                                <Form.Label>Phone Number</Form.Label>
+                                <Form.Control type="text" placeholder="Phone number" value={phone_number} onChange={(event) => setPhone(event.target.value)} />
+                            </Form.Group>
+                        </Form>
+                    </Modal.Body>
 
-                        <Form.Group className="mb-3" controlId="formBasicPassword">
-                            <Form.Label>Phone Number</Form.Label>
-                            <Form.Control type="text" placeholder="Phone number" value={phone_number} onChange={(event) => setPhone(event.target.value)} />
-                        </Form.Group>
-                    </Form>
+                    <Modal.Footer>
+                        <Button variant="primary" onClick={(event) => handleSubmit(event)}>Save changes</Button>
+                    </Modal.Footer>
+                </Modal.Dialog>
+            </div>
 
-
-                </Modal.Body>
-                <Modal.Footer>
-                    <Button variant="secondary" onClick={handleClose}>
-                        Close
-                    </Button>
-                    <Button variant="primary" onClick={(event) => handleSubmit(event)}>
-                        Save Changes
-                    </Button>
-                </Modal.Footer>
-            </Modal>
         </>
     );
 }

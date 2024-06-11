@@ -18,7 +18,7 @@ const TableBooks = (props) => {
       axios.delete('http://localhost:3030/books/'+id)
       .then(res => {
         alert('Item has deleted!');
-        navigate('/')
+        navigate('/manage-books')
       }).catch(err => console.log(err))
     }
   }
@@ -28,7 +28,7 @@ const TableBooks = (props) => {
       setColmns(Object.keys(res.data[0]))
       setRecords(res.data)
     })
-  }, [])
+  }, )
 
   const [isShowModalEdit, setIsShowModalEdit] = useState(false);
   const handleClose = () => {
@@ -53,7 +53,7 @@ const TableBooks = (props) => {
               <td>{d.author}</td>
               <td>{d.description}</td>
               <td>{d.price}</td>
-              <td>{d.sale_percent}</td>
+              <td>{d.discount}</td>
               <td>{d.is_active}</td>
               <td>{d.genre_id}</td>
               <td>{d.stock}</td>

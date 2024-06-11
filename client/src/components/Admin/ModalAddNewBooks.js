@@ -6,12 +6,6 @@ import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
 function ModalAddNewBooks() {
-    const [show, setShow] = useState(false);
-
-    const handleClose = () => setShow(false);
-    const handleShow = () => setShow(true);
-
-
     const [title, setTitle] = useState('');
     const [author, setAuthor] = useState('');
     const [description, setDescription] = useState('');
@@ -29,27 +23,27 @@ function ModalAddNewBooks() {
             author: author,
             description: description,
             price: price,
-            sale_percent: sale,
+            discount: sale,
             stock: stock
         }
         axios.post('http://localhost:3030/books', data).then(res => {
             alert('Data add successfully!');
-            navigate('/');
+            navigate('/manage-books');
         }).catch(err => console.log(err));
     }
 
     return (
         <>
-            <Button variant="primary" onClick={handleShow}>
-                Add New Books
-            </Button>
+            <div
+                className="modal show"
+                style={{ display: 'block', position: 'initial' }}
+            >
+                <Modal.Dialog>
+                    <Modal.Header >
+                        <Modal.Title>Add New Book</Modal.Title>
+                    </Modal.Header>
 
-            <Modal show={show} onHide={handleClose}>
-                <Modal.Header closeButton>
-                    <Modal.Title>New Books</Modal.Title>
-                </Modal.Header>
-                <Modal.Body>
-
+                    <Modal.Body>
                     <Form>
                         <Form.Group className="mb-3" controlId="formBasicEmail" >
                             <Form.Label>Title</Form.Label>
@@ -81,18 +75,15 @@ function ModalAddNewBooks() {
                             <Form.Control type="number" placeholder="" value={stock} onChange={(event) => setStock(event.target.value)} />
                         </Form.Group>
                     </Form>
+                    </Modal.Body>
+                    
+                    <Modal.Footer>
+                        
+                        <Button variant="primary" onClick={(event) => handleSubmit(event)}>Save changes</Button>
+                    </Modal.Footer>
+                </Modal.Dialog>
+            </div>
 
-
-                </Modal.Body>
-                <Modal.Footer>
-                    <Button variant="secondary" onClick={handleClose}>
-                        Close
-                    </Button>
-                    <Button variant="primary" onClick={(event) => handleSubmit(event)}>
-                        Save Changes
-                    </Button>
-                </Modal.Footer>
-            </Modal>
         </>
     );
 }

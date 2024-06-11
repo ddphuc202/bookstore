@@ -8,9 +8,6 @@ import { useParams } from 'react-router-dom';
 
 
 function ModalEditBooks() {
-    const [show, setShow] = useState(false);
-    const handleClose = () => setShow(false);
-    const handleShow = () => setShow(true);
 
     const { id } = useParams();
     const [data, setData] = useState([]);
@@ -21,7 +18,7 @@ function ModalEditBooks() {
         axios.put('http://localhost:3030/books/'+ id, data)
             .then(res => {
                 alert("Data update successfully!");
-                navigate('/');
+                navigate('/manage-books');
             })
     }
 
@@ -38,7 +35,7 @@ function ModalEditBooks() {
             >
 
                 <Modal.Dialog>
-                    <Modal.Header closeButton>
+                    <Modal.Header >
                         <Modal.Title>Modal title</Modal.Title>
                     </Modal.Header>
                     <Modal.Body>
@@ -83,7 +80,6 @@ function ModalEditBooks() {
 
                     </Modal.Body>
                     <Modal.Footer>
-                        <Button variant="secondary" closeButton>Close</Button>
                         <Button variant="primary" onClick={(event) => handleSubmit(event)}>Save update</Button>
                     </Modal.Footer>
                 </Modal.Dialog>

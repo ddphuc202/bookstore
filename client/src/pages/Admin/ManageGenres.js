@@ -5,6 +5,7 @@ import ModalAddNewGenres from '../../components/Admin/ModalAddNewGenres';
 import Header from '../../components/Admin/Header';
 import SideBar from '../../components/Admin/SideBar';
 import { Container } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
 
 const ManageGenres = (props) => {
     return (
@@ -14,10 +15,10 @@ const ManageGenres = (props) => {
                 <div className='admin_sidebar'>
                     <SideBar />
                 </div>
-                <div className='admin-content'>
+                <div className='admin-content'style={{width: "100%"}}>
                     <div className='button-add'>
                         <h1><b>Manage Genres</b></h1>
-                        <ModalAddNewGenres />
+                        <Link to={'/manage-add-genres'} className='btn btn-primary'>Add New Genres</Link>
                     </div>
                     <br></br>
                     <TableGenres />

@@ -78,19 +78,19 @@ const Books = () => {
                                         xếp theo <span>Mặc định</span></span>
                                     <ul>
                                         <li className="btn-quick-sort default active">
-                                            <a href="javascript:;" onclick="sortby('default')"
+                                            <a href="javascript:;" onClick="sortby('default')"
                                                 title="Mặc định"><i></i>Mặc định</a>
                                         </li>
                                         <li className="btn-quick-sort created-desc">
-                                            <a href="javascript:;" onclick="sortby('created-desc')"
+                                            <a href="javascript:;" onClick="sortby('created-desc')"
                                                 title="Sách mới"><i></i>Sách mới</a>
                                         </li>
                                         <li className="btn-quick-sort price-desc">
-                                            <a href="javascript:;" onclick="sortby('price-asc')"
+                                            <a href="javascript:;" onClick="sortby('price-asc')"
                                                 title="Giá thấp - cao"><i></i>Giá thấp - cao</a>
                                         </li>
                                         <li className="btn-quick-sort price-asc">
-                                            <a href="javascript:;" onclick="sortby('price-desc')"
+                                            <a href="javascript:;" onClick="sortby('price-desc')"
                                                 title="Giá cao - thấp"><i></i>Giá cao - thấp</a>
                                         </li>
                                     </ul>
@@ -108,7 +108,7 @@ const Books = () => {
 
                                                 <form action="/cart/add" method="post"
                                                     className="variants product-action wishItem" data-cart-form=""
-                                                    data-id="product-actions-36086469" enctype="multipart/form-data">
+                                                    data-id="product-actions-36086469" encType="multipart/form-data">
                                                     <div className="thumb">
                                                         <a className="image_thumb" href="/hon-don-va-khu-vuon-nha-nam"
                                                             title="HỖN ĐỘN VÀ KHU VƯỜN">
@@ -122,7 +122,7 @@ const Books = () => {
                                                     </div>
                                                     <div className="info-product">
                                                         <h3 className="product-name"><a href="/hon-don-va-khu-vuon-nha-nam"
-                                                            title="HỖN ĐỘN VÀ KHU VƯỜN">{book.title}</a></h3>
+                                                            title="HỖN ĐỘN VÀ KHU VƯỜN"><b>{book.title}</b></a></h3>
 
                                                         <div className="price-box">
                                                             <span className="price">{book.price}$</span>
@@ -130,10 +130,12 @@ const Books = () => {
 
                                                         </div>
 
-                                                    </div>
-                                                    <button classNameName='btn-buy btn-left btn-views  btn-buy-now-grid' >
+                                                        <button className='btn-buy btn-left btn-views  btn-buy-now-grid' >
 														Thêm vào giỏ
 													</button>
+
+                                                    </div>
+                                                    
                                                 </form>
 
                                             </div>
