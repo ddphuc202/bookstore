@@ -7,40 +7,35 @@ import ModalEditBooks from './ModalEditBooks';
 import ModalDeleteBooks from './ModalDeleteBooks';
 const TableGenres = (props) => {
 
-  const [columns, setColmns] = useState([]);
   const [records, setRecords] = useState([]);
   const navigate = useNavigate();
 
 
-  const handleSubmit = (id) =>{
+  const handleSubmit = (id) => {
     const conf = window.confirm('Do you want to delete?');
-    if(conf) {
-      axios.delete('http://localhost:3030/genres/'+id)
-      .then(res => {
-        alert('Item has deleted!');
-        navigate('/manage-genres')
-      }).catch(err => console.log(err))
+    if (conf) {
+      axios.delete('http://localhost:3030/genres/' + id)
+        .then(res => {
+          alert('Item has deleted!');
+          navigate('/manage-genres')
+        }).catch(err => console.log(err))
     }
   }
 
   useEffect(() => {
     axios.get('http://localhost:3030/genres').then(res => {
-      setColmns(Object.keys(res.data[0]))
       setRecords(res.data)
     })
-  }, )
+  },)
 
-  const [isShowModalEdit, setIsShowModalEdit] = useState(false);
-  const handleClose = () => {
-    setIsShowModalEdit(false);
-  }
+
   return (
     <Table striped bordered hover>
       <thead>
         <tr>
-          <th>{columns[0]}</th>
-          <th>{columns[1]}</th>
-          <th>Action</th>
+          <th>id</th>
+          <th>Tên thể loại</th>
+          <th>Hành động</th>
         </tr>
       </thead>
       <tbody>

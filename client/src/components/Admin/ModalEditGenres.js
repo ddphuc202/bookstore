@@ -7,14 +7,14 @@ import { useNavigate } from 'react-router-dom';
 import { useParams } from 'react-router-dom';
 
 
-function ModalEditGenres() {    
+function ModalEditGenres() {
     const { id } = useParams();
     const [data, setData] = useState([]);
     const navigate = useNavigate();
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        axios.put('http://localhost:3030/genres/'+ id, data)
+        axios.put('http://localhost:3030/genres/' + id, data)
             .then(res => {
                 alert("Data update successfully!");
                 navigate('/manage-genres');
@@ -22,7 +22,7 @@ function ModalEditGenres() {
     }
 
     useEffect(() => {
-        axios.get('http://localhost:3030/genres/'+ id)
+        axios.get('http://localhost:3030/genres/' + id)
             .then(res => setData(res.data))
             .catch(err => console.log(err))
     }, [])
@@ -35,7 +35,7 @@ function ModalEditGenres() {
 
                 <Modal.Dialog>
                     <Modal.Header >
-                        <Modal.Title>Edit Genres</Modal.Title>
+                        <Modal.Title>Chỉnh Sửa Thể Loại</Modal.Title>
                     </Modal.Header>
                     <Modal.Body>
 
@@ -46,7 +46,7 @@ function ModalEditGenres() {
                             </Form.Group>
 
                             <Form.Group className="mb-3" controlId="formBasicEmail" >
-                                <Form.Label>Genres Name</Form.Label>
+                                <Form.Label>Tên thể loại</Form.Label>
                                 <Form.Control type="text" value={data.name} onChange={event => setData({ ...data, name: event.target.value })} />
                             </Form.Group>
                         </Form>

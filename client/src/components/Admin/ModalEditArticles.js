@@ -15,7 +15,7 @@ function ModalEditArticles() {
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        axios.put('http://localhost:3030/articles/'+ id, data)
+        axios.put('http://localhost:3030/articles/' + id, data)
             .then(res => {
                 alert("Data update successfully!");
                 navigate('/manage-articles');
@@ -23,7 +23,7 @@ function ModalEditArticles() {
     }
 
     useEffect(() => {
-        axios.get('http://localhost:3030/articles/'+ id)
+        axios.get('http://localhost:3030/articles/' + id)
             .then(res => setData(res.data))
             .catch(err => console.log(err))
     }, [])
@@ -36,7 +36,7 @@ function ModalEditArticles() {
 
                 <Modal.Dialog>
                     <Modal.Header >
-                        <Modal.Title>Edit Articles</Modal.Title>
+                        <Modal.Title>Chỉnh Sửa Bài Viết</Modal.Title>
                     </Modal.Header>
                     <Modal.Body>
 
@@ -47,12 +47,12 @@ function ModalEditArticles() {
                             </Form.Group>
 
                             <Form.Group className="mb-3" controlId="formBasicEmail" >
-                                <Form.Label>Title</Form.Label>
+                                <Form.Label>Tên tiêu đề</Form.Label>
                                 <Form.Control type="text" value={data.title} onChange={event => setData({ ...data, title: event.target.value })} />
                             </Form.Group>
 
                             <Form.Group className="mb-3" controlId="formBasicPassword">
-                                <Form.Label>Content</Form.Label>
+                                <Form.Label>Nội dung</Form.Label>
                                 <Form.Control type="text" value={data.content} onChange={event => setData({ ...data, content: event.target.value })} />
                             </Form.Group>
                         </Form>

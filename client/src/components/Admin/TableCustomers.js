@@ -7,7 +7,6 @@ import ModalEditBooks from './ModalEditBooks';
 import ModalDeleteBooks from './ModalDeleteBooks';
 const TableCustomers = (props) => {
 
-  const [columns, setColmns] = useState([]);
   const [records, setRecords] = useState([]);
   const navigate = useNavigate();
 
@@ -25,26 +24,22 @@ const TableCustomers = (props) => {
 
   useEffect(() => {
     axios.get('http://localhost:3030/customers').then(res => {
-      setColmns(Object.keys(res.data[0]))
       setRecords(res.data)
     })
-  }, )
+  },)
 
-  const [isShowModalEdit, setIsShowModalEdit] = useState(false);
-  const handleClose = () => {
-    setIsShowModalEdit(false);
-  }
+
   return (
     <Table striped bordered hover>
       <thead>
         <tr>
-          <th>{columns[0]}</th>
-          <th>{columns[1]}</th>
-          <th>{columns[2]}</th>
-          <th>{columns[3]}</th>
-          <th>{columns[4]}</th>
-          <th>{columns[5]}</th>
-          <th>Action</th>
+          <th>id</th>
+          <th>Tên khách hàng</th>
+          <th>Email</th>
+          <th>Mật khẩu</th>
+          <th>Địa chỉ</th>
+          <th>Số điện thoại</th>
+          <th>Hành động</th>
         </tr>
       </thead>
       <tbody>
