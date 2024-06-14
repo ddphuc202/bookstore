@@ -10,24 +10,19 @@ import { Link } from 'react-router-dom';
 const ManageArticles = (props) => {
     return (
         <>
-            {/* <SideBar /> */}
             <div className='admin-container'>
                 <div className='admin_sidebar'>
                     <SideBar />
                 </div>
                 <div className='admin-content'>
                     <div className='button-add'>
-                        <h1><b>Manage Articles</b></h1>
-                        <Link to={'/manage-add-articles'} className='btn btn-primary'>Add New Article</Link>
+                        <h1><b>Quản lý bài viết</b></h1>
+                        <Link to={'/manage-add-articles'} className='btn btn-primary'>Thêm mới bài viết</Link>
                     </div>
                     <br></br>
                     <TableArticles />
                 </div>
             </div>
-            {/* <Container> */}
-
-
-            {/* </Container> */}
         </>
     )
 }
