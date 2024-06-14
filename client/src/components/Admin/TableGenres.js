@@ -1,10 +1,9 @@
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faPenToSquare, faTrash } from '@fortawesome/free-solid-svg-icons'
 import Table from 'react-bootstrap/Table';
-import { Button } from 'react-bootstrap';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import { Link, Route, useNavigate } from 'react-router-dom';
-import ModalEditBooks from './ModalEditBooks';
-import ModalDeleteBooks from './ModalDeleteBooks';
 const TableGenres = (props) => {
 
   const [records, setRecords] = useState([]);
@@ -45,8 +44,8 @@ const TableGenres = (props) => {
               <td>{d.id}</td>
               <td>{d.name}</td>
               <td>
-                <Link to={`/manage-edit-genres/${d.id}`} className='btn btn-warning'>Update</Link>
-                <button onClick={event => handleSubmit(d.id)} className='btn btn-danger'>Delete</button>
+                <Link to={`/manage-edit-genres/${d.id}`} ><FontAwesomeIcon icon={faPenToSquare} size="lg" /></Link>
+                <button style={{ border: 'none' }} onClick={event => handleSubmit(d.id)} ><FontAwesomeIcon icon={faTrash} /></button>
               </td>
             </tr>
           ))
