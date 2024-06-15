@@ -16,8 +16,11 @@ const upload = multer({ storage: storage });
 const BookController = {
     // Define controller methods here
     getAllBooks: (req, res) => {
+        // Get the sortBy, order, and search parameters from the request query
+        const { page = 1, pageSize = 10, sortBy = 'created_at', order = 'DESC', search = '' } = req.query;
+
         // Use the book model to get all books from the database
-        Book.getAllBooks()
+        Book.getAllBooks(page, pageSize, search, sortBy, order)
             .then(books => {
                 // If the books are retrieved successfully, send them in the response
                 res.status(200).json(books);
@@ -27,7 +30,6 @@ const BookController = {
                 res.status(500).json({ message: 'Error getting books', error: err });
             });
     },
-
     getBookById: (req, res) => {
         // Get the book ID from the request parameters
         const bookId = req.params.id;

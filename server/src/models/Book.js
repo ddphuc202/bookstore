@@ -9,9 +9,9 @@ class Book {
         this.stock = stock;
     }
 
-    static getAllBooks() {
+    static queryDatabase(query, params) {
         return new Promise((resolve, reject) => {
-            pool.query('SELECT * FROM books WHERE deleted_at IS NULL ORDER BY updated_at DESC', (err, results) => {
+            pool.query(query, params, (err, results) => {
                 if (err) {
                     return reject(err);
                 }
@@ -20,48 +20,44 @@ class Book {
         });
     }
 
+    static getAllBooks(page, pageSize, search, sortBy, order) {
+        const offset = (page - 1) * pageSize;
+        const searchQuery = '%' + search + '%';
+
+        // Validate sortBy and order parameters to prevent SQL injection
+        const validSortBy = ['created_at', 'price'];
+        const validOrder = ['ASC', 'DESC'];
+
+        if (!validSortBy.includes(sortBy)) {
+            sortBy = 'created_at';
+        }
+
+        if (!validOrder.includes(order)) {
+            order = 'DESC';
+        }
+
+        const orderBy = `ORDER BY ${sortBy} ${order}`;
+        const query = `SELECT * FROM books WHERE (title LIKE ? OR author LIKE ? or description LIKE ?) AND deleted_at IS NULL ${orderBy} LIMIT ? OFFSET ?`;
+
+        return this.queryDatabase(query, [searchQuery, searchQuery, searchQuery, parseInt(pageSize), parseInt(offset)]);
+    }
+
     static getBookById(id) {
-        return new Promise((resolve, reject) => {
-            pool.query('SELECT * FROM books WHERE id = ? AND deleted_at IS NULL', id, (err, results) => {
-                if (err) {
-                    return reject(err);
-                }
-                return resolve(results[0]);
-            });
-        });
+        return this.queryDatabase('SELECT * FROM books WHERE id = ? AND deleted_at IS NULL', id)
+            .then(results => results[0]);
     }
 
     static createBook(book) {
-        return new Promise((resolve, reject) => {
-            pool.query('INSERT INTO books SET ?', book, (err, results) => {
-                if (err) {
-                    return reject(err);
-                }
-                return resolve(results.insertId);
-            });
-        });
+        return this.queryDatabase('INSERT INTO books SET ?', book)
+            .then(results => results.insertId);
     }
 
     static updateBook(id, book) {
-        return new Promise((resolve, reject) => {
-            pool.query('UPDATE books SET ? WHERE id = ?', [book, id], (err, results) => {
-                if (err) {
-                    return reject(err);
-                }
-                return resolve(results.changedRows);
-            });
-        });
+        return this.queryDatabase('UPDATE books SET ? WHERE id = ?', [book, id]);
     }
 
     static deleteBook(id) {
-        return new Promise((resolve, reject) => {
-            pool.query('UPDATE books SET deleted_at = NOW() WHERE id = ?', [id], (err, results) => {
-                if (err) {
-                    return reject(err);
-                }
-                return resolve(results.changedRows);
-            });
-        });
+        return this.queryDatabase('UPDATE books SET deleted_at = CURRENT_TIMESTAMP WHERE id = ?', id);
     }
 }
 
