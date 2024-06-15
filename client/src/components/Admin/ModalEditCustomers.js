@@ -15,7 +15,7 @@ function ModalEditCustomers() {
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        axios.put('http://localhost:3030/customers/'+ id, data)
+        axios.put('http://localhost:3030/customers/' + id, data)
             .then(res => {
                 alert("Data update successfully!");
                 navigate('/manage-customers');
@@ -23,7 +23,7 @@ function ModalEditCustomers() {
     }
 
     useEffect(() => {
-        axios.get('http://localhost:3030/customers/'+ id)
+        axios.get('http://localhost:3030/customers/' + id)
             .then(res => setData(res.data))
             .catch(err => console.log(err))
     }, [])
@@ -33,10 +33,10 @@ function ModalEditCustomers() {
                 className="modal show"
                 style={{ display: 'block', position: 'initial' }}
             >
-                
+
                 <Modal.Dialog >
                     <Modal.Header >
-                        <Modal.Title>Edit Customer</Modal.Title>
+                        <Modal.Title>Chỉnh Sửa Khách Hàng</Modal.Title>
                     </Modal.Header>
                     <Modal.Body>
 
@@ -47,7 +47,7 @@ function ModalEditCustomers() {
                             </Form.Group>
 
                             <Form.Group className="mb-3" controlId="formBasicEmail" >
-                                <Form.Label>Name</Form.Label>
+                                <Form.Label>Tên </Form.Label>
                                 <Form.Control type="text" value={data.name} onChange={event => setData({ ...data, name: event.target.value })} />
                             </Form.Group>
 
@@ -57,17 +57,17 @@ function ModalEditCustomers() {
                             </Form.Group>
 
                             <Form.Group className="mb-3" controlId="formBasicPassword">
-                                <Form.Label>Password</Form.Label>
+                                <Form.Label>Mật khẩu</Form.Label>
                                 <Form.Control type="text" value={data.password} onChange={event => setData({ ...data, password: event.target.value })} />
                             </Form.Group>
 
                             <Form.Group className="mb-3" controlId="formBasicPassword">
-                                <Form.Label>Address</Form.Label>
+                                <Form.Label>Địa chỉ</Form.Label>
                                 <Form.Control type="text" value={data.address} onChange={event => setData({ ...data, address: event.target.value })} />
                             </Form.Group>
 
                             <Form.Group className="mb-3" controlId="formBasicPassword">
-                                <Form.Label>Phone Number</Form.Label>
+                                <Form.Label>Số điện thoại</Form.Label>
                                 <Form.Control type="text" value={data.phone_number} onChange={event => setData({ ...data, phone_number: event.target.value })} />
                             </Form.Group>
                         </Form>

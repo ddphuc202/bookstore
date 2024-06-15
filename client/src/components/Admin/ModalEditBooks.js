@@ -5,7 +5,7 @@ import Form from 'react-bootstrap/Form';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { useParams } from 'react-router-dom';
-
+import { getBookById, updateBookByID } from '../../services/BooksServices';
 
 function ModalEditBooks() {
 
@@ -15,15 +15,11 @@ function ModalEditBooks() {
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        axios.put('http://localhost:3030/books/'+ id, data)
-            .then(res => {
-                alert("Data update successfully!");
-                navigate('/manage-books');
-            })
+        updateBookByID(id, data, navigate)
     }
 
     useEffect(() => {
-        axios.get('http://localhost:3030/books/'+ id)
+        getBookById(id)
             .then(res => setData(res.data))
             .catch(err => console.log(err))
     }, [])
@@ -36,7 +32,7 @@ function ModalEditBooks() {
 
                 <Modal.Dialog>
                     <Modal.Header >
-                        <Modal.Title>Modal title</Modal.Title>
+                        <Modal.Title>Chỉnh Sửa Sách</Modal.Title>
                     </Modal.Header>
                     <Modal.Body>
 
@@ -47,32 +43,32 @@ function ModalEditBooks() {
                             </Form.Group>
 
                             <Form.Group className="mb-3" controlId="formBasicEmail" >
-                                <Form.Label>Title</Form.Label>
+                                <Form.Label>Tiêu đề</Form.Label>
                                 <Form.Control type="text" value={data.title} onChange={event => setData({ ...data, title: event.target.value })} />
                             </Form.Group>
 
                             <Form.Group className="mb-3" controlId="formBasicPassword">
-                                <Form.Label>Author</Form.Label>
+                                <Form.Label>Tác giả</Form.Label>
                                 <Form.Control type="text" value={data.author} onChange={event => setData({ ...data, author: event.target.value })} />
                             </Form.Group>
 
                             <Form.Group className="mb-3" controlId="formBasicPassword">
-                                <Form.Label>Description</Form.Label>
+                                <Form.Label>Mô tả</Form.Label>
                                 <Form.Control type="text" value={data.description} onChange={event => setData({ ...data, description: event.target.value })} />
                             </Form.Group>
 
                             <Form.Group className="mb-3" controlId="formBasicPassword">
-                                <Form.Label>Price</Form.Label>
+                                <Form.Label>Giá thành</Form.Label>
                                 <Form.Control type="number" value={data.price} onChange={event => setData({ ...data, price: event.target.value })} />
                             </Form.Group>
 
                             <Form.Group className="mb-3" controlId="formBasicPassword">
-                                <Form.Label>Sale %</Form.Label>
+                                <Form.Label>Khuyến mãi %</Form.Label>
                                 <Form.Control type="number" value={data.sale_percent} onChange={event => setData({ ...data, sale_percent: event.target.value })} />
                             </Form.Group>
 
                             <Form.Group className="mb-3" controlId="formBasicPassword">
-                                <Form.Label>Stock</Form.Label>
+                                <Form.Label>Tồn kho</Form.Label>
                                 <Form.Control type="number" value={data.stock} onChange={event => setData({ ...data, stock: event.target.value })} />
                             </Form.Group>
                         </Form>

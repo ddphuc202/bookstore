@@ -1,13 +1,11 @@
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faPenToSquare, faTrash } from '@fortawesome/free-solid-svg-icons'
 import Table from 'react-bootstrap/Table';
-import { Button } from 'react-bootstrap';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import { Link, Route, useNavigate } from 'react-router-dom';
-import ModalEditBooks from './ModalEditBooks';
-import ModalDeleteBooks from './ModalDeleteBooks';
 const TableCustomers = (props) => {
 
-  const [columns, setColmns] = useState([]);
   const [records, setRecords] = useState([]);
   const navigate = useNavigate();
 
@@ -25,26 +23,22 @@ const TableCustomers = (props) => {
 
   useEffect(() => {
     axios.get('http://localhost:3030/customers').then(res => {
-      setColmns(Object.keys(res.data[0]))
       setRecords(res.data)
     })
-  }, )
+  },)
 
-  const [isShowModalEdit, setIsShowModalEdit] = useState(false);
-  const handleClose = () => {
-    setIsShowModalEdit(false);
-  }
+
   return (
     <Table striped bordered hover>
       <thead>
         <tr>
-          <th>{columns[0]}</th>
-          <th>{columns[1]}</th>
-          <th>{columns[2]}</th>
-          <th>{columns[3]}</th>
-          <th>{columns[4]}</th>
-          <th>{columns[5]}</th>
-          <th>Action</th>
+          <th>id</th>
+          <th>Tên khách hàng</th>
+          <th>Email</th>
+          <th>Mật khẩu</th>
+          <th>Địa chỉ</th>
+          <th>Số điện thoại</th>
+          <th>Hành động</th>
         </tr>
       </thead>
       <tbody>
@@ -58,8 +52,8 @@ const TableCustomers = (props) => {
               <td>{d.address}</td>
               <td>{d.phone_number}</td>
               <td>
-                <Link to={`/manage-edit-customers/${d.id}`} className='btn btn-warning'>Update</Link>
-                <button onClick={event => handleSubmit(d.id)} className='btn btn-danger'>Delete</button>
+                <Link to={`/manage-edit-customers/${d.id}`}><FontAwesomeIcon icon={faPenToSquare} size="lg" /></Link>
+                <button style={{ border: 'none' }} onClick={event => handleSubmit(d.id)} ><FontAwesomeIcon icon={faTrash} /></button>
               </td>
             </tr>
           ))

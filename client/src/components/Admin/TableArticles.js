@@ -1,48 +1,42 @@
 import Table from 'react-bootstrap/Table';
-import { Button } from 'react-bootstrap';
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faPenToSquare, faTrash } from '@fortawesome/free-solid-svg-icons'
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import { Link, Route, useNavigate } from 'react-router-dom';
-import ModalEditBooks from './ModalEditBooks';
-import ModalDeleteBooks from './ModalDeleteBooks';
 const TableArticles = (props) => {
 
-  const [columns, setColmns] = useState([]);
   const [records, setRecords] = useState([]);
   const navigate = useNavigate();
 
 
-  const handleSubmit = (id) =>{
+  const handleSubmit = (id) => {
     const conf = window.confirm('Do you want to delete?');
-    if(conf) {
-      axios.delete('http://localhost:3030/articles/'+id)
-      .then(res => {
-        alert('Item has deleted!');
-        navigate('/manage-articles')
-      }).catch(err => console.log(err))
+    if (conf) {
+      axios.delete('http://localhost:3030/articles/' + id)
+        .then(res => {
+          alert('Item has deleted!');
+          navigate('/manage-articles')
+        }).catch(err => console.log(err))
     }
   }
 
   useEffect(() => {
     axios.get('http://localhost:3030/articles').then(res => {
-      setColmns(Object.keys(res.data[0]))
       setRecords(res.data)
     })
-  }, )
+  },)
 
-  const [isShowModalEdit, setIsShowModalEdit] = useState(false);
-  const handleClose = () => {
-    setIsShowModalEdit(false);
-  }
+
   return (
     <Table striped bordered hover>
       <thead>
         <tr>
-          <th>{columns[0]}</th>
-          <th>{columns[1]}</th>
-          <th>{columns[2]}</th>
-          <th>{columns[3]}</th>
-          <th>Action</th>
+          <th>id</th>
+          <th>Tiêu đề</th>
+          <th>Nội dung</th>
+          <th>Ảnh</th>
+          <th>Hành động</th>
         </tr>
       </thead>
       <tbody>
@@ -54,8 +48,8 @@ const TableArticles = (props) => {
               <td>{d.content}</td>
               <td>{d.image_url}</td>
               <td>
-                <Link to={`/manage-edit-articles/${d.id}`} className='btn btn-warning'>Update</Link>
-                <button onClick={event => handleSubmit(d.id)} className='btn btn-danger'>Delete</button>
+                <Link to={`/manage-edit-articles/${d.id}`} ><FontAwesomeIcon icon={faPenToSquare} size="lg" /></Link>
+                <button style={{ border: 'none' }} onClick={event => handleSubmit(d.id)} ><FontAwesomeIcon icon={faTrash} /></button>
               </td>
             </tr>
           ))

@@ -33,19 +33,19 @@ function ModalAddNewArticles() {
             >
                 <Modal.Dialog>
                     <Modal.Header  >
-                        <Modal.Title>Add New Article</Modal.Title>
+                        <Modal.Title>Thêm bài viết</Modal.Title>
                     </Modal.Header>
 
                     <Modal.Body>
                         <Form>
                             <Form.Group className="mb-3" controlId="formBasicEmail" >
                                 <Form.Label>Title</Form.Label>
-                                <Form.Control type="text" placeholder="Enter title" value={title} onChange={(event) => setTitle(event.target.value)} />
+                                <Form.Control type="text" placeholder="Tiêu đề bài viết" value={title} onChange={(event) => setTitle(event.target.value)} />
                             </Form.Group>
 
                             <Form.Group className="mb-3" controlId="formBasicPassword">
                                 <Form.Label>Content</Form.Label>
-                                <Form.Control type="text" placeholder="Content" value={content} onChange={(event) => setContent(event.target.value)} />
+                                <Form.Control type="textarea" placeholder="Nội dung" value={content} onChange={(event) => setContent(event.target.value)} />
                             </Form.Group>
                         </Form>
                     </Modal.Body>

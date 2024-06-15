@@ -7,14 +7,19 @@ import axios from "axios";
 const Books = () => {
 
     const [columns, setColmns] = useState([]);
-	const [records, setRecords] = useState([]);
+    const [records, setRecords] = useState([]);
 
-	useEffect(() => {
-		axios.get('http://localhost:3030/books').then(res => {
-			setColmns(Object.keys(res.data[0]))
-			setRecords(res.data)
-		})
-	}, [])
+    useEffect(() => {
+        axios.get('http://localhost:3030/books').then(res => {
+            setColmns(Object.keys(res.data[0]))
+            setRecords(res.data)
+        })
+    }, [])
+
+    const sortBooksByPrice = () => {
+        const sortedBooks = [...records].sort((a, b) => a.price - b.price);
+        setRecords(sortedBooks);
+    }
 
 
     return (
@@ -86,7 +91,7 @@ const Books = () => {
                                                 title="Sách mới"><i></i>Sách mới</a>
                                         </li>
                                         <li className="btn-quick-sort price-desc">
-                                            <a href="javascript:;" onClick="sortby('price-asc')"
+                                            <a onClick={sortBooksByPrice}
                                                 title="Giá thấp - cao"><i></i>Giá thấp - cao</a>
                                         </li>
                                         <li className="btn-quick-sort price-asc">
@@ -102,44 +107,44 @@ const Books = () => {
 
                                 <section className="products-view products-view-grid collection_reponsive">
                                     <div className="row">
-                                        {records.map((book, index ) =>(
-                                        <div key={index} className="col-6 col-md-3 col-lg-3 product-col">
-                                            <div className="item_product_main">
+                                        {records.map((book, index) => (
+                                            <div key={index} className="col-6 col-md-3 col-lg-3 product-col">
+                                                <div className="item_product_main">
 
-                                                <form action="/cart/add" method="post"
-                                                    className="variants product-action wishItem" data-cart-form=""
-                                                    data-id="product-actions-36086469" encType="multipart/form-data">
-                                                    <div className="thumb">
-                                                        <a className="image_thumb" href="/hon-don-va-khu-vuon-nha-nam"
-                                                            title="HỖN ĐỘN VÀ KHU VƯỜN">
-                                                            <img width="199" height="199"
-                                                                src={image}
-                                                                data-src="https://bizweb.dktcdn.net/100/363/455/products/hondonvakhuvuon01e171766606841.jpg?v=1717666223843"
-                                                                alt="HỖN ĐỘN VÀ KHU VƯỜN"
-                                                                className="lazyload img-responsive center-block" />
-                                                        </a>
-                                                        
-                                                    </div>
-                                                    <div className="info-product">
-                                                        <h3 className="product-name"><a href="/hon-don-va-khu-vuon-nha-nam"
-                                                            title="HỖN ĐỘN VÀ KHU VƯỜN"><b>{book.title}</b></a></h3>
+                                                    <form action="/cart/add" method="post"
+                                                        className="variants product-action wishItem" data-cart-form=""
+                                                        data-id="product-actions-36086469" encType="multipart/form-data">
+                                                        <div className="thumb">
+                                                            <a className="image_thumb" href="/hon-don-va-khu-vuon-nha-nam"
+                                                                title="HỖN ĐỘN VÀ KHU VƯỜN">
+                                                                <img width="199" height="199"
+                                                                    src={image}
+                                                                    data-src="https://bizweb.dktcdn.net/100/363/455/products/hondonvakhuvuon01e171766606841.jpg?v=1717666223843"
+                                                                    alt="HỖN ĐỘN VÀ KHU VƯỜN"
+                                                                    className="lazyload img-responsive center-block" />
+                                                            </a>
 
-                                                        <div className="price-box">
-                                                            <span className="price">{book.price}$</span>
-                                                            <span className="compare-price">168.000$</span>
+                                                        </div>
+                                                        <div className="info-product">
+                                                            <h3 className="product-name"><a href="/hon-don-va-khu-vuon-nha-nam"
+                                                                title="HỖN ĐỘN VÀ KHU VƯỜN"><b>{book.title}</b></a></h3>
+
+                                                            <div className="price-box">
+                                                                <span className="price">{book.price}$</span>
+                                                                <span className="compare-price">168.000$</span>
+
+                                                            </div>
+
+                                                            <button className='btn-buy btn-left btn-views  btn-buy-now-grid' >
+                                                                Thêm vào giỏ
+                                                            </button>
 
                                                         </div>
 
-                                                        <button className='btn-buy btn-left btn-views  btn-buy-now-grid' >
-														Thêm vào giỏ
-													</button>
+                                                    </form>
 
-                                                    </div>
-                                                    
-                                                </form>
-
+                                                </div>
                                             </div>
-                                        </div>
                                         ))
                                         }
                                     </div>

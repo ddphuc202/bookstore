@@ -29,14 +29,14 @@ function ModalAddNewGenres() {
             >
                 <Modal.Dialog>
                     <Modal.Header >
-                        <Modal.Title>Add New Genres</Modal.Title>
+                        <Modal.Title>Thêm Thể Loại</Modal.Title>
                     </Modal.Header>
 
                     <Modal.Body>
                         <Form>
                             <Form.Group className="mb-3" controlId="formBasicEmail" >
-                                <Form.Label>Genres Name</Form.Label>
-                                <Form.Control type="text" placeholder="Enter Genres" value={name} onChange={(event) => setName(event.target.value)} />
+                                <Form.Label>Tên thể loại</Form.Label>
+                                <Form.Control type="text" placeholder="Nhập tên thể loại" value={name} onChange={(event) => setName(event.target.value)} />
                             </Form.Group>
                         </Form>
                     </Modal.Body>

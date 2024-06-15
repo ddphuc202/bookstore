@@ -38,14 +38,14 @@ function ModalAddNewCustomers() {
             >
                 <Modal.Dialog>
                     <Modal.Header >
-                        <Modal.Title>Add New Customer</Modal.Title>
+                        <Modal.Title>Thêm Khách Hàng</Modal.Title>
                     </Modal.Header>
 
                     <Modal.Body>
                         <Form>
                             <Form.Group className="mb-3" controlId="formBasicEmail" >
-                                <Form.Label>Name</Form.Label>
-                                <Form.Control type="text" placeholder="Enter name" value={name} onChange={(event) => setName(event.target.value)} />
+                                <Form.Label>Tên khách hàng</Form.Label>
+                                <Form.Control type="text" placeholder="Nhập tên" value={name} onChange={(event) => setName(event.target.value)} />
                             </Form.Group>
 
                             <Form.Group className="mb-3" controlId="formBasicPassword">
@@ -54,17 +54,17 @@ function ModalAddNewCustomers() {
                             </Form.Group>
 
                             <Form.Group className="mb-3" controlId="formBasicPassword">
-                                <Form.Label>Password</Form.Label>
-                                <Form.Control type="text" placeholder="Password" value={password} onChange={(event) => setPass(event.target.value)} />
+                                <Form.Label>Mật khẩu</Form.Label>
+                                <Form.Control type="text" placeholder="Mật khẩu" value={password} onChange={(event) => setPass(event.target.value)} />
                             </Form.Group>
 
                             <Form.Group className="mb-3" controlId="formBasicPassword">
-                                <Form.Label>Address</Form.Label>
-                                <Form.Control type="text" placeholder="Address" value={address} onChange={(event) => setAddress(event.target.value)} />
+                                <Form.Label>Địa chỉ</Form.Label>
+                                <Form.Control type="text" placeholder="Địa chỉ" value={address} onChange={(event) => setAddress(event.target.value)} />
                             </Form.Group>
 
                             <Form.Group className="mb-3" controlId="formBasicPassword">
-                                <Form.Label>Phone Number</Form.Label>
+                                <Form.Label>Số điện thoại</Form.Label>
                                 <Form.Control type="text" placeholder="Phone number" value={phone_number} onChange={(event) => setPhone(event.target.value)} />
                             </Form.Group>
                         </Form>

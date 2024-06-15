@@ -201,42 +201,17 @@ const Header = () => {
 
                                                 </ul>
                                             </div>			</li>
-                                        
+
                                         <li className="nav-item ">
                                             <a className="a-img" href="/about-page" title="Về Nhã Nam">
-                                                Về Nhã Nam
+                                                Về Khai Tâm
                                             </a>
                                         </li>
-                                        
+
                                     </ul>
                                 </nav>
                             </div>
-                            {/* <script>
-                                $(document).ready(function() {
-		var margin_left = 0;
-                                $('#prev').on('click', function(e) {
-                                    e.preventDefault();
-                                animateMargin( 190 );
-		});
-                                $('#next').on('click', function(e) {
-                                    e.preventDefault();
-                                animateMargin( -190 );
-		});
-		const animateMargin = ( amount ) => {
-                                    margin_left = Math.min(0, Math.max(getMaxMargin(), margin_left + amount));
-                                $('ul.item_big').animate({
-                                    'margin-left': margin_left
-			}, 300);
-		};
-		const getMaxMargin = () =>
-                                $('ul.item_big').parent().width() - $('ul.item_big')[0].scrollWidth;
 
-                                $('.navigation-head li.has-child').hover(
-                                function(){$('body').addclassName('current')},
-                                function(){$('body').removeclassName('current')}
-                                )
-	})
-                            </script> */}
                         </div>
                     </div>
                     <div className="col-md-6 col-xl-3 col-lg-4 col-12 mb-block">
@@ -247,7 +222,7 @@ const Header = () => {
                             <input type="text" aria-label="Tìm sản phẩm" name="query" placeholder="Tìm kiếm..." className="search-auto input-group-field auto-search" required="" />
                             <input type="hidden" name="type" value="product" />
                             <button className="btn search-button" aria-label="Justify">
-                            <FontAwesomeIcon icon={faMagnifyingGlass} size="sm" />
+                                <FontAwesomeIcon icon={faMagnifyingGlass} size="sm" />
                             </button>
                         </form>
                         <div className="user-header">
