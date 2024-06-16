@@ -50,7 +50,7 @@ class Book {
 
         const basePath = '/images/';
 
-        const query = `SELECT books.*, CONCAT('${basePath}', book_images.image_name) AS primary_image 
+        const query = `SELECT books.*, CONCAT('${basePath}', book_images.image_name) AS primary_image_path 
                        FROM books 
                        LEFT JOIN book_images ON books.id = book_images.book_id AND book_images.is_primary = 1
                        WHERE (books.title LIKE ? OR books.author LIKE ? or books.description LIKE ?) AND books.deleted_at IS NULL 
@@ -64,7 +64,7 @@ class Book {
 
         const basePath = '/images/';
 
-        const imagesQuery = `SELECT CONCAT('${basePath}', image_name) AS image_path FROM book_images WHERE book_id = ?`;
+        const imagesQuery = `SELECT CONCAT('${basePath}', image_name) AS image_path, is_primary FROM book_images WHERE book_id = ?`;
 
         return Promise.all([
             this.queryDatabase(bookQuery, [id]),
