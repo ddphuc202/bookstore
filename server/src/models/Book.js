@@ -81,7 +81,7 @@ class Book {
     }
 
     static createBook(book, primaryImageName, otherImageNames) {
-        return this.queryDatabase('INSERT INTO books SET ?', book)
+        return this.queryDatabase('INSERT INTO books SET ?', book) // specific syntax for inserting data into a table by passing an object where the keys are the column names and the values are the values to be inserted
             .then(results => {
                 const bookId = results.insertId;
                 const imageQueries = [];
