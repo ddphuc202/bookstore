@@ -28,7 +28,7 @@ const CustomerController = {
                 res.status(200).json(customer);
             })
             .catch(err => {
-                // If there was an error, send an error response
+                console.error(err);
                 res.status(500).json({ message: 'Error getting customer', error: err });
             });
     },
@@ -39,7 +39,7 @@ const CustomerController = {
         try {
             // Check if a customer with the same email already exists
             let customer = await Customer.getCustomerByEmail(newCustomerData.email);
-            if (customer) {
+            if (customer.length > 0) {
                 return res.status(400).json({ message: 'Customer with this email already exists' });
             }
 
