@@ -59,7 +59,7 @@ CREATE TABLE articles (
     id INT AUTO_INCREMENT PRIMARY KEY,
     title VARCHAR(255) NOT NULL,
     content TEXT NOT NULL,
-    image_url TEXT,
+    image_name TEXT,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
     admin_id INT,
@@ -68,12 +68,12 @@ CREATE TABLE articles (
 );
 
 -- Table for storing book images
-CREATE TABLE images (
+CREATE TABLE book_images (
     id INT AUTO_INCREMENT PRIMARY KEY,
     book_id INT,
-    image_url VARCHAR(255) NOT NULL,
+    is_primary BOOLEAN DEFAULT FALSE,
+    image_name VARCHAR(255) NOT NULL,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    deleted_at TIMESTAMP NULL,
     FOREIGN KEY (book_id) REFERENCES books(id)
 );
 

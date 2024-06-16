@@ -1,4 +1,5 @@
 const express = require('express');
+const upload = require('../middlewares/Upload');
 const BookController = require('../controllers/BookController');
 
 const router = express.Router();
@@ -10,10 +11,10 @@ router.get('/', BookController.getAllBooks);
 router.get('/:id', BookController.getBookById);
 
 // POST a new book
-router.post('/', BookController.createBook);
+router.post('/', upload.fields([{ name: 'primaryImage', maxCount: 1 }, { name: 'otherImages', maxCount: 4 }]), BookController.createBook);
 
 // PUT/update a book
-router.put('/:id', BookController.updateBook);
+router.put('/:id', upload.fields([{ name: 'primaryImage', maxCount: 1 }, { name: 'otherImages', maxCount: 4 }]), BookController.updateBook);
 
 // DELETE a book
 router.delete('/:id', BookController.deleteBook);
