@@ -1,8 +1,6 @@
 import '../../styles/Manage.css'
 import TableBooks from '../../components/Admin/TableBooks';
-import ModalAddNewBooks from '../../components/Admin/ModalAddNewBooks';
 import SideBar from '../../components/Admin/SideBar';
-import Header from '../../components/Admin/Header';
 import { Container } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 const ManageBooks = (props) => {

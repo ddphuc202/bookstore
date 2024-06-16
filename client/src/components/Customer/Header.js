@@ -44,28 +44,7 @@ const Header = () => {
                                                 Tin Sách
                                             </a>
                                             <i className="fa fa-angle-down"></i>
-                                            <ul className="item_small">
-                                                <li>
-                                                    <a className="" href="/tin-nha-nam" title="Tin Nhã Nam">
-                                                        Tin Nhã Nam
-                                                    </a>
-                                                </li>
-                                                <li>
-                                                    <a className="" href="/review-sach-cua-doc-gia" title="Review sách của độc giả">
-                                                        Review sách của độc giả
-                                                    </a>
-                                                </li>
-                                                <li>
-                                                    <a className="" href="/review-sach-tren-bao-chi" title="Review sách trên báo chí">
-                                                        Review sách trên báo chí
-                                                    </a>
-                                                </li>
-                                                <li>
-                                                    <a className="" href="/bien-tap-vien-gioi-thieu" title="Biên tập viên giới thiệu">
-                                                        Biên tập viên giới thiệu
-                                                    </a>
-                                                </li>
-                                            </ul>
+
                                         </li>
                                         <li className="nav-item has-child   has-mega">
                                             <a className="a-img caret-down" href="/books" title="Sách Nhã Nam">

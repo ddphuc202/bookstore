@@ -13,6 +13,8 @@ function ModalAddNewBooks() {
     const [price, setPrice] = useState('');
     const [sale, setSale] = useState('');
     const [stock, setStock] = useState('');
+    const [imagePrimary, setImagePrimary] = useState('');
+    const [imageOthers, setImageOthers] = useState('');
 
     const navigate = useNavigate();
 
@@ -20,6 +22,12 @@ function ModalAddNewBooks() {
         event.preventDefault();
         createNewBook(title, author, description, price, sale, stock, navigate);
     }
+
+    // const handleUploadImage = (event) => {
+    //     if (event.target && event.target.files && event.target.files[0]) {
+    //         setImagePrimary(event.target.files[0])
+    //     }
+    // }
 
     return (
         <>
@@ -63,6 +71,16 @@ function ModalAddNewBooks() {
                                 <Form.Label>Tồn kho</Form.Label>
                                 <Form.Control type="number" placeholder="Tồn kho" value={stock} onChange={(event) => setStock(event.target.value)} />
                             </Form.Group>
+
+                            {/* <Form.Group controlId="formFile" className="mb-3">
+                                <Form.Label>Ảnh chính </Form.Label>
+                                <Form.Control type="file" />
+                            </Form.Group>
+
+                            <Form.Group controlId="formFileMultiple" className="mb-3">
+                                <Form.Label>Ảnh phụ</Form.Label>
+                                <Form.Control type="file" multiple onChange={(event) => handleUploadImage(event)} />
+                            </Form.Group> */}
                         </Form>
                     </Modal.Body>
 

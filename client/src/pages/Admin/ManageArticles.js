@@ -1,8 +1,6 @@
 import '../../styles/Manage.css'
 import '../../styles/Admin.css'
 import TableArticles from '../../components/Admin/TableArticles';
-import ModalAddNewArticles from '../../components/Admin/ModalAddNewArticles';
-import Header from '../../components/Admin/Header';
 import SideBar from '../../components/Admin/SideBar';
 import { Container } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
