@@ -6,9 +6,9 @@ class Article {
         this.content = content;
     }
 
-    static getAllArticles() {
+    static queryDatabase(query, params) {
         return new Promise((resolve, reject) => {
-            pool.query('SELECT * FROM articles WHERE deleted_at IS NULL ORDER BY updated_at DESC', (err, results) => {
+            pool.query(query, params, (err, results) => {
                 if (err) {
                     return reject(err);
                 }
@@ -17,48 +17,24 @@ class Article {
         });
     }
 
+    static getAllArticles() {
+        return this.queryDatabase('SELECT * FROM articles WHERE deleted_at IS NULL')
+    };
+
     static getArticleById(id) {
-        return new Promise((resolve, reject) => {
-            pool.query('SELECT * FROM articles WHERE id = ? AND deleted_at IS NULL', id, (err, results) => {
-                if (err) {
-                    return reject(err);
-                }
-                return resolve(results[0]);
-            });
-        });
+        return this.queryDatabase('SELECT * FROM articles WHERE id = ? AND deleted_at IS NULL', id);
     }
 
-    static createArticle(article) {
-        return new Promise((resolve, reject) => {
-            pool.query('INSERT INTO articles SET ?', article, (err, results) => {
-                if (err) {
-                    return reject(err);
-                }
-                return resolve(results.insertId);
-            });
-        });
+    static createArticle(newArticleData) {
+        return this.queryDatabase('INSERT INTO articles SET ?', newArticleData);
     }
 
     static updateArticle(id, article) {
-        return new Promise((resolve, reject) => {
-            pool.query('UPDATE articles SET ? WHERE id = ?', [article, id], (err, results) => {
-                if (err) {
-                    return reject(err);
-                }
-                return resolve(results.changedRows);
-            });
-        });
+        return this.queryDatabase('UPDATE articles SET ? WHERE id = ?', [article, id]);
     }
 
     static deleteArticle(id) {
-        return new Promise((resolve, reject) => {
-            pool.query('UPDATE articles SET deleted_at = NOW() WHERE id = ?', id, (err, results) => {
-                if (err) {
-                    return reject(err);
-                }
-                return resolve(results.affectedRows);
-            });
-        });
+        return this.queryDatabase('UPDATE articles SET deleted_at = CURRENT_TIMESTAMP WHERE id = ?', id);
     }
 }
 

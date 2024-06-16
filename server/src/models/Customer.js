@@ -2,62 +2,46 @@ const pool = require('../config/database');
 
 class Customer {
     constructor(name) {
+        this.email = email;
+        this.password = password;
         this.name = name;
+        this.phone = phone;
+        this.address = address;
+    }
+
+    static queryDatabase(query, params) {
+        return new Promise((resolve, reject) => {
+            pool.query(query, params, (err, results) => {
+                if (err) {
+                    return reject(err);
+                }
+                return resolve(results);
+            });
+        });
     }
 
     static getAllCustomers() {
-        return new Promise((resolve, reject) => {
-            pool.query('SELECT * FROM customers WHERE deleted_at IS NULL ORDER BY updated_at DESC', (err, results) => {
-                if (err) {
-                    return reject(err);
-                }
-                return resolve(results);
-            });
-        });
+        return this.queryDatabase('SELECT * FROM customers ORDER BY updated_at DESC');
+    }
+
+    static getCustomerByEmail(email) {
+        return this.queryDatabase('SELECT * FROM customers WHERE email = ?', [email]);
     }
 
     static getCustomerById(id) {
-        return new Promise((resolve, reject) => {
-            pool.query('SELECT * FROM customers WHERE id = ? AND deleted_at IS NULL', [id], (err, results) => {
-                if (err) {
-                    return reject(err);
-                }
-                return resolve(results[0]);
-            });
-        });
+        return this.queryDatabase('SELECT * FROM customers WHERE id = ?', id);
     }
 
-    static createCustomer(newCategory) {
-        return new Promise((resolve, reject) => {
-            pool.query('INSERT INTO customers SET ?', newCategory, (err, results) => {
-                if (err) {
-                    return reject(err);
-                }
-                return resolve(results.insertId);
-            });
-        });
+    static createCustomer(newCustomerData) {
+        return this.queryDatabase('INSERT INTO customers SET ?', newCustomerData);
     }
 
-    static updateCustomer(id, updatedCategory) {
-        return new Promise((resolve, reject) => {
-            pool.query('UPDATE customers SET ? WHERE id = ?', [updatedCategory, id], (err, results) => {
-                if (err) {
-                    return reject(err);
-                }
-                return resolve(results);
-            });
-        });
+    static updateCustomer(id, updatedCustomerData) {
+        return this.queryDatabase('UPDATE customers SET ? WHERE id = ?', [updatedCustomerData, id]);
     }
 
     static deleteCustomer(id) {
-        return new Promise((resolve, reject) => {
-            pool.query('UPDATE customers SET deleted_at = NOW() WHERE id = ?', [id], (err, results) => {
-                if (err) {
-                    return reject(err);
-                }
-                return resolve(results);
-            });
-        });
+        return this.queryDatabase('UPDATE customers SET deleted_at = NOW() WHERE id = ?', id);
     }
 }
 

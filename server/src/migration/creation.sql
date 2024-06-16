@@ -4,14 +4,15 @@ CREATE DATABASE bookstore;
 -- Use the bookstore database
 USE bookstore;
 
--- Table for storing admin users
+-- Table for storing admins
 CREATE TABLE admins (
     id INT AUTO_INCREMENT PRIMARY KEY,
     email VARCHAR(255) UNIQUE NOT NULL,
     password VARCHAR(255) NOT NULL,
     name VARCHAR(255),
-    role ENUM('super', 'normal') DEFAULT 'normal',
-    status ENUM('active', 'inactive') DEFAULT 'active',
+    phone VARCHAR(20),
+    role ENUM('admin', 'super') DEFAULT 'admin',
+    is_active BOOLEAN DEFAULT TRUE,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 );
@@ -19,11 +20,11 @@ CREATE TABLE admins (
 -- Table for storing customers
 CREATE TABLE customers (
     id INT AUTO_INCREMENT PRIMARY KEY,
-    name VARCHAR(255) NOT NULL,
     email VARCHAR(255) UNIQUE NOT NULL,
     password VARCHAR(255) NOT NULL,
+    name VARCHAR(255),
+    phone VARCHAR(20),
     address VARCHAR(255),
-    phone_number VARCHAR(20),
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
     deleted_at TIMESTAMP NULL
@@ -59,7 +60,7 @@ CREATE TABLE articles (
     id INT AUTO_INCREMENT PRIMARY KEY,
     title VARCHAR(255) NOT NULL,
     content TEXT NOT NULL,
-    image_url TEXT,
+    image_name TEXT,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
     admin_id INT,
@@ -68,12 +69,12 @@ CREATE TABLE articles (
 );
 
 -- Table for storing book images
-CREATE TABLE images (
+CREATE TABLE book_images (
     id INT AUTO_INCREMENT PRIMARY KEY,
     book_id INT,
-    image_url VARCHAR(255) NOT NULL,
+    is_primary BOOLEAN DEFAULT FALSE,
+    image_name VARCHAR(255) NOT NULL,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    deleted_at TIMESTAMP NULL,
     FOREIGN KEY (book_id) REFERENCES books(id)
 );
 
@@ -87,10 +88,12 @@ CREATE TABLE orders (
     shipping_address VARCHAR(255),
     recipient_phone_number VARCHAR(20),
     tracking_number VARCHAR(50),
-    order_status VARCHAR(50) DEFAULT 'Pending',
+    status ENUM('pending', 'approved', 'delivering', 'success', 'cancel') DEFAULT 'pending',
+    admin_id INT,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-    FOREIGN KEY (customer_id) REFERENCES customers(id)
+    FOREIGN KEY (customer_id) REFERENCES customers(id),
+    FOREIGN KEY (admin_id) REFERENCES admins(id)
 );
 
 -- Table for storing order details
@@ -103,3 +106,6 @@ CREATE TABLE order_details (
     FOREIGN KEY (order_id) REFERENCES orders(id),
     FOREIGN KEY (book_id) REFERENCES books(id)
 );
+
+-- Adding index to 'customer_id' in 'orders' table
+CREATE INDEX idx_orders_customer_id ON orders(customer_id);

@@ -1,4 +1,5 @@
 const Customer = require('../models/Customer');
+const bcrypt = require('bcryptjs');
 
 // Define customer controller object
 const CustomerController = {
@@ -27,25 +28,31 @@ const CustomerController = {
                 res.status(200).json(customer);
             })
             .catch(err => {
-                // If there was an error, send an error response
+                console.error(err);
                 res.status(500).json({ message: 'Error getting customer', error: err });
             });
     },
 
-    createCustomer: (req, res) => {
-        // Get the customer data from the request body
+    createCustomer: async (req, res) => {
         const newCustomerData = req.body;
 
-        // Use the customer model to create a new customer in the database
-        Customer.createCustomer(newCustomerData)
-            .then(newCustomerId => {
-                // If the customer was created successfully, send a success response
-                res.status(201).json({ message: 'Customer created successfully', id: newCustomerId });
-            })
-            .catch(err => {
-                // If there was an error, send an error response
-                res.status(500).json({ message: 'Error creating customer', error: err });
-            });
+        try {
+            // Check if a customer with the same email already exists
+            let customer = await Customer.getCustomerByEmail(newCustomerData.email);
+            if (customer.length > 0) {
+                return res.status(400).json({ message: 'Customer with this email already exists' });
+            }
+
+            // Hash the password
+            const salt = await bcrypt.genSalt(10);
+            newCustomerData.password = await bcrypt.hash(newCustomerData.password, salt);
+
+            const newCustomerId = await Customer.createCustomer(newCustomerData);
+
+            res.status(201).json({ message: 'Customer created successfully', id: newCustomerId });
+        } catch (err) {
+            res.status(500).json({ message: 'Error creating customer', error: err });
+        }
     },
 
     updateCustomer: (req, res) => {

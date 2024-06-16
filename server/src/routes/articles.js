@@ -1,4 +1,5 @@
 const express = require('express');
+const upload = require('../middlewares/Upload');
 const ArticleController = require('../controllers/ArticleController');
 
 const router = express.Router();
@@ -10,10 +11,10 @@ router.get('/', ArticleController.getAllArticles);
 router.get('/:id', ArticleController.getArticleById);
 
 // POST a new article
-router.post('/', ArticleController.createArticle);
+router.post('/', upload.single('image'), ArticleController.createArticle);
 
 // PUT/update a article
-router.put('/:id', ArticleController.updateArticle);
+router.put('/:id', upload.single('image'), ArticleController.updateArticle);
 
 // DELETE a article
 router.delete('/:id', ArticleController.deleteArticle);
