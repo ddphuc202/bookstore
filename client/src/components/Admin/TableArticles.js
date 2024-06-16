@@ -49,7 +49,7 @@ const TableArticles = (props) => {
               <td>{d.image_url}</td>
               <td>
                 <Link to={`/manage-edit-articles/${d.id}`} ><FontAwesomeIcon icon={faPenToSquare} size="lg" /></Link>
-                <button style={{ border: 'none' }} onClick={event => handleSubmit(d.id)} ><FontAwesomeIcon icon={faTrash} /></button>
+                <button style={{ border: 'none' }} onClick={event => handleSubmit(d.id)} ><FontAwesomeIcon icon={faTrash} style={{ color: "#fa2500" }} /></button>
               </td>
             </tr>
           ))

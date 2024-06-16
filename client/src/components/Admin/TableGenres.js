@@ -45,7 +45,7 @@ const TableGenres = (props) => {
               <td>{d.name}</td>
               <td>
                 <Link to={`/manage-edit-genres/${d.id}`} ><FontAwesomeIcon icon={faPenToSquare} size="lg" /></Link>
-                <button style={{ border: 'none' }} onClick={event => handleSubmit(d.id)} ><FontAwesomeIcon icon={faTrash} /></button>
+                <button style={{ border: 'none' }} onClick={event => handleSubmit(d.id)} ><FontAwesomeIcon icon={faTrash} style={{ color: "#fa2500" }} /></button>
               </td>
             </tr>
           ))

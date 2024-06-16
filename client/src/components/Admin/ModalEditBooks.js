@@ -54,7 +54,7 @@ function ModalEditBooks() {
 
                             <Form.Group className="mb-3" controlId="formBasicPassword">
                                 <Form.Label>Mô tả</Form.Label>
-                                <Form.Control type="text" value={data.description} onChange={event => setData({ ...data, description: event.target.value })} />
+                                <Form.Control as="textarea" value={data.description} onChange={event => setData({ ...data, description: event.target.value })} />
                             </Form.Group>
 
                             <Form.Group className="mb-3" controlId="formBasicPassword">

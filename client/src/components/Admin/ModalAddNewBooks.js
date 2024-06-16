@@ -46,7 +46,7 @@ function ModalAddNewBooks() {
 
                             <Form.Group className="mb-3" controlId="formBasicPassword">
                                 <Form.Label>Mô tả</Form.Label>
-                                <Form.Control type="text" placeholder="Mô tả" value={description} onChange={(event) => setDescription(event.target.value)} />
+                                <Form.Control as="textarea" placeholder="Mô tả" value={description} onChange={(event) => setDescription(event.target.value)} />
                             </Form.Group>
 
                             <Form.Group className="mb-3" controlId="formBasicPassword">
