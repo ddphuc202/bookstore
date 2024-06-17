@@ -34,11 +34,6 @@ class Book {
         const offset = (page - 1) * pageSize;
         const searchQuery = '%' + search + '%';
 
-        let genreQuery = '';
-        if (genre_id) {
-            genreQuery = 'AND books.genre_id = ?';
-        }
-
         // Validate sortBy and order parameters to prevent SQL injection
         const validSortBy = ['created_at', 'price', 'genres.name'];
         const validOrder = ['ASC', 'DESC'];
@@ -55,13 +50,22 @@ class Book {
 
         const basePath = '/images/';
 
-        const query = `SELECT books.*, CONCAT('${basePath}', book_images.image_name) AS primary_image_path 
+        let parameters = [searchQuery, searchQuery, searchQuery, pageSize, parseInt(offset)];
+
+        let genreQuery = '';
+        if (genre_id) {
+            genreQuery = 'AND books.genre_id = ?';
+            parameters.splice(3, 0, parseInt(genre_id));
+        }
+
+        const query = `SELECT books.*, CONCAT('${basePath}', book_images.image_name) AS primary_image_path
                        FROM books 
                        LEFT JOIN book_images ON books.id = book_images.book_id AND book_images.is_primary = 1
                        WHERE (books.title LIKE ? OR books.author LIKE ? or books.description LIKE ?) ${genreQuery} AND books.deleted_at IS NULL 
                        ${orderBy} LIMIT ? OFFSET ?`;
 
-        return this.queryDatabase(query, [searchQuery, searchQuery, searchQuery, parseInt(genre_id), pageSize, parseInt(offset)]);
+        console.log(query);
+        return this.queryDatabase(query, parameters);
     }
 
     static getBookById(id) {
