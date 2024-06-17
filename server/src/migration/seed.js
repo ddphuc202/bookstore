@@ -3,9 +3,9 @@ const pool = require('../config/database');
 // Seed admin
 const seedAdmins = [
     { email: 'superadmin@khaitam.com', password: '123', name: 'Super Admin', role: 'super' },
-    { email: 'admin1@khaitam.com', password: '123', name: 'Admin 1', role: 'normal' },
-    { email: 'admin2@khaitam.com', password: '123', name: 'Admin 2', role: 'normal' },
-    { email: 'admin3@khaitam.com', password: '123', name: 'Admin 3', role: 'normal' },
+    { email: 'admin1@khaitam.com', password: '123', name: 'Admin 1', role: 'admin' },
+    { email: 'admin2@khaitam.com', password: '123', name: 'Admin 2', role: 'admin' },
+    { email: 'admin3@khaitam.com', password: '123', name: 'Admin 3', role: 'admin' },
 ];
 
 // Insert seed data into admins table
