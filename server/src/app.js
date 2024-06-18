@@ -1,5 +1,9 @@
 const express = require('express');
 
+const morgan = require('morgan');
+const { default: helmet } = require('helmet');
+const compression = require('compression');
+
 const configViewEngine = require('./config/viewEngine');
 const configStaticFiles = require('./config/staticFiles');
 
@@ -11,8 +15,14 @@ const customerRoutes = require('./routes/customers');
 
 const app = express();
 
+// CORS (cross-origin resource sharing) allows the server to accept requests from another domain
 const cors = require('cors');
 app.use(cors());
+
+// Init middlewares
+app.use(morgan('dev'));
+app.use(helmet());
+app.use(compression());
 
 // Config 
 configViewEngine(app);

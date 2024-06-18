@@ -29,10 +29,18 @@ const BookController = {
     createBook: (req, res) => {
         const newBookData = req.body;
 
-        const primaryImageName = path.basename(req.files.primaryImage[0].path);
-        const otherImageNames = req.files.otherImages.map(file => path.basename(file.path));
+        let thumbnail = null;
+        if (req.files.thumbnail) {
+            thumbnail = path.basename(req.files.thumbnail[0].path);
+            newBookData.thumbnail = thumbnail;
+        }
 
-        Book.createBook(newBookData, primaryImageName, otherImageNames)
+        let otherImages = null;
+        if (req.files.otherImages) {
+            otherImages = req.files.otherImages.map(file => path.basename(file.path));
+        }
+
+        Book.createBook(newBookData, otherImages)
             .then(newBookId => {
                 res.status(201).json({ message: 'Book created successfully', id: newBookId });
             })
@@ -45,7 +53,18 @@ const BookController = {
         const bookId = req.params.id;
         const updatedBookData = req.body;
 
-        Book.updateBook(bookId, updatedBookData)
+        let thumbnail = null;
+        if (req.files.thumbnail) {
+            thumbnail = path.basename(req.files.thumbnail[0].path);
+            updatedBookData.thumbnail = thumbnail;
+        }
+
+        let otherImages = null;
+        if (req.files.otherImages) {
+            otherImages = req.files.otherImages.map(file => path.basename(file.path));
+        }
+
+        Book.updateBook(bookId, updatedBookData, otherImages)
             .then(updateResult => {
                 res.status(200).json({ message: 'Book updated successfully', rowsAffected: updateResult });
             })
