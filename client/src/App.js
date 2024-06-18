@@ -18,6 +18,7 @@ import Register from './pages/Customer/Register';
 import InfoPage from './pages/Customer/InfoPage';
 import Books from './pages/Customer/Books';
 import Articles from './pages/Customer/Articles';
+import Test from './components/Admin/Test';
 
 
 import HomePage from './pages/Customer/HomePage';
@@ -46,7 +47,7 @@ function App() {
         <Route path='/manage-add-customers' element={<ModalAddNewCustomers />} />
         <Route path='/manage-edit-customers/:id' element={<ModalEditCustomers />} />
 
-
+        <Route path='/test' element={<Test />} />
 
         {/* Customer side */}
         <Route path='/' element={<HomePage />} />

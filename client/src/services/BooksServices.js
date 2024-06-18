@@ -1,31 +1,45 @@
-import axios from '../utils/AxiosCustomize';
+import { instance } from '../utils/AxiosCustomize';
 
-const createNewBook = (title, author, description, price, sale, stock, navigate) => {
+const createNewBook = (title, author, description, price, sale, stock, genres, primaryImage, otherImages, navigate) => {
 
-    let data = {
-        title: title,
-        author: author,
-        description: description,
-        price: price,
-        discount: sale,
-        stock: stock
-    }
-    return axios.post('/books', data).then(res => {
+    const otherImagesArray = Array.from(otherImages);
+
+    const data = new FormData();
+    data.append('title', title);
+    data.append('author', author);
+    data.append('description', description);
+    data.append('price', price);
+    data.append('discount', sale);
+    data.append('stock', stock);
+    data.append('genre_id', genres);
+    data.append('primaryImage', primaryImage);
+    otherImagesArray.forEach((file) => {
+        data.append(`otherImages`, file);
+    });
+
+    return instance.post('/books', data).then(res => {
         alert('Data add successfully!');
         navigate('/manage-books');
     }).catch(err => console.log(err));
 }
 
-const getBooks = () => {
-    return axios.get('/books')
+const getBooks = (setRecords) => {
+    return instance.get('/books').then(res => {
+        setRecords(res.data)
+    })
 }
 
-const getBookById = (id) => {
-    return axios.get('/books/' + id)
+
+const getBookById = (id, setData) => {
+    return instance.get('/books/' + id)
+        .then(res => {
+            setData(res.data);
+        })
+        .catch(err => console.log(err))
 }
 
 const updateBookByID = (id, data, navigate) => {
-    axios.put('/books/' + id, data)
+    instance.put('/books/' + id, data)
         .then(res => {
             alert("Data update successfully!");
             navigate('/manage-books');
@@ -35,7 +49,7 @@ const updateBookByID = (id, data, navigate) => {
 const deleteBooks = (id, navigate) => {
     const conf = window.confirm('Do you want to delete?');
     if (conf) {
-        axios.delete('/books/' + id)
+        instance.delete('/books/' + id)
             .then(res => {
                 alert('Item has deleted!');
                 navigate('/manage-books')

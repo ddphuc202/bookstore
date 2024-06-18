@@ -10,9 +10,7 @@ const NewBooks = () => {
 	const [records, setRecords] = useState([]);
 
 	useEffect(() => {
-		getBooks().then(res => {
-			setRecords(res.data)
-		})
+		getBooks(setRecords)
 	}, [])
 
 	const responsive = {

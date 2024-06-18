@@ -4,6 +4,7 @@ import Table from 'react-bootstrap/Table';
 import { useEffect, useState } from 'react';
 import { Link, Route, useNavigate } from 'react-router-dom';
 import { getBooks, deleteBooks } from '../../services/BooksServices'
+import { baseURL } from '../../utils/AxiosCustomize';
 const TableBooks = (props) => {
 
 
@@ -16,9 +17,8 @@ const TableBooks = (props) => {
   }
 
   useEffect(() => {
-    getBooks().then(res => {
-      setRecords(res.data)
-    })
+    getBooks(setRecords);
+
   },)
 
   const [isShowModalEdit, setIsShowModalEdit] = useState(false);
@@ -46,7 +46,9 @@ const TableBooks = (props) => {
             records.map((d, i) => (
               <tr key={i}>
                 <td>{d.id}</td>
-                <td>{d.title}</td>
+                <td>{d.title}
+                  <img width={'200px'} src={baseURL + d.primary_image_path} />
+                </td>
                 <td>{d.author}</td>
                 <td>{d.description}</td>
                 <td>{d.price}</td>

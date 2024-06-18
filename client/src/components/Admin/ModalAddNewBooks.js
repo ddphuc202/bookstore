@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import Form from 'react-bootstrap/Form';
@@ -13,21 +13,37 @@ function ModalAddNewBooks() {
     const [price, setPrice] = useState('');
     const [sale, setSale] = useState('');
     const [stock, setStock] = useState('');
-    const [imagePrimary, setImagePrimary] = useState('');
-    const [imageOthers, setImageOthers] = useState('');
+    const [genres, setGenres] = useState('');
+    const [primaryImage, setPrimaryImage] = useState(null);
+    const [otherImages, setOtherImages] = useState([]);
 
     const navigate = useNavigate();
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        createNewBook(title, author, description, price, sale, stock, navigate);
+        createNewBook(title, author, description, price, sale, stock, genres, primaryImage, otherImages, navigate);
     }
 
-    // const handleUploadImage = (event) => {
-    //     if (event.target && event.target.files && event.target.files[0]) {
-    //         setImagePrimary(event.target.files[0])
-    //     }
-    // }
+    const handleSelect = (event) => {
+        setGenres(event.target.value);
+    }
+
+    const handleUploadPrimaryImage = (event) => {
+        if (event.target && event.target.files && event.target.files[0]) {
+            console.log(event.target.files[0])
+            setPrimaryImage(event.target.files[0])
+        }
+    }
+
+    const handleUploadOtherImages = (event) => {
+        if (event.target && event.target.files && event.target.files) {
+            console.log(event.target.files)
+            const filesArray = Array.from(event.target.files);
+            setOtherImages(filesArray);
+
+        }
+    }
+
 
     return (
         <>
@@ -41,7 +57,7 @@ function ModalAddNewBooks() {
                     </Modal.Header>
 
                     <Modal.Body>
-                        <Form>
+                        <Form encType='multipart/form-data'>
                             <Form.Group className="mb-3" controlId="formBasicEmail" >
                                 <Form.Label>Tiêu đề</Form.Label>
                                 <Form.Control type="text" placeholder="Tiêu đề sách" value={title} onChange={(event) => setTitle(event.target.value)} />
@@ -64,7 +80,22 @@ function ModalAddNewBooks() {
 
                             <Form.Group className="mb-3" controlId="formBasicPassword">
                                 <Form.Label>Khuyến mãi (%)</Form.Label>
-                                <Form.Control type="number" placeholder="" value={sale} onChange={(event) => setSale(event.target.value)} />
+                                <Form.Control type="number" placeholder="Khuyến mãi" value={sale} onChange={(event) => setSale(event.target.value)} />
+                            </Form.Group>
+
+                            <Form.Group className="mb-3" controlId="formBasicPassword">
+                                <Form.Label>Thể loại</Form.Label>
+                                <Form.Select aria-label="Default select example" onChange={handleSelect}>
+                                    <option>Thể loại </option>
+                                    <option value='1'>Khoa Học Viễn Tưởng</option>
+                                    <option value="2">Trinh Thám</option>
+                                    <option value="3">Bí ẩn</option>
+                                    <option value="4">Kinh Doanh</option>
+                                    <option value="5">Lãng mạn</option>
+                                    <option value="6">Lịch Sử</option>
+                                    <option value="7">Tâm Lý Học</option>
+                                    <option value="8">Tâm Linh - Tôn Giáo</option>
+                                </Form.Select>
                             </Form.Group>
 
                             <Form.Group className="mb-3" controlId="formBasicPassword">
@@ -72,15 +103,15 @@ function ModalAddNewBooks() {
                                 <Form.Control type="number" placeholder="Tồn kho" value={stock} onChange={(event) => setStock(event.target.value)} />
                             </Form.Group>
 
-                            {/* <Form.Group controlId="formFile" className="mb-3">
+                            <Form.Group controlId="formFile" className="mb-3" >
                                 <Form.Label>Ảnh chính </Form.Label>
-                                <Form.Control type="file" />
+                                <Form.Control type="file" onChange={(event) => handleUploadPrimaryImage(event)} name='primaryImage' />
                             </Form.Group>
 
                             <Form.Group controlId="formFileMultiple" className="mb-3">
                                 <Form.Label>Ảnh phụ</Form.Label>
-                                <Form.Control type="file" multiple onChange={(event) => handleUploadImage(event)} />
-                            </Form.Group> */}
+                                <Form.Control type="file" multiple onChange={(event) => handleUploadOtherImages(event)} name='otherImages' />
+                            </Form.Group>
                         </Form>
                     </Modal.Body>
 

@@ -208,8 +208,8 @@ const Header = () => {
                             <FontAwesomeIcon icon={faUser} />
                             <div className="account-header">
 
-                                <a href="/account/login">Đăng nhập</a>
-                                <a href="/account/register">Đăng ký</a>
+                                <a href="/login">Đăng nhập</a>
+                                <a href="/register">Đăng ký</a>
 
                             </div>
                         </div>

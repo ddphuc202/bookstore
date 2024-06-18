@@ -7,10 +7,20 @@ import { useNavigate } from 'react-router-dom';
 import { useParams } from 'react-router-dom';
 import { getBookById, updateBookByID } from '../../services/BooksServices';
 
+
 function ModalEditBooks() {
 
     const { id } = useParams();
     const [data, setData] = useState([]);
+
+    const [primaryImage, setPrimaryImage] = useState(null);
+
+    const [previewPrimaryImage, setPreviewPrimaryImage] = useState(null);
+
+    const [otherImages, setOtherImages] = useState([]);
+
+    const [previewOtherImages, setPreviewOtherImages] = useState([]);
+
     const navigate = useNavigate();
 
     const handleSubmit = (event) => {
@@ -18,19 +28,44 @@ function ModalEditBooks() {
         updateBookByID(id, data, navigate)
     }
 
+    const handleUploadPrimaryImage = (event) => {
+        if (event.target && event.target.files && event.target.files[0]) {
+
+            setPreviewPrimaryImage(URL.createObjectURL(event.target.files[0]))
+        }
+    }
+
+    const handleUploadOtherImages = (event) => {
+        if (event.target && event.target.files && event.target.files) {
+            const filesArray = Array.from(event.target.files);
+            setPreviewOtherImages(filesArray);
+            console.log(filesArray);
+        }
+    }
+
+
+
     useEffect(() => {
-        getBookById(id)
-            .then(res => setData(res.data))
-            .catch(err => console.log(err))
-    }, [])
+        getBookById(id, setData)
+
+        if (data && data.images) {
+            const PrimaryImage = data.images.find(image => image.is_primary === 1);
+            setPrimaryImage(PrimaryImage);
+
+            const OtherImages = data.images.filter(image => image.is_primary === 0);
+            setOtherImages(OtherImages);
+
+        }
+    }, [data])
     return (
         <>
+
             <div
                 className="modal show"
                 style={{ display: 'block', position: 'initial' }}
             >
 
-                <Modal.Dialog>
+                <Modal.Dialog style={{ maxWidth: '60%' }}>
                     <Modal.Header >
                         <Modal.Title>Chỉnh Sửa Sách</Modal.Title>
                     </Modal.Header>
@@ -64,7 +99,22 @@ function ModalEditBooks() {
 
                             <Form.Group className="mb-3" controlId="formBasicPassword">
                                 <Form.Label>Khuyến mãi %</Form.Label>
-                                <Form.Control type="number" value={data.sale_percent} onChange={event => setData({ ...data, sale_percent: event.target.value })} />
+                                <Form.Control type="number" value={data.discount} onChange={event => setData({ ...data, discount: event.target.value })} />
+                            </Form.Group>
+
+                            <Form.Group className="mb-3" controlId="formBasicPassword">
+                                <Form.Label>Thể loại</Form.Label>
+                                <Form.Select aria-label="Default select example" value={data.genre_id} onChange={event => setData({ ...data, genre_id: event.target.value })}>
+                                    <option>Thể loại </option>
+                                    <option value='1'>Khoa Học Viễn Tưởng</option>
+                                    <option value="2">Trinh Thám</option>
+                                    <option value="3">Bí ẩn</option>
+                                    <option value="4">Kinh Doanh</option>
+                                    <option value="5">Lãng mạn</option>
+                                    <option value="6">Lịch Sử</option>
+                                    <option value="7">Tâm Lý Học</option>
+                                    <option value="8">Tâm Linh - Tôn Giáo</option>
+                                </Form.Select>
                             </Form.Group>
 
                             <Form.Group className="mb-3" controlId="formBasicPassword">
@@ -72,6 +122,63 @@ function ModalEditBooks() {
                                 <Form.Control type="number" value={data.stock} onChange={event => setData({ ...data, stock: event.target.value })} />
                             </Form.Group>
                         </Form>
+
+                        <Form.Group controlId="formFile" className="mb-3" >
+                            <Form.Label>Ảnh chính </Form.Label>
+                            <Form.Control type="file"
+                                onChange={(event) => handleUploadPrimaryImage(event)}
+                                name='primaryImage' />
+                            <br />
+                            <thead>
+                                <tr>
+                                    <th style={{ textAlign: "center" }}>Ảnh sẵn</th>
+                                    <th style={{ textAlign: "center" }}>Ảnh mới</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        {primaryImage && <img width={'200px'} style={{ padding: "10px" }}
+                                            src={`http://localhost:3030${primaryImage.image_path}`}
+                                            alt="Primary" />}
+                                    </td>
+                                    <td>
+                                        {previewPrimaryImage && <img width={'200px'} style={{ padding: "10px" }}
+                                            src={previewPrimaryImage}
+                                            alt="New Image" />}
+                                    </td>
+                                </tr>
+                            </tbody>
+
+                        </Form.Group>
+
+                        <Form.Group controlId="formFileMultiple" className="mb-3">
+                            <Form.Label>Ảnh phụ</Form.Label>
+                            <Form.Control type="file" multiple
+                                onChange={(event) => handleUploadOtherImages(event)}
+                                name='otherImages' />
+                            <br />
+                            <div>
+                                <span style={{ fontWeight: "bold", marginLeft: "20px" }}>Ảnh sẵn</span>
+                                <div>
+                                    {otherImages.map((image, index) => (
+                                        <img width={'200px'} style={{ padding: "10px" }} key={index} src={`http://localhost:3030${image.image_path}`} alt={`Other ${index}`} />
+                                    ))}
+                                </div>
+                                <br />
+                                <span style={{ fontWeight: "bold", marginLeft: "20px" }}>Ảnh mới</span>
+                                <div>
+                                    {
+                                        [...previewOtherImages].map((previewOtherImage) => (
+                                            <img src={URL.createObjectURL(previewOtherImage)} width={'200px'} style={{ padding: "10px" }} />
+                                        ))
+                                    }
+                                </div>
+
+
+                            </div>
+
+                        </Form.Group>
 
 
                     </Modal.Body>
