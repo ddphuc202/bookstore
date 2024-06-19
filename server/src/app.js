@@ -9,7 +9,7 @@ const configStaticFiles = require('./config/staticFiles');
 
 const webRoutes = require('./routes/web');
 const bookRoutes = require('./routes/books');
-const genreRoutes = require('./routes/genres');
+const categoryRoutes = require('./routes/categories');
 const articleRoutes = require('./routes/articles');
 const customerRoutes = require('./routes/customers');
 
@@ -40,7 +40,7 @@ app.use(express.urlencoded({ extended: true }));
 // Routes
 app.use('/', webRoutes);
 app.use('/books', bookRoutes);
-app.use('/genres', genreRoutes);
+app.use('/categories', categoryRoutes);
 app.use('/articles', articleRoutes);
 app.use('/customers', customerRoutes);
 

@@ -21,8 +21,8 @@ seedAdmins.forEach((admin) => {
     });
 });
 
-// Seed book genres
-const seedGenres = [
+// Seed book categories
+const seedCategories = [
     { name: 'Khoa Học Viễn Tưởng' },
     { name: 'Trinh Thám' },
     { name: 'Bí ẩn' },
@@ -34,52 +34,52 @@ const seedGenres = [
 ];
 
 
-// Insert seed data into genres table
-seedGenres.forEach(async (genre) => {
-    const query = `INSERT INTO genres (name) VALUES (?)`;
-    const values = [genre.name];
+// Insert seed data into categories table
+seedCategories.forEach(async (category) => {
+    const query = `INSERT INTO categories (name) VALUES (?)`;
+    const values = [category.name];
     pool.query(query, values, (err, res) => {
         if (err) {
             console.error(err);
         } else {
-            console.log(`Genre ${genre.name} inserted successfully.`);
+            console.log(`Category ${category.name} inserted successfully.`);
         }
     });
 });
 
 // Seed books
 const seedBooks = [
-    { title: 'Dune - Xứ Cát', author: 'Frank Herbert', description: 'Một cuốn tiểu thuyết khoa học viễn tưởng về một hành tinh sa mạc.', price: 19.99, genre_id: 1, stock: 100 },
-    { title: 'Harry Potter và Hòn Đá Phù Thủy', author: 'J.K. Rowling', description: 'Một tiểu thuyết phù thủy huyền bí.', price: 29.99, genre_id: 2, stock: 120 },
-    { title: 'Sherlock Holmes', author: 'Arthur Conan Doyle', description: 'Một loạt các câu chuyện trinh thám về thám tử nổi tiếng.', price: 15.99, genre_id: 3, stock: 100 },
-    { title: 'Bí Mật của Triệu Phú', author: 'Robert T. Kiyosaki', description: 'Sách dạy kinh doanh và tài chính cá nhân.', price: 12.99, genre_id: 4, stock: 200 },
-    { title: 'Nhà Giả Kim', author: 'Paulo Coelho', description: 'Một cuốn sách truyền thống kinh điển.', price: 17.99, genre_id: 4, stock: 80 },
-    { title: 'Chiến Binh Của Tâm Linh', author: 'Paulo Coelho', description: 'Một câu chuyện về sức mạnh của tâm linh.', price: 14.99, genre_id: 4, stock: 150 },
-    { title: 'Sapiens: Người Nắm Quyền', author: 'Yuval Noah Harari', description: 'Một cuốn sách phi hư cấu về lịch sử nhân loại.', price: 24.99, genre_id: 6, stock: 50 },
-    { title: 'Bố Già', author: 'Mario Puzo', description: 'Một cuốn tiểu thuyết về gia đình và tội phạm.', price: 20.99, genre_id: 3, stock: 120 },
-    { title: 'Cuộc Phiêu Lưu Của Alice Trong Xứ Sở Thần Tiên', author: 'Lewis Carroll', description: 'Một câu chuyện kỳ diệu về một cô gái vào xứ sở thần tiên.', price: 13.99, genre_id: 2, stock: 150 },
-    { title: 'Bí Mật', author: 'Rhonda Byrne', description: 'Một cuốn sách tự truyện phát triển bản thân.', price: 22.99, genre_id: 7, stock: 50 },
-    { title: 'Nghệ Thuật Chết', author: 'Nguyễn Hiến Lê', description: 'Một cuốn sách triết học về sự sống và cái chết.', price: 11.99, genre_id: 7, stock: 60 },
-    { title: 'Trở Lại Từ Cõi Sáng', author: 'Kimberly Clark Sharp', description: 'Một cuốn sách về kinh nghiệm gần chết.', price: 13.99, genre_id: 7, stock: 90 },
-    { title: 'Bí Mật Thanh Xuân', author: 'Hồng Ân', description: 'Một cuốn sách tự truyện về những năm thanh xuân.', price: 11.99, genre_id: 5, stock: 80 },
-    { title: 'Mắt Biếc', author: 'Nguyễn Nhật Ánh', description: 'Một cuốn tiểu thuyết tình cảm.', price: 9.99, genre_id: 5, stock: 200 },
-    { title: 'Tử Thư', author: 'Hoàng Nhật Nam', description: 'Một tiểu thuyết về cuộc sống và cái chết.', price: 8.99, genre_id: 3, stock: 110 },
-    { title: 'Hồng Lâu Mộng', author: 'Tào Tuyết Cần', description: 'Một cuốn tiểu thuyết văn học cổ điển của Trung Quốc.', price: 21.99, genre_id: 5, stock: 70 },
-    { title: 'Dấu Chân Trên Cát', author: 'Nguyễn Ngọc Thuần', description: 'Một cuốn sách tự truyện của một nhà văn và nhà báo Việt Nam.', price: 15.99, genre_id: 5, stock: 100 },
-    { title: 'Nghìn Lẻ Một Đêm', author: 'Antoine Galland', description: 'Một bộ sưu tập truyện dân gian Ả Rập.', price: 19.99, genre_id: 5, stock: 140 },
-    { title: 'Cẩm Y Chi Hạ', author: 'Tuyết Sơn Phi Hồng', description: 'Một cuốn sách văn học cổ điển của Trung Quốc.', price: 16.99, genre_id: 5, stock: 100 },
-    { title: 'Những Bí Ẩn Của Thế Giới', author: 'Dan Brown', description: 'Một cuốn tiểu thuyết ly kỳ về những bí ẩn và âm mưu toàn cầu.', price: 18.99, genre_id: 3, stock: 80 },
-    { title: 'Tâm Hồn Của Lãng Mạn', author: 'Nicholas Sparks', description: 'Một cuốn tiểu thuyết lãng mạn về tình yêu và mối quan hệ.', price: 16.99, genre_id: 5, stock: 120 },
-    { title: 'Phát Triển Bản Thân: 7 Bước Để Trở Thành Phiên Bản Tốt Nhất Của Bạn', author: 'Tony Robbins', description: 'Một cuốn sách tự phát triển về việc cải thiện bản thân và đạt được mục tiêu.', price: 23.99, genre_id: 7, stock: 90 },
-    { title: 'Lược Sử Thế Giới', author: 'John M. Roberts', description: 'Một cuốn sách về lịch sử thế giới từ nguyên thủy đến hiện đại.', price: 25.99, genre_id: 6, stock: 100 },
-    { title: 'Câu Chuyện Cổ Tích Trong Sách', author: 'Joseph Campbell', description: 'Một cuốn sách nghiên cứu về những câu chuyện cổ tích và tầm quan trọng của chúng trong văn hóa.', price: 21.99, genre_id: 7, stock: 70 },
-    { title: 'Khám Phá Bí Mật Vũ Trụ', author: 'Stephen Hawking', description: 'Một cuốn sách khoa học về vũ trụ và những bí mật của nó.', price: 29.99, genre_id: 1, stock: 110 }
+    { title: 'Dune - Xứ Cát', author: 'Frank Herbert', description: 'Một cuốn tiểu thuyết khoa học viễn tưởng về một hành tinh sa mạc.', price: 19.99, category_id: 1, stock: 100 },
+    { title: 'Harry Potter và Hòn Đá Phù Thủy', author: 'J.K. Rowling', description: 'Một tiểu thuyết phù thủy huyền bí.', price: 29.99, category_id: 2, stock: 120 },
+    { title: 'Sherlock Holmes', author: 'Arthur Conan Doyle', description: 'Một loạt các câu chuyện trinh thám về thám tử nổi tiếng.', price: 15.99, category_id: 3, stock: 100 },
+    { title: 'Bí Mật của Triệu Phú', author: 'Robert T. Kiyosaki', description: 'Sách dạy kinh doanh và tài chính cá nhân.', price: 12.99, category_id: 4, stock: 200 },
+    { title: 'Nhà Giả Kim', author: 'Paulo Coelho', description: 'Một cuốn sách truyền thống kinh điển.', price: 17.99, category_id: 4, stock: 80 },
+    { title: 'Chiến Binh Của Tâm Linh', author: 'Paulo Coelho', description: 'Một câu chuyện về sức mạnh của tâm linh.', price: 14.99, category_id: 4, stock: 150 },
+    { title: 'Sapiens: Người Nắm Quyền', author: 'Yuval Noah Harari', description: 'Một cuốn sách phi hư cấu về lịch sử nhân loại.', price: 24.99, category_id: 6, stock: 50 },
+    { title: 'Bố Già', author: 'Mario Puzo', description: 'Một cuốn tiểu thuyết về gia đình và tội phạm.', price: 20.99, category_id: 3, stock: 120 },
+    { title: 'Cuộc Phiêu Lưu Của Alice Trong Xứ Sở Thần Tiên', author: 'Lewis Carroll', description: 'Một câu chuyện kỳ diệu về một cô gái vào xứ sở thần tiên.', price: 13.99, category_id: 2, stock: 150 },
+    { title: 'Bí Mật', author: 'Rhonda Byrne', description: 'Một cuốn sách tự truyện phát triển bản thân.', price: 22.99, category_id: 7, stock: 50 },
+    { title: 'Nghệ Thuật Chết', author: 'Nguyễn Hiến Lê', description: 'Một cuốn sách triết học về sự sống và cái chết.', price: 11.99, category_id: 7, stock: 60 },
+    { title: 'Trở Lại Từ Cõi Sáng', author: 'Kimberly Clark Sharp', description: 'Một cuốn sách về kinh nghiệm gần chết.', price: 13.99, category_id: 7, stock: 90 },
+    { title: 'Bí Mật Thanh Xuân', author: 'Hồng Ân', description: 'Một cuốn sách tự truyện về những năm thanh xuân.', price: 11.99, category_id: 5, stock: 80 },
+    { title: 'Mắt Biếc', author: 'Nguyễn Nhật Ánh', description: 'Một cuốn tiểu thuyết tình cảm.', price: 9.99, category_id: 5, stock: 200 },
+    { title: 'Tử Thư', author: 'Hoàng Nhật Nam', description: 'Một tiểu thuyết về cuộc sống và cái chết.', price: 8.99, category_id: 3, stock: 110 },
+    { title: 'Hồng Lâu Mộng', author: 'Tào Tuyết Cần', description: 'Một cuốn tiểu thuyết văn học cổ điển của Trung Quốc.', price: 21.99, category_id: 5, stock: 70 },
+    { title: 'Dấu Chân Trên Cát', author: 'Nguyễn Ngọc Thuần', description: 'Một cuốn sách tự truyện của một nhà văn và nhà báo Việt Nam.', price: 15.99, category_id: 5, stock: 100 },
+    { title: 'Nghìn Lẻ Một Đêm', author: 'Antoine Galland', description: 'Một bộ sưu tập truyện dân gian Ả Rập.', price: 19.99, category_id: 5, stock: 140 },
+    { title: 'Cẩm Y Chi Hạ', author: 'Tuyết Sơn Phi Hồng', description: 'Một cuốn sách văn học cổ điển của Trung Quốc.', price: 16.99, category_id: 5, stock: 100 },
+    { title: 'Những Bí Ẩn Của Thế Giới', author: 'Dan Brown', description: 'Một cuốn tiểu thuyết ly kỳ về những bí ẩn và âm mưu toàn cầu.', price: 18.99, category_id: 3, stock: 80 },
+    { title: 'Tâm Hồn Của Lãng Mạn', author: 'Nicholas Sparks', description: 'Một cuốn tiểu thuyết lãng mạn về tình yêu và mối quan hệ.', price: 16.99, category_id: 5, stock: 120 },
+    { title: 'Phát Triển Bản Thân: 7 Bước Để Trở Thành Phiên Bản Tốt Nhất Của Bạn', author: 'Tony Robbins', description: 'Một cuốn sách tự phát triển về việc cải thiện bản thân và đạt được mục tiêu.', price: 23.99, category_id: 7, stock: 90 },
+    { title: 'Lược Sử Thế Giới', author: 'John M. Roberts', description: 'Một cuốn sách về lịch sử thế giới từ nguyên thủy đến hiện đại.', price: 25.99, category_id: 6, stock: 100 },
+    { title: 'Câu Chuyện Cổ Tích Trong Sách', author: 'Joseph Campbell', description: 'Một cuốn sách nghiên cứu về những câu chuyện cổ tích và tầm quan trọng của chúng trong văn hóa.', price: 21.99, category_id: 7, stock: 70 },
+    { title: 'Khám Phá Bí Mật Vũ Trụ', author: 'Stephen Hawking', description: 'Một cuốn sách khoa học về vũ trụ và những bí mật của nó.', price: 29.99, category_id: 1, stock: 110 }
 ];
 
 // Insert seed data into books table
 seedBooks.forEach((book) => {
-    const query = `INSERT INTO books (title, author, description, price, genre_id, stock) VALUES (?, ?, ?, ?, ?, ?)`;
-    const values = [book.title, book.author, book.description, book.price, book.genre_id, book.stock];
+    const query = `INSERT INTO books (title, author, description, price, category_id, stock) VALUES (?, ?, ?, ?, ?, ?)`;
+    const values = [book.title, book.author, book.description, book.price, book.category_id, book.stock];
     pool.query(query, values, (err, res) => {
         if (err) {
             console.error(err);
