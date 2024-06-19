@@ -58,9 +58,10 @@ class Book {
             parameters.splice(3, 0, parseInt(genre_id));
         }
 
-        const query = `SELECT *, CONCAT('${basePath}', thumbnail) AS thumbnail_path
-                       FROM books 
-                       WHERE (books.title LIKE ? OR books.author LIKE ? or books.description LIKE ?) ${genreQuery} AND books.deleted_at IS NULL 
+        const query = `SELECT books.*, genres.name AS genre_name, CONCAT('${basePath}', books.thumbnail) AS thumbnail_path
+                       FROM books
+                       LEFT JOIN genres ON books.genre_id = genres.id
+                       WHERE (books.title LIKE ? OR books.author LIKE ? OR books.description LIKE ?) ${genreQuery} AND books.deleted_at IS NULL
                        ${orderBy} LIMIT ? OFFSET ?`;
 
         return this.queryDatabase(query, parameters);
