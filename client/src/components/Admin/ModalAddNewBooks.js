@@ -11,33 +11,31 @@ function ModalAddNewBooks() {
     const [author, setAuthor] = useState('');
     const [description, setDescription] = useState('');
     const [price, setPrice] = useState('');
-    const [sale, setSale] = useState('');
+    const [discount, setDiscount] = useState('');
     const [stock, setStock] = useState('');
     const [genres, setGenres] = useState('');
-    const [primaryImage, setPrimaryImage] = useState(null);
+    const [thumbnail, setThumbnail] = useState(null);
     const [otherImages, setOtherImages] = useState([]);
 
     const navigate = useNavigate();
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        createNewBook(title, author, description, price, sale, stock, genres, primaryImage, otherImages, navigate);
+        createNewBook(title, author, description, price, discount, stock, genres, thumbnail, otherImages, navigate);
     }
 
     const handleSelect = (event) => {
         setGenres(event.target.value);
     }
 
-    const handleUploadPrimaryImage = (event) => {
+    const handleUploadThumbnail = (event) => {
         if (event.target && event.target.files && event.target.files[0]) {
-            console.log(event.target.files[0])
-            setPrimaryImage(event.target.files[0])
+            setThumbnail(event.target.files[0])
         }
     }
 
     const handleUploadOtherImages = (event) => {
         if (event.target && event.target.files && event.target.files) {
-            console.log(event.target.files)
             const filesArray = Array.from(event.target.files);
             setOtherImages(filesArray);
 
@@ -80,7 +78,7 @@ function ModalAddNewBooks() {
 
                             <Form.Group className="mb-3" controlId="formBasicPassword">
                                 <Form.Label>Khuyến mãi (%)</Form.Label>
-                                <Form.Control type="number" placeholder="Khuyến mãi" value={sale} onChange={(event) => setSale(event.target.value)} />
+                                <Form.Control type="number" placeholder="Khuyến mãi" value={discount} onChange={(event) => setDiscount(event.target.value)} />
                             </Form.Group>
 
                             <Form.Group className="mb-3" controlId="formBasicPassword">
@@ -105,7 +103,7 @@ function ModalAddNewBooks() {
 
                             <Form.Group controlId="formFile" className="mb-3" >
                                 <Form.Label>Ảnh chính </Form.Label>
-                                <Form.Control type="file" onChange={(event) => handleUploadPrimaryImage(event)} name='primaryImage' />
+                                <Form.Control type="file" onChange={(event) => handleUploadThumbnail(event)} name='thumbnail' />
                             </Form.Group>
 
                             <Form.Group controlId="formFileMultiple" className="mb-3">

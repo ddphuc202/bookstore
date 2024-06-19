@@ -20,7 +20,7 @@ const Test = () => {
     }
 
     return (
-        <form onSubmit={handleSubmit} method="POST" enctype="multipart/form-data">
+        <form action="books/" method="POST" enctype="multipart/form-data">
             <label for="title">Title:</label>
             <input type="text" id="title" name="title" />
             <br />
@@ -36,8 +36,8 @@ const Test = () => {
             <label for="stock">Stock:</label>
             <input type="number" id="stock" name="stock" />
             <br />
-            <label for="primaryImage">Primary Image:</label>
-            <input type="file" id="primaryImage" name="primaryImage" />
+            <label for="thumbnail">Thumbnail:</label>
+            <input type="file" id="thumbnail" name="thumbnail" />
             <br />
             <label for="otherImages">Other Images:</label>
             <input type="file" id="otherImages" name="otherImages" multiple />

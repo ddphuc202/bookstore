@@ -1,6 +1,6 @@
 import { instance } from '../utils/AxiosCustomize';
 
-const createNewBook = (title, author, description, price, sale, stock, genres, primaryImage, otherImages, navigate) => {
+const createNewBook = (title, author, description, price, discount, stock, genres, thumbnail, otherImages, navigate) => {
 
     const otherImagesArray = Array.from(otherImages);
 
@@ -9,10 +9,10 @@ const createNewBook = (title, author, description, price, sale, stock, genres, p
     data.append('author', author);
     data.append('description', description);
     data.append('price', price);
-    data.append('discount', sale);
+    data.append('discount', discount);
     data.append('stock', stock);
     data.append('genre_id', genres);
-    data.append('primaryImage', primaryImage);
+    data.append('thumbnail', thumbnail);
     otherImagesArray.forEach((file) => {
         data.append(`otherImages`, file);
     });

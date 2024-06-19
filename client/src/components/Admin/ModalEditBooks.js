@@ -13,12 +13,10 @@ function ModalEditBooks() {
     const { id } = useParams();
     const [data, setData] = useState([]);
 
-    const [primaryImage, setPrimaryImage] = useState(null);
-
-    const [previewPrimaryImage, setPreviewPrimaryImage] = useState(null);
+    const [thumbnail, setThumbnail] = useState(null);
+    const [previewThumbnail, setPreviewThumbnail] = useState(null);
 
     const [otherImages, setOtherImages] = useState([]);
-
     const [previewOtherImages, setPreviewOtherImages] = useState([]);
 
     const navigate = useNavigate();
@@ -28,10 +26,10 @@ function ModalEditBooks() {
         updateBookByID(id, data, navigate)
     }
 
-    const handleUploadPrimaryImage = (event) => {
+    const handleUploadThumbnail = (event) => {
         if (event.target && event.target.files && event.target.files[0]) {
 
-            setPreviewPrimaryImage(URL.createObjectURL(event.target.files[0]))
+            setPreviewThumbnail(URL.createObjectURL(event.target.files[0]))
         }
     }
 
@@ -39,7 +37,7 @@ function ModalEditBooks() {
         if (event.target && event.target.files && event.target.files) {
             const filesArray = Array.from(event.target.files);
             setPreviewOtherImages(filesArray);
-            console.log(filesArray);
+
         }
     }
 
@@ -47,12 +45,9 @@ function ModalEditBooks() {
 
     useEffect(() => {
         getBookById(id, setData)
-
+        setThumbnail(data.thumbnail_path)
         if (data && data.images) {
-            const PrimaryImage = data.images.find(image => image.is_primary === 1);
-            setPrimaryImage(PrimaryImage);
-
-            const OtherImages = data.images.filter(image => image.is_primary === 0);
+            const OtherImages = Array.from(data.images);
             setOtherImages(OtherImages);
 
         }
@@ -106,13 +101,13 @@ function ModalEditBooks() {
                                 <Form.Label>Thể loại</Form.Label>
                                 <Form.Select aria-label="Default select example" value={data.genre_id} onChange={event => setData({ ...data, genre_id: event.target.value })}>
                                     <option>Thể loại </option>
-                                    <option value='1'>Khoa Học Viễn Tưởng</option>
-                                    <option value="2">Trinh Thám</option>
-                                    <option value="3">Bí ẩn</option>
-                                    <option value="4">Kinh Doanh</option>
-                                    <option value="5">Lãng mạn</option>
-                                    <option value="6">Lịch Sử</option>
-                                    <option value="7">Tâm Lý Học</option>
+                                    <option value='3'>Khoa Học Viễn Tưởng</option>
+                                    <option value="4">Trinh Thám</option>
+                                    <option value="7">Bí ẩn</option>
+                                    <option value="6">Kinh Doanh</option>
+                                    <option value="1">Lãng mạn</option>
+                                    <option value="2">Lịch Sử</option>
+                                    <option value="5">Tâm Lý Học</option>
                                     <option value="8">Tâm Linh - Tôn Giáo</option>
                                 </Form.Select>
                             </Form.Group>
@@ -126,8 +121,8 @@ function ModalEditBooks() {
                         <Form.Group controlId="formFile" className="mb-3" >
                             <Form.Label>Ảnh chính </Form.Label>
                             <Form.Control type="file"
-                                onChange={(event) => handleUploadPrimaryImage(event)}
-                                name='primaryImage' />
+                                onChange={(event) => handleUploadThumbnail(event)}
+                                name='thumbnail' />
                             <br />
                             <thead>
                                 <tr>
@@ -138,13 +133,13 @@ function ModalEditBooks() {
                             <tbody>
                                 <tr>
                                     <td>
-                                        {primaryImage && <img width={'200px'} style={{ padding: "10px" }}
-                                            src={`http://localhost:3030${primaryImage.image_path}`}
+                                        {thumbnail && <img width={'200px'} style={{ padding: "10px" }}
+                                            src={`http://localhost:3030${thumbnail}`}
                                             alt="Primary" />}
                                     </td>
                                     <td>
-                                        {previewPrimaryImage && <img width={'200px'} style={{ padding: "10px" }}
-                                            src={previewPrimaryImage}
+                                        {previewThumbnail && <img width={'200px'} style={{ padding: "10px" }}
+                                            src={previewThumbnail}
                                             alt="New Image" />}
                                     </td>
                                 </tr>

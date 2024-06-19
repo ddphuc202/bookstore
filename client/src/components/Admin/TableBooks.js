@@ -21,10 +21,7 @@ const TableBooks = (props) => {
 
   },)
 
-  const [isShowModalEdit, setIsShowModalEdit] = useState(false);
-  const handleClose = () => {
-    setIsShowModalEdit(false);
-  }
+
   return (
     <div style={{ border: "solid 1px #CFCFCF", padding: "30px", borderRadius: "15px", backgroundColor: "#E0EEEE" }}>
       <Table striped bordered hover responsive >
@@ -47,22 +44,21 @@ const TableBooks = (props) => {
               <tr key={i}>
                 <td>{d.id}</td>
                 <td>{d.title}
-                  <img width={'200px'} src={baseURL + d.primary_image_path} />
+                  <img width={'200px'} src={baseURL + d.thumbnail_path} />
                 </td>
                 <td>{d.author}</td>
                 <td>{d.description}</td>
                 <td>{d.price}</td>
                 <td>{d.discount}</td>
                 <td>
-                  {d.genre_id === 1 ? "Lịch sử" :
-                    d.genre_id === 2 ? "Bí ẩn" :
-                      d.genre_id === 3 ? "Kinh doanh" :
+                  {d.genre_id === 1 ? "Lãng mạn" :
+                    d.genre_id === 2 ? "Lịch sử" :
+                      d.genre_id === 3 ? "Khoa Học Viễn Tưởng" :
                         d.genre_id === 4 ? "Trinh thám" :
-                          d.genre_id === 5 ? "Lãng mạn" :
-                            d.genre_id === 6 ? "Khoa học viễn tưởng" :
-                              d.genre_id === 7 ? "Tâm lý học" :
-                                d.genre_id === 8 ? "Tâm linh - Tôn giáo" :
-                                  d.genre_id === 9 ? "Kinh dị" : null}
+                          d.genre_id === 5 ? "Tâm Lý Học" :
+                            d.genre_id === 6 ? "Kinh Doanh" :
+                              d.genre_id === 7 ? "Bí ẩn" :
+                                d.genre_id === 8 ? "Tâm linh - Tôn giáo" : null}
                 </td>
                 <td>{d.stock}</td>
                 <td>
