@@ -38,8 +38,18 @@ const getBookById = (id, setData) => {
         .catch(err => console.log(err))
 }
 
-const updateBookByID = (id, data, navigate) => {
-    instance.put('/books/' + id, data)
+const updateBookByID = (id, data, thumbnailFile, previewOtherImages, navigate) => {
+    const previewOtherImagesArray = Array.from(previewOtherImages);
+    const formData = new FormData();
+    for (const key in data) {
+        formData.append(key, data[key]);
+    }
+    formData.append('thumbnail', thumbnailFile);
+    previewOtherImagesArray.forEach((file) => {
+        formData.append('otherImages', file);
+    });
+
+    instance.put('/books/' + id, formData)
         .then(res => {
             alert("Data update successfully!");
             navigate('/manage-books');

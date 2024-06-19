@@ -29,6 +29,7 @@ const TableBooks = (props) => {
           <tr>
             <th>id</th>
             <th>Tiêu đề</th>
+            <th>Ảnh</th>
             <th>Tác giả</th>
             <th>Mô tả</th>
             <th>Giá thành</th>
@@ -43,23 +44,15 @@ const TableBooks = (props) => {
             records.map((d, i) => (
               <tr key={i}>
                 <td>{d.id}</td>
-                <td>{d.title}
+                <td>{d.title}</td>
+                <td>
                   <img width={'200px'} src={baseURL + d.thumbnail_path} />
                 </td>
                 <td>{d.author}</td>
                 <td>{d.description}</td>
                 <td>{d.price}</td>
                 <td>{d.discount}</td>
-                <td>
-                  {d.genre_id === 1 ? "Lãng mạn" :
-                    d.genre_id === 2 ? "Lịch sử" :
-                      d.genre_id === 3 ? "Khoa Học Viễn Tưởng" :
-                        d.genre_id === 4 ? "Trinh thám" :
-                          d.genre_id === 5 ? "Tâm Lý Học" :
-                            d.genre_id === 6 ? "Kinh Doanh" :
-                              d.genre_id === 7 ? "Bí ẩn" :
-                                d.genre_id === 8 ? "Tâm linh - Tôn giáo" : null}
-                </td>
+                <td>{d.genre_name}</td>
                 <td>{d.stock}</td>
                 <td>
                   <Link to={`/manage-edit-books/${d.id}`} ><FontAwesomeIcon icon={faPenToSquare} size="lg" /></Link>

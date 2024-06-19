@@ -3,15 +3,14 @@ import Footer from "../../components/Customer/Footer";
 import image from '../../image/thanh-xuan-sao-ma-dau-don.png'
 import '../../styles/Books.css';
 import { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import axios from "axios";
 const Books = () => {
 
-    const [columns, setColmns] = useState([]);
     const [records, setRecords] = useState([]);
 
     useEffect(() => {
         axios.get('http://localhost:3030/books').then(res => {
-            setColmns(Object.keys(res.data[0]))
             setRecords(res.data)
         })
     }, [])
@@ -115,19 +114,23 @@ const Books = () => {
                                                         className="variants product-action wishItem" data-cart-form=""
                                                         data-id="product-actions-36086469" encType="multipart/form-data">
                                                         <div className="thumb">
-                                                            <a className="image_thumb" href="/hon-don-va-khu-vuon-nha-nam"
+                                                            <Link to={`/info-book/${book.id}`} className="image_thumb" href="/hon-don-va-khu-vuon-nha-nam"
                                                                 title="HỖN ĐỘN VÀ KHU VƯỜN">
                                                                 <img width="199" height="199"
                                                                     src={image}
                                                                     data-src="https://bizweb.dktcdn.net/100/363/455/products/hondonvakhuvuon01e171766606841.jpg?v=1717666223843"
                                                                     alt="HỖN ĐỘN VÀ KHU VƯỜN"
                                                                     className="lazyload img-responsive center-block" />
-                                                            </a>
+                                                            </Link>
 
                                                         </div>
                                                         <div className="info-product">
-                                                            <h3 className="product-name"><a href="/hon-don-va-khu-vuon-nha-nam"
-                                                                title="HỖN ĐỘN VÀ KHU VƯỜN"><b>{book.title}</b></a></h3>
+                                                            <h3 className="product-name">
+                                                                <Link to={`/info-book/${book.id}`}
+                                                                    title="HỖN ĐỘN VÀ KHU VƯỜN">
+                                                                    <b>{book.title}</b>
+                                                                </Link>
+                                                            </h3>
 
                                                             <div className="price-box">
                                                                 <span className="price">{book.price}$</span>

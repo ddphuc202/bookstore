@@ -18,6 +18,7 @@ import Register from './pages/Customer/Register';
 import InfoPage from './pages/Customer/InfoPage';
 import Books from './pages/Customer/Books';
 import Articles from './pages/Customer/Articles';
+import InfoBook from './pages/Customer/InfoBooks';
 import Test from './components/Admin/Test';
 
 
@@ -55,6 +56,7 @@ function App() {
         <Route path='/about-page' element={<InfoPage />} />
         <Route path='/books' element={<Books />} />
         <Route path='/articles' element={<Articles />} />
+        <Route path='/info-book/:id' element={<InfoBook />} />
 
         <Route path='/login' element={<Login />} />
         <Route path='/register' element={<Register />} />
