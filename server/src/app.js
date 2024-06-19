@@ -20,13 +20,13 @@ const cors = require('cors');
 app.use(cors());
 
 // Init middlewares
-app.use(morgan('dev'));
-app.use(
-    helmet({
-        contentSecurityPolicy: false,
-        crossOriginEmbedderPolicy: false,
-    })
-);
+// app.use(morgan('dev'));
+// app.use(
+//     helmet({
+//         contentSecurityPolicy: false,
+//         crossOriginEmbedderPolicy: false,
+//     })
+// );
 app.use(compression());
 
 // Config 
@@ -43,23 +43,5 @@ app.use('/books', bookRoutes);
 app.use('/genres', genreRoutes);
 app.use('/articles', articleRoutes);
 app.use('/customers', customerRoutes);
-
-const multer = require('multer');
-const storage = multer.diskStorage({
-    destination: function (req, file, cb) {
-        cb(null, './src/public/uploads/')
-    },
-    filename: function (req, file, cb) {
-        // const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9)
-        // cb(null, file.fieldname + '-' + uniqueSuffix)
-        cb(null, file.originalname);
-    }
-})
-
-const upload = multer({ storage: storage })
-
-app.post('/upload', upload.single('image'), (req, res) => {
-    res.send(req.file);
-});
 
 module.exports = app;

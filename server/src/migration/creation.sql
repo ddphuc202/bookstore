@@ -42,8 +42,8 @@ CREATE TABLE genres (
 -- Table for storing books
 CREATE TABLE books (
     id INT AUTO_INCREMENT PRIMARY KEY,
-    title VARCHAR(255) NOT NULL,
-    thumbnail VARCHAR(255),
+    title VARCHAR(350) NOT NULL,
+    thumbnail VARCHAR(500),
     author VARCHAR(255) NOT NULL,
     description TEXT,
     price DECIMAL(10, 2) NOT NULL,
@@ -73,7 +73,7 @@ CREATE TABLE articles (
 CREATE TABLE book_images (
     id INT AUTO_INCREMENT PRIMARY KEY,
     book_id INT,
-    image VARCHAR(255) NOT NULL,
+    image VARCHAR(500) NOT NULL,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (book_id) REFERENCES books(id)
 );
