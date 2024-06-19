@@ -48,12 +48,12 @@ CREATE TABLE books (
     description TEXT,
     price DECIMAL(10, 2) NOT NULL,
     discount DECIMAL(5, 2) DEFAULT 0,
-    genre_id INT,
+    category_id INT,
     stock INT DEFAULT 0,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
     deleted_at TIMESTAMP NULL,
-    FOREIGN KEY (genre_id) REFERENCES genres(id)
+    FOREIGN KEY (category_id) REFERENCES categories(id)
 );
 
 -- Table for storing articles
