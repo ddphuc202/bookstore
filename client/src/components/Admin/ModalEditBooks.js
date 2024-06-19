@@ -49,7 +49,6 @@ function ModalEditBooks() {
         if (data && data.images) {
             const OtherImages = Array.from(data.images);
             setOtherImages(OtherImages);
-
         }
     }, [data])
     return (
@@ -135,12 +134,12 @@ function ModalEditBooks() {
                                     <td>
                                         {thumbnail && <img width={'200px'} style={{ padding: "10px" }}
                                             src={`http://localhost:3030${thumbnail}`}
-                                            alt="Primary" />}
+                                            alt="Ảnh sẵn" />}
                                     </td>
                                     <td>
                                         {previewThumbnail && <img width={'200px'} style={{ padding: "10px" }}
                                             src={previewThumbnail}
-                                            alt="New Image" />}
+                                            alt="Ảnh mới" />}
                                     </td>
                                 </tr>
                             </tbody>
@@ -157,7 +156,7 @@ function ModalEditBooks() {
                                 <span style={{ fontWeight: "bold", marginLeft: "20px" }}>Ảnh sẵn</span>
                                 <div>
                                     {otherImages.map((image, index) => (
-                                        <img width={'200px'} style={{ padding: "10px" }} key={index} src={`http://localhost:3030${image.image_path}`} alt={`Other ${index}`} />
+                                        <img width={'200px'} style={{ padding: "10px" }} key={index} src={`http://localhost:3030${image.image_path}`} alt={`Ảnh sẵn ${index + 1}`} />
                                     ))}
                                 </div>
                                 <br />

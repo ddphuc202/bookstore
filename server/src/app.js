@@ -20,13 +20,13 @@ const cors = require('cors');
 app.use(cors());
 
 // Init middlewares
-app.use(morgan('dev'));
-app.use(
-    helmet({
-        contentSecurityPolicy: false,
-        crossOriginEmbedderPolicy: false,
-    })
-);
+// app.use(morgan('dev'));
+// app.use(
+//     helmet({
+//         contentSecurityPolicy: false,
+//         crossOriginEmbedderPolicy: false,
+//     })
+// );
 app.use(compression());
 
 // Config 

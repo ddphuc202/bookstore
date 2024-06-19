@@ -63,7 +63,7 @@ class Book {
                        WHERE (books.title LIKE ? OR books.author LIKE ? or books.description LIKE ?) ${genreQuery} AND books.deleted_at IS NULL 
                        ${orderBy} LIMIT ? OFFSET ?`;
 
-        console.log(query);
+
         return this.queryDatabase(query, parameters);
     }
 

@@ -15,13 +15,15 @@ function ModalAddNewBooks() {
     const [stock, setStock] = useState('');
     const [genres, setGenres] = useState('');
     const [thumbnail, setThumbnail] = useState(null);
+    const [thumbnailFile, setThumbnailFile] = useState(null);
+
     const [otherImages, setOtherImages] = useState([]);
 
     const navigate = useNavigate();
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        createNewBook(title, author, description, price, discount, stock, genres, thumbnail, otherImages, navigate);
+        createNewBook(title, author, description, price, discount, stock, genres, thumbnailFile, otherImages, navigate);
     }
 
     const handleSelect = (event) => {
@@ -30,7 +32,8 @@ function ModalAddNewBooks() {
 
     const handleUploadThumbnail = (event) => {
         if (event.target && event.target.files && event.target.files[0]) {
-            setThumbnail(event.target.files[0])
+            setThumbnail(URL.createObjectURL(event.target.files[0]))
+            setThumbnailFile(event.target.files[0]);
         }
     }
 
@@ -49,7 +52,7 @@ function ModalAddNewBooks() {
                 className="modal show"
                 style={{ display: 'block', position: 'initial' }}
             >
-                <Modal.Dialog>
+                <Modal.Dialog style={{ maxWidth: '60%' }}>
                     <Modal.Header >
                         <Modal.Title>Thêm sách</Modal.Title>
                     </Modal.Header>
@@ -85,13 +88,13 @@ function ModalAddNewBooks() {
                                 <Form.Label>Thể loại</Form.Label>
                                 <Form.Select aria-label="Default select example" onChange={handleSelect}>
                                     <option>Thể loại </option>
-                                    <option value='1'>Khoa Học Viễn Tưởng</option>
-                                    <option value="2">Trinh Thám</option>
-                                    <option value="3">Bí ẩn</option>
-                                    <option value="4">Kinh Doanh</option>
-                                    <option value="5">Lãng mạn</option>
-                                    <option value="6">Lịch Sử</option>
-                                    <option value="7">Tâm Lý Học</option>
+                                    <option value='3'>Khoa Học Viễn Tưởng</option>
+                                    <option value="4">Trinh Thám</option>
+                                    <option value="7">Bí ẩn</option>
+                                    <option value="6">Kinh Doanh</option>
+                                    <option value="1">Lãng mạn</option>
+                                    <option value="2">Lịch Sử</option>
+                                    <option value="5">Tâm Lý Học</option>
                                     <option value="8">Tâm Linh - Tôn Giáo</option>
                                 </Form.Select>
                             </Form.Group>
@@ -104,11 +107,17 @@ function ModalAddNewBooks() {
                             <Form.Group controlId="formFile" className="mb-3" >
                                 <Form.Label>Ảnh chính </Form.Label>
                                 <Form.Control type="file" onChange={(event) => handleUploadThumbnail(event)} name='thumbnail' />
+                                {thumbnail && <img width={'200px'} style={{ padding: "10px" }}
+                                    src={thumbnail}
+                                    alt="New Image" />}
                             </Form.Group>
 
                             <Form.Group controlId="formFileMultiple" className="mb-3">
                                 <Form.Label>Ảnh phụ</Form.Label>
                                 <Form.Control type="file" multiple onChange={(event) => handleUploadOtherImages(event)} name='otherImages' />
+                                {[...otherImages].map((otherImage) => (
+                                    <img src={URL.createObjectURL(otherImage)} width={'200px'} style={{ padding: "10px" }} />
+                                ))}
                             </Form.Group>
                         </Form>
                     </Modal.Body>
