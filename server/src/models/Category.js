@@ -1,13 +1,13 @@
 const pool = require('../config/database');
 
-class Genre {
+class Category {
     constructor(name) {
         this.name = name;
     }
 
-    static getAllGenres() {
+    static getAllCategories() {
         return new Promise((resolve, reject) => {
-            pool.query('SELECT * FROM genres WHERE deleted_at IS NULL ORDER BY updated_at DESC', (err, results) => {
+            pool.query('SELECT * FROM categories WHERE deleted_at IS NULL ORDER BY updated_at DESC', (err, results) => {
                 if (err) {
                     return reject(err);
                 }
@@ -16,9 +16,9 @@ class Genre {
         });
     }
 
-    static getGenreById(id) {
+    static getCategoryById(id) {
         return new Promise((resolve, reject) => {
-            pool.query('SELECT * FROM genres WHERE id = ? AND deleted_at IS NULL', id, (err, results) => {
+            pool.query('SELECT * FROM categories WHERE id = ? AND deleted_at IS NULL', id, (err, results) => {
                 if (err) {
                     return reject(err);
                 }
@@ -27,9 +27,9 @@ class Genre {
         });
     }
 
-    static createGenre(genre) {
+    static createCategory(category) {
         return new Promise((resolve, reject) => {
-            pool.query('INSERT INTO genres SET ?', genre, (err, results) => {
+            pool.query('INSERT INTO categories SET ?', category, (err, results) => {
                 if (err) {
                     return reject(err);
                 }
@@ -38,9 +38,9 @@ class Genre {
         });
     }
 
-    static updateGenre(id, genre) {
+    static updateCategory(id, category) {
         return new Promise((resolve, reject) => {
-            pool.query('UPDATE genres SET ? WHERE id = ?', [genre, id], (err, results) => {
+            pool.query('UPDATE categories SET ? WHERE id = ?', [category, id], (err, results) => {
                 if (err) {
                     return reject(err);
                 }
@@ -49,9 +49,9 @@ class Genre {
         });
     }
 
-    static deleteGenre(id) {
+    static deleteCategory(id) {
         return new Promise((resolve, reject) => {
-            pool.query('UPDATE genres SET deleted_at = NOW() WHERE id = ?', [id], (err, results) => {
+            pool.query('UPDATE categories SET deleted_at = NOW() WHERE id = ?', [id], (err, results) => {
                 if (err) {
                     return reject(err);
                 }
@@ -61,4 +61,4 @@ class Genre {
     }
 }
 
-module.exports = Genre;
+module.exports = Category;

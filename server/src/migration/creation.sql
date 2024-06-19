@@ -30,8 +30,8 @@ CREATE TABLE customers (
     deleted_at TIMESTAMP NULL
 );
 
--- Table for storing genres
-CREATE TABLE genres (
+-- Table for storing categories
+CREATE TABLE categories (
     id INT AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(255) NOT NULL,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
