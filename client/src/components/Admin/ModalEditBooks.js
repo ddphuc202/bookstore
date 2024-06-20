@@ -2,7 +2,6 @@ import { useEffect, useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import Form from 'react-bootstrap/Form';
-import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { useParams } from 'react-router-dom';
 import { getBookById, updateBookByID } from '../../services/BooksServices';
@@ -15,6 +14,7 @@ function ModalEditBooks() {
 
     const [thumbnail, setThumbnail] = useState(null);
     const [previewThumbnail, setPreviewThumbnail] = useState(null);
+    const [thumbnailFile, setThumbnailFile] = useState(null);
 
     const [otherImages, setOtherImages] = useState([]);
     const [previewOtherImages, setPreviewOtherImages] = useState([]);
@@ -23,13 +23,13 @@ function ModalEditBooks() {
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        updateBookByID(id, data, navigate)
+        updateBookByID(id, data, thumbnailFile, previewOtherImages, navigate)
     }
 
     const handleUploadThumbnail = (event) => {
         if (event.target && event.target.files && event.target.files[0]) {
-
             setPreviewThumbnail(URL.createObjectURL(event.target.files[0]))
+            setThumbnailFile(event.target.files[0]);
         }
     }
 
@@ -41,8 +41,6 @@ function ModalEditBooks() {
         }
     }
 
-
-
     useEffect(() => {
         getBookById(id, setData)
         setThumbnail(data.thumbnail_path)
@@ -50,7 +48,9 @@ function ModalEditBooks() {
             const OtherImages = Array.from(data.images);
             setOtherImages(OtherImages);
         }
-    }, [data])
+    }, [])
+
+
     return (
         <>
 
@@ -66,12 +66,12 @@ function ModalEditBooks() {
                     <Modal.Body>
 
                         <Form>
-                            <Form.Group className="mb-3" controlId="formBasicEmail" >
+                            <Form.Group className="mb-3"  >
                                 <Form.Label></Form.Label>
                                 <Form.Control type="text" value={data.id} hidden />
                             </Form.Group>
 
-                            <Form.Group className="mb-3" controlId="formBasicEmail" >
+                            <Form.Group className="mb-3"  >
                                 <Form.Label>Tiêu đề</Form.Label>
                                 <Form.Control type="text" value={data.title} onChange={event => setData({ ...data, title: event.target.value })} />
                             </Form.Group>
@@ -123,26 +123,23 @@ function ModalEditBooks() {
                                 onChange={(event) => handleUploadThumbnail(event)}
                                 name='thumbnail' />
                             <br />
-                            <thead>
-                                <tr>
-                                    <th style={{ textAlign: "center" }}>Ảnh sẵn</th>
-                                    <th style={{ textAlign: "center" }}>Ảnh mới</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>
-                                        {thumbnail && <img width={'200px'} style={{ padding: "10px" }}
-                                            src={`http://localhost:3030${thumbnail}`}
-                                            alt="Ảnh sẵn" />}
-                                    </td>
-                                    <td>
-                                        {previewThumbnail && <img width={'200px'} style={{ padding: "10px" }}
-                                            src={previewThumbnail}
-                                            alt="Ảnh mới" />}
-                                    </td>
-                                </tr>
-                            </tbody>
+                            <tr>
+                                <th style={{ textAlign: "center" }}>Ảnh sẵn</th>
+                                <th style={{ textAlign: "center" }}>Ảnh mới</th>
+                            </tr>
+
+                            <tr>
+                                <td>
+                                    {thumbnail && <img width={'200px'} style={{ padding: "10px" }}
+                                        src={`http://localhost:3030${thumbnail}`}
+                                        alt="Ảnh sẵn" />}
+                                </td>
+                                <td>
+                                    {previewThumbnail && <img width={'200px'} style={{ padding: "10px" }}
+                                        src={previewThumbnail}
+                                        alt="Ảnh mới" />}
+                                </td>
+                            </tr>
 
                         </Form.Group>
 
@@ -163,8 +160,8 @@ function ModalEditBooks() {
                                 <span style={{ fontWeight: "bold", marginLeft: "20px" }}>Ảnh mới</span>
                                 <div>
                                     {
-                                        [...previewOtherImages].map((previewOtherImage) => (
-                                            <img src={URL.createObjectURL(previewOtherImage)} width={'200px'} style={{ padding: "10px" }} />
+                                        [...previewOtherImages].map((previewOtherImage, index) => (
+                                            <img key={index} src={URL.createObjectURL(previewOtherImage)} width={'200px'} style={{ padding: "10px" }} />
                                         ))
                                     }
                                 </div>
