@@ -89,8 +89,8 @@ seedBooks.forEach((book) => {
     });
 });
 
-// Seed articles
-const seedArticles = [
+// Seed posts
+const seedPosts = [
     { title: 'Đánh Giá Sách: Dune của Frank Herbert', content: 'Một bài đánh giá chi tiết về cuốn tiểu thuyết khoa học viễn tưởng Dune của Frank Herbert.' },
     { title: '10 Cuốn Sách Hay Không Thể Bỏ Lỡ Trong Tháng Này', content: 'Một danh sách các cuốn sách hay và đáng đọc trong tháng này, bao gồm các thể loại từ khoa học viễn tưởng đến lãng mạn.' },
     { title: 'Sale Đặc Biệt: Giảm Giá 30% Cho Tất Cả Các Sách Lịch Sử', content: 'Thông báo về chương trình giảm giá đặc biệt dành cho các cuốn sách lịch sử.' },
@@ -108,15 +108,15 @@ const seedArticles = [
     { title: 'Top 5 Sách Kinh Doanh Hay Nhất Năm Nay', content: 'Một bài viết tổng hợp về 5 cuốn sách kinh doanh được đánh giá cao và đáng đọc nhất trong năm nay.' }
 ];
 
-// Insert seed data into articles table
-seedArticles.forEach((article) => {
-    const query = `INSERT INTO articles (title, content) VALUES (?, ?)`;
-    const values = [article.title, article.content];
+// Insert seed data into posts table
+seedPosts.forEach((post) => {
+    const query = `INSERT INTO posts (title, content) VALUES (?, ?)`;
+    const values = [post.title, post.content];
     pool.query(query, values, (err, res) => {
         if (err) {
             console.error(err);
         } else {
-            console.log(`Article ${article.title} inserted successfully.`);
+            console.log(`Post ${post.title} inserted successfully.`);
         }
     });
 });

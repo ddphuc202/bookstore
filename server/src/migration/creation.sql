@@ -56,8 +56,8 @@ CREATE TABLE books (
     FOREIGN KEY (category_id) REFERENCES categories(id)
 );
 
--- Table for storing articles
-CREATE TABLE articles (
+-- Table for storing posts
+CREATE TABLE posts (
     id INT AUTO_INCREMENT PRIMARY KEY,
     title VARCHAR(255) NOT NULL,
     content TEXT NOT NULL,

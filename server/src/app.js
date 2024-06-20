@@ -9,7 +9,7 @@ const configBodyParser = require('./config/bodyParser');
 const webRoutes = require('./routes/web');
 const bookRoutes = require('./routes/books');
 const categoryRoutes = require('./routes/categories');
-const articleRoutes = require('./routes/articles');
+const postRoutes = require('./routes/posts');
 const customerRoutes = require('./routes/customers');
 
 const app = express();
@@ -30,7 +30,7 @@ configBodyParser(app);
 app.use('/', webRoutes);
 app.use('/books', bookRoutes);
 app.use('/categories', categoryRoutes);
-app.use('/articles', articleRoutes);
+app.use('/posts', postRoutes);
 app.use('/customers', customerRoutes);
 
 module.exports = app;
