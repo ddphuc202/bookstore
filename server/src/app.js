@@ -1,11 +1,10 @@
 const express = require('express');
 
-const morgan = require('morgan');
-const { default: helmet } = require('helmet');
 const compression = require('compression');
 
 const configViewEngine = require('./config/viewEngine');
 const configStaticFiles = require('./config/staticFiles');
+const configBodyParser = require('./config/bodyParser');
 
 const webRoutes = require('./routes/web');
 const bookRoutes = require('./routes/books');
@@ -20,22 +19,12 @@ const cors = require('cors');
 app.use(cors());
 
 // Init middlewares
-// app.use(morgan('dev'));
-// app.use(
-//     helmet({
-//         contentSecurityPolicy: false,
-//         crossOriginEmbedderPolicy: false,
-//     })
-// );
 app.use(compression());
 
 // Config 
 configViewEngine(app);
 configStaticFiles(app);
-
-// Config body parser
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
+configBodyParser(app);
 
 // Routes
 app.use('/', webRoutes);

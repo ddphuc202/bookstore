@@ -1,21 +1,21 @@
 const express = require('express');
-const GenreController = require('../controllers/GenreController');
+const CategoryController = require('../controllers/CategoryController');
 
 const router = express.Router();
 
-// GET all genres
-router.get('/', GenreController.getAllGenres);
+// GET all categories
+router.get('/', CategoryController.getAllCategories);
 
-// GET a specific genre
-router.get('/:id', GenreController.getGenreById);
+// GET a specific category
+router.get('/:id', CategoryController.getCategoryById);
 
-// POST a new genre
-router.post('/', GenreController.createGenre);
+// POST a new category
+router.post('/', CategoryController.createCategory);
 
-// PUT/update a genre
-router.put('/:id', GenreController.updateGenre);
+// PUT/update a category
+router.put('/:id', CategoryController.updateCategory);
 
-// DELETE a genre
-router.delete('/:id', GenreController.deleteGenre);
+// DELETE a category
+router.delete('/:id', CategoryController.deleteCategory);
 
 module.exports = router;

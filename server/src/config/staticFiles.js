@@ -1,8 +1,6 @@
 const path = require('path');
 const express = require('express');
 
-const configStaticFiles = (app) => {
+module.exports = (app) => {
     app.use(express.static(path.join(__dirname, '../public')));
 };
-
-module.exports = configStaticFiles;
