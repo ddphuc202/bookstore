@@ -23,6 +23,8 @@ import Test from './components/Admin/Test';
 
 
 import HomePage from './pages/Customer/HomePage';
+import Cart from './pages/Customer/Cart';
+import CheckOut from './pages/Customer/CheckOut';
 
 
 function App() {
@@ -34,14 +36,14 @@ function App() {
         <Route path='/manage-add-books' element={<ModalAddNewBooks />} />
         <Route path='/manage-edit-books/:id' element={<ModalEditBooks />} />
 
-        <Route path='/manage-genres' element={<ManageGenres />} />
-        <Route path='/manage-add-genres' element={<ModalAddNewGenres />} />
-        <Route path='/manage-edit-genres/:id' element={<ModalEditGenres />} />
+        <Route path='/manage-categories' element={<ManageGenres />} />
+        <Route path='/manage-add-categories' element={<ModalAddNewGenres />} />
+        <Route path='/manage-edit-categories/:id' element={<ModalEditGenres />} />
 
 
-        <Route path='/manage-articles' element={<ManageArticles />} />
-        <Route path='/manage-add-articles' element={<ModalAddNewArticles />} />
-        <Route path='/manage-edit-articles/:id' element={<ModalEditArticles />} />
+        <Route path='/manage-posts' element={<ManageArticles />} />
+        <Route path='/manage-add-posts' element={<ModalAddNewArticles />} />
+        <Route path='/manage-edit-posts/:id' element={<ModalEditArticles />} />
 
 
         <Route path='/manage-customers' element={<ManageCustomers />} />
@@ -57,6 +59,8 @@ function App() {
         <Route path='/books' element={<Books />} />
         <Route path='/articles' element={<Articles />} />
         <Route path='/info-book/:id' element={<InfoBook />} />
+        <Route path='/cart' element={<Cart />} />
+        <Route path='/checkout' element={<CheckOut />} />
 
         <Route path='/login' element={<Login />} />
         <Route path='/register' element={<Register />} />

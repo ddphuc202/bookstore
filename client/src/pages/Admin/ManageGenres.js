@@ -15,7 +15,7 @@ const ManageGenres = (props) => {
                 <div className='admin-content' style={{ width: "100%" }}>
                     <div className='button-add'>
                         <h1><b>Quản lý thể loại sách</b></h1>
-                        <Link to={'/manage-add-genres'} className='btn btn-primary'>Thêm mới thể loại</Link>
+                        <Link to={'/manage-add-categories'} className='btn btn-primary'>Thêm mới thể loại</Link>
                     </div>
                     <br></br>
                     <TableGenres />

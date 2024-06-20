@@ -8,15 +8,6 @@ const SideBar = () => {
     return (
         <>
 
-            {/* <Sidebar style={{ marginTop: "20px", border: "1px, solid, green" }}>
-                <Menu iconShape="square">
-                    <MenuItem><b>Admin Site</b></MenuItem>
-                    <MenuItem><Link to={'/manage-books'} style={{ textDecoration: "none", color: "green" }}> <b>Books</b></Link></MenuItem>
-                    <MenuItem><Link to={'/manage-articles'} style={{ textDecoration: "none", color: "green" }}> <b>Articles</b></Link></MenuItem>
-                    <MenuItem><Link to={'/manage-genres'} style={{ textDecoration: "none", color: "green" }}> <b>Genres</b></Link></MenuItem>
-                    <MenuItem><Link to={'/manage-customers'} style={{ textDecoration: "none", color: "green" }}> <b>Customers</b></Link></MenuItem>
-                </Menu>
-            </Sidebar> */}
 
             <ul className="navbar-nav bg-gradient-success sidebar sidebar-dark accordion" id="accordionSidebar">
 
@@ -52,11 +43,11 @@ const SideBar = () => {
 
 
                 <li className="nav-item">
-                    <Link className="nav-link" to={'/manage-articles'} style={{ textDecoration: "none" }}> <b>Articles</b></Link>
+                    <Link className="nav-link" to={'/manage-posts'} style={{ textDecoration: "none" }}> <b>Posts</b></Link>
                 </li>
 
                 <li className="nav-item">
-                    <Link className="nav-link" to={'/manage-genres'} style={{ textDecoration: "none" }}> <b>Genres</b></Link>
+                    <Link className="nav-link" to={'/manage-categories'} style={{ textDecoration: "none" }}> <b>Categories</b></Link>
                 </li>
 
                 <li className="nav-item">

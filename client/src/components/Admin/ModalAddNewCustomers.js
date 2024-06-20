@@ -4,30 +4,21 @@ import Modal from 'react-bootstrap/Modal';
 import Form from 'react-bootstrap/Form';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import { createNewCustomer } from '../../services/CustomerServices';
 
 function ModalAddNewCustomers() {
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPass] = useState('');
     const [address, setAddress] = useState('');
-    const [phone_number, setPhone] = useState('');
+    const [phone, setPhone] = useState('');
 
     const navigate = useNavigate();
 
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        let data = {
-            name: name,
-            email: email,
-            password: password,
-            address: address,
-            phone_number: phone_number
-        }
-        axios.post('http://localhost:3030/customers', data).then(res => {
-            alert('Data add successfully!');
-            navigate('/manage-customers');
-        }).catch(err => console.log(err));
+        createNewCustomer(name, email, password, phone, address, navigate);
     }
 
     return (
@@ -65,7 +56,7 @@ function ModalAddNewCustomers() {
 
                             <Form.Group className="mb-3" controlId="formBasicPassword">
                                 <Form.Label>Số điện thoại</Form.Label>
-                                <Form.Control type="text" placeholder="Phone number" value={phone_number} onChange={(event) => setPhone(event.target.value)} />
+                                <Form.Control type="text" placeholder="Phone number" value={phone} onChange={(event) => setPhone(event.target.value)} />
                             </Form.Group>
                         </Form>
                     </Modal.Body>

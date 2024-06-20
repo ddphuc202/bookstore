@@ -52,7 +52,7 @@ const TableBooks = (props) => {
                 <td>{d.description}</td>
                 <td>{d.price}</td>
                 <td>{d.discount}</td>
-                <td>{d.genre_name}</td>
+                <td>{d.category_name}</td>
                 <td>{d.stock}</td>
                 <td>
                   <Link to={`/manage-edit-books/${d.id}`} ><FontAwesomeIcon icon={faPenToSquare} size="lg" /></Link>
