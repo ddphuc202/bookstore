@@ -70,7 +70,10 @@ class Book {
     static getBookById(id) {
         const basePath = '/images/';
 
-        const bookQuery = `SELECT *, CONCAT('${basePath}', thumbnail) AS thumbnail_path FROM books WHERE id = ? AND is_available = 1`;
+        const bookQuery = `SELECT books.*, CONCAT('${basePath}', thumbnail) AS thumbnail_path, categories.name AS category_name 
+                        FROM books
+                        LEFT JOIN categories ON books.category_id = categories.id 
+                        WHERE books.id = ? AND books.is_available = 1`;
 
         const imagesQuery = `SELECT CONCAT('${basePath}', image) AS image_path FROM book_images WHERE book_id = ?`;
 
