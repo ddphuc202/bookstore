@@ -3,9 +3,9 @@ const path = require('path');
 
 const BookController = {
     getAllBooks: (req, res) => {
-        const { page = 1, pageSize = 10, sortBy = 'created_at', order = 'DESC', genre_id, search = '' } = req.query;
+        const { page = 1, pageSize = 10, sortBy = 'created_at', order = 'DESC', category_id, search = '' } = req.query;
 
-        Book.getAllBooks(page, pageSize, sortBy, order, search, genre_id)
+        Book.getAllBooks(page, pageSize, sortBy, order, search, category_id)
             .then(books => {
                 res.status(200).json(books);
             })

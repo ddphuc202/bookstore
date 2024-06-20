@@ -20,7 +20,7 @@ class Book {
         });
     }
 
-    static getAllBooks(page, pageSize, sortBy, order, search, category_id) {
+    static getAllBooks(page, pageSize, sortBy, order, search, genre_id) {
         page = parseInt(page);
         if (isNaN(page)) {
             page = 1;
@@ -52,17 +52,17 @@ class Book {
 
         let parameters = [searchQuery, searchQuery, searchQuery, pageSize, parseInt(offset)];
 
-        let categoryQuery = '';
-        if (category_id) {
-            categoryQuery = 'AND books.category_id = ?';
-            parameters.splice(3, 0, parseInt(category_id));
+        let genreQuery = '';
+        if (genre_id) {
+            genreQuery = 'AND books.genre_id = ?';
+            parameters.splice(3, 0, parseInt(genre_id));
         }
 
-        const query = `SELECT books.*, categories.name AS category_name, CONCAT('${basePath}', books.thumbnail) AS thumbnail_path
-                   FROM books
-                   LEFT JOIN categories ON books.category_id = categories.id
-                   WHERE (books.title LIKE ? OR books.author LIKE ? OR books.description LIKE ?) ${categoryQuery} AND books.is_available = 1
-                   ${orderBy} LIMIT ? OFFSET ?`;
+        const query = `SELECT books.*, genres.name AS genre_name, CONCAT('${basePath}', books.thumbnail) AS thumbnail_path
+                       FROM books
+                       LEFT JOIN genres ON books.genre_id = genres.id
+                       WHERE (books.title LIKE ? OR books.author LIKE ? OR books.description LIKE ?) ${genreQuery} AND books.deleted_at IS NULL
+                       ${orderBy} LIMIT ? OFFSET ?`;
 
         return this.queryDatabase(query, parameters);
     }

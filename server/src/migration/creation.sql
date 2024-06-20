@@ -50,9 +50,9 @@ CREATE TABLE books (
     discount DECIMAL(5, 2) DEFAULT 0,
     category_id INT,
     stock INT DEFAULT 0,
+    is_available BOOLEAN DEFAULT TRUE,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-    deleted_at TIMESTAMP NULL,
     FOREIGN KEY (category_id) REFERENCES categories(id)
 );
 
