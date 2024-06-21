@@ -1,6 +1,6 @@
 const db = require('../models');
 
-const BookImageController = {
+const bookImageController = {
     // Get all book images
     getAll: async (req, res) => {
         try {
@@ -65,4 +65,4 @@ const BookImageController = {
     },
 };
 
-module.exports = BookImageController;
+module.exports = bookImageController;

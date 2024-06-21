@@ -1,6 +1,6 @@
 const db = require('../models');
 
-const CategoryController = {
+const categoryController = {
     // Get all categories
     getAll: async (req, res) => {
         try {
@@ -65,4 +65,4 @@ const CategoryController = {
     },
 };
 
-module.exports = CategoryController;
+module.exports = categoryController;

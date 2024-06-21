@@ -1,7 +1,7 @@
 const { where } = require('sequelize');
 const db = require('../models');
 
-const BooksController = {
+const booksController = {
     // Get all books
     getAll: async (req, res) => {
         let { page = 1, limit = 8, sortBy = 'updatedAt', order = 'DESC', categoryId, search } = req.query;
@@ -146,4 +146,4 @@ const BooksController = {
     },
 };
 
-module.exports = BooksController;
+module.exports = booksController;
