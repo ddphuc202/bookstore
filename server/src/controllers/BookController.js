@@ -31,6 +31,11 @@ const booksController = {
         try {
             const books = await db.Book.findAll({
                 where: whereClause,
+                attributes: {
+                    include: [
+                        [db.sequelize.literal(`CONCAT('${basePath}', thumbnail)`), 'thumbnail']
+                    ]
+                },
                 include: [
                     {
                         model: db.Category,
