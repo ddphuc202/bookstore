@@ -1,72 +1,76 @@
-const Post = require('../models/Post');
+const db = require('../models');
 
 const PostController = {
-    getAllPosts: (req, res) => {
-        Post.getAllPosts()
-            .then(posts => {
-                res.status(200).json(posts);
-            })
-            .catch(err => {
-                res.status(500).json({ message: 'Error getting posts', error: err });
-            });
+    // Get all posts
+    getAll: async (req, res) => {
+        try {
+            const posts = await db.Post.findAll();
+            res.status(200).json(posts);
+        } catch (error) {
+            res.status(500).json({ message: 'Error retrieving posts', error });
+        }
     },
 
-    getPostById: (req, res) => {
-        const postId = req.params.id;
-
-        Post.getPostById(postId)
-            .then(post => {
-                res.status(200).json(post);
-            })
-            .catch(err => {
-                res.status(500).json({ message: 'Error getting post', error: err });
-            });
+    // Get post by ID
+    getById: async (req, res) => {
+        try {
+            const post = await db.Post.findByPk(req.params.id);
+            if (!post) {
+                return res.status(404).json({ message: 'Post not found' });
+            }
+            res.status(200).json(post);
+        } catch (error) {
+            res.status(500).json({ message: 'Error retrieving post', error });
+        }
     },
 
-    createPost: (req, res) => {
-        const newPostData = req.body;
-        const imageName = req.file ? req.file.filename : null; // prevent TypeError if no image is uploaded
-
-        console.log(imageName);
-        newPostData.image_name = imageName;
-
-        Post.createPost(newPostData)
-            .then(newPostId => {
-                res.status(201).json({ message: 'Post created successfully', id: newPostId });
-            })
-            .catch(err => {
-                res.status(500).json({ message: 'Error creating post', error: err });
-            });
+    // Create a new post
+    create: async (req, res) => {
+        try {
+            const postData = req.body;
+            if (req.file) {
+                postData.image = req.file.filename;
+            }
+            const newPost = await db.Post.create(postData);
+            res.status(201).json(newPost);
+        } catch (error) {
+            res.status(500).json({ message: 'Error creating post', error });
+        }
     },
 
-    updatePost: (req, res) => {
-        const postId = req.params.id;
-        const updatedPostData = req.body;
-        const imageName = req.file ? req.file.filename : null;
-
-        updatedPostData.image_name = imageName;
-
-        Post.updatePost(postId, updatedPostData)
-            .then(updateResult => {
-                res.status(200).json({ message: 'Post updated successfully', rowsAffected: updateResult });
-            })
-            .catch(err => {
-                res.status(500).json({ message: 'Error updating post', error: err });
+    // Update a post
+    update: async (req, res) => {
+        try {
+            const postData = req.body;
+            if (req.file) {
+                postData.image = req.file.filename;
+            }
+            const [updated] = await db.Post.update(req.body, {
+                where: { id: req.params.id }
             });
-
+            if (!updated) {
+                throw new Error('Post not found');
+            }
+            res.status(200).json({ message: 'Post updated successfully' });
+        } catch (error) {
+            res.status(500).json({ message: 'Error updating post', error });
+        }
     },
 
-    deletePost: (req, res) => {
-        const postId = req.params.id;
-
-        Post.deletePost(postId)
-            .then(deleteResult => {
-                res.status(200).json({ message: 'Post deleted successfully', rowsAffected: deleteResult });
-            })
-            .catch(err => {
-                res.status(500).json({ message: 'Error deleting post', error: err });
+    // Delete a post
+    delete: async (req, res) => {
+        try {
+            const deleted = await db.Post.destroy({
+                where: { id: req.params.id }
             });
-    }
+            if (!deleted) {
+                throw new Error('Post not found');
+            }
+            res.status(200).json({ message: 'Post deleted successfully' });
+        } catch (error) {
+            res.status(500).json({ message: 'Error deleting post', error });
+        }
+    },
 };
 
 module.exports = PostController;
