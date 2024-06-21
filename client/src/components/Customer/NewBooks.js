@@ -1,6 +1,5 @@
 import React from 'react';
 import Carousel from 'react-multi-carousel';
-import axios from 'axios';
 import "react-multi-carousel/lib/styles.css";
 import { useEffect, useState } from 'react';
 import image1 from '../../image/thanh-xuan-sao-ma-dau-don.png';
@@ -70,7 +69,7 @@ const NewBooks = () => {
 														</h3>
 													</div>
 													<div className="price-box">
-														<span className="price"><b>{book.sale_percent}</b></span>
+														<span className="price"><b>{book.discount}</b></span>
 														<span className="compare-price"><b>{book.price}</b></span>
 
 													</div>

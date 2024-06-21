@@ -1,6 +1,6 @@
 import { instance } from '../utils/AxiosCustomize';
 
-const createNewBook = (title, author, description, price, discount, stock, genres, thumbnailFile, otherImages, navigate) => {
+const createNewBook = (title, author, description, price, discount, stock, categories, thumbnailFile, otherImages, navigate) => {
 
     const otherImagesArray = Array.from(otherImages);
 
@@ -11,11 +11,12 @@ const createNewBook = (title, author, description, price, discount, stock, genre
     data.append('price', price);
     data.append('discount', discount);
     data.append('stock', stock);
-    data.append('genre_id', genres);
+    data.append('category_id', categories);
     data.append('thumbnail', thumbnailFile);
     otherImagesArray.forEach((file) => {
         data.append(`otherImages`, file);
     });
+
 
     return instance.post('/books', data).then(res => {
         alert('Data add successfully!');
@@ -36,6 +37,7 @@ const getBookById = (id, setData) => {
             setData(res.data);
         })
         .catch(err => console.log(err))
+
 }
 
 const updateBookByID = (id, data, thumbnailFile, previewOtherImages, navigate) => {

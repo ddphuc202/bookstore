@@ -2,8 +2,8 @@ import { useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import Form from 'react-bootstrap/Form';
-import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import { createNewCategories } from '../../services/GenresServices';
 
 function ModalAddNewGenres() {
     const [name, setName] = useState('');
@@ -12,13 +12,7 @@ function ModalAddNewGenres() {
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        let data = {
-            name: name
-        }
-        axios.post('http://localhost:3030/genres', data).then(res => {
-            alert('Data add successfully!');
-            navigate('/manage-genres');
-        }).catch(err => console.log(err));
+        createNewCategories(name, navigate);
     }
 
     return (

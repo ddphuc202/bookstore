@@ -4,24 +4,27 @@ import Modal from 'react-bootstrap/Modal';
 import Form from 'react-bootstrap/Form';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import { createNewPost } from '../../services/ArticlesServices';
 
 function ModalAddNewArticles() {
     const [title, setTitle] = useState('');
     const [content, setContent] = useState('');
+    const [image, setImage] = useState(null);
+    const [imageFile, setImageFile] = useState(null);
 
     const navigate = useNavigate();
 
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        let data = {
-            title: title,
-            content: content
+        createNewPost(title, content, imageFile, navigate);
+    }
+
+    const handleUploadImage = (event) => {
+        if (event.target && event.target.files && event.target.files[0]) {
+            setImage(URL.createObjectURL(event.target.files[0]))
+            setImageFile(event.target.files[0]);
         }
-        axios.post('http://localhost:3030/articles', data).then(res => {
-            alert('Data add successfully!');
-            navigate('/manage-articles');
-        }).catch(err => console.log(err));
     }
 
     return (
@@ -48,6 +51,14 @@ function ModalAddNewArticles() {
                                 <Form.Control as="textarea" placeholder="Nội dung" value={content} onChange={(event) => setContent(event.target.value)} />
                             </Form.Group>
                         </Form>
+
+                        <Form.Group controlId="formFile" className="mb-3" >
+                            <Form.Label>Ảnh chính </Form.Label>
+                            <Form.Control type="file" onChange={(event) => handleUploadImage(event)} name='image_name' />
+                            {image && <img width={'200px'} style={{ padding: "10px" }}
+                                src={image}
+                                alt="New Image" />}
+                        </Form.Group>
                     </Modal.Body>
 
                     <Modal.Footer>

@@ -2,8 +2,8 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPenToSquare, faTrash } from '@fortawesome/free-solid-svg-icons'
 import Table from 'react-bootstrap/Table';
 import { useEffect, useState } from 'react';
-import axios from 'axios';
 import { Link, Route, useNavigate } from 'react-router-dom';
+import { getCategories, deleteCategories } from "../../services/GenresServices";
 const TableGenres = (props) => {
 
   const [records, setRecords] = useState([]);
@@ -11,20 +11,11 @@ const TableGenres = (props) => {
 
 
   const handleSubmit = (id) => {
-    const conf = window.confirm('Do you want to delete?');
-    if (conf) {
-      axios.delete('http://localhost:3030/genres/' + id)
-        .then(res => {
-          alert('Item has deleted!');
-          navigate('/manage-genres')
-        }).catch(err => console.log(err))
-    }
+    deleteCategories(id, navigate)
   }
 
   useEffect(() => {
-    axios.get('http://localhost:3030/genres').then(res => {
-      setRecords(res.data)
-    })
+    getCategories(setRecords)
   },)
 
 
@@ -44,7 +35,7 @@ const TableGenres = (props) => {
               <td>{d.id}</td>
               <td>{d.name}</td>
               <td>
-                <Link to={`/manage-edit-genres/${d.id}`} ><FontAwesomeIcon icon={faPenToSquare} size="lg" /></Link>
+                <Link to={`/manage-edit-categories/${d.id}`} ><FontAwesomeIcon icon={faPenToSquare} size="lg" /></Link>
                 <button style={{ border: 'none' }} onClick={event => handleSubmit(d.id)} ><FontAwesomeIcon icon={faTrash} style={{ color: "#fa2500" }} /></button>
               </td>
             </tr>

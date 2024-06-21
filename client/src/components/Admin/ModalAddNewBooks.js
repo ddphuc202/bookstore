@@ -4,6 +4,7 @@ import Modal from 'react-bootstrap/Modal';
 import Form from 'react-bootstrap/Form';
 import { createNewBook } from '../../services/BooksServices';
 import { useNavigate } from 'react-router-dom';
+import { getCategories } from '../../services/GenresServices';
 
 
 function ModalAddNewBooks() {
@@ -13,22 +14,20 @@ function ModalAddNewBooks() {
     const [price, setPrice] = useState('');
     const [discount, setDiscount] = useState('');
     const [stock, setStock] = useState('');
-    const [genres, setGenres] = useState('');
+    const [categories, setGenres] = useState('');
     const [thumbnail, setThumbnail] = useState(null);
     const [thumbnailFile, setThumbnailFile] = useState(null);
 
     const [otherImages, setOtherImages] = useState([]);
+    const [records, setRecords] = useState([]);
 
     const navigate = useNavigate();
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        createNewBook(title, author, description, price, discount, stock, genres, thumbnailFile, otherImages, navigate);
+        createNewBook(title, author, description, price, discount, stock, categories, thumbnailFile, otherImages, navigate);
     }
 
-    const handleSelect = (event) => {
-        setGenres(event.target.value);
-    }
 
     const handleUploadThumbnail = (event) => {
         if (event.target && event.target.files && event.target.files[0]) {
@@ -45,6 +44,10 @@ function ModalAddNewBooks() {
         }
     }
 
+    useEffect(() => {
+        getCategories(setRecords)
+        console.log(title, author, description, price, discount, stock, categories, thumbnailFile, otherImages)
+    }, [])
 
     return (
         <>
@@ -86,16 +89,10 @@ function ModalAddNewBooks() {
 
                             <Form.Group className="mb-3" controlId="formBasicPassword">
                                 <Form.Label>Thể loại</Form.Label>
-                                <Form.Select aria-label="Default select example" onChange={handleSelect}>
-                                    <option>Thể loại </option>
-                                    <option value='3'>Khoa Học Viễn Tưởng</option>
-                                    <option value="4">Trinh Thám</option>
-                                    <option value="7">Bí ẩn</option>
-                                    <option value="6">Kinh Doanh</option>
-                                    <option value="1">Lãng mạn</option>
-                                    <option value="2">Lịch Sử</option>
-                                    <option value="5">Tâm Lý Học</option>
-                                    <option value="8">Tâm Linh - Tôn Giáo</option>
+                                <Form.Select aria-label="Default select example" onChange={(event) => setGenres(event.target.value)}>
+                                    {records.map((category, index) => (
+                                        <option key={index} value={category.id} > {category.name} </option>
+                                    ))}
                                 </Form.Select>
                             </Form.Group>
 

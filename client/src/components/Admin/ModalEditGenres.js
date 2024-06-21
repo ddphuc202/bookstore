@@ -2,9 +2,9 @@ import { useEffect, useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import Form from 'react-bootstrap/Form';
-import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { useParams } from 'react-router-dom';
+import { getCategoriesById, updateCategoriesByID } from '../../services/GenresServices';
 
 
 function ModalEditGenres() {
@@ -14,17 +14,11 @@ function ModalEditGenres() {
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        axios.put('http://localhost:3030/genres/' + id, data)
-            .then(res => {
-                alert("Data update successfully!");
-                navigate('/manage-genres');
-            })
+        updateCategoriesByID(id, data, navigate);
     }
 
     useEffect(() => {
-        axios.get('http://localhost:3030/genres/' + id)
-            .then(res => setData(res.data))
-            .catch(err => console.log(err))
+        getCategoriesById(id, setData)
     }, [])
     return (
         <>

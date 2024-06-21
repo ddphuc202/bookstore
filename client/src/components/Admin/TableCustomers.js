@@ -4,6 +4,7 @@ import Table from 'react-bootstrap/Table';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import { Link, Route, useNavigate } from 'react-router-dom';
+import { getCustomers, deleteCustomers } from '../../services/CustomerServices';
 const TableCustomers = (props) => {
 
   const [records, setRecords] = useState([]);
@@ -11,20 +12,11 @@ const TableCustomers = (props) => {
 
 
   const handleSubmit = (id) => {
-    const conf = window.confirm('Do you want to delete?');
-    if (conf) {
-      axios.delete('http://localhost:3030/customers/' + id)
-        .then(res => {
-          alert('Item has deleted!');
-          navigate('/manage-customers')
-        }).catch(err => console.log(err))
-    }
+    deleteCustomers(id, navigate);
   }
 
   useEffect(() => {
-    axios.get('http://localhost:3030/customers').then(res => {
-      setRecords(res.data)
-    })
+    getCustomers(setRecords);
   },)
 
 

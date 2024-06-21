@@ -3,6 +3,7 @@ import { faUser } from "@fortawesome/free-regular-svg-icons";
 import { faCartShopping } from "@fortawesome/free-solid-svg-icons";
 import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
 import Logo from '../../image/Khai_Tam.png';
+import { Link } from "react-router-dom";
 const Header = () => {
     return (
         <header className="header">
@@ -213,10 +214,10 @@ const Header = () => {
 
                             </div>
                         </div>
-                        <a className="cart-head" href="/cart" title="Giỏ hàng">
+                        <Link className="cart-head" to={'/cart'} title="Giỏ hàng">
                             <FontAwesomeIcon icon={faCartShopping} />
                             <span className="count_item count_item_pr">2</span>
-                        </a>
+                        </Link>
                     </div>
                 </div>
             </div>
