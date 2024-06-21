@@ -4,8 +4,19 @@ const db = require('../models');
 const BooksController = {
     // Get all books
     getAll: async (req, res) => {
-        const { page = 1, limit = 8, sortBy = 'updatedAt', order = 'DESC', categoryId, search } = req.query;
-        const offset = (page - 1) * limit;
+        let { page = 1, limit = 8, sortBy = 'updatedAt', order = 'DESC', categoryId, search } = req.query;
+        let offset = (page - 1) * limit;
+        if (offset < 0) {
+            offset = 0;
+        }
+        const validSortBy = ['updatedAt', 'price'];
+        if (!validSortBy.includes(sortBy)) {
+            sortBy = 'updatedAt';
+        }
+        const validOrder = ['ASC', 'DESC'];
+        if (!validOrder.includes(order)) {
+            order = 'DESC';
+        }
         const basePath = '/images/';
         const whereClause = {};
         if (categoryId) {
