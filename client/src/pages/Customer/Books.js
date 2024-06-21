@@ -2,17 +2,15 @@ import Header from "../../components/Customer/Header";
 import Footer from "../../components/Customer/Footer";
 import image from '../../image/thanh-xuan-sao-ma-dau-don.png'
 import '../../styles/Books.css';
+import { getBooks } from '../../services/BooksServices';
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import axios from "axios";
 const Books = () => {
 
     const [records, setRecords] = useState([]);
 
     useEffect(() => {
-        axios.get('http://localhost:3030/books').then(res => {
-            setRecords(res.data)
-        })
+        getBooks(setRecords);
     }, [])
 
     const sortBooksByPrice = () => {
@@ -34,8 +32,8 @@ const Books = () => {
                     </figure>
                 </div>
                 <div className="bg_collection section">
-                    <div className="row">
-                        <aside className="filter-sidebar sidebar left-content col-lg-3 col-md-4 col-sm-4">
+                    <div className="row-book">
+                        <aside className="filter-sidebar side-bar left-content col-lg-3 col-md-4 col-sm-4">
                             <div className="wrap_background_aside asidecollection">
                                 <div className="row">
                                     <div className="col-12 col-lg-12 order-1 order-lg-2">

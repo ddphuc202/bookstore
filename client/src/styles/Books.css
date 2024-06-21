@@ -8,6 +8,12 @@
     padding-top: 0
 }
 
+
+.row-book {
+    display: flex;
+    justify-content: space-around;
+}
+
 .aside-item .aside-title {
     position: relative
 }
@@ -109,11 +115,10 @@
     margin-bottom: 40px
 }
 
-.info-product h3{
+.info-product h3 {
     height: 80px;
 }
 
-.info-product button{
+.info-product button {
     margin-top: 10px;
 }
-

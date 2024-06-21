@@ -1,98 +1,103 @@
+import image from '../../image/thanh-xuan-sao-ma-dau-don.png';
 const SideBarCheckOut = () => {
     return (
         <>
-            <aside class="sidebar">
-                <div class="sidebar__header">
-                    <h2 class="sidebar__title">
+            <aside className="sidebar">
+                <div className="sidebar__header">
+                    <h2 className="sidebar__title">
                         Đơn hàng (2 sản phẩm)
                     </h2>
                 </div>
-                <div class="sidebar__content">
-                    <div id="order-summary" class="order-summary order-summary--is-collapsed">
-                        <div class="order-summary__sections">
-                            <div class="order-summary__section order-summary__section--product-list order-summary__section--is-scrollable order-summary--collapse-element">
-                                <table class="product-table" id="product-table" >
-                                    <caption class="visually-hidden">Chi tiết đơn h�&nbsp;ng</caption>
-                                    <thead class="product-table__header">
+                <div className="sidebar__content">
+                    <div id="order-summary" className="order-summary order-summary--is-collapsed">
+                        <div className="order-summary__sections">
+                            <div className="order-summary__section order-summary__section--product-list order-summary__section--is-scrollable order-summary--collapse-element">
+                                <table className="product-table" id="product-table" >
+                                    <thead className="product-table__header">
                                         <tr>
                                             <th>
-                                                <span class="visually-hidden">Ảnh sản phẩm</span>
+                                                <span className="visually-hidden">Ảnh sản phẩm</span>
                                             </th>
                                             <th>
-                                                <span class="visually-hidden">Mô tả</span>
+                                                <span className="visually-hidden">Mô tả</span>
                                             </th>
                                             <th>
-                                                <span class="visually-hidden">Sổ lượng</span>
+                                                <span className="visually-hidden">Sổ lượng</span>
                                             </th>
                                             <th>
-                                                <span class="visually-hidden">Đơn giá</span>
+                                                <span className="visually-hidden">Đơn giá</span>
                                             </th>
                                         </tr>
                                     </thead>
+                                    <br />
+
                                     <tbody>
 
-                                        <tr class="product">
-                                            <td class="product__image">
-                                                <div class="product-thumbnail">
-                                                    <div class="product-thumbnail__wrapper" data-tg-static="">
-                                                        <img src="images/khi-ban-trai-tro-ma-01-e1718178537602.jpg"
-                                                            alt="" class="product-thumbnail__image" />
+                                        <tr className="product">
+                                            <td className="product__image">
+                                                <div className="product-thumbnail">
+                                                    <div className="product-thumbnail__wrapper" >
+                                                        <img src={image}
+                                                            alt="" className="product-thumbnail__image" />
                                                     </div>
-                                                    <span class="product-thumbnail__quantity">1</span>
+                                                    <span className="product-thumbnail__quantity">1</span>
                                                 </div>
                                             </td>
-                                            <th class="product__description">
-                                                <span class="product__description__name">
-                                                    KHI B�&nbsp;N TRAI TRỔ MÃ
+                                            <th className="product__description">
+                                                <span className="product__description__name">
+                                                    KHI BẠN TRAI TRỔ MÃ
                                                 </span>
 
 
 
-                                                <span class="product__description__property">
-                                                    <span class="discount-tag">
-                                                        <span class="discount-icon"><i class="fa fa-tag"></i></span>
-                                                        <span class="discount-tag--name">Giảm 15% so với giá bìa
+                                                <span className="product__description__property">
+                                                    <span className="discount-tag">
+                                                        <span className="discount-icon"><i className="fa fa-tag"></i></span>
+                                                        <span className="discount-tag--name">Giảm 15% so với giá bìa
                                                             (-22.500₫)</span>
                                                     </span>
                                                 </span>
 
                                             </th>
-                                            <td class="product__quantity visually-hidden"><em>Số lượng:</em> 1</td>
-                                            <td class="product__price">
+                                            <td className="product__quantity visually-hidden"><em>Số lượng:</em> 1</td>
+                                            <td className="product__price">
 
                                                 127.500₫
 
                                             </td>
                                         </tr>
 
-                                        <tr class="product">
-                                            <td class="product__image">
-                                                <div class="product-thumbnail">
-                                                    <div class="product-thumbnail__wrapper" data-tg-static="">
-                                                        <img src="images/hondonvakhuvuon01e171766606841.jpg" alt=""
-                                                            class="product-thumbnail__image" />
+                                        <br />
+
+
+                                        <tr className="product">
+                                            <td className="product__image">
+                                                <div className="product-thumbnail">
+                                                    <div className="product-thumbnail__wrapper" >
+                                                        <img src={image} alt=""
+                                                            className="product-thumbnail__image" />
                                                     </div>
-                                                    <span class="product-thumbnail__quantity">1</span>
+                                                    <span className="product-thumbnail__quantity">1</span>
                                                 </div>
                                             </td>
-                                            <th class="product__description">
-                                                <span class="product__description__name">
+                                            <th className="product__description">
+                                                <span className="product__description__name">
                                                     HỖN ĐỘN VÀ KHU VƯỜN
                                                 </span>
 
 
 
-                                                <span class="product__description__property">
-                                                    <span class="discount-tag">
-                                                        <span class="discount-icon"><i class="fa fa-tag"></i></span>
-                                                        <span class="discount-tag--name">Giảm 15% so với giá bìa
+                                                <span className="product__description__property">
+                                                    <span className="discount-tag">
+                                                        <span className="discount-icon"><i className="fa fa-tag"></i></span>
+                                                        <span className="discount-tag--name">Giảm 15% so với giá bìa
                                                             (-25.200₫)</span>
                                                     </span>
                                                 </span>
 
                                             </th>
-                                            <td class="product__quantity visually-hidden"><em>Số lượng:</em> 1</td>
-                                            <td class="product__price">
+                                            <td className="product__quantity visually-hidden"><em>Số lượng:</em> 1</td>
+                                            <td className="product__price">
 
                                                 142.800₫
 
@@ -103,64 +108,53 @@ const SideBarCheckOut = () => {
                                 </table>
                             </div>
 
+                            <br></br>
 
-                            <div class="order-summary__section order-summary__section--total-lines order-summary--collapse-element"
+                            <div className="order-summary__section order-summary__section--total-lines order-summary--collapse-element"
                                 id="orderSummary">
-                                <table class="total-line-table">
-                                    <caption class="visually-hidden">Tổng giá trị</caption>
+                                <table className="total-line-table">
+
                                     <thead>
                                         <tr>
-                                            <td><span class="visually-hidden">Mô tả</span></td>
-                                            <td><span class="visually-hidden">Giá tiền</span></td>
+                                            <td><span className="visually-hidden">Mô tả</span></td>
+                                            <td><span className="visually-hidden">Giá tiền</span></td>
+
                                         </tr>
                                     </thead>
-                                    <tbody class="total-line-table__tbody">
-                                        <tr class="total-line total-line--subtotal">
-                                            <th class="total-line__name">
+                                    <tbody className="total-line-table__tbody">
+                                        <tr className="total-line total-line--subtotal">
+                                            <th className="total-line__name">
                                                 Tạm tính
                                             </th>
-                                            <td class="total-line__price">270.300₫</td>
-                                        </tr>
+                                            <td></td>
 
-
-
-                                        <tr class="total-line total-line--shipping-fee">
-                                            <th class="total-line__name">
-                                                Phí vận chuyển
-                                            </th>
-                                            <td class="total-line__price">
-                                                <span class="origin-price"></span>
-                                                <span ></span>
-                                            </td>
+                                            <td className="total-line__price">270.300₫</td>
                                         </tr>
 
 
 
                                     </tbody>
-                                    <tfoot class="total-line-table__footer">
-                                        <tr class="total-line payment-due">
-                                            <th class="total-line__name">
-                                                <span class="payment-due__label-total">
+                                    <tfoot className="total-line-table__footer">
+                                        <tr className="total-line payment-due">
+                                            <th className="total-line__name">
+                                                <span className="payment-due__label-total">
                                                     Tổng cộng
                                                 </span>
                                             </th>
-                                            <td class="total-line__price">
-                                                <span class="payment-due__price"
-                                                    data-bind="getTextTotalPrice()"></span>
+                                            <td></td>
+                                            <td className="total-line__price">
+                                                <span className="payment-due__price"
+                                                >270.300₫</span>
                                             </td>
                                         </tr>
                                     </tfoot>
                                 </table>
                             </div>
-                            <div class="order-summary__nav field__input-btn-wrapper hide-on-mobile layout-flex--row-reverse">
-                                <button type="submit" class="btn btn-checkout spinner"  >
-                                    <span class="spinner-label">ĐẶT HÀNG</span>
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="spinner-loader">
-                                        <use href="#spinner"></use>
-                                    </svg>
+                            <div className="order-summary__nav field__input-btn-wrapper hide-on-mobile layout-flex--row-reverse">
+                                <br></br>
+                                <button type="submit" className="btn btn-checkout spinner"  >
+                                    <span className="spinner-label btn btn-primary">ĐẶT HÀNG</span>
                                 </button>
-
-
                             </div>
                         </div>
                     </div>
