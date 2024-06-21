@@ -1,7 +1,7 @@
 const { where } = require('sequelize');
 const db = require('../models');
 
-const BooksController = {
+const booksController = {
     // Get all books
     getAll: async (req, res) => {
         let { page = 1, limit = 8, sortBy = 'updatedAt', order = 'DESC', categoryId, search } = req.query;
@@ -90,9 +90,14 @@ const BooksController = {
             }
             const newBook = await db.Book.create({
                 ...bookData, // spread operator
-                BookImages: otherImages // association should be BookImages not BookImage
+                bookImages: otherImages // association should be BookImages not BookImage
             }, {
-                include: [db.BookImage]
+                include: [
+                    {
+                        model: db.BookImage,
+                        as: 'bookImages',
+                    }
+                ]
             });
             res.status(201).json(newBook);
         } catch (error) {
@@ -146,4 +151,4 @@ const BooksController = {
     },
 };
 
-module.exports = BooksController;
+module.exports = booksController;
