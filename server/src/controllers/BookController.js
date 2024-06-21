@@ -58,6 +58,11 @@ const booksController = {
         try {
             const basePath = '/images/';
             const book = await db.Book.findByPk(req.params.id, {
+                attributes: {
+                    include: [
+                        [db.sequelize.literal(`CONCAT('${basePath}', thumbnail)`), 'thumbnail']
+                    ]
+                },
                 include: [
                     {
                         model: db.Category,
