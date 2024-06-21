@@ -120,6 +120,8 @@ const booksController = {
             let otherImages = [];
             if (req.files && req.files.otherImages) {
                 otherImages = req.files.otherImages.map(image => image.filename);
+                await db.BookImage.destroy({ where: { bookId: req.params.id } });
+                await db.BookImage.bulkCreate(otherImages.map(image => ({ image: image, bookId: req.params.id })));
             }
             const [updated] = await db.Book.update(bookData, {
                 where: { id: req.params.id }
@@ -130,9 +132,6 @@ const booksController = {
             await db.BookImage.destroy({
                 where: { bookId: req.params.id }
             })
-
-            await db.BookImage.destroy({ where: { bookId: req.params.id } });
-            await db.BookImage.bulkCreate(otherImages.map(image => ({ image: image, bookId: req.params.id })));
 
             res.status(200).json({ message: 'Book updated successfully' });
         } catch (error) {
