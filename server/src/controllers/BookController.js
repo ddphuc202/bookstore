@@ -33,7 +33,7 @@ const booksController = {
                 where: whereClause,
                 attributes: {
                     include: [
-                        [db.sequelize.literal(`CONCAT('${basePath}', thumbnail)`), 'thumbnail']
+                        [db.sequelize.literal(`CONCAT('${basePath}', thumbnail)`), 'thumbnailPath'],
                     ]
                 },
                 include: [
@@ -60,7 +60,7 @@ const booksController = {
             const book = await db.Book.findByPk(req.params.id, {
                 attributes: {
                     include: [
-                        [db.sequelize.literal(`CONCAT('${basePath}', thumbnail)`), 'thumbnail']
+                        [db.sequelize.literal(`CONCAT('${basePath}', thumbnail)`), 'thumbnailPath']
                     ]
                 },
                 include: [
@@ -73,7 +73,7 @@ const booksController = {
                         model: db.BookImage,
                         as: 'bookImages',
                         attributes: [
-                            [db.sequelize.literal(`CONCAT('${basePath}', image)`), 'image']
+                            [db.sequelize.literal(`CONCAT('${basePath}', image)`), 'imagePath']
                         ],
                     },
                 ],
@@ -134,9 +134,6 @@ const booksController = {
             if (!updated) {
                 throw new Error('Book not found');
             }
-            await db.BookImage.destroy({
-                where: { bookId: req.params.id }
-            })
 
             res.status(200).json({ message: 'Book updated successfully' });
         } catch (error) {
