@@ -90,9 +90,14 @@ const booksController = {
             }
             const newBook = await db.Book.create({
                 ...bookData, // spread operator
-                BookImages: otherImages // association should be BookImages not BookImage
+                bookImages: otherImages // association should be BookImages not BookImage
             }, {
-                include: [db.BookImage]
+                include: [
+                    {
+                        model: db.BookImage,
+                        as: 'bookImages',
+                    }
+                ]
             });
             res.status(201).json(newBook);
         } catch (error) {
