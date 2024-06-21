@@ -2,7 +2,7 @@ import image from '../../image/thanh-xuan-sao-ma-dau-don.png';
 const SideBarCheckOut = () => {
     return (
         <>
-            <aside className="sidebar">
+            <aside className="sideBar">
                 <div className="sidebar__header">
                     <h2 className="sidebar__title">
                         Đơn hàng (2 sản phẩm)

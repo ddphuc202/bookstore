@@ -5,6 +5,7 @@ import Form from 'react-bootstrap/Form';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { useParams } from 'react-router-dom';
+import { updatePostByID, getPostById } from '../../services/ArticlesServices';
 
 
 function ModalEditArticles() {
@@ -15,17 +16,11 @@ function ModalEditArticles() {
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        axios.put('http://localhost:3030/articles/' + id, data)
-            .then(res => {
-                alert("Data update successfully!");
-                navigate('/manage-articles');
-            })
+        updatePostByID(id, data, navigate)
     }
 
     useEffect(() => {
-        axios.get('http://localhost:3030/articles/' + id)
-            .then(res => setData(res.data))
-            .catch(err => console.log(err))
+        getPostById(id, setData)
     }, [])
     return (
         <>

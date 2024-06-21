@@ -5,6 +5,7 @@ import Form from 'react-bootstrap/Form';
 import { useNavigate } from 'react-router-dom';
 import { useParams } from 'react-router-dom';
 import { getBookById, updateBookByID } from '../../services/BooksServices';
+import { getCategories } from '../../services/GenresServices';
 
 
 function ModalEditBooks() {
@@ -12,12 +13,12 @@ function ModalEditBooks() {
     const { id } = useParams();
     const [data, setData] = useState([]);
 
-    const [thumbnail, setThumbnail] = useState(null);
     const [previewThumbnail, setPreviewThumbnail] = useState(null);
     const [thumbnailFile, setThumbnailFile] = useState(null);
 
-    const [otherImages, setOtherImages] = useState([]);
     const [previewOtherImages, setPreviewOtherImages] = useState([]);
+
+    const [records, setRecords] = useState([]);
 
     const navigate = useNavigate();
 
@@ -25,6 +26,7 @@ function ModalEditBooks() {
         event.preventDefault();
         updateBookByID(id, data, thumbnailFile, previewOtherImages, navigate)
     }
+
 
     const handleUploadThumbnail = (event) => {
         if (event.target && event.target.files && event.target.files[0]) {
@@ -43,11 +45,8 @@ function ModalEditBooks() {
 
     useEffect(() => {
         getBookById(id, setData)
-        setThumbnail(data.thumbnail_path)
-        if (data && data.images) {
-            const OtherImages = Array.from(data.images);
-            setOtherImages(OtherImages);
-        }
+
+        getCategories(setRecords)
     }, [])
 
 
@@ -98,22 +97,18 @@ function ModalEditBooks() {
 
                             <Form.Group className="mb-3" controlId="formBasicPassword">
                                 <Form.Label>Thể loại</Form.Label>
-                                <Form.Select aria-label="Default select example" value={data.genre_id} onChange={event => setData({ ...data, genre_id: event.target.value })}>
-                                    <option>Thể loại </option>
-                                    <option value='3'>Khoa Học Viễn Tưởng</option>
-                                    <option value="4">Trinh Thám</option>
-                                    <option value="7">Bí ẩn</option>
-                                    <option value="6">Kinh Doanh</option>
-                                    <option value="1">Lãng mạn</option>
-                                    <option value="2">Lịch Sử</option>
-                                    <option value="5">Tâm Lý Học</option>
-                                    <option value="8">Tâm Linh - Tôn Giáo</option>
+                                <Form.Select aria-label="Default select example" value={data.categoryId} onChange={event => setData({ ...data, categoryId: event.target.value })}>
+                                    {
+                                        records.map((category, index) => (
+                                            <option value={category.id} key={index} > {category.name} </option>
+                                        ))
+                                    }
                                 </Form.Select>
                             </Form.Group>
 
                             <Form.Group className="mb-3" controlId="formBasicPassword">
                                 <Form.Label>Tồn kho</Form.Label>
-                                <Form.Control type="number" value={data.stock} onChange={event => setData({ ...data, stock: event.target.value })} />
+                                <Form.Control type="number" value={data.quantity} onChange={event => setData({ ...data, quantity: event.target.value })} />
                             </Form.Group>
                         </Form>
 
@@ -123,23 +118,11 @@ function ModalEditBooks() {
                                 onChange={(event) => handleUploadThumbnail(event)}
                                 name='thumbnail' />
                             <br />
-                            <tr>
-                                <th style={{ textAlign: "center" }}>Ảnh sẵn</th>
-                                <th style={{ textAlign: "center" }}>Ảnh mới</th>
-                            </tr>
 
-                            <tr>
-                                <td>
-                                    {thumbnail && <img width={'200px'} style={{ padding: "10px" }}
-                                        src={`http://localhost:3030${thumbnail}`}
-                                        alt="Ảnh sẵn" />}
-                                </td>
-                                <td>
-                                    {previewThumbnail && <img width={'200px'} style={{ padding: "10px" }}
-                                        src={previewThumbnail}
-                                        alt="Ảnh mới" />}
-                                </td>
-                            </tr>
+                            {previewThumbnail && <img width={'200px'} style={{ padding: "10px" }}
+                                src={previewThumbnail}
+                                alt="Ảnh mới" />}
+
 
                         </Form.Group>
 
@@ -150,14 +133,6 @@ function ModalEditBooks() {
                                 name='otherImages' />
                             <br />
                             <div>
-                                <span style={{ fontWeight: "bold", marginLeft: "20px" }}>Ảnh sẵn</span>
-                                <div>
-                                    {otherImages.map((image, index) => (
-                                        <img width={'200px'} style={{ padding: "10px" }} key={index} src={`http://localhost:3030${image.image_path}`} alt={`Ảnh sẵn ${index + 1}`} />
-                                    ))}
-                                </div>
-                                <br />
-                                <span style={{ fontWeight: "bold", marginLeft: "20px" }}>Ảnh mới</span>
                                 <div>
                                     {
                                         [...previewOtherImages].map((previewOtherImage, index) => (
@@ -165,8 +140,6 @@ function ModalEditBooks() {
                                         ))
                                     }
                                 </div>
-
-
                             </div>
 
                         </Form.Group>

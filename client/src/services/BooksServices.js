@@ -1,6 +1,6 @@
 import { instance } from '../utils/AxiosCustomize';
 
-const createNewBook = (title, author, description, price, discount, stock, categories, thumbnailFile, otherImages, navigate) => {
+const createNewBook = (title, author, description, price, discount, quantity, categories, thumbnailFile, otherImages, navigate) => {
 
     const otherImagesArray = Array.from(otherImages);
 
@@ -10,8 +10,8 @@ const createNewBook = (title, author, description, price, discount, stock, categ
     data.append('description', description);
     data.append('price', price);
     data.append('discount', discount);
-    data.append('stock', stock);
-    data.append('category_id', categories);
+    data.append('quantity', quantity);
+    data.append('categoryId', categories);
     data.append('thumbnail', thumbnailFile);
     otherImagesArray.forEach((file) => {
         data.append(`otherImages`, file);
@@ -44,12 +44,18 @@ const updateBookByID = (id, data, thumbnailFile, previewOtherImages, navigate) =
     const previewOtherImagesArray = Array.from(previewOtherImages);
     const formData = new FormData();
     for (const key in data) {
-        formData.append(key, data[key]);
+        if (data[key] !== null) {
+            formData.append(key, data[key]);
+        }
     }
-    formData.append('thumbnail', thumbnailFile);
-    previewOtherImagesArray.forEach((file) => {
-        formData.append('otherImages', file);
-    });
+    if (thumbnailFile) {
+        formData.append('thumbnail', thumbnailFile);
+    }
+    if (previewOtherImagesArray) {
+        previewOtherImagesArray.forEach((file) => {
+            formData.append('otherImages', file);
+        });
+    }
 
     instance.put('/books/' + id, formData)
         .then(res => {

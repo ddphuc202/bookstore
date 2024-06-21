@@ -13,8 +13,8 @@ function ModalAddNewBooks() {
     const [description, setDescription] = useState('');
     const [price, setPrice] = useState('');
     const [discount, setDiscount] = useState('');
-    const [stock, setStock] = useState('');
-    const [categories, setGenres] = useState('');
+    const [quantity, setQuantity] = useState('');
+    const [categories, setCategories] = useState('');
     const [thumbnail, setThumbnail] = useState(null);
     const [thumbnailFile, setThumbnailFile] = useState(null);
 
@@ -25,7 +25,8 @@ function ModalAddNewBooks() {
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        createNewBook(title, author, description, price, discount, stock, categories, thumbnailFile, otherImages, navigate);
+        console.log(title, author, description, price, discount, quantity, categories, thumbnailFile, otherImages)
+        createNewBook(title, author, description, price, discount, quantity, categories, thumbnailFile, otherImages, navigate);
     }
 
 
@@ -46,7 +47,6 @@ function ModalAddNewBooks() {
 
     useEffect(() => {
         getCategories(setRecords)
-        console.log(title, author, description, price, discount, stock, categories, thumbnailFile, otherImages)
     }, [])
 
     return (
@@ -89,7 +89,7 @@ function ModalAddNewBooks() {
 
                             <Form.Group className="mb-3" controlId="formBasicPassword">
                                 <Form.Label>Thể loại</Form.Label>
-                                <Form.Select aria-label="Default select example" onChange={(event) => setGenres(event.target.value)}>
+                                <Form.Select aria-label="Default select example" onChange={(event) => setCategories(event.target.value)}>
                                     {records.map((category, index) => (
                                         <option key={index} value={category.id} > {category.name} </option>
                                     ))}
@@ -98,7 +98,7 @@ function ModalAddNewBooks() {
 
                             <Form.Group className="mb-3" controlId="formBasicPassword">
                                 <Form.Label>Tồn kho</Form.Label>
-                                <Form.Control type="number" placeholder="Tồn kho" value={stock} onChange={(event) => setStock(event.target.value)} />
+                                <Form.Control type="number" placeholder="Tồn kho" value={quantity} onChange={(event) => setQuantity(event.target.value)} />
                             </Form.Group>
 
                             <Form.Group controlId="formFile" className="mb-3" >

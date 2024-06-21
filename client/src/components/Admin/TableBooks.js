@@ -19,7 +19,7 @@ const TableBooks = (props) => {
   useEffect(() => {
     getBooks(setRecords);
 
-  },)
+  }, [])
 
 
   return (
@@ -46,14 +46,14 @@ const TableBooks = (props) => {
                 <td>{d.id}</td>
                 <td>{d.title}</td>
                 <td>
-                  <img width={'200px'} src={baseURL + d.thumbnail_path} />
+                  <img width={'200px'} src={baseURL + d.thumbnailPath} />
                 </td>
                 <td>{d.author}</td>
                 <td>{d.description}</td>
                 <td>{d.price}</td>
                 <td>{d.discount}</td>
-                <td>{d.category_name}</td>
-                <td>{d.stock}</td>
+                <td>{d.category.name}</td>
+                <td>{d.quantity}</td>
                 <td>
                   <Link to={`/manage-edit-books/${d.id}`} ><FontAwesomeIcon icon={faPenToSquare} size="lg" /></Link>
                   <button style={{ border: 'none' }} onClick={event => handleSubmit(d.id)} ><FontAwesomeIcon icon={faTrash} style={{ color: "#fa2500" }} /></button>
