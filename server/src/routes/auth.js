@@ -7,8 +7,8 @@ const router = express.Router();
 // Register a new customer
 router.post('/register', customerController.create);
 
-// // Login
-// router.post('/login', AuthController.login);
+// Login
+router.post('/login', authController.login);
 
 // // Logout
 // router.get('/logout', AuthController.logout);

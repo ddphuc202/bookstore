@@ -16,6 +16,14 @@ const postRoutes = require('./routes/posts');
 
 const app = express();
 
+const session = require('express-session');
+app.use(session({
+    secret: 'bookstore',
+    resave: false,
+    saveUninitialized: true,
+    cookie: { secure: false }
+}));
+
 // Init middlewares
 app.use(compression());
 
