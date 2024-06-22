@@ -14,6 +14,7 @@ import 'swiper/css';
 import 'swiper/css/navigation';
 import { Navigation } from 'swiper/modules';
 import { Container } from "react-bootstrap";
+import { addBookToCart } from '../../services/CartServices';
 
 
 const InfoBooks = () => {
@@ -23,6 +24,10 @@ const InfoBooks = () => {
 
     const [thumbnail, setThumbnail] = useState(null);
     const [otherImages, setOtherImages] = useState([]);
+
+    const handleSubmit = (id) => {
+        addBookToCart(id);
+    }
 
     const responsive = {
         superLargeDesktop: {
@@ -59,7 +64,7 @@ const InfoBooks = () => {
             <br />
             <br />
             <Container>
-                <div className="row ">
+                <div className="row-book ">
                     <div className="product-detail-left product-images col-12 col-md-12 col-lg-5">
                         <div className="product-image-detail">
                             <br />
@@ -145,11 +150,11 @@ const InfoBooks = () => {
                                                 </button>
                                             </div>
 
-                                            <span className="counter-qty">Còn lại {data.stock} trong kho</span>
+                                            <span className="counter-qty">Còn lại {data.quantity} trong kho</span>
 
                                         </div>
                                         <div className="btn-mua">
-                                            <button type="button" className="btn btn-lg btn-gray btn_buy btn-buy-now">Thêm vào giỏ hàng</button>
+                                            <button onClick={() => handleSubmit(data.id)} type="button" className="btn btn-lg btn-gray btn_buy btn-buy-now">Thêm vào giỏ hàng</button>
                                         </div>
                                     </div>
 

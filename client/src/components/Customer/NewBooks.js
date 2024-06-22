@@ -5,9 +5,14 @@ import { useEffect, useState } from 'react';
 import image1 from '../../image/thanh-xuan-sao-ma-dau-don.png';
 import { getBooks } from '../../services/BooksServices';
 import { Link } from 'react-router-dom';
+import { addBookToCart } from '../../services/CartServices';
 const NewBooks = () => {
 
 	const [records, setRecords] = useState([]);
+
+	const handleSubmit = (id) => {
+		addBookToCart(id);
+	}
 
 	useEffect(() => {
 		getBooks(setRecords)
@@ -71,7 +76,7 @@ const NewBooks = () => {
 
 												</div>
 
-												<button className='btn-buy btn-left btn-views  btn-buy-now-grid' >
+												<button onClick={() => handleSubmit(book.id)} className='btn-buy btn-left btn-views  btn-buy-now-grid' >
 													Thêm vào giỏ
 												</button>
 											</div>
