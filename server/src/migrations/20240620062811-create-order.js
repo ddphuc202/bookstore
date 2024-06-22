@@ -33,10 +33,6 @@ module.exports = {
         type: Sequelize.INTEGER,
         allowNull: false
       },
-      order_date: {
-        type: Sequelize.DATE,
-        allowNull: false
-      },
       tracking_number: {
         type: Sequelize.STRING,
       },

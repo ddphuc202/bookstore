@@ -22,7 +22,7 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   Order.init({
-    customer_id: {
+    customerId: {
       type: DataTypes.INTEGER,
       allowNull: false,
       references: {
@@ -44,10 +44,6 @@ module.exports = (sequelize, DataTypes) => {
     },
     total: {
       type: DataTypes.INTEGER,
-      allowNull: false
-    },
-    orderDate: {
-      type: DataTypes.DATE,
       allowNull: false
     },
     trackingNumber: {

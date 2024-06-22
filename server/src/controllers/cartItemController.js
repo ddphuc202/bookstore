@@ -20,11 +20,10 @@ const cartItemController = {
     // Create a new cart item
     create: async (req, res) => {
         try {
-            const cartItemData = req.body;
             const existingCartItem = await db.CartItem.findOne({
                 where: {
-                    customerId: cartItemData.customerId,
-                    bookId: cartItemData.bookId,
+                    customerId: req.body.customerId,
+                    bookId: req.body.bookId,
                 }
             })
             if (existingCartItem) {
@@ -32,7 +31,10 @@ const cartItemController = {
                 await existingCartItem.save();
                 res.status(200).json(existingCartItem);
             } else {
-                const newCartItem = await db.CartItem.create(cartItemData);
+                const book = await db.Book.findByPk(req.body.bookId);
+                const discountedPrice = book.price - (book.price * book.discount / 100);
+                req.body.price = discountedPrice;
+                const newCartItem = await db.CartItem.create(req.body);
                 res.status(201).json(newCartItem);
             }
         } catch (error) {
@@ -52,8 +54,6 @@ const cartItemController = {
             res.status(200).json({ message: 'Cart item updated successfully' });
         } catch (error) {
             res.status(500).json({ message: 'Error updating cart item', error });
-            // const errorMessage = error.message || 'Unknown error occurred';
-            // res.status(500).json({ message: 'Error updating cart item', error: errorMessage });
         }
     },
 
