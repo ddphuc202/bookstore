@@ -67,7 +67,9 @@ const TableProductCart = () => {
                     </tr>
                 </tbody>
             </Table>
-
+            <div className="btn-mua">
+                <button type="button" className="btn btn-lg btn-gray btn_buy btn-buy-now">Thanh toán</button>
+            </div>
 
         </>
     )

@@ -44,143 +44,15 @@ const Header = () => {
                                             <a className="a-img caret-down" href="/tin-sach" title="Tin Sách">
                                                 Tin Sách
                                             </a>
-                                            <i className="fa fa-angle-down"></i>
+
 
                                         </li>
                                         <li className="nav-item has-child   has-mega">
                                             <a className="a-img caret-down" href="/books" title="Sách Nhã Nam">
                                                 Sách Khai Tâm
                                             </a>
-                                            <i className="fa fa-angle-down"></i>
-                                            <div className="mega-content">
-                                                <ul className="level0">
 
-
-                                                    <li className="level1 parent item">
-                                                        <h4><a href="/hu-cau" title="Hư cấu">Hư cấu</a><span className="icon fa fa-angle-down"></span></h4>
-                                                        <ul className="level1">
-
-                                                            <li className="level2"><a href="/van-hoc-hien-dai" title="Văn học hiện đại">Văn học hiện đại</a> </li>
-
-                                                            <li className="level2"><a href="/van-hoc-kinh-dien" title="Văn học kinh điển">Văn học kinh điển</a> </li>
-
-                                                            <li className="level2"><a href="/lich-su" title="Văn học thiếu nhi">Văn học thiếu nhi</a> </li>
-
-                                                            <li className="level2"><a href="/lang-man" title="Lãng mạn">Lãng mạn</a> </li>
-
-                                                            <li className="level2"><a href="/ky-ao" title="Kỳ ảo">Kỳ ảo</a> </li>
-
-                                                            <li className="level2"><a href="/trinh-tham-kinh-di" title="Trinh thám - Kinh dị">Trinh thám - Kinh dị</a> </li>
-
-                                                            <li className="level2"><a href="/vien-tuong" title="Khoa học Viễn tưởng">Khoa học Viễn tưởng</a> </li>
-
-                                                            <li className="level2"><a href="/phieu-luu-ly-ky" title="Phiêu lưu ly kỳ">Phiêu lưu ly kỳ</a> </li>
-
-                                                            <li className="level2"><a href="/tan-van" title="Tản văn">Tản văn</a> </li>
-
-                                                            <li className="level2"><a href="/truyen-tranh-graphic-novel" title="Truyện tranh (graphic novel)">Truyện tranh (graphic novel)</a> </li>
-
-                                                            <li className="level2"><a href="/sach-tranh-picture-book" title="Sách tranh (Picture book)">Sách tranh (Picture book)</a> </li>
-
-                                                            <li className="level2"><a href="/tho-kich" title="Thơ - kịch">Thơ - kịch</a> </li>
-
-                                                            <li className="level2"><a href="/light-novel" title="Light novel">Light novel</a> </li>
-
-                                                            <li className="level2"><a href="/sach-to-mau" title="Sách tô màu">Sách tô màu</a> </li>
-
-                                                        </ul>
-                                                    </li>
-
-
-
-                                                    <li className="level1 parent item">
-                                                        <h4><a href="/phi-hu-cau" title="Phi hư cấu">Phi hư cấu</a><span className="icon fa fa-angle-down"></span></h4>
-                                                        <ul className="level1">
-
-                                                            <li className="level2"><a href="/triet-hoc" title="Triết học">Triết học</a> </li>
-
-                                                            <li className="level2"><a href="/lich-su-1" title="Sử học">Sử học</a> </li>
-
-                                                            <li className="level2"><a href="/khoa-hoc" title="Khoa học">Khoa học</a> </li>
-
-                                                            <li className="level2"><a href="/kinh-doanh" title="Kinh doanh">Kinh doanh</a> </li>
-
-                                                            <li className="level2"><a href="/kinh-te-chinh-tri" title="Kinh tế chính trị">Kinh tế chính trị</a> </li>
-
-                                                            <li className="level2"><a href="/ky-nang" title="Kỹ năng">Kỹ năng</a> </li>
-
-                                                            <li className="level2"><a href="/nghe-thuat" title="Nghệ thuật">Nghệ thuật</a> </li>
-
-                                                            <li className="level2"><a href="/nuoi-day-con" title="Nuôi dạy con">Nuôi dạy con</a> </li>
-
-                                                            <li className="level2"><a href="/tieu-luan-phe-binh" title="Tiểu luận - phê bình">Tiểu luận - phê bình</a> </li>
-
-                                                            <li className="level2"><a href="/phat-trien-ban-than" title="Tâm lý ứng dụng">Tâm lý ứng dụng</a> </li>
-
-                                                            <li className="level2"><a href="/tam-ly-hoc" title="Tâm lý học">Tâm lý học</a> </li>
-
-                                                            <li className="level2"><a href="/hoi-ky" title="Hồi ký">Hồi ký</a> </li>
-
-                                                            <li className="level2"><a href="/y-hoc-suc-khoe" title="Y học - Sức khỏe">Y học - Sức khỏe</a> </li>
-
-                                                            <li className="level2"><a href="/tam-linh-ton-giao" title="Tâm linh - Tôn giáo">Tâm linh - Tôn giáo</a> </li>
-
-                                                            <li className="level2"><a href="/kien-thuc-pho-thong" title="Kiến thức phổ thông">Kiến thức phổ thông</a> </li>
-
-                                                            <li className="level2"><a href="/phong-cach-song" title="Phong cách sống">Phong cách sống</a> </li>
-
-                                                        </ul>
-                                                    </li>
-
-
-
-                                                    <li className="level1 parent item">
-                                                        <h4><a href="/thieu-nhi" title="Thiếu nhi">Thiếu nhi</a><span className="icon fa fa-angle-down"></span></h4>
-                                                        <ul className="level1">
-
-                                                            <li className="level2"><a href="/0-5-tuoi" title="0-5 tuổi">0-5 tuổi</a> </li>
-
-                                                            <li className="level2"><a href="/6-8-tuoi" title="6-8 tuổi">6-8 tuổi</a> </li>
-
-                                                            <li className="level2"><a href="/9-12-tuoi" title="9-12 tuổi">9-12 tuổi</a> </li>
-
-                                                            <li className="level2"><a href="/13-15-tuoi" title="13-15 tuổi">13-15 tuổi</a> </li>
-
-                                                        </ul>
-                                                    </li>
-
-
-
-                                                    <li className="level1 parent item">
-                                                        <h4><a href="/phan-loai-khac" title="Phân loại khác">Phân loại khác</a><span className="icon fa fa-angle-down"></span></h4>
-                                                        <ul className="level1">
-
-                                                            <li className="level2"><a href="/sach-ban-chay" title="Sách bán chạy">Sách bán chạy</a> </li>
-
-                                                            <li className="level2"><a href="/sach-moi-xuat-ban" title="Sách mới xuất bản">Sách mới xuất bản</a> </li>
-
-                                                            <li className="level2"><a href="/sach-sap-xuat-ban" title="Sách sắp xuất bản">Sách sắp xuất bản</a> </li>
-
-                                                            <li className="level2"><a href="/sach-duoc-giai-thuong" title="Sách được giải thưởng">Sách được giải thưởng</a> </li>
-
-                                                            <li className="level2"><a href="/sach-pop-up-lift-the-flaps" title="Sách pop-up, lift-the-flaps">Sách pop-up, lift-the-flaps</a> </li>
-
-                                                            <li className="level2"><a href="/sach-chu-de-dong-duong" title="Nghiên cứu Việt Nam">Nghiên cứu Việt Nam</a> </li>
-
-                                                            <li className="level2"><a href="/viet-nam-danh-tac" title="Việt Nam danh tác">Việt Nam danh tác</a> </li>
-
-                                                            <li className="level2"><a href="/tac-gia-viet-nam" title="Tác giả Việt Nam">Tác giả Việt Nam</a> </li>
-
-                                                            <li className="level2"><a href="/ban-dac-biet" title="Bản đặc biệt">Bản đặc biệt</a> </li>
-
-                                                            <li className="level2"><a href="/phu-kien-qua-tang" title="Phụ kiện - Quà tặng">Phụ kiện - Quà tặng</a> </li>
-
-                                                        </ul>
-                                                    </li>
-
-
-                                                </ul>
-                                            </div>			</li>
+                                        </li>
 
                                         <li className="nav-item ">
                                             <a className="a-img" href="/about-page" title="Về Nhã Nam">

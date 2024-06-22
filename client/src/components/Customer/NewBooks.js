@@ -4,6 +4,7 @@ import "react-multi-carousel/lib/styles.css";
 import { useEffect, useState } from 'react';
 import image1 from '../../image/thanh-xuan-sao-ma-dau-don.png';
 import { getBooks } from '../../services/BooksServices';
+import { Link } from 'react-router-dom';
 const NewBooks = () => {
 
 	const [records, setRecords] = useState([]);
@@ -48,38 +49,32 @@ const NewBooks = () => {
 								{records.map((book, index) => (
 									<div className="swiper-slide" key={index}>
 										<div className="item_product_main">
+											<div className="thumb">
+												<Link className="image_thumb" to={`/info-book/${book.id}`}
+													title="THANH XUÂN, SAO MÀ ĐAU ĐỚN!">
+													<img width="199" height="199"
+														src={image1}
+														alt="THANH XUÂN, SAO MÀ ĐAU ĐỚN!"
+														className="lazyload img-responsive center-block" />
+												</Link>
 
-											<form action="/cart/add" method="post" className="variants product-action wishItem"
-												data-cart-form="" data-id="product-actions-35700297"
-												encType="multipart/form-data">
-												<div className="thumb">
-													<a className="image_thumb" href="/thanh-xuan-sao-ma-dau-don-nha-nam"
-														title="THANH XUÂN, SAO MÀ ĐAU ĐỚN!">
-														<img width="199" height="199"
-															src={image1}
-															alt="THANH XUÂN, SAO MÀ ĐAU ĐỚN!"
-															className="lazyload img-responsive center-block" />
-													</a>
+											</div>
+											<div className="info-product">
+												<div className='title-box'>
+													<h3 className="product-name"><Link to={`/info-book/${book.id}`}
+														title="THANH XUÂN, SAO MÀ ĐAU ĐỚN!"><b>{book.title}</b></Link>
+													</h3>
+												</div>
+												<div className="price-box">
+													<span className="price"><b>{book.price - book.price * book.discount / 100} $</b></span>
+													<span className="compare-price"><b>{book.price} $</b></span>
 
 												</div>
-												<div className="info-product">
-													<div className='title-box'>
-														<h3 className="product-name"><a href="/thanh-xuan-sao-ma-dau-don-nha-nam"
-															title="THANH XUÂN, SAO MÀ ĐAU ĐỚN!"><b>{book.title}</b></a>
-														</h3>
-													</div>
-													<div className="price-box">
-														<span className="price"><b>{book.discount}</b></span>
-														<span className="compare-price"><b>{book.price}</b></span>
 
-													</div>
-
-													<button className='btn-buy btn-left btn-views  btn-buy-now-grid' >
-														Thêm vào giỏ
-													</button>
-
-												</div>
-											</form>
+												<button className='btn-buy btn-left btn-views  btn-buy-now-grid' >
+													Thêm vào giỏ
+												</button>
+											</div>
 										</div>
 									</div>
 								))

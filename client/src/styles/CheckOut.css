@@ -1,12 +1,19 @@
+.wrap {
+    display: flex;
+}
+
 .main,
 .main__content {
     display: flex;
     flex: 1 0 auto;
-    flex-direction: column
+    flex-direction: column;
+    width: 800px;
+    margin-left: 100px;
 }
 
+
 .main {
-    width: 100%;
+    width: auto;
     padding-top: 1.5em
 }
 
@@ -18,7 +25,7 @@
 }
 
 .col--two {
-    width: 50%
+    width: 70%
 }
 
 .logo__image--small {
@@ -41,17 +48,20 @@
     margin-bottom: 12px
 }
 
-.layout-flex {
-    display: flex;
-    align-items: baseline
+
+.layout-flex h2 {
+    font-size: 22px;
+    color: #333;
+    font-weight: bold;
 }
 
 .alert {
     position: relative;
     padding: .75rem 1.25rem;
-    margin-bottom: 1rem;
-    border: 1px solid transparent;
-    border-radius: .25rem
+    margin-top: 40px;
+    border: 1px solid #bee5eb;
+    border-radius: .25rem;
+    background-color: #d1ecf1;
 }
 
 .content-box {
@@ -59,7 +69,8 @@
     background: #fff;
     background-clip: padding-box;
     border-radius: 5px;
-    color: #545454
+    color: #545454;
+    width: auto;
 }
 
 .content-box__row {
@@ -161,8 +172,19 @@
 }
 
 
+
+
+.sideBar {
+    width: 500px !important;
+    margin-right: 250px;
+    background-color: #ECECEC;
+    padding: 20px;
+    border-left: solid 1px #CCCCCC;
+}
+
 .main__header {
-    padding-bottom: 1.5em
+    padding-bottom: 1.5em;
+    border-bottom: solid 1px white;
 }
 
 .sidebar__title {
@@ -175,8 +197,8 @@
     border-bottom: 1px solid #e1e1e1;
     padding-top: 20px;
     padding-bottom: 20px;
-    display: none
 }
+
 
 .product-table tbody th {
     padding-left: 1em;
@@ -308,7 +330,8 @@
 .total-line__price {
     padding-left: 1.5em;
     text-align: right;
-    white-space: nowrap
+    white-space: nowrap;
+
 }
 
 .total-line-table__tbody+.total-line-table__footer .total-line:first-child th,

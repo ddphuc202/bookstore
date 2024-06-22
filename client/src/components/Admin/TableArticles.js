@@ -4,6 +4,7 @@ import { faPenToSquare, faTrash } from '@fortawesome/free-solid-svg-icons'
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import { Link, Route, useNavigate } from 'react-router-dom';
+import { getPost, deletePost } from '../../services/ArticlesServices';
 const TableArticles = (props) => {
 
   const [records, setRecords] = useState([]);
@@ -11,20 +12,11 @@ const TableArticles = (props) => {
 
 
   const handleSubmit = (id) => {
-    const conf = window.confirm('Do you want to delete?');
-    if (conf) {
-      axios.delete('http://localhost:3030/articles/' + id)
-        .then(res => {
-          alert('Item has deleted!');
-          navigate('/manage-articles')
-        }).catch(err => console.log(err))
-    }
+    deletePost(id, navigate);
   }
 
   useEffect(() => {
-    axios.get('http://localhost:3030/articles').then(res => {
-      setRecords(res.data)
-    })
+    getPost(setRecords);
   },)
 
 
@@ -48,7 +40,7 @@ const TableArticles = (props) => {
               <td>{d.content}</td>
               <td>{d.image_url}</td>
               <td>
-                <Link to={`/manage-edit-articles/${d.id}`} ><FontAwesomeIcon icon={faPenToSquare} size="lg" /></Link>
+                <Link to={`/manage-edit-posts/${d.id}`} ><FontAwesomeIcon icon={faPenToSquare} size="lg" /></Link>
                 <button style={{ border: 'none' }} onClick={event => handleSubmit(d.id)} ><FontAwesomeIcon icon={faTrash} style={{ color: "#fa2500" }} /></button>
               </td>
             </tr>
