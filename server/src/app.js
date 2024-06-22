@@ -13,6 +13,7 @@ const customerRoutes = require('./routes/customers');
 const categoryRoutes = require('./routes/categories');
 const bookRoutes = require('./routes/books');
 const postRoutes = require('./routes/posts');
+const cartRoutes = require('./routes/carts');
 
 const app = express();
 
@@ -40,5 +41,6 @@ app.use('/customers', customerRoutes);
 app.use('/categories', categoryRoutes);
 app.use('/books', bookRoutes);
 app.use('/posts', postRoutes);
+app.use('/carts', cartRoutes);
 
 module.exports = app;

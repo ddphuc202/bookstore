@@ -1,6 +1,6 @@
 const db = require('../models');
 
-const PostController = {
+const postController = {
     // Get all posts
     getAll: async (req, res) => {
         try {
@@ -73,4 +73,4 @@ const PostController = {
     },
 };
 
-module.exports = PostController;
+module.exports = postController;

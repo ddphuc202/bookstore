@@ -44,7 +44,7 @@ CREATE TABLE books (
     thumbnail VARCHAR(500),
     author VARCHAR(255) NOT NULL,
     description TEXT,
-    price DECIMAL(10, 2) NOT NULL,
+    price INT NOT NULL,
     discount DECIMAL(5, 2) DEFAULT 0,
     category_id INT,
     quantity INT NOT NULL,
@@ -74,6 +74,19 @@ CREATE TABLE book_images (
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
     FOREIGN KEY (book_id) REFERENCES books(id)
+);
+
+-- Table for storing carts
+CREATE TABLE carts (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    customer_id INT NOT NULL,
+    book_id INT NOT NULL,
+    quantity INT NOT NULL,
+    price INT NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    FOREIGN KEY (customer_id) REFERENCES customer(id),
+    FOREIGN KEY (book_id) REFERENCES products(id)
 );
 
 
