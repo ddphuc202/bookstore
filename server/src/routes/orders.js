@@ -6,6 +6,9 @@ const router = express.Router();
 // GET all orders
 router.get('/', orderController.getAll);
 
+// GET all orders by a customer ID
+router.get('/customer/:customerId', orderController.getAllByCustomerId);
+
 // GET a specific order
 router.get('/:id', orderController.getById);
 

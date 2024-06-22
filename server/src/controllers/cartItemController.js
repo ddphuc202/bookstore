@@ -27,11 +27,25 @@ const cartItemController = {
                 }
             })
             if (existingCartItem) {
+                const book = await db.Book.findByPk(req.body.bookId);
+                if (!book) {
+                    return res.status(404).json({ message: 'Book not found' });
+                }
+                if (existingCartItem.quantity + 1 > book.quantity) {
+                    return res.status(400).json({ message: 'Requested quantity is greater than available quantity' });
+                }
                 existingCartItem.quantity += 1;
                 await existingCartItem.save();
                 res.status(200).json(existingCartItem);
             } else {
                 const book = await db.Book.findByPk(req.body.bookId);
+                if (!book) {
+                    return res.status(404).json({ message: 'Book not found' });
+                }
+                const requestedQuantity = req.body.quantity || 1;
+                if (requestedQuantity > book.quantity) {
+                    return res.status(400).json({ message: 'Requested quantity is greater than available quantity' });
+                }
                 const discountedPrice = book.price - (book.price * book.discount / 100);
                 req.body.price = discountedPrice;
                 const newCartItem = await db.CartItem.create(req.body);
@@ -45,6 +59,17 @@ const cartItemController = {
     // Update a cart item
     update: async (req, res) => {
         try {
+            const cartItem = await db.CartItem.findByPk(req.params.id);
+            if (!cartItem) {
+                return res.status(404).json({ message: 'Cart item not found' });
+            }
+            const book = await db.Book.findByPk(cartItem.bookId);
+            if (!book) {
+                return res.status(404).json({ message: 'Book not found' });
+            }
+            if (req.body.quantity > book.quantity) {
+                return res.status(400).json({ message: 'Requested quantity is greater than available quantity' });
+            }
             const [updated] = await db.CartItem.update(req.body, {
                 where: { id: req.params.id }
             });

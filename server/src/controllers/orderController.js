@@ -14,6 +14,22 @@ const orderController = {
         }
     },
 
+    // Get all orders by a customer ID
+    getAllByCustomerId: async (req, res) => {
+        try {
+            const orders = await db.Order.findAll({
+                where: { customerId: req.params.customerId },
+                order: [['updatedAt', 'DESC']],
+            });
+            if (orders.length === 0) {
+                return res.status(404).json({ message: 'No order found for this customer' });
+            }
+            res.status(200).json(orders);
+        } catch (error) {
+            res.status(500).json({ message: 'Error retrieving orders', error });
+        }
+    },
+
     // Get order by ID
     getById: async (req, res) => {
         try {
@@ -52,6 +68,19 @@ const orderController = {
                 price: cartItem.price,
             }));
             await db.OrderDetail.bulkCreate(orderDetails);
+
+            for (const detail of orderDetails) {
+                const book = await db.Book.findByPk(detail.bookId);
+                if (book) {
+                    book.quantity -= detail.quantity;
+                    if (book.quantity = 0) {
+                        await book.save();
+                        await book.destroy();
+                    } else {
+                        await book.save();
+                    }
+                }
+            }
 
             await db.CartItem.destroy({
                 where: { customerId: req.body.customerId }
