@@ -4,7 +4,9 @@ const postController = {
     // Get all posts
     getAll: async (req, res) => {
         try {
-            const posts = await db.Post.findAll();
+            const posts = await db.Post.findAll({
+                order: [['updatedAt', 'DESC']],
+            });
             res.status(200).json(posts);
         } catch (error) {
             res.status(500).json({ message: 'Error retrieving posts', error });

@@ -4,7 +4,9 @@ const bookImageController = {
     // Get all book images
     getAll: async (req, res) => {
         try {
-            const bookImages = await db.BookImage.findAll();
+            const bookImages = await db.BookImage.findAll({
+                order: [['updatedAt', 'DESC']],
+            });
             res.status(200).json(bookImages);
         } catch (error) {
             res.status(500).json({ message: 'Error retrieving book images', error });

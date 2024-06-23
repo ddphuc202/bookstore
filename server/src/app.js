@@ -13,7 +13,7 @@ const customerRoutes = require('./routes/customers');
 const categoryRoutes = require('./routes/categories');
 const bookRoutes = require('./routes/books');
 const postRoutes = require('./routes/posts');
-const cartItemsRoutes = require('./routes/cart_items');
+const cartRoutes = require('./routes/carts');
 const orderRoutes = require('./routes/orders');
 
 const app = express();
@@ -42,7 +42,7 @@ app.use('/customers', customerRoutes);
 app.use('/categories', categoryRoutes);
 app.use('/books', bookRoutes);
 app.use('/posts', postRoutes);
-app.use('/cart_items', cartItemsRoutes);
+app.use('/carts', cartRoutes);
 app.use('/orders', orderRoutes);
 
 module.exports = app;

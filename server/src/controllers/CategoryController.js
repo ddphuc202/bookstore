@@ -4,7 +4,9 @@ const categoryController = {
     // Get all categories
     getAll: async (req, res) => {
         try {
-            const categories = await db.Category.findAll();
+            const categories = await db.Category.findAll({
+                order: [['updatedAt', 'DESC']],
+            });
             res.status(200).json(categories);
         } catch (error) {
             res.status(500).json({ message: 'Error retrieving categories', error });

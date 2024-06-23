@@ -4,9 +4,8 @@ const cartItemController = {
     // Get all cart items by a customer ID
     getAllByCustomerId: async (req, res) => {
         try {
-            const customerId = req.params.customerId;
             const cartItems = await db.CartItem.findAll({
-                where: { customerId: customerId },
+                where: { customerId: req.params.id },
             });
             if (cartItems.length === 0) {
                 return res.status(404).json({ message: 'No cart item found for this customer' });

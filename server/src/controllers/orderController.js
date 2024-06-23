@@ -18,7 +18,7 @@ const orderController = {
     getAllByCustomerId: async (req, res) => {
         try {
             const orders = await db.Order.findAll({
-                where: { customerId: req.params.customerId },
+                where: { customerId: req.params.id },
                 order: [['updatedAt', 'DESC']],
             });
             if (orders.length === 0) {
