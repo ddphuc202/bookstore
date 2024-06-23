@@ -1,16 +1,34 @@
 const db = require('../models');
+require('dotenv').config();
 
 const cartItemController = {
     // Get all cart items by a customer ID
     getAllByCustomerId: async (req, res) => {
         try {
+
             const cartItems = await db.CartItem.findAll({
                 where: { customerId: req.params.id },
+                include: [
+                    {
+                        model: db.Book,
+                        as: 'book',
+                        attributes: ['title', ['thumbnail', 'thumbnailPath']],
+                    }
+                ]
             });
             if (cartItems.length === 0) {
                 return res.status(404).json({ message: 'No cart item found for this customer' });
             }
-            res.status(200).json(cartItems);
+            const updatedCartItems = cartItems.map(item => {
+                /*Access thumbnailPath through item.book.dataValues.thumbnailPath instead of item.book.thumbnailPath. 
+                This adjustment is necessary because Sequelize models store the actual data in the dataValues object, 
+                especially when dealing with raw queries or when you need to manipulate the data after fetching it 
+                from the database.
+                */
+                item.book.dataValues.thumbnailPath = `${process.env.IMAGE_PATH}${item.book.dataValues.thumbnailPath}`;
+                return item;
+            });
+            res.status(200).json(updatedCartItems);
         } catch (error) {
             res.status(500).json({ message: 'Error retrieving cart items', error });
         }

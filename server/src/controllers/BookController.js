@@ -1,5 +1,5 @@
-const { where } = require('sequelize');
 const db = require('../models');
+require('dotenv').config();
 
 const booksController = {
     // Get all books
@@ -17,7 +17,6 @@ const booksController = {
         if (!validOrder.includes(order)) {
             order = 'DESC';
         }
-        const basePath = '/images/';
         const whereClause = {};
         if (categoryId) {
             whereClause.categoryId = categoryId;
@@ -33,7 +32,7 @@ const booksController = {
                 where: whereClause,
                 attributes: {
                     include: [
-                        [db.sequelize.literal(`CONCAT('${basePath}', thumbnail)`), 'thumbnailPath'],
+                        [db.sequelize.literal(`CONCAT('${process.env.IMAGE_PATH}', thumbnail)`), 'thumbnailPath'],
                     ]
                 },
                 include: [
@@ -56,11 +55,10 @@ const booksController = {
     // Get book by ID
     getById: async (req, res) => {
         try {
-            const basePath = '/images/';
             const book = await db.Book.findByPk(req.params.id, {
                 attributes: {
                     include: [
-                        [db.sequelize.literal(`CONCAT('${basePath}', thumbnail)`), 'thumbnailPath']
+                        [db.sequelize.literal(`CONCAT('${process.env.IMAGE_PATH}', thumbnail)`), 'thumbnailPath']
                     ]
                 },
                 include: [
@@ -73,7 +71,7 @@ const booksController = {
                         model: db.BookImage,
                         as: 'bookImages',
                         attributes: [
-                            [db.sequelize.literal(`CONCAT('${basePath}', image)`), 'imagePath']
+                            [db.sequelize.literal(`CONCAT('${process.env.IMAGE_PATH}', image)`), 'imagePath']
                         ],
                     },
                 ],
