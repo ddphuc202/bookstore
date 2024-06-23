@@ -5,18 +5,9 @@ import '../../styles/Books.css';
 import { getBooks } from '../../services/BooksServices';
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import ListBooks from "../../components/Customer/ListBooks";
 const Books = () => {
 
-    const [records, setRecords] = useState([]);
-
-    useEffect(() => {
-        getBooks(setRecords);
-    }, [])
-
-    const sortBooksByPrice = () => {
-        const sortedBooks = [...records].sort((a, b) => a.price - b.price);
-        setRecords(sortedBooks);
-    }
 
 
     return (
@@ -77,7 +68,7 @@ const Books = () => {
                                 <div className="sortby">
                                     <span className="lazyload sort-icon"
                                         data-src="//bizweb.dktcdn.net/100/363/455/themes/918830/assets/sort.png?1704690471681">Sắp
-                                        xếp theo <span>Mặc định</span></span>
+                                        xếp theo </span>
                                     <ul>
                                         <li className="btn-quick-sort default active">
                                             <a href="javascript:;" onClick="sortby('default')"
@@ -88,7 +79,9 @@ const Books = () => {
                                                 title="Sách mới"><i></i>Sách mới</a>
                                         </li>
                                         <li className="btn-quick-sort price-desc">
-                                            <a onClick={sortBooksByPrice}
+                                            <a onClick=''
+                                                // {sortBooksByPrice}
+
                                                 title="Giá thấp - cao"><i></i>Giá thấp - cao</a>
                                         </li>
                                         <li className="btn-quick-sort price-asc">
@@ -98,60 +91,8 @@ const Books = () => {
                                     </ul>
                                 </div>
                             </div>
+                            <ListBooks />
 
-                            <div className="category-products products">
-
-
-                                <section className="products-view products-view-grid collection_reponsive">
-                                    <div className="row">
-                                        {records.map((book, index) => (
-                                            <div key={index} className="col-6 col-md-3 col-lg-3 product-col">
-                                                <div className="item_product_main">
-
-                                                    <form action="/cart/add" method="post"
-                                                        className="variants product-action wishItem" data-cart-form=""
-                                                        data-id="product-actions-36086469" encType="multipart/form-data">
-                                                        <div className="thumb">
-                                                            <Link to={`/info-book/${book.id}`} className="image_thumb" href="/hon-don-va-khu-vuon-nha-nam"
-                                                                title="HỖN ĐỘN VÀ KHU VƯỜN">
-                                                                <img width="199" height="199"
-                                                                    src={image}
-                                                                    data-src="https://bizweb.dktcdn.net/100/363/455/products/hondonvakhuvuon01e171766606841.jpg?v=1717666223843"
-                                                                    alt="HỖN ĐỘN VÀ KHU VƯỜN"
-                                                                    className="lazyload img-responsive center-block" />
-                                                            </Link>
-
-                                                        </div>
-                                                        <div className="info-product">
-                                                            <h3 className="product-name">
-                                                                <Link to={`/info-book/${book.id}`}
-                                                                    title="HỖN ĐỘN VÀ KHU VƯỜN">
-                                                                    <b>{book.title}</b>
-                                                                </Link>
-                                                            </h3>
-
-                                                            <div className="price-box">
-                                                                <span className="price">{book.price}$</span>
-                                                                <span className="compare-price">168.000$</span>
-
-                                                            </div>
-
-                                                            <button className='btn-buy btn-left btn-views  btn-buy-now-grid' >
-                                                                Thêm vào giỏ
-                                                            </button>
-
-                                                        </div>
-
-                                                    </form>
-
-                                                </div>
-                                            </div>
-                                        ))
-                                        }
-                                    </div>
-
-                                </section>
-                            </div>
                         </div>
                     </div>
                 </div>
