@@ -37,7 +37,7 @@ configCORS(app);
 
 // Routes
 app.use('/', webRoutes);
-app.use('/auth', authRoutes)
+app.use('/', authRoutes)
 app.use('/customers', customerRoutes);
 app.use('/categories', categoryRoutes);
 app.use('/books', bookRoutes);

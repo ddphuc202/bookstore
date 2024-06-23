@@ -32,11 +32,11 @@ const customerController = {
             // Check if email already exists
             const existingCustomer = await db.Customer.findOne({ where: { email: customerData.email } });
             if (existingCustomer) {
-                return res.status(400).json({ message: 'Customer already exists' });
+                return res.status(400).json({ message: 'Email already used' });
             }
             const existingAdmin = await db.Admin.findOne({ where: { email: customerData.email } });
             if (existingAdmin) {
-                return res.status(400).json({ message: 'Email already in use by an admin' });
+                return res.status(400).json({ message: 'Email already used' });
             }
             // Hash password
             customerData.password = await bcrypt.hash(customerData.password, 12);
