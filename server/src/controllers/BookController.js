@@ -1,4 +1,5 @@
 const db = require('../models');
+const { Op } = require('sequelize');
 require('dotenv').config();
 
 const booksController = {
@@ -18,6 +19,7 @@ const booksController = {
             order = 'DESC';
         }
         const whereClause = {};
+        whereClause.quantity = { [Op.gt]: 0 };
         if (categoryId) {
             whereClause.categoryId = categoryId;
         }

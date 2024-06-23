@@ -5,14 +5,13 @@ const cartItemController = {
     // Get all cart items by a customer ID
     getAllByCustomerId: async (req, res) => {
         try {
-
             const cartItems = await db.CartItem.findAll({
                 where: { customerId: req.params.id },
                 include: [
                     {
                         model: db.Book,
                         as: 'book',
-                        attributes: ['title', ['thumbnail', 'thumbnailPath']],
+                        attributes: ['title', ['thumbnail', 'thumbnailPath'], 'discount'],
                     }
                 ]
             });

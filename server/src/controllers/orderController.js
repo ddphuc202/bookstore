@@ -73,12 +73,7 @@ const orderController = {
                 const book = await db.Book.findByPk(detail.bookId);
                 if (book) {
                     book.quantity -= detail.quantity;
-                    if (book.quantity == 0) {
-                        await book.save();
-                        await book.destroy();
-                    } else {
-                        await book.save();
-                    }
+                    book.save();
                 }
             }
 
