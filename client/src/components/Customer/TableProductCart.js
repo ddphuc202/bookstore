@@ -3,17 +3,40 @@ import { faPlus, faMinus } from '@fortawesome/free-solid-svg-icons'
 import Table from 'react-bootstrap/Table';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { useEffect, useState } from "react";
-import { getCartByCustomerId } from "../../services/CartServices";
+import { getCartByCustomerId, updateIncreaseAmountOfCart, updateDecreaseAmountOfCart, updateInputAmountOfCart, deleteItemInCart } from "../../services/CartServices";
+import { Link } from "react-router-dom";
+import { baseURL } from "../../utils/AxiosCustomize";
 const TableProductCart = () => {
 
     const [data, setData] = useState([]);
-    const [amount, setAmount] = useState();
     const [total, setTotal] = useState(0);
 
+
+    const increaseQuantity = (index, id) => {
+        updateIncreaseAmountOfCart(index, id, data, setData);
+    };
+
+    const decreaseQuantity = (index, id) => {
+        updateDecreaseAmountOfCart(index, id, data, setData, handleDelete);
+    };
+
+    const updateQuantity = (index, id, newQuantity) => {
+        updateInputAmountOfCart(index, id, newQuantity, data, setData);
+    };
+
+    const handleDelete = (id) => {
+        deleteItemInCart(id);
+    }
+
     useEffect(() => {
-        getCartByCustomerId(1, setData)
-        let totalPrice = data.reduce((sum, item) => sum + item.price * item.quantity, 0);
-        setTotal(totalPrice);
+        if (Array.isArray(data)) {
+            let totalPrice = data.reduce((sum, item) => sum + item.price * item.quantity, 0);
+            setTotal(totalPrice);
+        }
+    }, [data])
+
+    useEffect(() => {
+        getCartByCustomerId(3, setData)
     }, [data])
 
     return (
@@ -29,32 +52,34 @@ const TableProductCart = () => {
                 </thead>
                 <tbody>
                     {
-                        data.map((item, index) => (
+                        Array.isArray(data) && data.map((item, index) => (
+
                             <tr key={index}>
-                                <td>Book ID: {item.bookId}</td>
+                                <td>
+                                    <img src={baseURL + item.book.thumbnailPath}></img>
+                                    <span>{item.book.title}</span>
+                                    <p onClick={() => handleDelete(item.id)} >Xóa</p>
+                                </td>
                                 <td className="price">{item.price}đ</td>
                                 <td>
-                                    <div className="custom custom-btn-numbers clearfix input_number_product">
+                                    <div className="custom custom-btn-numbers clearfix input_number_index">
                                         <button
-                                            onClick=''
+                                            onClick={() => decreaseQuantity(index, item.id)}
                                             className="btn-minus btn-cts" type="button">
                                             <FontAwesomeIcon icon={faMinus} style={{ color: "#000000", marginTop: "5px" }} />
                                         </button>
                                         <input aria-label="Số lượng" type="text" className="qty input-text" id="qty"
                                             name="quantity" value={item.quantity}
-                                            onChange='' />
+                                            onChange={event => updateQuantity(index, item.id, event.target.value)} />
                                         <button
-                                            onClick=""
+                                            onClick={() => increaseQuantity(index, item.id)}
                                             className="btn-plus btn-cts" type="button">
                                             <FontAwesomeIcon icon={faPlus} style={{ color: "#000000", marginTop: "5px" }} />
                                         </button>
                                     </div>
                                 </td>
                                 <td className="price">{item.price * item.quantity}đ</td>
-
-
                             </tr>
-
                         ))
                     }
 
@@ -68,7 +93,7 @@ const TableProductCart = () => {
                 </tbody>
             </Table>
             <div className="btn-mua">
-                <button type="button" className="btn btn-lg btn-gray btn_buy btn-buy-now">Thanh toán</button>
+                <Link style={{ textDecoration: 'none' }} to={'/checkout'}><button type="button" className="btn btn-lg btn-gray btn_buy btn-buy-now">  Thanh toán </button></Link>
             </div>
 
         </>

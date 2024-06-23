@@ -1,5 +1,22 @@
+import { Link } from 'react-router-dom';
 import image from '../../image/thanh-xuan-sao-ma-dau-don.png';
+import { getCartByCustomerId } from '../../services/CartServices';
+import { useState, useEffect } from 'react';
 const SideBarCheckOut = () => {
+
+    const [data, setData] = useState([]);
+    const [total, setTotal] = useState(0);
+
+    useEffect(() => {
+        if (Array.isArray(data)) {
+            let totalPrice = data.reduce((sum, item) => sum + item.price * item.quantity, 0);
+            setTotal(totalPrice);
+        }
+    }, [data])
+    useEffect(() => {
+        getCartByCustomerId(3, setData);
+    }, [])
+
     return (
         <>
             <aside className="sideBar">
@@ -32,77 +49,41 @@ const SideBarCheckOut = () => {
                                     <br />
 
                                     <tbody>
+                                        {
+                                            Array.isArray(data) && data.map((item, index) => (
+                                                <>
+                                                    <tr key={index} className="product">
+                                                        <td className="product__image">
+                                                            <div className="product-thumbnail">
+                                                                <div className="product-thumbnail__wrapper" >
+                                                                    <img src={image}
+                                                                        alt="" className="product-thumbnail__image" />
+                                                                </div>
+                                                                <span className="product-thumbnail__quantity">{item.quantity}</span>
+                                                            </div>
+                                                        </td>
+                                                        <th className="product__description">
+                                                            <span className="product__description__name">
+                                                                {item.book.title}
+                                                            </span>
+                                                            <span className="product__description__property">
+                                                                <span className="discount-tag">
+                                                                    <span className="discount-icon"><i className="fa fa-tag"></i></span>
+                                                                    <span className="discount-tag--name">Giảm {item.book.discount}% so với giá bìa
+                                                                        ({item.price * item.book.discount / 100}₫)</span>
+                                                                </span>
+                                                            </span>
 
-                                        <tr className="product">
-                                            <td className="product__image">
-                                                <div className="product-thumbnail">
-                                                    <div className="product-thumbnail__wrapper" >
-                                                        <img src={image}
-                                                            alt="" className="product-thumbnail__image" />
-                                                    </div>
-                                                    <span className="product-thumbnail__quantity">1</span>
-                                                </div>
-                                            </td>
-                                            <th className="product__description">
-                                                <span className="product__description__name">
-                                                    KHI BẠN TRAI TRỔ MÃ
-                                                </span>
+                                                        </th>
+                                                        <td className="product__quantity visually-hidden"><em>Số lượng:</em> {item.quantity} </td>
+                                                        <td className="product__price"> {item.price.toLocaleString('vi-VN')}đ </td>
 
-
-
-                                                <span className="product__description__property">
-                                                    <span className="discount-tag">
-                                                        <span className="discount-icon"><i className="fa fa-tag"></i></span>
-                                                        <span className="discount-tag--name">Giảm 15% so với giá bìa
-                                                            (-22.500₫)</span>
-                                                    </span>
-                                                </span>
-
-                                            </th>
-                                            <td className="product__quantity visually-hidden"><em>Số lượng:</em> 1</td>
-                                            <td className="product__price">
-
-                                                127.500₫
-
-                                            </td>
-                                        </tr>
+                                                    </tr>
+                                                    <br></br>
+                                                </>
+                                            ))}
 
                                         <br />
-
-
-                                        <tr className="product">
-                                            <td className="product__image">
-                                                <div className="product-thumbnail">
-                                                    <div className="product-thumbnail__wrapper" >
-                                                        <img src={image} alt=""
-                                                            className="product-thumbnail__image" />
-                                                    </div>
-                                                    <span className="product-thumbnail__quantity">1</span>
-                                                </div>
-                                            </td>
-                                            <th className="product__description">
-                                                <span className="product__description__name">
-                                                    HỖN ĐỘN VÀ KHU VƯỜN
-                                                </span>
-
-
-
-                                                <span className="product__description__property">
-                                                    <span className="discount-tag">
-                                                        <span className="discount-icon"><i className="fa fa-tag"></i></span>
-                                                        <span className="discount-tag--name">Giảm 15% so với giá bìa
-                                                            (-25.200₫)</span>
-                                                    </span>
-                                                </span>
-
-                                            </th>
-                                            <td className="product__quantity visually-hidden"><em>Số lượng:</em> 1</td>
-                                            <td className="product__price">
-
-                                                142.800₫
-
-                                            </td>
-                                        </tr>
 
                                     </tbody>
                                 </table>
@@ -128,7 +109,7 @@ const SideBarCheckOut = () => {
                                             </th>
                                             <td></td>
 
-                                            <td className="total-line__price">270.300₫</td>
+                                            <td className="total-line__price">{total.toLocaleString('vi-VN')}₫</td>
                                         </tr>
 
 
@@ -144,7 +125,7 @@ const SideBarCheckOut = () => {
                                             <td></td>
                                             <td className="total-line__price">
                                                 <span className="payment-due__price"
-                                                >270.300₫</span>
+                                                >{total.toLocaleString('vi-VN')}₫</span>
                                             </td>
                                         </tr>
                                     </tfoot>
@@ -152,9 +133,9 @@ const SideBarCheckOut = () => {
                             </div>
                             <div className="order-summary__nav field__input-btn-wrapper hide-on-mobile layout-flex--row-reverse">
                                 <br></br>
-                                <button type="submit" className="btn btn-checkout spinner"  >
-                                    <span className="spinner-label btn btn-primary">ĐẶT HÀNG</span>
-                                </button>
+                                <Link to={'/cart'}><button type="submit" className="btn btn-checkout spinner"  >
+                                    <span className="spinner-label "> Quay lại giỏ hàng</span>
+                                </button></Link>
                             </div>
                         </div>
                     </div>

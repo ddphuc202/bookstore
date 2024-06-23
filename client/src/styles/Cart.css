@@ -86,6 +86,11 @@ tbody .price {
     height: 60px;
     font-weight: bold;
     margin-left: auto;
+
+}
+
+.btn-mua button.btn-buy-now a {
+    text-align: none !important;
 }
 
 .btn-mua button.btn-buy-now:hover {

@@ -51,7 +51,11 @@ const SideBar = () => {
                 </li>
 
                 <li className="nav-item">
-                    <Link className="nav-link" to={'/manage-customers'} style={{ textDecoration: "none" }}> <b>Customer</b></Link>
+                    <Link className="nav-link" to={'/manage-customers'} style={{ textDecoration: "none" }}> <b>Customers</b></Link>
+                </li>
+
+                <li className="nav-item">
+                    <Link className="nav-link" to={'/manage-orders'} style={{ textDecoration: "none" }}> <b>Orders</b></Link>
                 </li>
 
 

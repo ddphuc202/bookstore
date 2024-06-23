@@ -23,7 +23,7 @@ const TableGenres = (props) => {
     <Table striped bordered hover>
       <thead>
         <tr>
-          <th>id</th>
+          <th>#</th>
           <th>Tên thể loại</th>
           <th>Hành động</th>
         </tr>

@@ -1,8 +1,8 @@
 import '../../styles/Cart.css';
-import TableProductCart from "../../components/Customer/TableProductCart"
+import TableOrderCustomers from '../../components/Customer/TableOrderCustomers';
 import Header from '../../components/Customer/Header';
 import Footer from '../../components/Customer/Footer';
-const Cart = () => {
+const OrderCustomers = () => {
     return (
         <>
             <Header />
@@ -13,7 +13,7 @@ const Cart = () => {
                         <div className="header-cart">
                             <div className="title-block-page">
                                 <h1 className="title-module">
-                                    <span>Giỏ hàng của bạn</span>
+                                    <span>Đơn hàng của bạn</span>
                                 </h1>
                             </div>
                         </div>
@@ -22,7 +22,7 @@ const Cart = () => {
                                 <div className="cart-page d-xl-block d-none">
                                     <div className="drawer__inner">
                                         <div className="CartPageContainer">
-                                            <TableProductCart />
+                                            <TableOrderCustomers />
                                         </div>
                                     </div>
                                 </div>
@@ -37,4 +37,4 @@ const Cart = () => {
         </>
     )
 }
-export default Cart;
+export default OrderCustomers;

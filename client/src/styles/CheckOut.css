@@ -354,3 +354,8 @@
 .order-summary__nav {
     margin-bottom: 1em
 }
+
+.spinner .spinner-label:hover {
+    color: green;
+    text-decoration: underline;
+}
