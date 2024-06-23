@@ -53,9 +53,9 @@ const orderController = {
                 return res.status(400).json({ message: 'Cart is empty' });
             }
             // const total = cartItems.reduce((acc, cartItem) => acc + cartItem.price, 0);
-            let total = 0; // Step 1: Initialize total to 0
-            for (let i = 0; i < cartItems.length; i++) { // Step 2: Loop through cart items
-                total += cartItems[i].price; // Step 3: Add each item's price to total
+            let total = 0;
+            for (let i = 0; i < cartItems.length; i++) {
+                total += cartItems[i].price * cartItems[i].quantity;
             }
             req.body.total = total;
 
