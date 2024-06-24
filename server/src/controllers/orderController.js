@@ -11,7 +11,8 @@ const orderController = {
             });
             res.status(200).json(orders);
         } catch (error) {
-            res.status(500).json({ message: 'Error retrieving orders', error });
+            console.log('Error retrieving orders', error);
+            res.status(500).json({ message: 'Error retrieving orders', error: error.message });
         }
     },
 
@@ -27,7 +28,8 @@ const orderController = {
             }
             res.status(200).json(orders);
         } catch (error) {
-            res.status(500).json({ message: 'Error retrieving orders', error });
+            console.log('Error retrieving orders', error);
+            res.status(500).json({ message: 'Error retrieving orders', error: error.message });
         }
     },
 
@@ -42,7 +44,9 @@ const orderController = {
                     include: [{
                         model: db.Book,
                         as: 'book',
-                        attributes: ['title', ['thumbnail', 'thumbnailPath']],
+                        attributes: ['title',
+                            [db.sequelize.literal(`CONCAT('${process.env.IMAGE_PATH}', thumbnail)`), 'thumbnailPath'],
+                        ]
                     }]
                 }]
             });
@@ -51,33 +55,40 @@ const orderController = {
             }
             res.status(200).json(order);
         } catch (error) {
-            res.status(500).json({ message: 'Error retrieving order', error });
+            console.log('Error retrieving order', error);
+            res.status(500).json({ message: 'Error retrieving order', error: error.message });
         }
     },
 
     // Create a new order
     create: async (req, res) => {
         try {
-            const cartItems = await db.CartItem.findAll({
-                where: { customerId: req.body.customerId }
-            })
-            if (cartItems.length === 0) {
+            const carts = await db.Cart.findAll({
+                where: { customerId: req.body.customerId },
+                include: [{
+                    model: db.Book,
+                    as: 'book',
+                    attributes: [[db.sequelize.literal(`CAST((price - (price * discount / 100)) AS SIGNED)`), 'price']],
+                }]
+            });
+            if (carts.length == 0) {
                 return res.status(400).json({ message: 'Cart is empty' });
             }
-            // const total = cartItems.reduce((acc, cartItem) => acc + cartItem.price, 0);
             let total = 0;
-            for (let i = 0; i < cartItems.length; i++) {
-                total += cartItems[i].price * cartItems[i].quantity;
+            for (let i = 0; i < carts.length; i++) {
+                const book = carts[i].book;
+                carts[i].price = book.dataValues.price;
+                total += carts[i].price * carts[i].quantity;
             }
             req.body.total = total;
 
             const newOrder = await db.Order.create(req.body);
 
-            const orderDetails = cartItems.map(cartItem => ({
+            const orderDetails = carts.map(cartItem => ({
                 orderId: newOrder.id,
                 bookId: cartItem.bookId,
                 quantity: cartItem.quantity,
-                price: cartItem.price,
+                price: cartItem.price
             }));
             await db.OrderDetail.bulkCreate(orderDetails);
 
@@ -89,13 +100,14 @@ const orderController = {
                 }
             }
 
-            await db.CartItem.destroy({
+            await db.Cart.destroy({
                 where: { customerId: req.body.customerId }
             })
 
             res.status(201).json(newOrder);
         } catch (error) {
-            res.status(500).json({ message: 'Error creating order', error });
+            console.log('Error creating order', error);
+            res.status(500).json({ message: 'Error creating order', error: error.message });
         }
     },
 
@@ -110,24 +122,10 @@ const orderController = {
             }
             res.status(200).json({ message: 'Order updated successfully' });
         } catch (error) {
-            res.status(500).json({ message: 'Error updating order', error });
+            console.log('Error updating order', error);
+            res.status(500).json({ message: 'Error updating order', error: error.message });
         }
     },
-
-    // Delete a order
-    // delete: async (req, res) => {
-    //     try {
-    //         const deleted = await db.Order.destroy({
-    //             where: { id: req.params.id }
-    //         });
-    //         if (!deleted) {
-    //             throw new Error('Order not found');
-    //         }
-    //         res.status(200).json({ message: 'Order deleted successfully' });
-    //     } catch (error) {
-    //         res.status(500).json({ message: 'Error deleting order', error });
-    //     }
-    // },
 };
 
 module.exports = orderController;

@@ -34,14 +34,10 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.INTEGER,
       defaultValue: 1,
     },
-    price: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
-    },
   }, {
     sequelize,
-    modelName: 'CartItem',
-    tableName: 'cart_items',
+    modelName: 'Cart',
+    tableName: 'carts',
     underscored: true,
   });
   return Cart;
