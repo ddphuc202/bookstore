@@ -11,16 +11,8 @@ const TableOrderCustomers = () => {
     const [status, setStatus] = useState();
 
 
-
-    // useEffect(() => {
-    //     if (Array.isArray(data)) {
-    //         let totalPrice = data.reduce((sum, item) => sum + item.price * item.quantity, 0);
-    //         setTotal(totalPrice);
-    //     }
-    // }, [data])
-
     useEffect(() => {
-        getOrderCustomers(3, setData)
+        getOrderCustomers(localStorage.getItem('userId'), setData)
     }, [data])
 
     return (

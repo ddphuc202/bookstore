@@ -14,9 +14,6 @@ const Login = () => {
         handleLogin(email, password, navigate);
     }
 
-    console.log('email >>', email)
-    console.log('password >>', password)
-
     return (
         <section className="vh-100">
             <div className="container-fluid h-custom">
@@ -37,14 +34,14 @@ const Login = () => {
                             <div data-mdb-input-init className="form-outline mb-4">
                                 <input type="email" id="form3Example3" className="form-control form-control-lg"
                                     placeholder="Nhập Email..." value={email} onChange={(event) => { setEmail(event.target.value) }} />
-                                <label className="form-label" for="form3Example3">Địa chỉ Email</label>
+                                <label className="form-label" >Địa chỉ Email</label>
                             </div>
 
                             {/* <!-- Password input --> */}
                             <div data-mdb-input-init className="form-outline mb-3">
                                 <input type="password" id="form3Example4" className="form-control form-control-lg"
                                     placeholder="Nhập mật khẩu..." value={password} onChange={(event) => { setPassword(event.target.value) }} />
-                                <label className="form-label" for="form3Example4">Mật khẩu</label>
+                                <label className="form-label" >Mật khẩu</label>
                             </div>
 
                             <div className="text-center text-lg-start mt-4 pt-2">

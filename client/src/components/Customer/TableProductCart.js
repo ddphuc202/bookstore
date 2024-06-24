@@ -30,13 +30,13 @@ const TableProductCart = () => {
 
     useEffect(() => {
         if (Array.isArray(data)) {
-            let totalPrice = data.reduce((sum, item) => sum + item.price * item.quantity, 0);
+            let totalPrice = data.reduce((sum, item) => sum + item.book.price * item.quantity, 0);
             setTotal(totalPrice);
         }
     }, [data])
 
     useEffect(() => {
-        getCartByCustomerId(3, setData)
+        getCartByCustomerId(localStorage.getItem('userId'), setData)
     }, [data])
 
     return (
@@ -56,11 +56,11 @@ const TableProductCart = () => {
 
                             <tr key={index}>
                                 <td>
-                                    <img src={baseURL + item.book.thumbnailPath}></img>
+                                    <img width={"200px"} src={baseURL + item.book.thumbnailPath}></img>
                                     <span>{item.book.title}</span>
                                     <p onClick={() => handleDelete(item.id)} >Xóa</p>
                                 </td>
-                                <td className="price">{item.price}đ</td>
+                                <td className="price">{item.book.price}đ</td>
                                 <td>
                                     <div className="custom custom-btn-numbers clearfix input_number_index">
                                         <button
@@ -78,7 +78,7 @@ const TableProductCart = () => {
                                         </button>
                                     </div>
                                 </td>
-                                <td className="price">{item.price * item.quantity}đ</td>
+                                <td className="price">{item.book.price * item.quantity}đ</td>
                             </tr>
                         ))
                     }

@@ -1,9 +1,9 @@
 import { instance } from "../utils/AxiosCustomize";
-const addBookToCart = (id) => {
+const addBookToCart = (id, quantity) => {
     let data = {
         bookId: id,
-        quantity: 1,
-        customerId: 3
+        quantity: quantity,
+        customerId: localStorage.getItem('userId')
     }
     instance.post('/carts/item', data).then(res => {
         alert('Data add successfully!');
@@ -66,7 +66,6 @@ const updateInputAmountOfCart = (index, id, newQuantity, data, setData) => {
 }
 
 const deleteItemInCart = (id) => {
-    // confirm('Are you sure want to delete this item ?');
     instance.delete('carts/item/' + id);
 }
 

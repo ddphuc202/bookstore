@@ -2,7 +2,7 @@ import { instance } from '../utils/AxiosCustomize';
 
 const createNewOrder = (name, phone, address, navigate) => {
     let data = {
-        customerId: 3,
+        customerId: localStorage.getItem('userId'),
         name: name,
         phone: phone,
         address: address

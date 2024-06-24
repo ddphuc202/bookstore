@@ -6,6 +6,7 @@ import { useNavigate } from 'react-router-dom';
 import { useParams } from 'react-router-dom';
 import { getBookById, updateBookByID } from '../../services/BooksServices';
 import { getCategories } from '../../services/GenresServices';
+import { baseURL } from '../../utils/AxiosCustomize';
 
 
 function ModalEditBooks() {
@@ -15,8 +16,10 @@ function ModalEditBooks() {
 
     const [previewThumbnail, setPreviewThumbnail] = useState(null);
     const [thumbnailFile, setThumbnailFile] = useState(null);
+    const [thumbnail, setThumbnail] = useState([null]);
 
     const [previewOtherImages, setPreviewOtherImages] = useState([]);
+    const [otherImages, setOtherImages] = useState([]);
 
     const [records, setRecords] = useState([]);
 
@@ -45,9 +48,17 @@ function ModalEditBooks() {
 
     useEffect(() => {
         getBookById(id, setData)
-
         getCategories(setRecords)
     }, [])
+
+    useEffect(() => {
+        if (data) {
+            setThumbnail(data.thumbnailPath);
+            if (data.bookImages) {
+                setOtherImages(data.bookImages.map(image => image.imagePath));
+            }
+        }
+    }, [data])
 
 
     return (
@@ -118,10 +129,30 @@ function ModalEditBooks() {
                                 onChange={(event) => handleUploadThumbnail(event)}
                                 name='thumbnail' />
                             <br />
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th style={{ textAlign: "center" }} >Ảnh sẵn</th>
+                                        <th style={{ textAlign: "center" }} >Ảnh mới</th>
+                                    </tr>
+                                </thead>
 
-                            {previewThumbnail && <img width={'200px'} style={{ padding: "10px" }}
-                                src={previewThumbnail}
-                                alt="Ảnh mới" />}
+                                <tbody>
+                                    <tr>
+                                        <td>
+                                            {thumbnail && <img width={'200px'} style={{ padding: "10px" }}
+                                                src={baseURL + thumbnail}
+                                                alt="Ảnh sẵn" />}
+                                        </td>
+
+                                        <td>
+                                            {previewThumbnail && <img width={'200px'} style={{ padding: "10px" }}
+                                                src={previewThumbnail}
+                                                alt="Ảnh mới" />}
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
 
 
                         </Form.Group>
@@ -133,13 +164,21 @@ function ModalEditBooks() {
                                 name='otherImages' />
                             <br />
                             <div>
-                                <div>
-                                    {
-                                        [...previewOtherImages].map((previewOtherImage, index) => (
-                                            <img key={index} src={URL.createObjectURL(previewOtherImage)} width={'200px'} style={{ padding: "10px" }} />
-                                        ))
-                                    }
-                                </div>
+                                <span>Ảnh sẵn</span>
+                                {
+                                    [...otherImages].map((otherImage, index) => (
+                                        <img key={index} src={baseURL + otherImage} width={'200px'} style={{ padding: "10px" }} />
+                                    ))
+                                }
+                            </div>
+                            <br />
+                            <div>
+                                <span>Ảnh mới</span>
+                                {
+                                    [...previewOtherImages].map((previewOtherImage, index) => (
+                                        <img key={index} src={URL.createObjectURL(previewOtherImage)} width={'200px'} style={{ padding: "10px" }} />
+                                    ))
+                                }
                             </div>
 
                         </Form.Group>

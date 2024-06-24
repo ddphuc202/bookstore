@@ -10,8 +10,6 @@ import '../../styles/Footer.css';
 
 const HomePage = (props) => {
 
-    console.log("user data: ", localStorage.getItem("userId"))
-
     return (
         <>
             <Header />

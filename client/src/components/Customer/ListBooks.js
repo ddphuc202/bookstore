@@ -29,11 +29,10 @@ const ListBooks = () => {
                             <div key={index} className="col-6 col-md-3 col-lg-3 product-col">
                                 <div className="item_product_main">
                                     <div className="thumb">
-                                        <Link to={`/info-book/${book.id}`} className="image_thumb" href="/hon-don-va-khu-vuon-nha-nam"
+                                        <Link to={`/info-book/${book.id}`} className="image_thumb"
                                             title="HỖN ĐỘN VÀ KHU VƯỜN">
                                             <img width="199" height="199"
                                                 src={image}
-                                                data-src="https://bizweb.dktcdn.net/100/363/455/products/hondonvakhuvuon01e171766606841.jpg?v=1717666223843"
                                                 alt="HỖN ĐỘN VÀ KHU VƯỜN"
                                                 className="lazyload img-responsive center-block" />
                                         </Link>
@@ -48,8 +47,8 @@ const ListBooks = () => {
                                         </h3>
 
                                         <div className="price-box">
-                                            <span className="price">{book.price}$</span>
-                                            <span className="compare-price">168.000$</span>
+                                            <span className="price">{(book.price - book.price * book.discount / 100).toLocaleString('vi-VN')}đ</span>
+                                            <span className="compare-price">{book.price.toLocaleString('vi-VN')}đ</span>
 
                                         </div>
 

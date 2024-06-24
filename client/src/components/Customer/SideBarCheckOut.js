@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom';
 import image from '../../image/thanh-xuan-sao-ma-dau-don.png';
 import { getCartByCustomerId } from '../../services/CartServices';
 import { useState, useEffect } from 'react';
+import { baseURL } from '../../utils/AxiosCustomize';
 const SideBarCheckOut = () => {
 
     const [data, setData] = useState([]);
@@ -9,12 +10,12 @@ const SideBarCheckOut = () => {
 
     useEffect(() => {
         if (Array.isArray(data)) {
-            let totalPrice = data.reduce((sum, item) => sum + item.price * item.quantity, 0);
+            let totalPrice = data.reduce((sum, item) => sum + item.book.price * item.quantity, 0);
             setTotal(totalPrice);
         }
     }, [data])
     useEffect(() => {
-        getCartByCustomerId(3, setData);
+        getCartByCustomerId(localStorage.getItem('userId'), setData);
     }, [])
 
     return (
@@ -22,7 +23,7 @@ const SideBarCheckOut = () => {
             <aside className="sideBar">
                 <div className="sidebar__header">
                     <h2 className="sidebar__title">
-                        Đơn hàng (2 sản phẩm)
+                        Đơn hàng ({data.length} sản phẩm)
                     </h2>
                 </div>
                 <div className="sidebar__content">
@@ -56,7 +57,7 @@ const SideBarCheckOut = () => {
                                                         <td className="product__image">
                                                             <div className="product-thumbnail">
                                                                 <div className="product-thumbnail__wrapper" >
-                                                                    <img src={image}
+                                                                    <img src={baseURL + item.book.thumbnailPath}
                                                                         alt="" className="product-thumbnail__image" />
                                                                 </div>
                                                                 <span className="product-thumbnail__quantity">{item.quantity}</span>
@@ -70,13 +71,13 @@ const SideBarCheckOut = () => {
                                                                 <span className="discount-tag">
                                                                     <span className="discount-icon"><i className="fa fa-tag"></i></span>
                                                                     <span className="discount-tag--name">Giảm {item.book.discount}% so với giá bìa
-                                                                        ({item.price * item.book.discount / 100}₫)</span>
+                                                                        ({item.book.price * item.book.discount / 100}₫)</span>
                                                                 </span>
                                                             </span>
 
                                                         </th>
                                                         <td className="product__quantity visually-hidden"><em>Số lượng:</em> {item.quantity} </td>
-                                                        <td className="product__price"> {item.price.toLocaleString('vi-VN')}đ </td>
+                                                        <td className="product__price"> {item.book.price}đ </td>
 
                                                     </tr>
                                                     <br></br>

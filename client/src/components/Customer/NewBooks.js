@@ -71,8 +71,8 @@ const NewBooks = () => {
 													</h3>
 												</div>
 												<div className="price-box">
-													<span className="price"><b>{book.price - book.price * book.discount / 100} $</b></span>
-													<span className="compare-price"><b>{book.price} $</b></span>
+													<span className="price"><b>{(book.price - book.price * book.discount / 100).toLocaleString('vi-VN')}đ</b></span>
+													<span className="compare-price"><b>{book.price.toLocaleString('vi-VN')}đ</b></span>
 
 												</div>
 

@@ -6,18 +6,15 @@ const handleLogin = (email, password, navigate) => {
         email: email,
         password: password
     }
-    console.log(data);
     instance.post('/login', data)
         .then(res => {
-            console.log(res.data)
             localStorage.setItem('token', res.data.token)
-            console.log(localStorage.getItem('token'));
-
             var user = jwtDecode(res.data.token);
-            console.log(user);
             localStorage.setItem('userId', user.userId);
             localStorage.setItem('userType', user.userType);
             navigate('/')
+        }).catch(err => {
+            alert('Đăng nhập thất bại');
         })
 }
 

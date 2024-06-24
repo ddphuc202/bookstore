@@ -25,7 +25,6 @@ function ModalAddNewBooks() {
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        console.log(title, author, description, price, discount, quantity, categories, thumbnailFile, otherImages)
         createNewBook(title, author, description, price, discount, quantity, categories, thumbnailFile, otherImages, navigate);
     }
 

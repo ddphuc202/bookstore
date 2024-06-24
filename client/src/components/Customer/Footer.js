@@ -21,19 +21,19 @@ const Footer = () => {
 								</li>
 								<li>
 									<svg className="icon">  </svg>
-									<a href="mailto:info@nhanam.vn">info@khaitam.vn</a>
+									<p >info@khaitam.vn</p>
 								</li>
 								<li>
 									<svg className="icon"> </svg>
-									<a className="phone" href="tel:02435146876">
+									<p className="phone" >
 										02435146876
-									</a>
+									</p>
 								</li>
 								<li>
 									<svg className="icon">  </svg>
-									<a className="phone" href="tel:0903244248">
+									<p className="phone" >
 										0903244248
-									</a>
+									</p>
 								</li>
 							</ul>
 						</div>
@@ -44,11 +44,11 @@ const Footer = () => {
 								</span>
 							</h4>
 							<ul className="list-menu">
-								<li className="li_menu"><a href="/gioi-thieu" title="Về Nhã Nam">Về Khai Tâm</a></li>
-								<li className="li_menu"><a href="/he-thong-hieu-sach" title="Hệ thống hiệu sách">Hệ thống hiệu sách</a></li>
-								<li className="li_menu"><a href="/he-thong-cua-hang" title="Hệ thống phát h�&nbsp;nh">Hệ thống phát hành</a></li>
-								<li className="li_menu"><a href="/tuyen-dung" title="Tuyển dụng">Tuyển dụng</a></li>
-								<li className="li_menu"><a href="/lien-he-voi-chung-toi" title="Liên hệ với chúng tôi">Liên hệ với chúng tôi</a></li>
+								<li className="li_menu"><a href="/" title="Về Nhã Nam">Về Khai Tâm</a></li>
+								<li className="li_menu"><a href="/" title="Hệ thống hiệu sách">Hệ thống hiệu sách</a></li>
+								<li className="li_menu"><a href="/" title="Hệ thống phát h�&nbsp;nh">Hệ thống phát hành</a></li>
+								<li className="li_menu"><a href="/" title="Tuyển dụng">Tuyển dụng</a></li>
+								<li className="li_menu"><a href="/" title="Liên hệ với chúng tôi">Liên hệ với chúng tôi</a></li>
 							</ul>
 						</div>
 						<div className="col-lg-3 col-md-4 col-12 third-col">
@@ -58,9 +58,9 @@ const Footer = () => {
 								</span>
 							</h4>
 							<ul className="list-menu">
-								<li className="li_menu"><a href="/chinh-sach" title="Chính sách bảo mật">Chính sách bảo mật</a></li>
-								<li className="li_menu"><a href="/chinh-sach" title="Chính sách đổi trả/hoàn tiền">Chính sách đổi trả/hoàn tiền</a></li>
-								<li className="li_menu"><a href="/chinh-sach" title="Chính sách thanh toán/ vận chuyển">Chính sách thanh toán/ vận chuyển</a></li>
+								<li className="li_menu"><a href="/" title="Chính sách bảo mật">Chính sách bảo mật</a></li>
+								<li className="li_menu"><a href="/" title="Chính sách đổi trả/hoàn tiền">Chính sách đổi trả/hoàn tiền</a></li>
+								<li className="li_menu"><a href="/" title="Chính sách thanh toán/ vận chuyển">Chính sách thanh toán/ vận chuyển</a></li>
 							</ul>
 						</div>
 

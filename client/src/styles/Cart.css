@@ -107,3 +107,19 @@ tbody .price {
 .btn-mua button:disabled:hover {
     color: #fff
 }
+
+.table tbody tr td span {
+    font-size: 22px;
+    margin-left: 20px;
+    font-weight: bold;
+}
+
+.table tbody tr td p {
+    margin-top: 10px;
+    color: red;
+}
+
+.table tbody tr td p:hover {
+    text-decoration: underline;
+    cursor: pointer;
+}
