@@ -78,7 +78,8 @@ const Header = () => {
                             </button>
                         </form>
                         <div className="user-header">
-                            <FontAwesomeIcon icon={faUser} />
+                            <Link to={'/orders'} ><FontAwesomeIcon icon={faUser} /></Link>
+
                             <div className="account-header">
 
                                 <a href="/login">Đăng nhập</a>

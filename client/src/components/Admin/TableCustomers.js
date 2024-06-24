@@ -24,7 +24,7 @@ const TableCustomers = (props) => {
     <Table striped bordered hover>
       <thead>
         <tr>
-          <th>id</th>
+          <th>#</th>
           <th>Tên khách hàng</th>
           <th>Email</th>
           <th>Mật khẩu</th>

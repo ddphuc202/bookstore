@@ -25,6 +25,9 @@ import Test from './components/Admin/Test';
 import HomePage from './pages/Customer/HomePage';
 import Cart from './pages/Customer/Cart';
 import CheckOut from './pages/Customer/CheckOut';
+import OrderCustomers from './pages/Customer/OrderCustomers';
+import ManageOrders from './pages/Admin/ManageOrders';
+import ModalEditOrder from './components/Admin/ModalEditOrder';
 
 
 function App() {
@@ -50,6 +53,10 @@ function App() {
         <Route path='/manage-add-customers' element={<ModalAddNewCustomers />} />
         <Route path='/manage-edit-customers/:id' element={<ModalEditCustomers />} />
 
+
+        <Route path='/manage-orders' element={<ManageOrders />} />
+        <Route path='/manage-update-orders/:id' element={<ModalEditOrder />} />
+
         <Route path='/test' element={<Test />} />
 
         {/* Customer side */}
@@ -61,6 +68,7 @@ function App() {
         <Route path='/info-book/:id' element={<InfoBook />} />
         <Route path='/cart' element={<Cart />} />
         <Route path='/checkout' element={<CheckOut />} />
+        <Route path='/orders' element={<OrderCustomers />} />
 
         <Route path='/login' element={<Login />} />
         <Route path='/register' element={<Register />} />

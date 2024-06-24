@@ -27,7 +27,7 @@ const TableBooks = (props) => {
       <Table striped bordered hover responsive >
         <thead>
           <tr>
-            <th>id</th>
+            <th>#</th>
             <th>Tiêu đề</th>
             <th>Ảnh</th>
             <th>Tác giả</th>
