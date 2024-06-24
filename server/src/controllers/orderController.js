@@ -1,5 +1,6 @@
 const { or } = require('sequelize');
 const db = require('../models');
+require('dotenv').config();
 
 const orderController = {
     // Get all orders
@@ -33,7 +34,18 @@ const orderController = {
     // Get order by ID
     getById: async (req, res) => {
         try {
-            const order = await db.Order.findByPk(req.params.id);
+            const order = await db.Order.findByPk(req.params.id, {
+                include: [{
+                    model: db.OrderDetail,
+                    as: 'orderDetails',
+                    attributes: ['quantity', 'price'],
+                    include: [{
+                        model: db.Book,
+                        as: 'book',
+                        attributes: ['title', ['thumbnail', 'thumbnailPath']],
+                    }]
+                }]
+            });
             if (!order) {
                 return res.status(404).json({ message: 'Order not found' });
             }
