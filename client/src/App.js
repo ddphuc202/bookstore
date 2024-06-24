@@ -28,6 +28,7 @@ import CheckOut from './pages/Customer/CheckOut';
 import OrderCustomers from './pages/Customer/OrderCustomers';
 import ManageOrders from './pages/Admin/ManageOrders';
 import ModalEditOrder from './components/Admin/ModalEditOrder';
+import Logout from './components/Auth/Logout';
 
 
 function App() {
@@ -72,6 +73,7 @@ function App() {
 
         <Route path='/login' element={<Login />} />
         <Route path='/register' element={<Register />} />
+        <Route path='/logout' element={<Logout />} />
       </Routes>
     </>
   );

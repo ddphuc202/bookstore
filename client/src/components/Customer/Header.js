@@ -25,8 +25,9 @@ const Header = () => {
                                     <FontAwesomeIcon icon={faUser} />
                                     <div className="d-flex">
 
-                                        <a href="/account/login">Đăng nhập</a>
+                                        <a href="/login">Đăng nhập</a>
                                         <a href="/account/register">Đăng ký</a>
+
 
                                     </div>
                                 </div>
@@ -58,6 +59,10 @@ const Header = () => {
                                             <a className="a-img" href="/about-page" title="Về Nhã Nam">
                                                 Về Khai Tâm
                                             </a>
+                                        </li>
+
+                                        <li className="nav-item ">
+                                            <Link to="/logout">Đăng xuất</Link>
                                         </li>
 
                                     </ul>
