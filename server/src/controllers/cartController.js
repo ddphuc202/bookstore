@@ -11,7 +11,7 @@ const cartItemController = {
                     {
                         model: db.Book,
                         as: 'book',
-                        attributes: ['title',
+                        attributes: ['title', 'discount',
                             [db.sequelize.literal(`CONCAT('${process.env.IMAGE_PATH}', thumbnail)`), 'thumbnailPath'],
                             [db.sequelize.literal(`CAST((price - (price * discount / 100)) AS SIGNED)`), 'price']
                         ],
