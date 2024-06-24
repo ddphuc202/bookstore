@@ -27,6 +27,10 @@ module.exports = (sequelize, DataTypes) => {
         foreignKey: 'bookId',
         otherKey: 'orderId',
       });
+      models.Book.hasMany(models.OrderDetail, {
+        foreignKey: 'bookId',
+        as: 'orderDetails',
+      });
     }
   }
   Book.init({

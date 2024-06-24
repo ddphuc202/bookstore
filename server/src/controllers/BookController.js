@@ -24,9 +24,14 @@ const booksController = {
             whereClause.categoryId = categoryId;
         }
         if (search) {
-            whereClause.title = { [Op.like]: `%${search}%` };
-            whereClause.author = { [Op.like]: `%${search}%` };
-            whereClause.description = { [Op.like]: `%${search}%` };
+            const searchCondition = {
+                [Op.or]: [
+                    { title: { [Op.like]: `%${search}%` } },
+                    { author: { [Op.like]: `%${search}%` } },
+                    { description: { [Op.like]: `%${search}%` } },
+                ]
+            };
+            whereClause[Op.or] = searchCondition[Op.or];
         }
 
         try {
