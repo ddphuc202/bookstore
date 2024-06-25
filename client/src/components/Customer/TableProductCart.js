@@ -39,11 +39,12 @@ const TableProductCart = () => {
         getCartByCustomerId(localStorage.getItem('userId'), setData)
     }, [data])
 
+
     return (
         <>
             <Table className='table table-hover' >
-                <thead>
-                    <tr>
+                <thead >
+                    <tr >
                         <th>Thông tin sản phẩm</th>
                         <th>Đơn giá</th>
                         <th>Số lượng</th>
@@ -78,7 +79,7 @@ const TableProductCart = () => {
                                         </button>
                                     </div>
                                 </td>
-                                <td className="price">{item.book.price * item.quantity}đ</td>
+                                <td className="price">{(item.book.price * item.quantity).toLocaleString('vi-VN')}đ</td>
                             </tr>
                         ))
                     }
@@ -88,7 +89,7 @@ const TableProductCart = () => {
                         <td></td>
                         <td></td>
                         <td><span style={{ fontWeight: 'bold', fontSize: '22px', color: 'black' }} >Tổng tiền:</span></td>
-                        <td><span style={{ fontWeight: 'bold', fontSize: '22px', color: '#009900' }}>{total}đ</span></td>
+                        <td><span style={{ fontWeight: 'bold', fontSize: '22px', color: '#009900' }}>{total.toLocaleString('vi-VN')}đ</span></td>
                     </tr>
                 </tbody>
             </Table>

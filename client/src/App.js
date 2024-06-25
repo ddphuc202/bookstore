@@ -29,6 +29,7 @@ import OrderCustomers from './pages/Customer/OrderCustomers';
 import ManageOrders from './pages/Admin/ManageOrders';
 import ModalEditOrder from './components/Admin/ModalEditOrder';
 import Logout from './components/Auth/Logout';
+import OrderCustomersDetail from './pages/Customer/OrderCustomersDetail';
 
 
 function App() {
@@ -70,6 +71,7 @@ function App() {
         <Route path='/cart' element={<Cart />} />
         <Route path='/checkout' element={<CheckOut />} />
         <Route path='/orders' element={<OrderCustomers />} />
+        <Route path='/order-detail/:id' element={<OrderCustomersDetail />} />
 
         <Route path='/login' element={<Login />} />
         <Route path='/register' element={<Register />} />

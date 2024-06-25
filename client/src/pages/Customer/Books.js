@@ -41,10 +41,8 @@ const Books = () => {
                                                             <li
                                                                 className="filter-item filter-item--check-box filter-item--green vendorxxx">
                                                                 <span>
-                                                                    <label for="filter-viet-nam">
-                                                                        <input type="checkbox" id="filter-viet-nam"
-                                                                            data-group="Quốc gia" data-field="tags"
-                                                                            data-text="Việt Nam" data-operator="OR" />
+                                                                    <label >
+                                                                        <input type="checkbox" />
                                                                         <i className="fa"></i>
                                                                         <span>Trinh thám</span>
                                                                     </label>
@@ -66,26 +64,24 @@ const Books = () => {
 
                             <div className="wrap-srt-title">
                                 <div className="sortby">
-                                    <span className="lazyload sort-icon"
-                                        data-src="//bizweb.dktcdn.net/100/363/455/themes/918830/assets/sort.png?1704690471681">Sắp
-                                        xếp theo </span>
+                                    <span className="lazyload sort-icon">Sắp xếp theo </span>
                                     <ul>
                                         <li className="btn-quick-sort default active">
-                                            <a href="javascript:;" onClick="sortby('default')"
+                                            <a href="javascript:;"
                                                 title="Mặc định"><i></i>Mặc định</a>
                                         </li>
                                         <li className="btn-quick-sort created-desc">
-                                            <a href="javascript:;" onClick="sortby('created-desc')"
+                                            <a href="javascript:;"
                                                 title="Sách mới"><i></i>Sách mới</a>
                                         </li>
                                         <li className="btn-quick-sort price-desc">
-                                            <a onClick=''
+                                            <a
                                                 // {sortBooksByPrice}
 
                                                 title="Giá thấp - cao"><i></i>Giá thấp - cao</a>
                                         </li>
                                         <li className="btn-quick-sort price-asc">
-                                            <a href="javascript:;" onClick="sortby('price-desc')"
+                                            <a href="javascript:;"
                                                 title="Giá cao - thấp"><i></i>Giá cao - thấp</a>
                                         </li>
                                     </ul>

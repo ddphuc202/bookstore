@@ -3,13 +3,10 @@ import Table from 'react-bootstrap/Table';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { baseURL } from "../../utils/AxiosCustomize";
 import { getOrderCustomers } from '../../services/OrderServices';
 const TableOrderCustomers = () => {
 
     const [data, setData] = useState([]);
-    const [status, setStatus] = useState();
-
 
     useEffect(() => {
         getOrderCustomers(localStorage.getItem('userId'), setData)
@@ -20,7 +17,7 @@ const TableOrderCustomers = () => {
             <Table className='table table-hover' >
                 <thead>
                     <tr>
-                        <th>Đơn hàng</th>
+                        <th>#</th>
                         <th>Tên người nhận</th>
                         <th>Số điện thoại</th>
                         <th>Địa chỉ nhận hàng</th>
@@ -35,14 +32,14 @@ const TableOrderCustomers = () => {
 
                             <tr key={index}>
                                 <td>{item.id}</td>
-                                <td><span>{item.name}</span></td>
+                                <td>{item.name}</td>
                                 <td>{item.phone}</td>
                                 <td>
                                     {item.address}
                                 </td>
                                 <td className="price">{item.status}</td>
                                 <td className="price">{item.total}đ</td>
-                                <td><Link>Chi tiết</Link></td>
+                                <td><Link to={`/order-detail/${item.id}`}>Chi tiết</Link></td>
                             </tr>
                         ))
                     }

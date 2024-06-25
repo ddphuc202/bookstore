@@ -98,11 +98,11 @@ const InfoBooks = () => {
                                 <div className="price-box clearfix">
 
                                     <span className="special-price">
-                                        <span className="price product-price">{data.price - data.price * data.discount / 100}đ</span>
+                                        <span className="price product-price">{Number(data.price - data.price * data.discount / 100).toLocaleString('vi-VN')}đ</span>
                                     </span>
                                     <span className="old-price">
                                         <del className="price product-price-old">
-                                            {data.price}đ
+                                            {Number(data.price).toLocaleString('vi-VN')}đ
                                         </del>
                                         <span className="discount">-
                                             {data.discount} %

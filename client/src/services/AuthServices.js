@@ -11,7 +11,8 @@ const handleLogin = (email, password, navigate) => {
             localStorage.setItem('token', res.data.token);
             var user = jwtDecode(res.data.token);
             localStorage.setItem('userId', user.userId);
-            localStorage.setItem('userType', user.userType);
+            localStorage.setItem('userRole', user.userRole);
+            localStorage.setItem('userName', user.userName);
             navigate('/');
         }).catch(err => {
             alert('Đăng nhập thất bại');
@@ -19,9 +20,7 @@ const handleLogin = (email, password, navigate) => {
 };
 
 const handleLogout = (navigate) => {
-    localStorage.removeItem('token');
-    localStorage.removeItem('userId');
-    localStorage.removeItem('userType');
+    localStorage.clear();
     navigate('/');
 };
 

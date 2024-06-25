@@ -77,7 +77,7 @@ const SideBarCheckOut = () => {
 
                                                         </th>
                                                         <td className="product__quantity visually-hidden"><em>Số lượng:</em> {item.quantity} </td>
-                                                        <td className="product__price"> {item.book.price}đ </td>
+                                                        <td className="product__price"> {item.book.price.toLocaleString('vi-VN')}đ </td>
 
                                                     </tr>
                                                     <br></br>

@@ -10,6 +10,8 @@ import '../../styles/Footer.css';
 
 const HomePage = (props) => {
 
+    console.log(localStorage.getItem('token'))
+
     return (
         <>
             <Header />
