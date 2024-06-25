@@ -1,22 +1,23 @@
 const express = require('express');
+const authenticate = require('../middleware/authenticate');
 const authorize = require('../middleware/authorize');;
 const orderController = require('../controllers/orderController');
 
 const router = express.Router();
 
 // GET all orders
-router.get('/', authorize(['admin', 'super']), orderController.getAll);
+router.get('/', authenticate(), authorize(['admin', 'super']), orderController.getAll);
 
 // GET all orders by a customer ID
-router.get('/customer/:id', authorize(['customer', 'admin', 'super']), orderController.getAllByCustomerId);
+router.get('/customer/:id', authenticate(), orderController.getAllByCustomerId);
 
 // GET a specific order
-router.get('/:id', authorize(['admin', 'super']), orderController.getById);
+router.get('/:id', authenticate(), orderController.getById);
 
 // POST a new order
-router.post('/', authorize(['customer', 'admin', 'super']), orderController.create);
+router.post('/', authenticate(), orderController.create);
 
 // PUT/update a order
-router.put('/:id', authorize(['customer', 'admin', 'super']), orderController.update);
+router.put('/:id', authenticate(), orderController.update);
 
 module.exports = router;

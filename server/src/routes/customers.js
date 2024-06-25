@@ -1,20 +1,21 @@
 const express = require('express');
+const authenticate = require('../middleware/authenticate');;
 const authorize = require('../middleware/authorize');
 const customerController = require('../controllers/customerController');
 
 const router = express.Router();
 
 // GET all customers
-router.get('/', authorize(['admin', 'super']), customerController.getAll);
+router.get('/', authenticate(), authorize(['admin', 'super']), customerController.getAll);
 
 // GET a specific customer
-router.get('/:id', authorize(['customer', 'admin', 'super']), customerController.getById);
+router.get('/:id', authenticate(), authorize(['customer', 'admin', 'super']), customerController.getById);
 
 // POST a new customer
-router.post('/', authorize(['admin', 'super']), customerController.create);
+router.post('/', authenticate(), authorize(['admin', 'super']), customerController.create);
 
 // PUT/update a customer
-router.put('/:id', authorize(['customer', 'admin', 'super']), customerController.update);
+router.put('/:id', authenticate(), customerController.update);
 
 // // DELETE a customer
 // router.delete('/:id', authorize(['admin', 'super']), customerController.delete);

@@ -1,5 +1,6 @@
 const express = require('express');
 const upload = require('../middleware/upload');
+const authenticate = require('../middleware/authenticate');
 const authorize = require('../middleware/authorize');
 const bookController = require('../controllers/bookController');
 
@@ -12,12 +13,12 @@ router.get('/', bookController.getAll);
 router.get('/:id', bookController.getById);
 
 // POST a new book
-router.post('/', authorize(['admin', 'super']), upload.fields([{ name: 'thumbnail', maxCount: 1 }, { name: 'otherImages', maxCount: 4 }]), bookController.create);
+router.post('/', authenticate(), authorize(['admin', 'super']), upload.fields([{ name: 'thumbnail', maxCount: 1 }, { name: 'otherImages', maxCount: 4 }]), bookController.create);
 
 // PUT/update a book
-router.put('/:id', authorize(['admin', 'super']), upload.fields([{ name: 'thumbnail', maxCount: 1 }, { name: 'otherImages', maxCount: 4 }]), bookController.update);
+router.put('/:id', authenticate(), authorize(['admin', 'super']), upload.fields([{ name: 'thumbnail', maxCount: 1 }, { name: 'otherImages', maxCount: 4 }]), bookController.update);
 
 // DELETE a book
-router.delete('/:id', authorize(['admin', 'super']), bookController.delete);
+router.delete('/:id', authenticate(), authorize(['admin', 'super']), bookController.delete);
 
 module.exports = router;

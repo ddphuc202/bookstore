@@ -1,4 +1,5 @@
 const express = require('express');
+const authenticate = require('../middleware/authenticate');
 const authorize = require('../middleware/authorize');
 const upload = require('../middleware/upload');
 const postController = require('../controllers/postController');
@@ -12,12 +13,12 @@ router.get('/', postController.getAll);
 router.get('/:id', postController.getById);
 
 // POST a new post
-router.post('/', authorize(['admin', 'super']), upload.single('image'), postController.create);
+router.post('/', authenticate(), authorize(['admin', 'super']), upload.single('image'), postController.create);
 
 // PUT/update a post
-router.put('/:id', authorize(['admin', 'super']), upload.single('image'), postController.update);
+router.put('/:id', authenticate(), authorize(['admin', 'super']), upload.single('image'), postController.update);
 
 // DELETE a post
-router.delete('/:id', authorize(['admin', 'super']), postController.delete);
+router.delete('/:id', authenticate(), authorize(['admin', 'super']), postController.delete);
 
 module.exports = router;

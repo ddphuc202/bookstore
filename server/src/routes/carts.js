@@ -1,22 +1,23 @@
 const express = require('express');
+const authenticate = require('../middleware/authenticate');;
 const authorize = require('../middleware/authorize');
 const cartController = require('../controllers/cartController');
 
 const router = express.Router();
 
 // GET all cart items of a customer
-router.get('/customer/:id', authorize(['customer', 'admin', 'super']), cartController.getAllByCustomerId);
+router.get('/customer/:id', authenticate(), cartController.getAllByCustomerId);
 
 // POST a new cart items
-router.post('/item', authorize(['customer', 'admin', 'super']), cartController.create);
+router.post('/item', authenticate(), cartController.create);
 
 // PUT/update a cart item
-router.put('/item/:id', authorize(['customer', 'admin', 'super']), cartController.update);
+router.put('/item/:id', authenticate(), cartController.update);
 
 // DELETE a cart item
-router.delete('/item/:id', authorize(['customer', 'admin', 'super']), cartController.delete);
+router.delete('/item/:id', authenticate(), cartController.delete);
 
 // DELETE all cart items of a customer
-router.delete('/customer/:id', authorize(['customer', 'admin', 'super']), cartController.deleteAllByCustomerId);
+router.delete('/customer/:id', authenticate(), cartController.deleteAllByCustomerId);
 
 module.exports = router;
