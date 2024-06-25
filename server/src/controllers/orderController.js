@@ -102,7 +102,7 @@ const orderController = {
 
             await db.Cart.destroy({
                 where: { customerId: req.body.customerId }
-            })
+            });
 
             res.status(201).json(newOrder);
         } catch (error) {

@@ -1,4 +1,5 @@
 const express = require('express');
+const authorize = require('../middleware/authorize');
 const categoryController = require('../controllers/categoryController');
 
 const router = express.Router();
@@ -7,15 +8,15 @@ const router = express.Router();
 router.get('/', categoryController.getAll);
 
 // GET a specific category
-router.get('/:id', categoryController.getById);
+router.get('/:id', authorize(['admin', 'super']), categoryController.getById);
 
 // POST a new category
-router.post('/', categoryController.create);
+router.post('/', authorize(['admin', 'super']), categoryController.create);
 
 // PUT/update a category
-router.put('/:id', categoryController.update);
+router.put('/:id', authorize(['admin', 'super']), categoryController.update);
 
 // DELETE a category
-router.delete('/:id', categoryController.delete);
+router.delete('/:id', authorize(['admin', 'super']), categoryController.delete);
 
 module.exports = router;

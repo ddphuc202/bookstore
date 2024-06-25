@@ -36,7 +36,7 @@ const cartItemController = {
                     customerId: req.body.customerId,
                     bookId: req.body.bookId,
                 }
-            })
+            });
             if (existingCart) {
                 const book = await db.Book.findByPk(req.body.bookId);
                 if (!book) {
