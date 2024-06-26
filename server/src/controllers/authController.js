@@ -7,17 +7,17 @@ const authController = {
     // Login
     login: async (req, res) => {
         try {
-            const { email, password } = req.body;
-            let admin = await db.Admin.findOne({ where: { email: email } });
             let isValid, userId, userName, userRole;
+
+            let admin = await db.Admin.findOne({ where: { email: req.body.email } });
             if (admin) {
-                isValid = await bcrypt.compare(password, admin.password);
+                isValid = await bcrypt.compare(req.body.password, admin.password);
                 userId = admin.id;
                 userName = admin.name;
                 userRole = admin.role;
             } else {
-                customer = await db.Customer.findOne({ where: { email: email } });
-                isValid = await bcrypt.compare(password, customer.password);
+                customer = await db.Customer.findOne({ where: { email: req.body.email } });
+                isValid = await bcrypt.compare(req.body.password, customer.password);
                 userId = customer.id;
                 userName = customer.name;
                 userRole = 'customer';

@@ -4,10 +4,18 @@ const categoryController = {
     // Get all categories
     getAll: async (req, res) => {
         try {
+            let { page = 1, limit = 10 } = req.query;
+            let offset = (page - 1) * limit;
+            if (offset < 0) {
+                offset = 0;
+            }
+            const totalCategories = await db.Category.count();
+            const totalPages = Math.ceil(totalCategories / limit);
+
             const categories = await db.Category.findAll({
                 order: [['updatedAt', 'DESC']],
             });
-            res.status(200).json(categories);
+            res.status(200).json({ categories, totalPages });
         } catch (error) {
             res.status(500).json({ message: 'Error retrieving categories', error });
         }

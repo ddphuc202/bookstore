@@ -6,10 +6,18 @@ const orderController = {
     // Get all orders
     getAll: async (req, res) => {
         try {
+            let { page = 1, limit = 10 } = req.query;
+            let offset = (page - 1) * limit;
+            if (offset < 0) {
+                offset = 0;
+            }
+            const totalOrders = await db.Order.count();
+            const totalPages = Math.ceil(totalOrders / limit);
+
             const orders = await db.Order.findAll({
-                order: [['updatedAt', 'DESC']],
+                order: [['updatedAt', 'ASC']],
             });
-            res.status(200).json(orders);
+            res.status(200).json({ orders, totalPages });
         } catch (error) {
             console.log('Error retrieving orders', error);
             res.status(500).json({ message: 'Error retrieving orders', error: error.message });

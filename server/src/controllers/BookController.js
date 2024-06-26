@@ -35,6 +35,11 @@ const booksController = {
         }
 
         try {
+            const totalBooks = await db.Book.count({
+                where: whereClause
+            });
+            const totalPages = Math.ceil(totalBooks / limit);
+
             const books = await db.Book.findAll({
                 where: whereClause,
                 attributes: {
@@ -53,7 +58,8 @@ const booksController = {
                 limit: parseInt(limit),
                 offset: parseInt(offset),
             });
-            res.status(200).json(books);
+
+            res.status(200).json({ books, totalPages });
         } catch (error) {
             res.status(500).json({ message: 'Error retrieving books', error });
         }
@@ -155,9 +161,9 @@ const booksController = {
             if (!deleted) {
                 throw new Error('Book not found');
             }
-            res.status(200).json({ message: 'Book deleted successfully' });
+            res.status(200).json({ message: 'Book soft deleted successfully' });
         } catch (error) {
-            res.status(500).json({ message: 'Error deleting book', error });
+            res.status(500).json({ message: 'Error soft deleting book', error });
         }
     },
 };
