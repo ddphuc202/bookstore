@@ -5,8 +5,18 @@ const customerController = {
     // Get all customers
     getAll: async (req, res) => {
         try {
-            const customers = await db.Customer.findAll();
-            res.status(200).json(customers);
+            let { page = 1, limit = 10 } = req.query;
+            let offset = (page - 1) * limit;
+            if (offset < 0) {
+                offset = 0;
+            }
+            const totalCustomers = await db.Customer.count();
+            const totalPages = Math.ceil(totalCustomers / limit);
+
+            const customers = await db.Customer.findAll({
+                order: [['updatedAt', 'DESC']],
+            });
+            res.status(200).json({ customers, totalPages });
         } catch (error) {
             res.status(500).json({ message: 'Error retrieving customers', error });
         }

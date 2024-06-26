@@ -12,7 +12,7 @@ function authenticate() {
         jwt.verify(token, process.env.JWT_SECRET, (err, decoded) => {
             if (err) {
                 console.log(err);
-                return res.status(403).json({ message: 'Authentication failed', err });
+                return res.status(403).json({ message: 'Authentication failed: Invalid token', err });
             }
             req.user = decoded;
             next();

@@ -8,7 +8,7 @@ module.exports = {
       {
         name: 'admin',
         email: 'superadmin@khaitam.com',
-        password: '123456',
+        password: '$2a$12$NgRrWvfDeHe14pn/0NAt2.YFbAQENDmuxoWnLbGHjku8SBj4gvlFq',
         role: 'super',
         created_at: currentDate,
         updated_at: currentDate
@@ -16,21 +16,21 @@ module.exports = {
       {
         name: 'admin1',
         email: 'admin1@khaitam.com',
-        password: '123456',
+        password: '$2a$12$NgRrWvfDeHe14pn/0NAt2.YFbAQENDmuxoWnLbGHjku8SBj4gvlFq',
         created_at: currentDate,
         updated_at: currentDate
       },
       {
         name: 'admin2',
         email: 'admin2@khaitam.com',
-        password: '123456',
+        password: '$2a$12$NgRrWvfDeHe14pn/0NAt2.YFbAQENDmuxoWnLbGHjku8SBj4gvlFq',
         created_at: currentDate,
         updated_at: currentDate
       },
       {
         name: 'admin3',
         email: 'admin3@khaitam.com',
-        password: '123456',
+        password: '$2a$12$NgRrWvfDeHe14pn/0NAt2.YFbAQENDmuxoWnLbGHjku8SBj4gvlFq',
         created_at: currentDate,
         updated_at: currentDate
       }

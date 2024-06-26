@@ -10,6 +10,7 @@ const compression = require('compression');
 
 // Import routes
 const authRoutes = require('./routes/auth');
+const adminRoutes = require('./routes/admins');
 const customerRoutes = require('./routes/customers');
 const categoryRoutes = require('./routes/categories');
 const bookRoutes = require('./routes/books');
@@ -32,6 +33,7 @@ configCORS(app);
 
 // Routes
 app.use('/', authRoutes);
+app.use('/admins', adminRoutes);
 app.use('/customers', customerRoutes);
 app.use('/categories', categoryRoutes);
 app.use('/books', bookRoutes);
