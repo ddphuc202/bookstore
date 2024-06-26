@@ -19,14 +19,14 @@ const createNewCustomer = (name, email, password, phone, address, navigate) => {
 const getCustomers = (setRecords) => {
     return instance.get('/customers').then(res => {
         setRecords(res.data)
-    })
+    }).catch(err => console.log(err))
 }
 
 
 const getCustomerById = (id, setData) => {
     return instance.get('/customers/' + id)
         .then(res => {
-            setData(res.data[0]);
+            setData(res.data);
         })
         .catch(err => console.log(err))
 }
@@ -36,7 +36,7 @@ const updateCustomerByID = (id, data, navigate) => {
         .then(res => {
             alert("Data update successfully!");
             navigate('/manage-customers');
-        })
+        }).catch(err => console.log(err))
 }
 
 const deleteCustomers = (id, navigate) => {

@@ -16,7 +16,7 @@ const TableGenres = (props) => {
 
   useEffect(() => {
     getCategories(setRecords)
-  },)
+  }, [])
 
 
   return (

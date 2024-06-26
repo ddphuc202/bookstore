@@ -12,7 +12,7 @@ const TableOrders = (props) => {
 
     useEffect(() => {
         getAllOrders(setData);
-    },)
+    }, [])
 
 
     return (

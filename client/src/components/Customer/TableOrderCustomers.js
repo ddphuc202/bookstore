@@ -8,6 +8,13 @@ const TableOrderCustomers = () => {
 
     const [data, setData] = useState([]);
 
+    const status = {
+        'pending': 'Chờ xác nhận',
+        'processing': 'Đang xử lý',
+        'completed': ' Thành công',
+        'cancelled': 'Đã hủy'
+    }
+
     useEffect(() => {
         getOrderCustomers(localStorage.getItem('userId'), setData)
     }, [])
@@ -37,7 +44,7 @@ const TableOrderCustomers = () => {
                                 <td>
                                     {item.address}
                                 </td>
-                                <td className="price">{item.status}</td>
+                                <td className={`status1 status-${item.status}`}>{status[item.status]}</td>
                                 <td className="price">{item.total}đ</td>
                                 <td><Link to={`/order-detail/${item.id}`}>Chi tiết</Link></td>
                             </tr>

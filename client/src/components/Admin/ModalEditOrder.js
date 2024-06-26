@@ -44,8 +44,8 @@ function ModalEditOrder() {
                                 <Form.Select aria-label="Default select example" value={data.status} onChange={event => setData({ ...data, status: event.target.value })}>
                                     <option value={1} >Pending</option>
                                     <option value={2} >Processing</option>
-                                    <option value={1} >Complete</option>
-                                    <option value={1} >Cancel</option>
+                                    <option value={3} >Complete</option>
+                                    <option value={4} >Cancel</option>
                                 </Form.Select>
                             </Form.Group>
                         </Form>

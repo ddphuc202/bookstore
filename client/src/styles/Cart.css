@@ -2,17 +2,32 @@
     border: solid 1px #DDDDDD;
 }
 
+tbody .status1 {
+    font-weight: bold;
+}
 
 tbody .price {
     color: #009900;
-    vertical-align: middle;
 }
 
-tbody td div {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+tbody .status-completed {
+    color: #009900
 }
+
+tbody .status-cancelled {
+    color: #DD0000
+}
+
+tbody .status-pending {
+    color: #EEEE00
+}
+
+tbody .status-processing {
+    color: #FFB90F
+}
+
+
+
 
 .title-module,
 .title-block-page {

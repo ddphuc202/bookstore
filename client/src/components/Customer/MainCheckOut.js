@@ -1,20 +1,26 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import image from '../../image/Khai_Tam.png';
 import { Link } from 'react-router-dom';
 import { createNewOrder } from '../../services/OrderServices';
 import { useNavigate } from 'react-router-dom';
+import { getCustomerById } from '../../services/CustomerServices';
 
 const MainCheckOut = () => {
 
     const [name, setName] = useState('');
     const [phone, setPhone] = useState('');
     const [address, setAddress] = useState('');
+    const [data, setData] = useState([]);
 
     const navigate = useNavigate();
 
     const handleSubmit = (event) => {
         createNewOrder(name, phone, address, navigate)
     }
+
+    useEffect(() => {
+        getCustomerById(localStorage.getItem('userId'), setData);
+    }, [])
 
     return (
         <>
@@ -52,7 +58,7 @@ const MainCheckOut = () => {
                                             <div className="field__input-wrapper">
                                                 <label className="field__label">Họ và tên</label>
                                                 <input name="billingName" id="billingName" type="text"
-                                                    className="form-control" value={name} onChange={(event) => setName(event.target.value)} />
+                                                    className="form-control" value={data.name} onChange={(event) => setName(event.target.value)} />
                                             </div>
 
                                         </div>
@@ -64,7 +70,7 @@ const MainCheckOut = () => {
                                                     Số điện thoại (tùy chọn)
                                                 </label>
                                                 <input name="billingPhone" id="billingPhone" type="text"
-                                                    className="form-control" value={phone} onChange={(event) => setPhone(event.target.value)} />
+                                                    className="form-control" value={data.phone} onChange={(event) => setPhone(event.target.value)} />
                                             </div>
                                         </div>
 
@@ -75,7 +81,7 @@ const MainCheckOut = () => {
                                                     Địa chỉ (tùy chọn)
                                                 </label>
                                                 <input name="billingAddress" id="billingAddress" type="text"
-                                                    className="form-control" value={address} onChange={(event) => setAddress(event.target.value)} />
+                                                    className="form-control" value={data.address} onChange={(event) => setAddress(event.target.value)} />
                                             </div>
                                         </div>
                                         <br />
@@ -123,13 +129,13 @@ const MainCheckOut = () => {
                                     <div className="content-box">
                                         <div className="content-box__row">
                                             <div className="radio-wrapper">
-                                                <div className="radio__input">
+                                                {/* <div className="radio__input">
                                                     <input name="paymentMethod" id="paymentMethod-432316"
                                                         type="radio" className="input-radio" />
-                                                </div>
+                                                </div> */}
                                                 <label className="radio__label">
-                                                    <span className="radio__label__primary">Thanh toán khi nhận
-                                                        hàng (COD)</span>
+                                                    <span className="radio__label__primary">Vui lòng thanh toán khi nhận
+                                                        hàng (COD) </span>
                                                     <span className="radio__label__accessory">
                                                         <span className="radio__label__icon">
                                                             <i className="payment-icon payment-icon--4"></i>

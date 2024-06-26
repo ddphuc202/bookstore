@@ -16,7 +16,7 @@ const createNewPost = (title, content, imageFile, navigate) => {
 const getPost = (setRecords) => {
     return instance.get('/posts').then(res => {
         setRecords(res.data)
-    })
+    }).catch(err => console.log(err))
 }
 
 
@@ -33,7 +33,7 @@ const updatePostByID = (id, data, navigate) => {
         .then(res => {
             alert("Data update successfully!");
             navigate('/manage-posts');
-        })
+        }).catch(err => console.log(err))
 }
 
 const deletePost = (id, navigate) => {

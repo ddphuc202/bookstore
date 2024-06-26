@@ -7,6 +7,9 @@ const addBookToCart = (id, quantity) => {
     };
     instance.post('/carts/item', data).then(res => {
         alert('Data add successfully!');
+    }).catch(err => {
+        console.log(err);
+        alert('Vui lòng đăng nhập!')
     });
 };
 
@@ -57,19 +60,21 @@ const updateInputAmountOfCart = (index, id, newQuantity, data, setData) => {
     const newData = [...data];
     if (newData[index].quantity > 0) {
         newData[index].quantity = Number(newQuantity);
-
-
-        let dataUpdate = {
-            quantity: newData[index].quantity
-        };
-        instance.put('carts/item/' + id, dataUpdate).then(res => {
-            if (newData[index].quantity == 0) {
-                deleteItemInCart(id, data, setData);
-            } else {
-                setData(newData);
-            }
-        }).catch(err => { console.log(err); });
     }
+    if (newData[index].quantity < 0) {
+        newData[index].quantity = 1
+    }
+    let dataUpdate = {
+        quantity: newData[index].quantity
+    };
+    instance.put('carts/item/' + id, dataUpdate).then(res => {
+        if (newData[index].quantity == 0) {
+            deleteItemInCart(id, data, setData);
+        } else {
+            setData(newData);
+        }
+    }).catch(err => { console.log(err); });
+
     if (newData[index].quantity == 0) {
         deleteItemInCart(id, data, setData);
     }

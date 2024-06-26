@@ -15,7 +15,7 @@ const createNewCategories = (name, navigate) => {
 const getCategories = (setRecords) => {
     return instance.get('/categories').then(res => {
         setRecords(res.data)
-    })
+    }).catch(err => console.log(err))
 }
 
 
@@ -32,7 +32,7 @@ const updateCategoriesByID = (id, data, navigate) => {
         .then(res => {
             alert("Data update successfully!");
             navigate('/manage-categories');
-        })
+        }).catch(err => console.log(err))
 }
 
 const deleteCategories = (id, navigate) => {
