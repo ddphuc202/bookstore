@@ -2,8 +2,16 @@
     border: solid 1px #DDDDDD;
 }
 
+
 tbody .price {
     color: #009900;
+    vertical-align: middle;
+}
+
+tbody td div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .title-module,

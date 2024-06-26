@@ -41,7 +41,7 @@ const updateDecreaseAmountOfCart = (index, id, data, setData) => {
     }
 
     if (newData[index].quantity == 0) {
-        deleteItemInCart(id);
+        deleteItemInCart(id, data, setData);
     }
 
     let dataUpdate = {
@@ -57,20 +57,31 @@ const updateInputAmountOfCart = (index, id, newQuantity, data, setData) => {
     const newData = [...data];
     if (newData[index].quantity > 0) {
         newData[index].quantity = Number(newQuantity);
+
+
+        let dataUpdate = {
+            quantity: newData[index].quantity
+        };
+        instance.put('carts/item/' + id, dataUpdate).then(res => {
+            if (newData[index].quantity == 0) {
+                deleteItemInCart(id, data, setData);
+            } else {
+                setData(newData);
+            }
+        }).catch(err => { console.log(err); });
     }
-    if (newData[index].quantity === 0) {
-        deleteItemInCart(id);
+    if (newData[index].quantity == 0) {
+        deleteItemInCart(id, data, setData);
     }
-    let dataUpdate = {
-        quantity: newData[index].quantity
-    };
-    instance.put('carts/item/' + id, dataUpdate).then(res => {
-        setData(newData);
-    }).catch(err => { console.log(err); });
 };
 
-const deleteItemInCart = (id) => {
-    instance.delete('carts/item/' + id);
+const deleteItemInCart = (id, data, setData) => {
+    instance.delete('carts/item/' + id).then(res => {
+        setData(data.filter(item => item.id !== id));
+    })
+        .catch(err => {
+            console.log(err);
+        });
 };
 
 

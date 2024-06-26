@@ -10,7 +10,7 @@ const TableOrderCustomers = () => {
 
     useEffect(() => {
         getOrderCustomers(localStorage.getItem('userId'), setData)
-    }, [data])
+    }, [])
 
     return (
         <>

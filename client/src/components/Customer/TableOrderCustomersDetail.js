@@ -11,10 +11,9 @@ const TableOrderCustomersDetail = () => {
     const [data, setData] = useState([]);
     const [status, setStatus] = useState();
 
-
     useEffect(() => {
         getOrderDetail(id, setData)
-    }, [data])
+    }, [])
 
     return (
         <>
@@ -29,20 +28,17 @@ const TableOrderCustomersDetail = () => {
                 </thead>
                 <tbody>
                     {
-                        Array.isArray(data) && data.map((item, index) => (
+                        Array.isArray(data.orderDetails) && data.orderDetails.map((detail, i) => (
+                            <tr key={i}>
+                                <td>
+                                    <img width={"200px"} src={baseURL + detail.book.thumbnailPath}></img>
+                                    <span>{detail.book.title} </span>
+                                </td>
 
-                            Array.isArray(item.orderDetails) && item.orderDetails.map((detail, i) => (
-                                <tr key={index}>
-                                    <td>
-                                        <img width={"200px"} src={baseURL + detail.book.thumbnailPath}></img>
-                                        <span>{detail.book.title} </span>
-                                    </td>
-
-                                    <td>{detail.price.toLocalString('vi-VN')}</td>
-                                    <td>{detail.quantity}</td>
-                                    <td>{Number(detail.price * detail.quantity).toLocaleString('vi-VN')}</td>
-                                </tr>
-                            ))
+                                <td className='price'>{Number(detail.price).toLocaleString('vi-VN')}đ</td>
+                                <td>{detail.quantity}</td>
+                                <td className='price'>{Number(detail.price * detail.quantity).toLocaleString('vi-VN')}đ</td>
+                            </tr>
                         ))
                     }
 

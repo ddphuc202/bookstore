@@ -12,6 +12,7 @@ const TableProductCart = () => {
     const [total, setTotal] = useState(0);
 
 
+
     const increaseQuantity = (index, id) => {
         updateIncreaseAmountOfCart(index, id, data, setData);
     };
@@ -25,8 +26,10 @@ const TableProductCart = () => {
     };
 
     const handleDelete = (id) => {
-        deleteItemInCart(id);
+        deleteItemInCart(id, data, setData);
     }
+
+    console.log(data)
 
     useEffect(() => {
         if (Array.isArray(data)) {
@@ -37,7 +40,8 @@ const TableProductCart = () => {
 
     useEffect(() => {
         getCartByCustomerId(localStorage.getItem('userId'), setData)
-    }, [data])
+    }, [])
+
 
 
     return (
