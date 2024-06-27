@@ -30,7 +30,7 @@ const TableOrders = (props) => {
             </thead>
             <tbody>
                 {
-                    data.map((d, i) => (
+                    Array.isArray(data) && data.map((d, i) => (
                         <tr key={i}>
                             <td>{d.id}</td>
                             <td>{d.name}</td>

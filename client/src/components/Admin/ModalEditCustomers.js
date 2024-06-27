@@ -21,7 +21,6 @@ function ModalEditCustomers() {
 
     useEffect(() => {
         getCustomerById(id, setData)
-        console.log(data);
     }, [])
     return (
         <>

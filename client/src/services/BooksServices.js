@@ -24,8 +24,16 @@ const createNewBook = (title, author, description, price, discount, quantity, ca
     }).catch(err => console.log(err));
 }
 
-const getBooks = (setRecords) => {
-    return instance.get('/books').then(res => {
+const getBooks = (page, search, sortBy, order, setRecords) => {
+    instance.get('/books', {
+        params: {
+            page: page,
+            search: search,
+            sortBy: sortBy,
+            order: order
+        }
+
+    }).then(res => {
         setRecords(res.data)
     })
 }

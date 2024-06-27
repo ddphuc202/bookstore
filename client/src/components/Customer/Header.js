@@ -4,6 +4,7 @@ import { faCartShopping } from "@fortawesome/free-solid-svg-icons";
 import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
 import Logo from '../../image/Khai_Tam.png';
 import { Link } from "react-router-dom";
+import SearchBooks from "./SearchBooks";
 const Header = () => {
     return (
         <header className="header">
@@ -75,13 +76,7 @@ const Header = () => {
                         <div className="search-icon-mb d-md-none d-inline-block">
                             <svg className="icon">  </svg>
                         </div>
-                        <form action="/search" className="input-group search-bar" role="search">
-                            <input type="text" aria-label="Tìm sản phẩm" name="query" placeholder="Tìm kiếm..." className="search-auto input-group-field auto-search" required="" />
-                            <input type="hidden" name="type" value="product" />
-                            <button className="btn search-button" aria-label="Justify">
-                                <FontAwesomeIcon icon={faMagnifyingGlass} size="sm" />
-                            </button>
-                        </form>
+
                         <div className="user-header">
                             <Link to={'/orders'} ><FontAwesomeIcon icon={faUser} /></Link>
 
@@ -94,7 +89,6 @@ const Header = () => {
                         </div>
                         <Link className="cart-head" to={'/cart'} title="Giỏ hàng">
                             <FontAwesomeIcon icon={faCartShopping} />
-                            <span className="count_item count_item_pr">2</span>
                         </Link>
                     </div>
                 </div>

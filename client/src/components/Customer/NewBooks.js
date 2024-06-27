@@ -9,13 +9,17 @@ import { addBookToCart } from '../../services/CartServices';
 const NewBooks = () => {
 
 	const [records, setRecords] = useState([]);
+	const [page, setPage] = useState(1);
+	const [search, setSearch] = useState([]);
+	const [sortBy, setSortBy] = useState([]);
+	const [order, setOrder] = useState([]);
 
 	const handleSubmit = (id) => {
 		addBookToCart(id);
 	}
 
 	useEffect(() => {
-		getBooks(setRecords)
+		getBooks(page, search, sortBy, order, setRecords)
 	}, [])
 
 	const responsive = {
@@ -51,7 +55,7 @@ const NewBooks = () => {
 					<div className="slide-book-new-wrap relative swiper-button-main">
 						<div className="swiper-container slide-book-new">
 							<Carousel responsive={responsive}>
-								{records.map((book, index) => (
+								{Array.isArray(records) && records.map((book, index) => (
 									<div className="swiper-slide" key={index}>
 										<div className="item_product_main">
 											<div className="thumb">

@@ -1,15 +1,15 @@
 import { instance } from '../utils/AxiosCustomize';
 
-const createNewOrder = (name, phone, address, navigate) => {
-    let data = {
+const createNewOrder = (data, navigate) => {
+    let dataForm = {
         customerId: localStorage.getItem('userId'),
-        name: name,
-        phone: phone,
-        address: address
+        name: data.name,
+        phone: data.phone,
+        address: data.address
     }
-    instance.post('/orders', data).then(res => {
+    instance.post('/orders', dataForm).then(res => {
         alert('Đặt hàng thành công!');
-        navigate('/');
+        navigate('/orders');
     }).catch(err => console.log(err))
 }
 

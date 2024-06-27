@@ -89,7 +89,7 @@ function ModalAddNewBooks() {
                             <Form.Group className="mb-3" controlId="formBasicPassword">
                                 <Form.Label>Thể loại</Form.Label>
                                 <Form.Select aria-label="Default select example" onChange={(event) => setCategories(event.target.value)}>
-                                    {records.map((category, index) => (
+                                    {Array.isArray(records) && records.map((category, index) => (
                                         <option key={index} value={category.id} > {category.name} </option>
                                     ))}
                                 </Form.Select>

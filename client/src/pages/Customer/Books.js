@@ -6,9 +6,39 @@ import { getBooks } from '../../services/BooksServices';
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import ListBooks from "../../components/Customer/ListBooks";
+import SearchBooks from "../../components/Customer/SearchBooks";
 const Books = () => {
 
+    const [searchBooks, setSearchBooks] = useState([])
+    const [sortBy, setSortBy] = useState([]);
+    const [order, setOrder] = useState([]);
+    const [page, setPage] = useState(1);
 
+
+    const handleSearch = (searchValue) => {
+        setSearchBooks(searchValue);
+        setPage(1);
+        setSortBy('');
+        setOrder('');
+    }
+
+    const handleDefault = () => {
+        setSortBy('');
+        setOrder('');
+        setPage(1);
+    }
+
+    const handleSortBy = () => {
+        setSortBy('created_at')
+    }
+
+    const handleAsc = () => {
+        setOrder('asc')
+    }
+
+    const handleDesc = () => {
+        setOrder('desc')
+    }
 
     return (
         <>
@@ -61,33 +91,35 @@ const Books = () => {
                             </div>
                         </aside>
                         <div className="main_container collection col-lg-9 col-md-12 col-sm-12">
-
                             <div className="wrap-srt-title">
                                 <div className="sortby">
+
+                                    < SearchBooks onSearch={handleSearch} />
+
                                     <span className="lazyload sort-icon">Sắp xếp theo </span>
                                     <ul>
                                         <li className="btn-quick-sort default active">
-                                            <a href="javascript:;"
-                                                title="Mặc định"><i></i>Mặc định</a>
+                                            <a onClick={() => handleDefault()} >Mặc định</a>
                                         </li>
                                         <li className="btn-quick-sort created-desc">
-                                            <a href="javascript:;"
-                                                title="Sách mới"><i></i>Sách mới</a>
+                                            <a onClick={() => handleSortBy()} >Sách mới</a>
                                         </li>
                                         <li className="btn-quick-sort price-desc">
-                                            <a
-                                                // {sortBooksByPrice}
-
-                                                title="Giá thấp - cao"><i></i>Giá thấp - cao</a>
+                                            <a onClick={() => handleAsc()} >Giá thấp - cao</a>
                                         </li>
                                         <li className="btn-quick-sort price-asc">
-                                            <a href="javascript:;"
-                                                title="Giá cao - thấp"><i></i>Giá cao - thấp</a>
+                                            <a onClick={() => handleDesc()} >Giá cao - thấp</a>
                                         </li>
                                     </ul>
                                 </div>
                             </div>
-                            <ListBooks />
+                            <ListBooks
+                                searchBook={searchBooks}
+                                sortByBook={sortBy}
+                                orderBook={order}
+                                page={page}
+                                setPage={setPage}
+                            />
 
                         </div>
                     </div>
