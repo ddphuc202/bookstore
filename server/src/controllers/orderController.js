@@ -11,13 +11,10 @@ const orderController = {
             if (offset < 0) {
                 offset = 0;
             }
-            const totalOrders = await db.Order.count();
-            const totalPages = Math.ceil(totalOrders / limit);
-
             const orders = await db.Order.findAll({
                 order: [['updatedAt', 'ASC']],
             });
-            res.status(200).json({ orders, totalPages });
+            res.status(200).json(orders);
         } catch (error) {
             console.log('Error retrieving orders', error);
             res.status(500).json({ message: 'Error retrieving orders', error: error.message });

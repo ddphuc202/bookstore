@@ -10,13 +10,10 @@ const customerController = {
             if (offset < 0) {
                 offset = 0;
             }
-            const totalCustomers = await db.Customer.count();
-            const totalPages = Math.ceil(totalCustomers / limit);
-
             const customers = await db.Customer.findAll({
                 order: [['updatedAt', 'DESC']],
             });
-            res.status(200).json({ customers, totalPages });
+            res.status(200).json(customers);
         } catch (error) {
             res.status(500).json({ message: 'Error retrieving customers', error });
         }
