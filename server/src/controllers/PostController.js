@@ -9,16 +9,12 @@ const postController = {
             if (offset < 0) {
                 offset = 0;
             }
-            const totalPosts = await db.Post.count();
-            const totalPages = Math.ceil(totalPosts / limit);
-
             const posts = await db.Post.findAll({
                 order: [['updatedAt', 'DESC']],
                 limit: parseInt(limit),
                 offset: parseInt(offset),
             });
-
-            res.status(200).json({ posts, totalPages });
+            res.status(200).json(posts);
         } catch (error) {
             res.status(500).json({ message: 'Error retrieving posts', error });
         }
