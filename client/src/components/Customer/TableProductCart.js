@@ -29,8 +29,6 @@ const TableProductCart = () => {
         deleteItemInCart(id, data, setData);
     }
 
-    console.log(data)
-
     useEffect(() => {
         if (Array.isArray(data)) {
             let totalPrice = data.reduce((sum, item) => sum + item.book.price * item.quantity, 0);

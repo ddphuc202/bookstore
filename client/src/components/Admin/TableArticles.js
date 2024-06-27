@@ -17,7 +17,7 @@ const TableArticles = (props) => {
 
   useEffect(() => {
     getPost(setRecords);
-  },)
+  }, [])
 
 
   return (

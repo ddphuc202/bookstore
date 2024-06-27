@@ -10,7 +10,7 @@ const createNewOrder = (name, phone, address, navigate) => {
     instance.post('/orders', data).then(res => {
         alert('Đặt hàng thành công!');
         navigate('/');
-    })
+    }).catch(err => console.log(err))
 }
 
 const getAllOrders = (setData) => {
@@ -43,8 +43,19 @@ const updateStatusOrder = (id, data, navigate) => {
         .then(res => {
             alert("Data update successfully!");
             navigate('/manage-orders');
-        })
+        }).catch(err => console.log(err))
 
 }
 
-export { createNewOrder, getOrderCustomers, getAllOrders, getOrderDetail, updateStatusOrder } 
+const cancelStatusOrder = (id, navigate) => {
+    let data = {
+        status: 4
+    }
+    instance.put('/orders/' + id, data)
+        .then(res => {
+            alert("Order cancel successfully!");
+            navigate('/orders');
+        }).catch(err => console.log(err))
+}
+
+export { createNewOrder, getOrderCustomers, getAllOrders, getOrderDetail, updateStatusOrder, cancelStatusOrder } 

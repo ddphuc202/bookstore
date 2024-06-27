@@ -48,7 +48,6 @@ const SideBarCheckOut = () => {
                                         </tr>
                                     </thead>
                                     <br />
-
                                     <tbody>
                                         {
                                             Array.isArray(data) && data.map((item, index) => (
@@ -80,11 +79,9 @@ const SideBarCheckOut = () => {
                                                         <td className="product__price"> {item.book.price.toLocaleString('vi-VN')}đ </td>
 
                                                     </tr>
-                                                    <br></br>
+                                                    <br />
                                                 </>
                                             ))}
-
-                                        <br />
 
                                     </tbody>
                                 </table>

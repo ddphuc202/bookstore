@@ -17,7 +17,7 @@ const TableCustomers = (props) => {
 
   useEffect(() => {
     getCustomers(setRecords);
-  },)
+  }, [])
 
 
   return (

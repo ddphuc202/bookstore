@@ -3,17 +3,24 @@ import Table from 'react-bootstrap/Table';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
-import { getOrderDetail } from '../../services/OrderServices';
+import { getOrderDetail, cancelStatusOrder } from '../../services/OrderServices';
 import { baseURL } from '../../utils/AxiosCustomize';
+import { useNavigate } from 'react-router-dom';
 const TableOrderCustomersDetail = () => {
 
     const { id } = useParams();
     const [data, setData] = useState([]);
-    const [status, setStatus] = useState();
+
+    const navigate = useNavigate()
+
+    const handleCancel = () => {
+        cancelStatusOrder(id, navigate);
+    }
 
     useEffect(() => {
         getOrderDetail(id, setData)
     }, [])
+
 
     return (
         <>
@@ -35,9 +42,9 @@ const TableOrderCustomersDetail = () => {
                                     <span>{detail.book.title} </span>
                                 </td>
 
-                                <td className='price'>{Number(detail.price).toLocaleString('vi-VN')}đ</td>
-                                <td>{detail.quantity}</td>
-                                <td className='price'>{Number(detail.price * detail.quantity).toLocaleString('vi-VN')}đ</td>
+                                <td className='price' style={{ verticalAlign: "middle" }}>{Number(detail.price).toLocaleString('vi-VN')}đ</td>
+                                <td style={{ verticalAlign: "middle" }} >{detail.quantity}</td>
+                                <td className='price' style={{ verticalAlign: "middle" }} >{Number(detail.price * detail.quantity).toLocaleString('vi-VN')}đ</td>
                             </tr>
                         ))
                     }
@@ -45,7 +52,7 @@ const TableOrderCustomersDetail = () => {
                 </tbody>
             </Table>
 
-            <button> Hủy đơn hàng </button>
+            <button disabled={data.status === "processing" || data.status === 'completed' || data.status === 'cancelled'} onClick={() => handleCancel()} className='btn btn-danger'> Hủy đơn hàng </button>
 
 
         </>
