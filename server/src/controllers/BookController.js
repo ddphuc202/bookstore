@@ -1,6 +1,9 @@
 const db = require('../models');
 const { Op } = require('sequelize');
+const fs = require('fs');
+const path = require('path');
 require('dotenv').config();
+
 
 const booksController = {
     // Get all books
@@ -126,12 +129,31 @@ const booksController = {
         try {
             let bookData = req.body;
             if (req.files && req.files.thumbnail) {
+                const currentThumbnail = await db.Book.findByPk(req.params.id, {
+                    attributes: ['thumbnail']
+                });
+                const thumbnailPath = path.join(__dirname, '../public', process.env.IMAGE_PATH, currentThumbnail.thumbnail);
+                fs.unlink(thumbnailPath, (err) => {
+                    if (err) console.log('Error deleting thumbnail: ', thumbnailPath);
+                    else console.log('Successfully deleted thumbnail: ', thumbnailPath);
+                });
                 bookData.thumbnail = req.files.thumbnail[0].filename;
             }
             let otherImages = [];
             if (req.files && req.files.otherImages) {
-                otherImages = req.files.otherImages.map(image => image.filename);
+                const currentImages = await db.BookImage.findAll({
+                    where: { bookId: req.params.id }
+                });
+                currentImages.forEach(image => {
+                    const imagePath = path.join(__dirname, '../public', process.env.IMAGE_PATH, image.image);
+                    fs.unlink(imagePath, (err) => {
+                        if (err) console.log('Error deleting image: ', imagePath);
+                        else console.log('Successfully deleted image: ', imagePath);
+                    });
+                });
                 await db.BookImage.destroy({ where: { bookId: req.params.id } });
+
+                otherImages = req.files.otherImages.map(image => image.filename);
                 await db.BookImage.bulkCreate(otherImages.map(image => ({ image: image, bookId: req.params.id })));
             }
             const [updated] = await db.Book.update(bookData, {
@@ -143,6 +165,7 @@ const booksController = {
 
             res.status(200).json({ message: 'Book updated successfully' });
         } catch (error) {
+            console.log('Error updating book: ', error);
             res.status(500).json({ message: 'Error updating book', error });
         }
     },
