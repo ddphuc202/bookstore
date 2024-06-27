@@ -14,17 +14,17 @@ module.exports = (sequelize, DataTypes) => {
         through: models.OrderDetail,
         foreignKey: 'orderId',
         otherKey: 'bookId',
-      })
+      });
       Order.belongsTo(models.Customer, {
         foreignKey: 'customerId',
         as: 'customer',
-      })
+      });
       Order.hasMany(models.OrderDetail,
         {
           foreignKey: 'orderId',
           as: 'orderDetails',
         }
-      )
+      );
     }
   }
   Order.init({
@@ -56,7 +56,7 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.STRING,
     },
     status: {
-      type: DataTypes.ENUM('pending', 'processing', 'completed', 'cancelled'),
+      type: DataTypes.ENUM('pending', 'processing', 'delivering', 'completed', 'cancelled'),
       allowNull: false,
       defaultValue: 'pending'
     },

@@ -5,6 +5,9 @@ const adminController = require('../controllers/adminController');
 
 const router = express.Router();
 
+// Statistic
+router.get('/statistic', authenticate(), authorize(['super']), adminController.statistic);
+
 // GET all admins
 router.get('/', authenticate(), authorize(['super']), adminController.getAll);
 

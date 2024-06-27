@@ -35,11 +35,6 @@ const booksController = {
         }
 
         try {
-            const totalBooks = await db.Book.count({
-                where: whereClause
-            });
-            const totalPages = Math.ceil(totalBooks / limit);
-
             const books = await db.Book.findAll({
                 where: whereClause,
                 attributes: {
@@ -59,7 +54,7 @@ const booksController = {
                 offset: parseInt(offset),
             });
 
-            res.status(200).json({ books, totalPages });
+            res.status(200).json(books);
         } catch (error) {
             res.status(500).json({ message: 'Error retrieving books', error });
         }

@@ -1,4 +1,3 @@
-const { where } = require('sequelize');
 const db = require('../models');
 
 const adminController = {
@@ -58,6 +57,48 @@ const adminController = {
             res.status(500).json({ message: 'Error updating admin', error: error.message });
         }
     },
+
+    // Statistic
+    statistic: async (req, res) => {
+        try {
+            const { month, year } = req.query;
+            const currentYear = new Date().getFullYear();
+            const currentMonth = new Date().getMonth() + 1; // getMonth() returns 0-11
+
+            if (!month || !year || month < 1 || month > 12 || year < 2024 || year > currentYear || (year == currentYear && month > currentMonth)) {
+                return res.status(400).json({ message: 'Invalid month or year' });
+            }
+
+            const startDate = new Date(Date.UTC(year, month - 1, 1, 0, 0, 0, 0));
+            const endDate = new Date(year, month, 0, 23, 59, 59, 999);
+
+            // Sales by month
+            const salesByMonth = await db.Order.sum('total', {
+                where: {
+                    status: 'completed',
+                    createdAt: {
+                        [db.Sequelize.Op.between]: [startDate, endDate]
+                    }
+                }
+            });
+
+            // Total sales
+            const totalSales = await db.Order.sum('total', {
+                where: {
+                    status: 'completed'
+                }
+            });
+
+            res.status(200).json({
+                salesByMonth: salesByMonth || 0,
+                totalSales: totalSales || 0
+            });
+
+        } catch (error) {
+            console.log(error);
+            res.status(500).json({ message: 'Error calculating statistics', error: error.message });
+        }
+    }
 };
 
 module.exports = adminController;
