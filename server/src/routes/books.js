@@ -6,8 +6,11 @@ const bookController = require('../controllers/bookController');
 
 const router = express.Router();
 
-// GET all books
-router.get('/', bookController.getAll);
+// GET all books for customer
+router.get('/customer', bookController.getAll);
+
+// GET all books for admin
+router.get('/admin', authenticate(), authorize(['admin', 'super']), bookController.getAllForAdmin);
 
 // GET a specific book
 router.get('/:id', bookController.getById);
