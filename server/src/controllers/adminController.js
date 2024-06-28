@@ -4,6 +4,15 @@ const adminController = {
     // Get all admins
     getAll: async (req, res) => {
         try {
+            const totalAdmins = await db.Admin.count({
+                where: {
+                    role: {
+                        [db.Sequelize.Op.not]: 'super'
+                    }
+                }
+            });
+            const totalPages = Math.ceil(totalAdmins / 10);
+
             const admins = await db.Admin.findAll({
                 where: {
                     role: {
@@ -11,7 +20,8 @@ const adminController = {
                     }
                 }
             });
-            res.status(200).json(admins);
+
+            res.status(200).json({ admins, totalPages });
         } catch (error) {
             console.log(error);
             res.status(500).json({ message: 'Error retrieving admins', error: error.message });

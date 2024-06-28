@@ -8,41 +8,46 @@ require('dotenv').config();
 const booksController = {
     // Get all books
     getAll: async (req, res) => {
-        let { page = 1, limit = 8, sortBy = 'updatedAt', order = 'DESC', categoryId, search } = req.query;
-        let offset = (page - 1) * limit;
-        if (offset < 0) {
-            offset = 0;
-        }
-        const validSortBy = ['updatedAt', 'price'];
-        if (!validSortBy.includes(sortBy)) {
-            sortBy = 'updatedAt';
-        }
-        const validOrder = ['ASC', 'DESC'];
-        if (!validOrder.includes(order)) {
-            order = 'DESC';
-        }
-        const whereClause = {};
-        whereClause.quantity = { [Op.gt]: 0 };
-        if (categoryId) {
-            whereClause.categoryId = categoryId;
-        }
-        if (search) {
-            const searchCondition = {
-                [Op.or]: [
-                    { title: { [Op.like]: `%${search}%` } },
-                    { author: { [Op.like]: `%${search}%` } },
-                    { description: { [Op.like]: `%${search}%` } },
-                ]
-            };
-            whereClause[Op.or] = searchCondition[Op.or];
-        }
-
         try {
+            let { page = 1, limit = 8, sortBy = 'updatedAt', order = 'DESC', categoryId, search } = req.query;
+            let offset = (page - 1) * limit;
+            if (offset < 0) {
+                offset = 0;
+            }
+            const validSortBy = ['updatedAt', 'price'];
+            if (!validSortBy.includes(sortBy)) {
+                sortBy = 'updatedAt';
+            }
+            const validOrder = ['ASC', 'DESC'];
+            if (!validOrder.includes(order)) {
+                order = 'DESC';
+            }
+            const whereClause = {};
+            whereClause.quantity = { [Op.gt]: 0 };
+            if (categoryId) {
+                whereClause.categoryId = categoryId;
+            }
+            if (search) {
+                const searchCondition = {
+                    [Op.or]: [
+                        { title: { [Op.like]: `%${search}%` } },
+                        { author: { [Op.like]: `%${search}%` } },
+                        { description: { [Op.like]: `%${search}%` } },
+                    ]
+                };
+                whereClause[Op.or] = searchCondition[Op.or];
+            }
+
+            const totalBooks = await db.Book.count({
+                where: whereClause
+            });
+            const totalPages = Math.ceil(totalBooks / limit);
+
             const books = await db.Book.findAll({
                 where: whereClause,
                 attributes: {
                     include: [
-                        [db.sequelize.literal(`CONCAT('${process.env.IMAGE_PATH}', thumbnail)`), 'thumbnailPath'],
+                        [db.Sequelize.literal(`CONCAT('${process.env.IMAGE_PATH}', thumbnail)`), 'thumbnailPath'],
                     ]
                 },
                 include: [
@@ -57,7 +62,7 @@ const booksController = {
                 offset: parseInt(offset),
             });
 
-            res.status(200).json(books);
+            res.status(200).json({ books, totalPages });
         } catch (error) {
             res.status(500).json({ message: 'Error retrieving books', error });
         }
@@ -69,7 +74,7 @@ const booksController = {
             const book = await db.Book.findByPk(req.params.id, {
                 attributes: {
                     include: [
-                        [db.sequelize.literal(`CONCAT('${process.env.IMAGE_PATH}', thumbnail)`), 'thumbnailPath']
+                        [db.Sequelize.literal(`CONCAT('${process.env.IMAGE_PATH}', thumbnail)`), 'thumbnailPath']
                     ]
                 },
                 include: [
@@ -82,14 +87,16 @@ const booksController = {
                         model: db.BookImage,
                         as: 'bookImages',
                         attributes: [
-                            [db.sequelize.literal(`CONCAT('${process.env.IMAGE_PATH}', image)`), 'imagePath']
+                            [db.Sequelize.literal(`CONCAT('${process.env.IMAGE_PATH}', image)`), 'imagePath']
                         ],
                     },
                 ],
             });
+
             if (!book) {
                 return res.status(404).json({ message: 'Book not found' });
             }
+
             res.status(200).json(book);
         } catch (error) {
             res.status(500).json({ message: 'Error retrieving book', error });
@@ -107,6 +114,7 @@ const booksController = {
             if (req.files && req.files.otherImages) {
                 otherImages = req.files.otherImages.map(image => ({ image: image.filename })); // BookImage expects "image" field not "filename"
             }
+
             const newBook = await db.Book.create({
                 ...bookData, // spread operator
                 bookImages: otherImages // association should be BookImages not BookImage
@@ -118,6 +126,7 @@ const booksController = {
                     }
                 ]
             });
+
             res.status(201).json(newBook);
         } catch (error) {
             res.status(500).json({ message: 'Error creating book', error });
@@ -156,6 +165,7 @@ const booksController = {
                 otherImages = req.files.otherImages.map(image => image.filename);
                 await db.BookImage.bulkCreate(otherImages.map(image => ({ image: image, bookId: req.params.id })));
             }
+
             const [updated] = await db.Book.update(bookData, {
                 where: { id: req.params.id }
             });
@@ -179,6 +189,7 @@ const booksController = {
             if (!deleted) {
                 throw new Error('Book not found');
             }
+
             res.status(200).json({ message: 'Book soft deleted successfully' });
         } catch (error) {
             res.status(500).json({ message: 'Error soft deleting book', error });
