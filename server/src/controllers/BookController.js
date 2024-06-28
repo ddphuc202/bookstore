@@ -6,8 +6,8 @@ require('dotenv').config();
 
 
 const booksController = {
-    // Get all books
-    getAll: async (req, res) => {
+    // Get all books for customer
+    getAllForAdmin: async (req, res) => {
         try {
             let { page = 1, limit = 8, sortBy = 'updatedAt', order = 'DESC', categoryId, search } = req.query;
             let offset = (page - 1) * limit;
@@ -24,6 +24,67 @@ const booksController = {
             }
             const whereClause = {};
             whereClause.quantity = { [Op.gt]: 0 };
+            if (categoryId) {
+                whereClause.categoryId = categoryId;
+            }
+            if (search) {
+                const searchCondition = {
+                    [Op.or]: [
+                        { title: { [Op.like]: `%${search}%` } },
+                        { author: { [Op.like]: `%${search}%` } },
+                        { description: { [Op.like]: `%${search}%` } },
+                    ]
+                };
+                whereClause[Op.or] = searchCondition[Op.or];
+            }
+
+            const totalBooks = await db.Book.count({
+                where: whereClause
+            });
+            const totalPages = Math.ceil(totalBooks / limit);
+
+            const books = await db.Book.findAll({
+                where: whereClause,
+                attributes: {
+                    include: [
+                        [db.Sequelize.literal(`CONCAT('${process.env.IMAGE_PATH}', thumbnail)`), 'thumbnailPath'],
+                    ]
+                },
+                include: [
+                    {
+                        model: db.Category,
+                        as: 'category',
+                        attributes: ['name'],
+                    }
+                ],
+                order: [[sortBy, order]],
+                limit: parseInt(limit),
+                offset: parseInt(offset),
+            });
+
+            res.status(200).json({ books, totalPages });
+        } catch (error) {
+            res.status(500).json({ message: 'Error retrieving books', error });
+        }
+    },
+
+    // Get all books for admin
+    getAllForAdmin: async (req, res) => {
+        try {
+            let { page = 1, limit = 8, sortBy = 'updatedAt', order = 'DESC', categoryId, search } = req.query;
+            let offset = (page - 1) * limit;
+            if (offset < 0) {
+                offset = 0;
+            }
+            const validSortBy = ['updatedAt', 'price'];
+            if (!validSortBy.includes(sortBy)) {
+                sortBy = 'updatedAt';
+            }
+            const validOrder = ['ASC', 'DESC'];
+            if (!validOrder.includes(order)) {
+                order = 'DESC';
+            }
+            const whereClause = {};
             if (categoryId) {
                 whereClause.categoryId = categoryId;
             }
