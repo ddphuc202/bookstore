@@ -42,7 +42,7 @@ const updateStatusOrder = (id, data, navigate) => {
     instance.put('/orders/' + id, data)
         .then(res => {
             alert("Data update successfully!");
-            navigate('/manage-orders');
+            navigate('/manage');
         }).catch(err => console.log(err))
 
 }

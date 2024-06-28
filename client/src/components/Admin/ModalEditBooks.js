@@ -110,7 +110,7 @@ function ModalEditBooks() {
                                 <Form.Label>Thể loại</Form.Label>
                                 <Form.Select aria-label="Default select example" value={data.categoryId} onChange={event => setData({ ...data, categoryId: event.target.value })}>
                                     {
-                                        Array.isArray(records) && records.map((category, index) => (
+                                        Array.isArray(records.categories) && records.categories.map((category, index) => (
                                             <option value={category.id} key={index} > {category.name} </option>
                                         ))
                                     }

@@ -13,15 +13,25 @@ const handleLogin = (email, password, navigate) => {
             localStorage.setItem('userId', user.userId);
             localStorage.setItem('userRole', user.userRole);
             localStorage.setItem('userName', user.userName);
-            navigate('/');
+            if (localStorage.getItem('userRole') === 'customer') {
+                navigate('/');
+            } else {
+                navigate('/manage');
+            }
+
         }).catch(err => {
             alert('Đăng nhập thất bại');
         });
 };
 
 const handleLogout = (navigate) => {
-    localStorage.clear();
-    navigate('/');
+    if (localStorage.getItem('userRole') === 'customer') {
+        localStorage.clear();
+        navigate('/');
+    } else {
+        localStorage.clear();
+        navigate('/login');
+    }
 };
 
 export { handleLogin, handleLogout };

@@ -36,13 +36,14 @@ const updatePostByID = (id, data, navigate) => {
         }).catch(err => console.log(err))
 }
 
-const deletePost = (id, navigate) => {
+const deletePost = (id, count, setCount) => {
     const conf = window.confirm('Do you want to delete?');
     if (conf) {
         instance.delete('/posts/' + id)
             .then(res => {
                 alert('Item has deleted!');
-                navigate('/manage-posts')
+                count++;
+                setCount(count);
             }).catch(err => console.log(err))
     }
 }

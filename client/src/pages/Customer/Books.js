@@ -7,12 +7,14 @@ import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import ListBooks from "../../components/Customer/ListBooks";
 import SearchBooks from "../../components/Customer/SearchBooks";
+import SideBarCategories from "../../components/Customer/SideBarCategories";
 const Books = () => {
 
     const [searchBooks, setSearchBooks] = useState([])
     const [sortBy, setSortBy] = useState([]);
     const [order, setOrder] = useState([]);
     const [page, setPage] = useState(1);
+    const [categoryId, setCategoryId] = useState();
 
 
     const handleSearch = (searchValue) => {
@@ -26,18 +28,29 @@ const Books = () => {
         setSortBy('');
         setOrder('');
         setPage(1);
+        setSearchBooks([]);
     }
 
     const handleSortBy = () => {
         setSortBy('created_at')
+        setOrder('DESC')
+        setPage(1);
     }
 
     const handleAsc = () => {
-        setOrder('asc')
+        setSortBy('price')
+        setOrder('ASC')
+        setPage(1);
     }
 
     const handleDesc = () => {
-        setOrder('desc')
+        setSortBy('price')
+        setOrder('DESC')
+        setPage(1);
+    }
+
+    const handleCategoryId = (id) => {
+        setCategoryId(id);
     }
 
     return (
@@ -47,49 +60,12 @@ const Books = () => {
             <div className="container " style={{ marginTop: "10px" }}>
                 <div className="banner-col">
                     <figure className="d-block a-center">
-                        <a href="#" title="">
-                            <img src="//bizweb.dktcdn.net/100/363/455/themes/918830/assets/banner-col.jpg?1704690471681" alt="" />
-                        </a>
+                        <img src="//bizweb.dktcdn.net/100/363/455/themes/918830/assets/banner-col.jpg?1704690471681" alt="" />
                     </figure>
                 </div>
                 <div className="bg_collection section">
                     <div className="row-book">
-                        <aside className="filter-sidebar side-bar left-content col-lg-3 col-md-4 col-sm-4">
-                            <div className="wrap_background_aside asidecollection">
-                                <div className="row">
-                                    <div className="col-12 col-lg-12 order-1 order-lg-2">
-                                        <div className="filter-content aside-filter">
-                                            <div className="filter-container">
-
-                                                <aside className="aside-item filter-vendor f-left">
-                                                    <div className="aside-title">
-                                                        <h2 className="title-filter title-head margin-top-0"><span
-                                                            className="leaf">Thể Loại</span></h2>
-                                                    </div>
-                                                    <div className="aside-content margin-top-0 filter-group">
-                                                        <ul>
-                                                            <li
-                                                                className="filter-item filter-item--check-box filter-item--green vendorxxx">
-                                                                <span>
-                                                                    <label >
-                                                                        <input type="checkbox" />
-                                                                        <i className="fa"></i>
-                                                                        <span>Trinh thám</span>
-                                                                    </label>
-                                                                </span>
-                                                            </li>
-
-
-                                                        </ul>
-                                                    </div>
-                                                </aside>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                </div>
-                            </div>
-                        </aside>
+                        <SideBarCategories category={handleCategoryId} />
                         <div className="main_container collection col-lg-9 col-md-12 col-sm-12">
                             <div className="wrap-srt-title">
                                 <div className="sortby">
@@ -119,6 +95,7 @@ const Books = () => {
                                 orderBook={order}
                                 page={page}
                                 setPage={setPage}
+                                categoryId={categoryId}
                             />
 
                         </div>

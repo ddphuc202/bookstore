@@ -7,9 +7,6 @@ import { getCustomerById } from '../../services/CustomerServices';
 
 const MainCheckOut = () => {
 
-    const [name, setName] = useState('');
-    const [phone, setPhone] = useState('');
-    const [address, setAddress] = useState('');
     const [data, setData] = useState([]);
 
     const navigate = useNavigate();
@@ -129,10 +126,6 @@ const MainCheckOut = () => {
                                     <div className="content-box">
                                         <div className="content-box__row">
                                             <div className="radio-wrapper">
-                                                {/* <div className="radio__input">
-                                                    <input name="paymentMethod" id="paymentMethod-432316"
-                                                        type="radio" className="input-radio" />
-                                                </div> */}
                                                 <label className="radio__label">
                                                     <span className="radio__label__primary">Vui lòng thanh toán khi nhận
                                                         hàng (COD) </span>

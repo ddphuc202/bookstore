@@ -13,7 +13,6 @@ const SearchBooks = (props) => {
         props.onSearch(search);
     }
 
-
     return (
         <>
             <form className="input-group search-bar">

@@ -20,17 +20,18 @@ const createNewBook = (title, author, description, price, discount, quantity, ca
 
     return instance.post('/books', data).then(res => {
         alert('Data add successfully!');
-        navigate('/manage-books');
+        navigate('/manage/books');
     }).catch(err => console.log(err));
 }
 
-const getBooks = (page, search, sortBy, order, setRecords) => {
+const getBooks = (page, search, sortBy, order, categoryId, setRecords) => {
     instance.get('/books', {
         params: {
             page: page,
             search: search,
             sortBy: sortBy,
-            order: order
+            order: order,
+            categoryId: categoryId,
         }
 
     }).then(res => {
@@ -68,17 +69,18 @@ const updateBookByID = (id, data, thumbnailFile, previewOtherImages, navigate) =
     instance.put('/books/' + id, formData)
         .then(res => {
             alert("Data update successfully!");
-            navigate('/manage-books');
+            navigate('/manage/books');
         })
 }
 
-const deleteBooks = (id, navigate) => {
+const deleteBooks = (id, count, setCount) => {
     const conf = window.confirm('Do you want to delete?');
     if (conf) {
         instance.delete('/books/' + id)
             .then(res => {
                 alert('Item has deleted!');
-                navigate('/manage-books')
+                count++;
+                setCount(count);
             }).catch(err => console.log(err))
     }
 }

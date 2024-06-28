@@ -15,7 +15,7 @@ const ManageArticles = (props) => {
                 <div className='admin-content'>
                     <div className='button-add'>
                         <h1><b>Quản lý bài viết</b></h1>
-                        <Link to={'/manage-add-articles'} className='btn btn-primary'>Thêm mới bài viết</Link>
+                        <Link to={'/manage/add-articles'} className='btn btn-primary'>Thêm mới bài viết</Link>
                     </div>
                     <br></br>
                     <TableArticles />

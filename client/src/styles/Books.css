@@ -154,7 +154,7 @@
     margin: 5px
 }
 
-.custom-btn-numbers {
+.customs-btn-numbers {
     position: relative;
     width: 100px;
     margin-left: 355px;
@@ -162,7 +162,7 @@
     justify-content: center;
 }
 
-.custom-btn-numbers button {
+.customs-btn-numbers button {
     width: 30px;
     height: 32px;
     border: none;
@@ -184,12 +184,12 @@
     align-items: center
 }
 
-.custom-btn-numbers button.btn-minus {
+.customs-btn-numbers button.btn-minus {
     left: 0;
     top: 0
 }
 
-.custom-btn-numbers input {
+.customs-btn-numbers input {
     float: left;
     width: 100px;
     height: 32px;
@@ -202,7 +202,7 @@
     border-radius: 5px
 }
 
-.custom-btn-numbers button.btn-minus {
+.customs-btn-numbers button.btn-minus {
     left: 0;
     top: 0
 }
