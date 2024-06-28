@@ -25,7 +25,7 @@ const createNewBook = (title, author, description, price, discount, quantity, ca
 }
 
 const getBooks = (page, search, sortBy, order, categoryId, setRecords) => {
-    instance.get('/books', {
+    instance.get('/books/customer', {
         params: {
             page: page,
             search: search,
