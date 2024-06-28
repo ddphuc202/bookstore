@@ -13,7 +13,7 @@ const addBookToCart = (id, quantity) => {
     });
 };
 
-const getCartByCustomerId = (id, setData, data) => {
+const getCartByCustomerId = (id, setData) => {
     instance.get('/carts/customer/' + id)
         .then(res => {
             if (res.data.length > 0) {

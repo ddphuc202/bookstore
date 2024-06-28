@@ -15,7 +15,7 @@ const MainCheckOut = () => {
     const navigate = useNavigate();
 
     const handleSubmit = (event) => {
-        createNewOrder(name, phone, address, navigate)
+        createNewOrder(data, navigate)
     }
 
     useEffect(() => {
@@ -58,7 +58,7 @@ const MainCheckOut = () => {
                                             <div className="field__input-wrapper">
                                                 <label className="field__label">Họ và tên</label>
                                                 <input name="billingName" id="billingName" type="text"
-                                                    className="form-control" value={data.name} onChange={(event) => setName(event.target.value)} />
+                                                    className="form-control" value={data.name} onChange={event => setData({ ...data, name: event.target.value })} />
                                             </div>
 
                                         </div>
@@ -70,7 +70,7 @@ const MainCheckOut = () => {
                                                     Số điện thoại (tùy chọn)
                                                 </label>
                                                 <input name="billingPhone" id="billingPhone" type="text"
-                                                    className="form-control" value={data.phone} onChange={(event) => setPhone(event.target.value)} />
+                                                    className="form-control" value={data.phone} onChange={event => setData({ ...data, phone: event.target.value })} />
                                             </div>
                                         </div>
 
@@ -81,7 +81,7 @@ const MainCheckOut = () => {
                                                     Địa chỉ (tùy chọn)
                                                 </label>
                                                 <input name="billingAddress" id="billingAddress" type="text"
-                                                    className="form-control" value={data.address} onChange={(event) => setAddress(event.target.value)} />
+                                                    className="form-control" value={data.address} onChange={event => setData({ ...data, address: event.target.value })} />
                                             </div>
                                         </div>
                                         <br />

@@ -65,9 +65,6 @@
 }
 
 .sortby .sort-icon {
-    background-repeat: no-repeat;
-    background-size: 16px;
-    background-position: left center;
     padding-left: 25px
 }
 
@@ -75,7 +72,6 @@
 
 .sortby span,
 .sortby ul li a {
-    font-family: var(--font-base);
     font-size: 14px;
     color: #2E3A59;
     height: 32px;
@@ -100,15 +96,11 @@
 
 .sortby ul li.active,
 .sortby ul li:hover {
-    background: #7B7B7D
+    background: #7B7B7D;
+    color: #fff;
+    cursor: pointer;
 }
 
-.sortby ul li.active a,
-.sortby ul li:hover a {
-    color: #fff
-}
-
-/* */
 
 .collection .category-products .item_product_main {
     position: relative;
@@ -121,4 +113,96 @@
 
 .info-product button {
     margin-top: 10px;
+}
+
+.search-bar {
+    height: 40px;
+    margin: 24px 0 -0 -38px;
+    position: relative;
+    border-radius: 30px;
+    overflow: hidden;
+    border: solid 1px #BBBBBF;
+    width: 240px;
+    margin-bottom: 25px
+}
+
+.search-bar input {
+    height: 40px;
+    border: none;
+    background: #fff;
+    padding: 0 50px 0 20px
+}
+
+.search-bar input:focus {
+    outline: none;
+}
+
+.search-bar .search-button {
+    width: 45px;
+    height: 40px;
+    padding: 0;
+    text-align: center;
+    line-height: 40px;
+    position: absolute;
+    right: 0;
+    top: 0
+}
+
+.search-bar .search-button svg {
+    width: 24px;
+    height: 24px;
+    margin: 5px
+}
+
+.custom-btn-numbers {
+    position: relative;
+    width: 100px;
+    margin-left: 355px;
+    display: flex;
+    justify-content: center;
+}
+
+.custom-btn-numbers button {
+    width: 30px;
+    height: 32px;
+    border: none;
+    background-color: transparent;
+    font-size: 14px;
+    color: #ee4f83;
+    padding: 0;
+    font-weight: 400;
+    float: left;
+    border-radius: 0;
+    line-height: 22px;
+    position: absolute;
+    z-index: 1;
+    right: 4px;
+    top: -2px;
+    text-align: center;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center
+}
+
+.custom-btn-numbers button.btn-minus {
+    left: 0;
+    top: 0
+}
+
+.custom-btn-numbers input {
+    float: left;
+    width: 100px;
+    height: 32px;
+    border: solid 1px #E5E5E5;
+    padding: 0 30px;
+    text-align: center;
+    font-size: 16px;
+    min-height: unset;
+    margin: 0;
+    border-radius: 5px
+}
+
+.custom-btn-numbers button.btn-minus {
+    left: 0;
+    top: 0
 }

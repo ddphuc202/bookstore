@@ -30,7 +30,7 @@ const TableGenres = (props) => {
       </thead>
       <tbody>
         {
-          records.map((d, i) => (
+          Array.isArray(records) && records.map((d, i) => (
             <tr key={i}>
               <td>{d.id}</td>
               <td>{d.name}</td>
