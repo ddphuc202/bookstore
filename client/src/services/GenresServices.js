@@ -8,7 +8,7 @@ const createNewCategories = (name, navigate) => {
 
     return instance.post('/categories', data).then(res => {
         alert('Data add successfully!');
-        navigate('/manage-categories');
+        navigate('/manage/categories');
     }).catch(err => console.log(err));
 }
 
@@ -31,17 +31,18 @@ const updateCategoriesByID = (id, data, navigate) => {
     instance.put('/categories/' + id, data)
         .then(res => {
             alert("Data update successfully!");
-            navigate('/manage-categories');
+            navigate('/manage/categories');
         }).catch(err => console.log(err))
 }
 
-const deleteCategories = (id, navigate) => {
+const deleteCategories = (id, count, setCount) => {
     const conf = window.confirm('Do you want to delete?');
     if (conf) {
         instance.delete('/categories/' + id)
             .then(res => {
                 alert('Item has deleted!');
-                navigate('/manage-categories')
+                count++;
+                setCount(count);
             }).catch(err => console.log(err))
     }
 }

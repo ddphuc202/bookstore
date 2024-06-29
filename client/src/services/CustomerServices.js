@@ -12,7 +12,7 @@ const createNewCustomer = (name, email, password, phone, address, navigate) => {
 
     instance.post('/customers', data).then(res => {
         alert('Data add successfully!');
-        navigate('/manage-customers');
+        navigate('/manage/customers');
     }).catch(err => console.log(err));
 }
 
@@ -35,17 +35,18 @@ const updateCustomerByID = (id, data, navigate) => {
     instance.put('/customers/' + id, data)
         .then(res => {
             alert("Data update successfully!");
-            navigate('/manage-customers');
+            navigate('/manage/customers');
         }).catch(err => console.log(err))
 }
 
-const deleteCustomers = (id, navigate) => {
+const deleteCustomers = (id, count, setCount) => {
     const conf = window.confirm('Do you want to delete?');
     if (conf) {
         instance.delete('/customers/' + id)
             .then(res => {
                 alert('Item has deleted!');
-                navigate('/manage-customers')
+                count++;
+                setCount(count);
             }).catch(err => console.log(err))
     }
 }

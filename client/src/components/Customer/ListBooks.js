@@ -9,14 +9,16 @@ import { addBookToCart } from '../../services/CartServices';
 const ListBooks = (props) => {
 
     const [records, setRecords] = useState([]);
-    const [page, setPage] = useState(1);
+
 
     const handleSubmit = (id) => {
         addBookToCart(id);
     }
 
     const pageForward = () => {
-        props.setPage(props.page + 1);
+        if (props.page < records.totalPages) {
+            props.setPage(props.page + 1);
+        }
     }
 
     const pageBack = () => {
@@ -24,8 +26,9 @@ const ListBooks = (props) => {
     }
 
     useEffect(() => {
-        getBooks(props.page, props.searchBook, props.sortByBook, props.orderBook, setRecords);
+        getBooks(props.page, props.searchBook, props.sortByBook, props.orderBook, props.categoryId, setRecords);
     }, [props])
+
 
 
     return (
@@ -33,7 +36,7 @@ const ListBooks = (props) => {
             <div className="category-products products">
                 <section className="products-view products-view-grid collection_reponsive">
                     <div className="row">
-                        {Array.isArray(records) && records.map((book, index) => (
+                        {Array.isArray(records.books) && records.books.map((book, index) => (
                             <div key={index} className="col-6 col-md-3 col-lg-3 product-col">
                                 <div className="item_product_main">
                                     <div className="thumb">
@@ -68,23 +71,24 @@ const ListBooks = (props) => {
                             </div>
                         ))
                         }
+                    </div>
 
-                        <div className="custom custom-btn-numbers clearfix input_number_index">
-                            <button
-                                onClick={() => pageBack()}
-                                disabled={props.page === 1}
-                                className="btn-minus btn-cts" type="button">
-                                <FontAwesomeIcon icon={faAnglesLeft} style={{ color: "#000000", marginTop: "2px" }} />
-                            </button>
-                            <input aria-label="Số lượng" type="text" className="qty input-text" id="qty"
-                                name="quantity" value={props.page} disabled
-                            />
-                            <button
-                                onClick={() => pageForward()}
-                                className="btn-plus btn-cts" type="button">
-                                <FontAwesomeIcon icon={faAnglesRight} style={{ color: "#000000", marginTop: "5px" }} />
-                            </button>
-                        </div>
+                    <div className="custom customs-btn-numbers clearfix input_number_index">
+                        <button
+                            onClick={() => pageBack()}
+                            disabled={props.page === 1}
+                            className="btn-minus btn-cts" type="button">
+                            <FontAwesomeIcon icon={faAnglesLeft} style={{ color: "#000000", marginTop: "2px" }} />
+                        </button>
+                        <input aria-label="Số lượng" type="text" className="qty input-text" id="qty"
+                            name="quantity" value={props.page} disabled
+                        />
+                        <button
+                            onClick={() => pageForward()}
+                            disabled={props.page === records.totalPages}
+                            className="btn-plus btn-cts" type="button">
+                            <FontAwesomeIcon icon={faAnglesRight} style={{ color: "#000000", marginTop: "5px" }} />
+                        </button>
                     </div>
                     <br />
 

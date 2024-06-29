@@ -39,7 +39,6 @@ const TableProductCart = () => {
         getCartByCustomerId(localStorage.getItem('userId'), setData)
     }, [])
 
-
     return (
         <>
             <Table className='table table-hover' >
@@ -94,7 +93,17 @@ const TableProductCart = () => {
                 </tbody>
             </Table>
             <div className="btn-mua">
-                <Link style={{ textDecoration: 'none' }} to={'/checkout'}><button type="button" className="btn btn-lg btn-gray btn_buy btn-buy-now">  Thanh toán </button></Link>
+                {data && data.length > 0 ? (
+                    <Link style={{ textDecoration: 'none' }} to={'/checkout'}>
+                        <button type="button" className="btn btn-lg btn-gray btn_buy btn-buy-now">
+                            Thanh toán
+                        </button>
+                    </Link>
+                ) : (
+                    <button type="button" disabled className="btn btn-lg btn-gray btn_buy btn-buy-now">
+                        Thanh toán
+                    </button>
+                )}
             </div>
 
         </>

@@ -13,7 +13,7 @@ const ManageBooks = (props) => {
                 <div className='admin-content'>
                     <div className='button-add'>
                         <h1><b>Quản lý sách</b></h1>
-                        <Link to={'/manage-add-books'} className='btn btn-primary'>Thêm mới sách</Link>
+                        <Link to={'/manage/add-books'} className='btn btn-primary'>Thêm mới sách</Link>
                     </div>
                     <br></br>
                     <TableBooks />
