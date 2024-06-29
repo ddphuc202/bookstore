@@ -7,7 +7,7 @@ require('dotenv').config();
 
 const booksController = {
     // Get all books for customer
-    getAllForAdmin: async (req, res) => {
+    getAllForCustomer: async (req, res) => {
         try {
             let { page = 1, limit = 8, sortBy = 'updatedAt', order = 'DESC', categoryId, search } = req.query;
             let offset = (page - 1) * limit;

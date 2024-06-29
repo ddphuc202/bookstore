@@ -7,7 +7,7 @@ const bookController = require('../controllers/bookController');
 const router = express.Router();
 
 // GET all books for customer
-router.get('/customer', bookController.getAll);
+router.get('/customer', bookController.getAllForCustomer);
 
 // GET all books for admin
 router.get('/admin', authenticate(), authorize(['admin', 'super']), bookController.getAllForAdmin);
