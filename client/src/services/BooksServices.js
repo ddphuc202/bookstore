@@ -1,4 +1,6 @@
-import { instance } from '../utils/AxiosCustomize';
+import { instance } from "../utils/AxiosCustomize";
+
+
 
 const createNewBook = (title, author, description, price, discount, quantity, categories, thumbnailFile, otherImages, navigate) => {
 
@@ -39,6 +41,20 @@ const getBooks = (page, search, sortBy, order, categoryId, setRecords) => {
     })
 }
 
+const getBooksAdmin = (page, search, sortBy, order, categoryId, setRecords) => {
+    instance.get('/books/admin', {
+        params: {
+            page: page,
+            search: search,
+            sortBy: sortBy,
+            order: order,
+            categoryId: categoryId,
+        }
+
+    }).then(res => {
+        setRecords(res.data)
+    })
+}
 
 const getBookById = (id, setData) => {
     return instance.get('/books/' + id)
@@ -84,4 +100,4 @@ const deleteBooks = (id, count, setCount) => {
             }).catch(err => console.log(err))
     }
 }
-export { createNewBook, getBooks, getBookById, updateBookByID, deleteBooks } 
+export { createNewBook, getBooks, getBookById, updateBookByID, deleteBooks, getBooksAdmin } 

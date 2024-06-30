@@ -70,5 +70,15 @@
 }
 
 .content_blog .a-title {
-    height: 70px;
+    height: 100px;
+    text-decoration: none;
+    color: black;
+}
+
+.content_blog .a-title:hover {
+    color: #007700;
+}
+
+.dates {
+    font-size: 13px;
 }

@@ -49,9 +49,9 @@ const NewBooks = () => {
 				<div className="container">
 					<div className="title-border">
 						<h2 className="title-module">
-							<a href="sach-moi-xuat-ban" title="Sách mới"><b>Sách mới</b></a>
+							<b>Sách mới</b>
 						</h2>
-						<a className="link-more" title="xem thêm" href="sach-moi-xuat-ban"><b>Xem thêm</b></a>
+						<Link className="link-more" title="xem thêm" to={'/books'}><b>Xem thêm</b></Link>
 					</div>
 					<div className="slide-book-new-wrap relative swiper-button-main">
 						<div className="swiper-container slide-book-new">

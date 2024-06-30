@@ -153,8 +153,6 @@ function ModalEditBooks() {
                                     </tr>
                                 </tbody>
                             </table>
-
-
                         </Form.Group>
 
                         <Form.Group controlId="formFileMultiple" className="mb-3">

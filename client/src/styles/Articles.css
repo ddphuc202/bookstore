@@ -14,7 +14,7 @@
 
 .blogpage .item_blog_base .thumb {
     display: block;
-    border-radius: 5px;
+    border-radius: 10px;
     margin-bottom: 15px
 }
 
@@ -30,4 +30,38 @@
 
 .blogpage .item_blog_base p {
     display: none
+}
+
+.content_blogs {
+    width: 196px;
+}
+
+.content_blogs .titles {
+    width: 260px;
+    height: 120px;
+}
+
+.thumb img {
+    border-radius: 5px;
+}
+
+.content_blogs .a-title {
+    font-size: 20px;
+    height: 120px;
+    text-decoration: none;
+    color: black;
+}
+
+.content_blogs .a-title:hover {
+    color: #007700;
+}
+
+.content_blogs .dates {
+    font-size: 15px;
+}
+
+.aside-item h2 {
+    font-size: 25px;
+    font-weight: bold;
+    color: #009900;
 }

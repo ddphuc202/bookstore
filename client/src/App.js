@@ -17,7 +17,7 @@ import Login from './components/Auth/Login';
 import Register from './components/Auth/Register';
 import InfoPage from './pages/Customer/InfoPage';
 import Books from './pages/Customer/Books';
-import Articles from './pages/Customer/Articles';
+import Posts from './pages/Customer/Posts';
 import InfoBook from './pages/Customer/InfoBooks';
 import Test from './components/Admin/Test';
 
@@ -31,6 +31,7 @@ import ModalEditOrder from './components/Admin/ModalEditOrder';
 import Logout from './components/Auth/Logout';
 import OrderCustomersDetail from './pages/Customer/OrderCustomersDetail';
 import ProtectedRoutes from './utils/ProtectedRoutes';
+import InfoPost from './pages/Customer/InfoPosts';
 
 
 function App() {
@@ -72,7 +73,8 @@ function App() {
       <Route path='/' element={<HomePage />} />
       <Route path='/about-page' element={<InfoPage />} />
       <Route path='/books' element={<Books />} />
-      <Route path='/articles' element={<Articles />} />
+      <Route path='/posts' element={<Posts />} />
+      <Route path='/info-post/:id' element={<InfoPost />} />
       <Route path='/info-book/:id' element={<InfoBook />} />
       <Route path='/cart' element={<Cart />} />
       <Route path='/checkout' element={<CheckOut />} />

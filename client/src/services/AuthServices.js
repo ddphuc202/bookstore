@@ -24,6 +24,23 @@ const handleLogin = (email, password, navigate) => {
         });
 };
 
+const handleRegister = (name, email, password, address, phone, navigate) => {
+    let data = {
+        name: name,
+        email: email,
+        password: password,
+        address: address,
+        phone: phone
+    };
+    instance.post('/register', data).then(res => {
+        alert('Đăng ký thành công');
+        navigate('/login');
+    }).catch(err => {
+        alert('Đăng ký thất bại');
+    })
+}
+
+
 const handleLogout = (navigate) => {
     if (localStorage.getItem('userRole') === 'customer') {
         localStorage.clear();
@@ -34,4 +51,4 @@ const handleLogout = (navigate) => {
     }
 };
 
-export { handleLogin, handleLogout };
+export { handleLogin, handleLogout, handleRegister };

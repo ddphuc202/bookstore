@@ -13,58 +13,43 @@ const Header = () => {
                 <div className="row">
                     <div className="col-lg-2 col-md-3">
 
-                        <a href="/" className="logo">
+                        <Link to="/" className="logo">
                             <img width="74" height="75" src={Logo} alt="Khai Tâm" />
-                        </a>
+                        </Link>
 
 
                     </div>
                     <div className="col-9 col-md-3 col-xl-7 col-lg-6">
                         <div className="child-header header_nav_main">
-                            <div className="d-block d-md-none bl-acc">
-                                <div className="block-account">
-                                    <FontAwesomeIcon icon={faUser} />
-                                    <div className="d-flex">
-
-                                        <a href="/login">Đăng nhập</a>
-                                        <a href="/account/register">Đăng ký</a>
-
-
-                                    </div>
-                                </div>
-                            </div>
                             <div className="navigation-head">
 
                                 <nav className="nav-horizontal">
                                     <ul className="item_big">
                                         <li className="nav-item active ">
-                                            <a className="a-img" href="/" title="Trang chủ">
+                                            <Link className="a-img" to="/" title="Trang chủ">
                                                 Trang chủ
-                                            </a>
+                                            </Link>
                                         </li>
                                         <li className="nav-item has-child  ">
-                                            <a className="a-img caret-down" href="/tin-sach" title="Tin Sách">
+                                            <Link className="a-img caret-down" to="/posts" title="Tin Sách">
                                                 Tin Sách
-                                            </a>
+                                            </Link>
 
 
                                         </li>
                                         <li className="nav-item has-child   has-mega">
-                                            <a className="a-img caret-down" href="/books" title="Sách Nhã Nam">
+                                            <Link className="a-img caret-down" to="/books" title="Sách Nhã Nam">
                                                 Sách Khai Tâm
-                                            </a>
+                                            </Link>
 
                                         </li>
 
                                         <li className="nav-item ">
-                                            <a className="a-img" href="/about-page" title="Về Nhã Nam">
+                                            <Link className="a-img" to="/about-page" title="Về Nhã Nam">
                                                 Về Khai Tâm
-                                            </a>
+                                            </Link>
                                         </li>
 
-                                        <li className="nav-item ">
-                                            <Link to="/logout">Đăng xuất</Link>
-                                        </li>
 
                                     </ul>
                                 </nav>
@@ -78,18 +63,28 @@ const Header = () => {
                         </div>
 
                         <div className="user-header">
-                            <Link to={'/orders'} ><FontAwesomeIcon icon={faUser} /></Link>
-
-                            <div className="account-header">
-
-                                <a href="/login">Đăng nhập</a>
-                                <a href="/register">Đăng ký</a>
-
+                            <Link to={'/orders'} ><FontAwesomeIcon icon={faUser} style={{ color: "#000000", }} /></Link>
+                            {!localStorage.getItem('token') ? (
+                                <div className="account-header">
+                                    <Link to="/login">Đăng nhập</Link>
+                                    <Link to="/register">Đăng ký</Link>
+                                </div>
+                            ) : (<div className="account-header">
+                                <Link to="/logout">Đăng xuất</Link>
                             </div>
+                            )
+                            }
                         </div>
                         <Link className="cart-head" to={'/cart'} title="Giỏ hàng">
-                            <FontAwesomeIcon icon={faCartShopping} />
+                            <FontAwesomeIcon icon={faCartShopping} style={{ color: "#000000", }} />
                         </Link>
+                        <div className="user-name">
+                            {
+                                localStorage.getItem('token') ? (
+                                    <b>Xin chào {localStorage.getItem('userName')}</b>
+                                ) : (null)
+                            }
+                        </div>
                     </div>
                 </div>
             </div>

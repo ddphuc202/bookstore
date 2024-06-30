@@ -2,8 +2,8 @@ import Table from 'react-bootstrap/Table';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPenToSquare, faTrash, faAnglesLeft, faAnglesRight } from '@fortawesome/free-solid-svg-icons'
 import { useEffect, useState } from 'react';
-import axios from 'axios';
-import { Link, Route, useNavigate } from 'react-router-dom';
+import { baseURL } from '../../utils/AxiosCustomize';
+import { Link } from 'react-router-dom';
 import { getPost, deletePost } from '../../services/ArticlesServices';
 const TableArticles = (props) => {
 
@@ -24,7 +24,7 @@ const TableArticles = (props) => {
       <Table striped bordered hover>
         <thead>
           <tr>
-            <th>id</th>
+            <th>#</th>
             <th>Tiêu đề</th>
             <th>Nội dung</th>
             <th>Ảnh</th>
@@ -38,7 +38,7 @@ const TableArticles = (props) => {
                 <td>{d.id}</td>
                 <td>{d.title}</td>
                 <td>{d.content}</td>
-                <td>{d.image_url}</td>
+                <td> <img width={'200px'} src={baseURL + d.imagePath} /> </td>
                 <td>
                   <Link to={`/manage/edit-posts/${d.id}`} ><FontAwesomeIcon icon={faPenToSquare} size="lg" /></Link>
                   <button style={{ border: 'none' }} onClick={event => handleDelete(d.id)} ><FontAwesomeIcon icon={faTrash} style={{ color: "#fa2500" }} /></button>

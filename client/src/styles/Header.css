@@ -10,6 +10,13 @@ header .logo {
     display: flex
 }
 
+header .user-name {
+    height: 24px;
+    position: absolute;
+    top: 33px;
+    left: 30px;
+    color: #008800;
+}
 
 header .user-header {
     width: 24px;

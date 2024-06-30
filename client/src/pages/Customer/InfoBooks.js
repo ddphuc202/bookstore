@@ -41,13 +41,18 @@ const InfoBooks = () => {
         }
     };
 
-
     useEffect(() => {
         getBookById(id, setData)
-        setThumbnail(data.thumbnail_path)
-        if (data && data.images) {
-            const OtherImages = Array.from(data.images);
-            setOtherImages(OtherImages);
+    }, [])
+
+
+    useEffect(() => {
+        if (data) {
+            setThumbnail(data.thumbnail_path)
+            if (data.bookImages) {
+                const OtherImages = Array.from(data.bookImages);
+                setOtherImages(OtherImages);
+            }
         }
     }, [data])
 
@@ -65,11 +70,11 @@ const InfoBooks = () => {
                             <br />
                             <Swiper navigation={true} modules={[Navigation]} className="mySwiper">
                                 <SwiperSlide >
-                                    <img style={{ marginLeft: '0px', alignItems: 'center' }} width={'515px'} height={'390px'} src={baseURL + thumbnail} alt="Ảnh" />
+                                    <img style={{ marginLeft: '0px', alignItems: 'center' }} width={'515px'} height={'390px'} src={baseURL + data.thumbnailPath} alt="Ảnh" />
                                 </SwiperSlide>
                                 {otherImages.map((image, index) => (
                                     <SwiperSlide key={index}>
-                                        <img style={{ marginLeft: '0px', alignItems: 'center' }} width={'515px'} height={'390px'} key={index} src={baseURL + image.image_path} alt="Ảnh" />
+                                        <img style={{ marginLeft: '0px', alignItems: 'center' }} width={'515px'} height={'390px'} key={index} src={baseURL + image.imagePath} alt="Ảnh" />
                                     </SwiperSlide>
                                 ))}
                             </Swiper>

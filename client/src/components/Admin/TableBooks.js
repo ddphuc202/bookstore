@@ -3,7 +3,7 @@ import { faPenToSquare, faTrash, faAnglesLeft, faAnglesRight, faMagnifyingGlass 
 import Table from 'react-bootstrap/Table';
 import { useEffect, useState } from 'react';
 import { Link, Route, useNavigate } from 'react-router-dom';
-import { getBooks, deleteBooks } from '../../services/BooksServices'
+import { getBooksAdmin, deleteBooks } from '../../services/BooksServices'
 import { baseURL } from '../../utils/AxiosCustomize';
 const TableBooks = (props) => {
 
@@ -32,7 +32,7 @@ const TableBooks = (props) => {
   }
 
   useEffect(() => {
-    getBooks(page, search, sortBy, order, categoryId, setRecords);
+    getBooksAdmin(page, search, sortBy, order, categoryId, setRecords);
   }, [page, search, count])
 
 

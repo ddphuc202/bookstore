@@ -5,11 +5,12 @@ const createNewPost = (title, content, imageFile, navigate) => {
     const data = new FormData();
     data.append('title', title);
     data.append('content', content);
-    data.append('imageFile', imageFile);
+    data.append('image', imageFile);
+    data.append('adminId', localStorage.getItem('userId'));
 
     return instance.post('/posts', data).then(res => {
         alert('Data add successfully!');
-        navigate('/manage-posts');
+        navigate('/manage/posts');
     }).catch(err => console.log(err));
 }
 
@@ -20,6 +21,16 @@ const getPost = (setRecords) => {
 }
 
 
+const getPostBanner = (limit, setRecords) => {
+    return instance.get('/posts', {
+        params: {
+            limit: limit
+        }
+    }).then(res => {
+        setRecords(res.data)
+    }).catch(err => console.log(err))
+}
+
 const getPostById = (id, setData) => {
     return instance.get('/posts/' + id)
         .then(res => {
@@ -28,11 +39,20 @@ const getPostById = (id, setData) => {
         .catch(err => console.log(err))
 }
 
-const updatePostByID = (id, data, navigate) => {
-    instance.put('/posts/' + id, data)
+const updatePostByID = (id, data, imageFile, navigate) => {
+    const formData = new FormData();
+    for (const key in data) {
+        if (data[key] !== null) {
+            formData.append(key, data[key]);
+        }
+    }
+    if (imageFile) {
+        formData.append('image', imageFile);
+    }
+    instance.put('/posts/' + id, formData)
         .then(res => {
             alert("Data update successfully!");
-            navigate('/manage-posts');
+            navigate('/manage/posts');
         }).catch(err => console.log(err))
 }
 
@@ -47,4 +67,4 @@ const deletePost = (id, count, setCount) => {
             }).catch(err => console.log(err))
     }
 }
-export { createNewPost, getPost, getPostById, updatePostByID, deletePost } 
+export { createNewPost, getPost, getPostBanner, getPostById, updatePostByID, deletePost } 
