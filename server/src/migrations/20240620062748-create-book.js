@@ -29,6 +29,10 @@ module.exports = {
         type: Sequelize.STRING,
         allowNull: false,
       },
+      publisher: {
+        type: Sequelize.STRING,
+        allowNull: false,
+      },
       discount: {
         type: Sequelize.INTEGER,
         defaultValue: 0,

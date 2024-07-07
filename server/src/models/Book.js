@@ -54,6 +54,10 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.STRING,
       allowNull: false,
     },
+    publisher: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
     discount: {
       type: DataTypes.INTEGER,
       defaultValue: 0,

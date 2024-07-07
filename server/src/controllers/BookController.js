@@ -92,7 +92,6 @@ const booksController = {
                     [Op.or]: [
                         { title: { [Op.like]: `%${search}%` } },
                         { author: { [Op.like]: `%${search}%` } },
-                        { description: { [Op.like]: `%${search}%` } },
                     ]
                 };
                 whereClause[Op.or] = searchCondition[Op.or];
