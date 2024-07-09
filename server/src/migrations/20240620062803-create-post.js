@@ -22,7 +22,7 @@ module.exports = {
       },
       admin_id: {
         type: Sequelize.INTEGER,
-        // allowNull: false,
+        allowNull: false,
         references: {
           model: 'admins',
           key: 'id',

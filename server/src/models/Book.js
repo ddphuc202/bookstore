@@ -18,6 +18,10 @@ module.exports = (sequelize, DataTypes) => {
         foreignKey: 'bookId',
         as: 'bookImages',
       });
+      models.Book.belongsTo(models.Admin, {
+        foreignKey: 'adminId',
+        as: 'admin',
+      });
       models.Book.hasMany(models.Cart, {
         foreignKey: 'bookId',
         as: 'carts',
@@ -70,6 +74,14 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false,
       references: {
         model: 'categories',
+        key: 'id',
+      },
+    },
+    adminId: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      references: {
+        model: 'admins',
         key: 'id',
       },
     },

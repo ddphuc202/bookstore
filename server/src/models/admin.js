@@ -13,7 +13,11 @@ module.exports = (sequelize, DataTypes) => {
       Admin.hasMany(models.Post, {
         foreignKey: 'adminId',
         as: 'posts',
-      })
+      });
+      Admin.hasMany(models.Book, {
+        foreignKey: 'adminId',
+        as: 'books',
+      });
     }
   }
   Admin.init({

@@ -14,7 +14,7 @@ module.exports = (sequelize, DataTypes) => {
       Post.belongsTo(models.Admin, {
         foreignKey: 'adminId',
         as: 'admin',
-      })
+      });
     }
   }
   Post.init({
@@ -31,7 +31,7 @@ module.exports = (sequelize, DataTypes) => {
     },
     adminId: {
       type: DataTypes.INTEGER,
-      // allowNull: false,
+      allowNull: false,
       references: {
         model: 'admins',
         key: 'id',

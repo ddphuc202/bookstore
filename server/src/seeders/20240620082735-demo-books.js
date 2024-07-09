@@ -1,5 +1,7 @@
 'use strict';
 
+const admin = require('../models/admin');
+
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
@@ -14,6 +16,7 @@ module.exports = {
         price: 85000,
         discount: 0,
         category_id: 1,
+        admin_id: 1,
         quantity: 100,
         created_at: currentDate,
         updated_at: currentDate
@@ -27,6 +30,7 @@ module.exports = {
         price: 78000,
         discount: 0,
         category_id: 2,
+        admin_id: 1,
         quantity: 80,
         created_at: currentDate,
         updated_at: currentDate
@@ -40,6 +44,7 @@ module.exports = {
         price: 92000,
         discount: 0,
         category_id: 3,
+        admin_id: 1,
         quantity: 90,
         created_at: currentDate,
         updated_at: currentDate
@@ -53,6 +58,7 @@ module.exports = {
         price: 89000,
         discount: 0,
         category_id: 4,
+        admin_id: 1,
         quantity: 95,
         created_at: currentDate,
         updated_at: currentDate
@@ -66,6 +72,7 @@ module.exports = {
         price: 87000,
         discount: 0,
         category_id: 5,
+        admin_id: 1,
         quantity: 85,
         created_at: currentDate,
         updated_at: currentDate
@@ -79,6 +86,7 @@ module.exports = {
         price: 80000,
         discount: 0,
         category_id: 1,
+        admin_id: 1,
         quantity: 75,
         created_at: currentDate,
         updated_at: currentDate
@@ -92,6 +100,7 @@ module.exports = {
         price: 93000,
         discount: 0,
         category_id: 2,
+        admin_id: 1,
         quantity: 85,
         created_at: currentDate,
         updated_at: currentDate
@@ -105,6 +114,7 @@ module.exports = {
         price: 88000,
         discount: 0,
         category_id: 3,
+        admin_id: 1,
         quantity: 90,
         created_at: currentDate,
         updated_at: currentDate
@@ -118,6 +128,7 @@ module.exports = {
         price: 91000,
         discount: 0,
         category_id: 4,
+        admin_id: 1,
         quantity: 95,
         created_at: currentDate,
         updated_at: currentDate
@@ -131,6 +142,7 @@ module.exports = {
         price: 84000,
         discount: 0,
         category_id: 5,
+        admin_id: 1,
         quantity: 80,
         created_at: currentDate,
         updated_at: currentDate
@@ -144,6 +156,7 @@ module.exports = {
         price: 82000,
         discount: 0,
         category_id: 1,
+        admin_id: 1,
         quantity: 70,
         created_at: currentDate,
         updated_at: currentDate
@@ -157,6 +170,7 @@ module.exports = {
         price: 86000,
         discount: 0,
         category_id: 2,
+        admin_id: 1,
         quantity: 85,
         created_at: currentDate,
         updated_at: currentDate
@@ -170,6 +184,7 @@ module.exports = {
         price: 90000,
         discount: 0,
         category_id: 3,
+        admin_id: 1,
         quantity: 90,
         created_at: currentDate,
         updated_at: currentDate
