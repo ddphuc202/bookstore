@@ -13,11 +13,11 @@ module.exports = (sequelize, DataTypes) => {
       OrderDetail.belongsTo(models.Order, {
         foreignKey: 'orderId',
         as: 'order',
-      })
+      });
       OrderDetail.belongsTo(models.Book, {
         foreignKey: 'bookId',
         as: 'book',
-      })
+      });
     }
   }
   OrderDetail.init({
@@ -52,6 +52,9 @@ module.exports = (sequelize, DataTypes) => {
     modelName: 'OrderDetail',
     tableName: 'order_details',
     underscored: true,
+    timestamps: true,
+    createdAt: true,
+    updatedAt: false,
   });
   return OrderDetail;
 };
