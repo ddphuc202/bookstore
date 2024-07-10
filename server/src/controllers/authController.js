@@ -9,7 +9,12 @@ const authController = {
         try {
             let isValid, userId, userName, userRole;
 
-            let admin = await db.Admin.findOne({ where: { email: req.body.email } });
+            let admin = await db.Admin.findOne({
+                where: {
+                    email: req.body.email,
+                    deletedAt: null
+                }
+            });
             if (admin) {
                 isValid = await bcrypt.compare(req.body.password, admin.password);
                 userId = admin.id;
