@@ -1,4 +1,5 @@
 const db = require('../models');
+const bcrypt = require('bcryptjs');
 
 const adminController = {
     // Get all admins
@@ -45,6 +46,15 @@ const adminController = {
     // Create new admin
     create: async (req, res) => {
         try {
+            const existingCustomer = await db.Customer.findOne({ where: { email: req.body.email } });
+            if (existingCustomer) {
+                return res.status(400).json({ message: 'Email already used' });
+            }
+            const existingAdmin = await db.Admin.findOne({ where: { email: req.body.email } });
+            if (existingAdmin) {
+                return res.status(400).json({ message: 'Email already used' });
+            }
+            req.body.password = await bcrypt.hash(req.body.password, 12);
             const admin = await db.Admin.create(req.body);
             res.status(201).json(admin);
         } catch (error) {

@@ -50,8 +50,8 @@ const customerController = {
             // Hash password
             customerData.password = await bcrypt.hash(customerData.password, 12);
             // Create customer
-            const newCustomer = await db.Customer.create(customerData);
-            res.status(201).json(newCustomer);
+            const customer = await db.Customer.create(customerData);
+            res.status(201).json(customer);
         } catch (error) {
             res.status(500).json({ message: 'Error creating customer', error });
         }
