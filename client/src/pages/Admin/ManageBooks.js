@@ -1,4 +1,5 @@
 import '../../styles/Manage.css'
+import '../../styles/Admin.css'
 import TableBooks from '../../components/Admin/TableBooks';
 import SideBar from '../../components/Admin/SideBar';
 import { Container } from 'react-bootstrap';
