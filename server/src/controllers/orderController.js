@@ -14,7 +14,7 @@ const orderController = {
             const totalOrders = await db.Order.count();
             const totalPages = Math.ceil(totalOrders / limit);
             const orders = await db.Order.findAll({
-                order: [['updatedAt', 'ASC']],
+                order: [['createdAt', 'DESC']],
             });
             res.status(200).json({ orders, totalPages });
         } catch (error) {
@@ -28,7 +28,7 @@ const orderController = {
         try {
             const orders = await db.Order.findAll({
                 where: { customerId: req.params.id },
-                order: [['updatedAt', 'DESC']],
+                order: [['createdAt', 'DESC']],
             });
             if (orders.length === 0) {
                 return res.status(404).json({ message: 'No order found for this customer' });
@@ -121,7 +121,7 @@ const orderController = {
     // Update a order
     update: async (req, res) => {
         try {
-            if (req.body.status && req.body.status === 'cancelled') {
+            if (req.body.status && req.body.status == 5) {
                 const orderDetails = await db.OrderDetail.findAll({
                     where: { orderId: req.params.id }
                 });

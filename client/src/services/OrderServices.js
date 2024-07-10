@@ -8,12 +8,12 @@ const createNewOrder = (data, navigate) => {
         name: data.name,
         phone: data.phone,
         address: data.address
-    }
+    };
     instance.post('/orders', dataForm).then(res => {
-        alert('Đặt hàng thành công!')
+        alert('Đặt hàng thành công!');
         navigate('/orders');
-    }).catch(err => console.log(err))
-}
+    }).catch(err => console.log(err));
+};
 
 const getAllOrders = (page, setData) => {
     instance.get('/orders', {
@@ -24,44 +24,44 @@ const getAllOrders = (page, setData) => {
         .then(res => {
             setData(res.data);
         })
-        .catch(err => console.log(err))
-}
+        .catch(err => console.log(err));
+};
 
 const getOrderCustomers = (id, setData) => {
     instance.get('/orders/customer/' + id)
         .then(res => {
             setData(res.data);
         })
-        .catch(err => console.log(err))
-}
+        .catch(err => console.log(err));
+};
 
 const getOrderDetail = (id, setData) => {
     instance.get('/orders/' + id)
         .then(res => {
             setData(res.data);
         })
-        .catch(err => console.log(err))
+        .catch(err => console.log(err));
 
-}
+};
 
 const updateStatusOrder = (id, data, navigate) => {
     instance.put('/orders/' + id, data)
         .then(res => {
             toast.success("Cập nhật tình trạng đơn hàng thành công!");
             navigate('/manage');
-        }).catch(err => console.log(err))
+        }).catch(err => console.log(err));
 
-}
+};
 
 const cancelStatusOrder = (id, navigate) => {
     let data = {
         status: 5
-    }
+    };
     instance.put('/orders/' + id, data)
         .then(res => {
             toast.success("Hủy đơn hàng thành công!");
             navigate('/orders');
-        }).catch(err => console.log(err))
-}
+        }).catch(err => console.log(err));
+};
 
-export { createNewOrder, getOrderCustomers, getAllOrders, getOrderDetail, updateStatusOrder, cancelStatusOrder } 
+export { createNewOrder, getOrderCustomers, getAllOrders, getOrderDetail, updateStatusOrder, cancelStatusOrder }; 
