@@ -17,6 +17,7 @@ function ModalEditOrder() {
         updateStatusOrder(id, data, navigate);
     }
 
+
     useEffect(() => {
         getOrderDetail(id, setData)
     }, [])
@@ -42,11 +43,46 @@ function ModalEditOrder() {
                             <Form.Group className="mb-3" controlId="formBasicEmail" >
                                 <Form.Label>Tên thể loại</Form.Label>
                                 <Form.Select aria-label="Default select example" value={data.status} onChange={event => setData({ ...data, status: event.target.value })}>
-                                    <option value={1} >Chờ xử lý</option>
-                                    <option value={2} >Đang xử lý</option>
-                                    <option value={3} >Đang vận chuyển</option>
-                                    <option value={4} >Hoàn thành</option>
-                                    <option value={5} >Đã hủy</option>
+
+                                    {data.status === 'pending' && (
+                                        <>
+                                            <option value={'pending'}>Chờ xử lý</option>
+                                            <option value={'processing'} >Đang xử lý</option>
+                                            <option value={'delivering'} >Đang vận chuyển</option>
+                                            <option value={'completed'} >Hoàn thành</option>
+                                            <option value={'cancelled'} >Đã hủy</option>
+                                        </>
+                                    )}
+                                    {data.status === 'processing' && (
+                                        <>
+                                            <option value={'processing'}>Đang xử lý</option>
+                                            <option value={'delivering'} >Đang vận chuyển</option>
+                                            <option value={'completed'} >Hoàn thành</option>
+                                            <option value={'cancelled'} >Đã hủy</option>
+                                        </>
+                                    )}
+                                    {data.status === 'delivering' && (
+                                        <>
+                                            <option value={'delivering'}>Đang vận chuyển</option>
+                                            <option value={'completed'} >Hoàn thành</option>
+                                            <option value={'cancelled'} >Đã hủy</option>
+                                        </>
+                                    )}
+                                    {data.status === 'completed' && (
+                                        <>
+                                            <option value={'delivering'}>Đang vận chuyển</option>
+                                            <option value={'completed'}>Hoàn thành</option>
+                                            <option value={'cancelled'}>Đã hủy</option>
+                                        </>
+                                    )}
+                                    {data.status === 'cancelled' && (
+                                        <>
+                                            <option value={'delivering'}>Đang vận chuyển</option>
+                                            <option value={'cancelled'}>Đã hủy</option>
+                                            <option value={'completed'}>Hoàn thành</option>
+                                        </>
+                                    )}
+
                                 </Form.Select>
                             </Form.Group>
                         </Form>

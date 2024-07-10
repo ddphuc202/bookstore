@@ -3,6 +3,7 @@ import '../../styles/Admin.css'
 import TableAdmins from '../../components/Admin/TableAdmins'
 import SideBar from '../../components/Admin/SideBar';
 import { Container } from 'react-bootstrap';
+import Statistic from '../../components/Admin/Statistic';
 import { Link } from 'react-router-dom';
 
 const ManageAdmins = (props) => {
@@ -19,6 +20,9 @@ const ManageAdmins = (props) => {
                     </div>
                     <br></br>
                     <TableAdmins />
+                    <br></br>
+                    <Statistic />
+
                 </div>
             </div>
         </>

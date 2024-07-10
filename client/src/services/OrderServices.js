@@ -53,14 +53,16 @@ const updateStatusOrder = (id, data, navigate) => {
 
 };
 
-const cancelStatusOrder = (id, navigate) => {
+const cancelStatusOrder = (id, refresh, setRefresh) => {
+    window.confirm('Bạn có chắc chắn muốn hủy đơn hàng này không?')
     let data = {
-        status: 5
+        status: 'cancelled'
     };
     instance.put('/orders/' + id, data)
         .then(res => {
             toast.success("Hủy đơn hàng thành công!");
-            navigate('/orders');
+            refresh++;
+            setRefresh(refresh)
         }).catch(err => console.log(err));
 };
 

@@ -43,6 +43,7 @@ const TableProductCart = () => {
 
     return (
         <>
+            <ToastContainer />
             <Table className='table table-hover' >
                 <thead >
                     <tr >

@@ -60,4 +60,18 @@ const deleteAdmins = (id, count, setCount) => {
             })
     }
 }
-export { createNewAdmin, getAdmins, getAdminById, updateAdminByID, deleteAdmins } 
+
+const statisticSales = (month, year, setData) => {
+    instance.get('/admins/statistic', {
+        params: {
+            month: month,
+            year: year
+        }
+    }).then(res => {
+        setData(res.data)
+
+    }).catch(err => {
+        console.log(err)
+    })
+}
+export { createNewAdmin, getAdmins, getAdminById, updateAdminByID, deleteAdmins, statisticSales } 

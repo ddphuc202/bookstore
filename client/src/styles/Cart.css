@@ -26,6 +26,10 @@ tbody .status-processing {
     color: #FFB90F
 }
 
+tbody .status-delivering {
+    color: cornflowerblue
+}
+
 
 
 

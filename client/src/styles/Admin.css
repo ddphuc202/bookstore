@@ -7,3 +7,12 @@
     padding-left: 40px;
     padding-right: 40px;
 }
+
+.statistic {
+    display: flex;
+}
+
+.input-date {
+    display: flex;
+    ;
+}

@@ -1,5 +1,6 @@
 import { jwtDecode } from "jwt-decode";
 import { instance } from "../utils/AxiosCustomize";
+import { toast } from "react-toastify";
 
 const handleLogin = (email, password, navigate) => {
     let data = {
@@ -20,7 +21,7 @@ const handleLogin = (email, password, navigate) => {
             }
 
         }).catch(err => {
-            alert('Đăng nhập thất bại');
+            toast.error('Đăng nhập thất bại');
         });
 };
 
@@ -33,10 +34,10 @@ const handleRegister = (name, email, password, address, phone, navigate) => {
         phone: phone
     };
     instance.post('/register', data).then(res => {
-        alert('Đăng ký thành công');
+        toast.success('Đăng ký thành công');
         navigate('/login');
     }).catch(err => {
-        alert('Đăng ký thất bại');
+        toast.error('Đăng ký thất bại');
     })
 }
 

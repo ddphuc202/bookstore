@@ -47,6 +47,7 @@ const NewBooks = () => {
 
 	return (
 		<>
+			<ToastContainer />
 			<section className="book_new">
 				<div className="container">
 					<div className="title-border">

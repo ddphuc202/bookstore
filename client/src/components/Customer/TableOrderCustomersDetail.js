@@ -6,24 +6,27 @@ import { Link, useParams } from "react-router-dom";
 import { getOrderDetail, cancelStatusOrder } from '../../services/OrderServices';
 import { baseURL } from '../../utils/AxiosCustomize';
 import { useNavigate } from 'react-router-dom';
+import { ToastContainer } from 'react-toastify';
 const TableOrderCustomersDetail = () => {
 
     const { id } = useParams();
     const [data, setData] = useState([]);
+    const [refresh, setRefresh] = useState(0);
 
     const navigate = useNavigate()
 
     const handleCancel = () => {
-        cancelStatusOrder(id, navigate);
+        cancelStatusOrder(id, refresh, setRefresh);
     }
 
     useEffect(() => {
         getOrderDetail(id, setData)
-    }, [])
+    }, [refresh])
 
 
     return (
         <>
+            <ToastContainer />
             <Table className='table table-hover' >
                 <thead>
                     <tr>

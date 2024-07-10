@@ -13,6 +13,9 @@ const addBookToCart = (id, quantity) => {
         if (err.response.status === 401) {
             toast.info('Vui lòng đăng nhập!')
         }
+        if (err.response.status === 403) {
+            toast.info('Vui lòng đăng nhập!')
+        }
     });
 };
 
