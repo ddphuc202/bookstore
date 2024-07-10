@@ -1,4 +1,6 @@
+import { toast } from 'react-toastify';
 import { instance } from '../utils/AxiosCustomize';
+
 
 const createNewOrder = (data, navigate) => {
     let dataForm = {
@@ -8,13 +10,17 @@ const createNewOrder = (data, navigate) => {
         address: data.address
     }
     instance.post('/orders', dataForm).then(res => {
-        alert('Đặt hàng thành công!');
+        alert('Đặt hàng thành công!')
         navigate('/orders');
     }).catch(err => console.log(err))
 }
 
-const getAllOrders = (setData) => {
-    instance.get('/orders')
+const getAllOrders = (page, setData) => {
+    instance.get('/orders', {
+        params: {
+            page: page
+        }
+    })
         .then(res => {
             setData(res.data);
         })
@@ -41,7 +47,7 @@ const getOrderDetail = (id, setData) => {
 const updateStatusOrder = (id, data, navigate) => {
     instance.put('/orders/' + id, data)
         .then(res => {
-            alert("Data update successfully!");
+            toast.success("Cập nhật tình trạng đơn hàng thành công!");
             navigate('/manage');
         }).catch(err => console.log(err))
 
@@ -49,11 +55,11 @@ const updateStatusOrder = (id, data, navigate) => {
 
 const cancelStatusOrder = (id, navigate) => {
     let data = {
-        status: 4
+        status: 5
     }
     instance.put('/orders/' + id, data)
         .then(res => {
-            alert("Order cancel successfully!");
+            toast.success("Hủy đơn hàng thành công!");
             navigate('/orders');
         }).catch(err => console.log(err))
 }

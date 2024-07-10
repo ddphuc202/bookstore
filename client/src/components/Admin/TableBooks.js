@@ -57,6 +57,7 @@ const TableBooks = (props) => {
             <th>Tiêu đề</th>
             <th>Ảnh</th>
             <th>Tác giả</th>
+            <th>Nhà xuất bản</th>
             <th>Mô tả</th>
             <th>Giá thành</th>
             <th>Khuyến mãi (%)</th>
@@ -75,6 +76,7 @@ const TableBooks = (props) => {
                   <img width={'200px'} src={baseURL + d.thumbnailPath} />
                 </td>
                 <td>{d.author}</td>
+                <td>{d.publisher}</td>
                 <td>{d.description}</td>
                 <td>{d.price}</td>
                 <td>{d.discount}</td>

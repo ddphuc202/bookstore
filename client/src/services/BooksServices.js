@@ -1,14 +1,17 @@
+import { toast } from "react-toastify";
 import { instance } from "../utils/AxiosCustomize";
 
 
 
-const createNewBook = (title, author, description, price, discount, quantity, categories, thumbnailFile, otherImages, navigate) => {
+const createNewBook = (title, author, publisher, description, price, discount, quantity, categories, thumbnailFile, otherImages, navigate) => {
 
     const otherImagesArray = Array.from(otherImages);
 
     const data = new FormData();
+    data.append('adminId', localStorage.getItem('userId'))
     data.append('title', title);
     data.append('author', author);
+    data.append('publisher', publisher);
     data.append('description', description);
     data.append('price', price);
     data.append('discount', discount);
@@ -21,9 +24,12 @@ const createNewBook = (title, author, description, price, discount, quantity, ca
 
 
     return instance.post('/books', data).then(res => {
-        alert('Data add successfully!');
+        toast.success('Thêm sách thành công!');
         navigate('/manage/books');
-    }).catch(err => console.log(err));
+    }).catch(err => {
+        console.log(err)
+        toast.error('Thêm sách thất bại!')
+    });
 }
 
 const getBooks = (page, search, sortBy, order, categoryId, setRecords) => {
@@ -38,7 +44,7 @@ const getBooks = (page, search, sortBy, order, categoryId, setRecords) => {
 
     }).then(res => {
         setRecords(res.data)
-    })
+    }).catch(err => console.log(err))
 }
 
 const getBooksAdmin = (page, search, sortBy, order, categoryId, setRecords) => {
@@ -53,7 +59,7 @@ const getBooksAdmin = (page, search, sortBy, order, categoryId, setRecords) => {
 
     }).then(res => {
         setRecords(res.data)
-    })
+    }).catch(err => console.log(err))
 }
 
 const getBookById = (id, setData) => {
@@ -84,20 +90,27 @@ const updateBookByID = (id, data, thumbnailFile, previewOtherImages, navigate) =
 
     instance.put('/books/' + id, formData)
         .then(res => {
-            alert("Data update successfully!");
+            toast.success("Chỉnh sửa sách thành công!");
             navigate('/manage/books');
-        })
+        }).catch(err => {
+            console.log(err)
+            toast.error("Chỉnh sửa sách thất bại!")
+
+        });
 }
 
 const deleteBooks = (id, count, setCount) => {
-    const conf = window.confirm('Do you want to delete?');
+    const conf = window.confirm('Bạn có muốn xóa?');
     if (conf) {
         instance.delete('/books/' + id)
             .then(res => {
-                alert('Item has deleted!');
+                toast.success('Sách xóa thành công!');
                 count++;
                 setCount(count);
-            }).catch(err => console.log(err))
+            }).catch(err => {
+                console.log(err)
+                toast.error('Xóa sách thất bại!')
+            })
     }
 }
 export { createNewBook, getBooks, getBookById, updateBookByID, deleteBooks, getBooksAdmin } 

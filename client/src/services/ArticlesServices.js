@@ -1,3 +1,4 @@
+import { toast } from 'react-toastify';
 import { instance } from '../utils/AxiosCustomize';
 
 const createNewPost = (title, content, imageFile, navigate) => {
@@ -9,13 +10,20 @@ const createNewPost = (title, content, imageFile, navigate) => {
     data.append('adminId', localStorage.getItem('userId'));
 
     return instance.post('/posts', data).then(res => {
-        alert('Data add successfully!');
+        toast.success('Thêm bài viết thành công!');
         navigate('/manage/posts');
-    }).catch(err => console.log(err));
+    }).catch(err => {
+        console.log(err)
+        toast.error('Thêm bài viết thất bại!')
+    });
 }
 
-const getPost = (setRecords) => {
-    return instance.get('/posts').then(res => {
+const getPost = (page, setRecords) => {
+    return instance.get('/posts', {
+        params: {
+            page: page
+        }
+    }).then(res => {
         setRecords(res.data)
     }).catch(err => console.log(err))
 }
@@ -51,9 +59,12 @@ const updatePostByID = (id, data, imageFile, navigate) => {
     }
     instance.put('/posts/' + id, formData)
         .then(res => {
-            alert("Data update successfully!");
+            toast.success("Cập nhật bài viết thành công!");
             navigate('/manage/posts');
-        }).catch(err => console.log(err))
+        }).catch(err => {
+            console.log(err)
+            toast.error("Cập nhật bài viết thất bại!")
+        })
 }
 
 const deletePost = (id, count, setCount) => {
@@ -61,10 +72,13 @@ const deletePost = (id, count, setCount) => {
     if (conf) {
         instance.delete('/posts/' + id)
             .then(res => {
-                alert('Item has deleted!');
+                toast.success('Xóa bài viết thành công!');
                 count++;
                 setCount(count);
-            }).catch(err => console.log(err))
+            }).catch(err => {
+                console.log(err)
+                toast.error('Xóa bài viết thất bại!')
+            })
     }
 }
 export { createNewPost, getPost, getPostBanner, getPostById, updatePostByID, deletePost } 

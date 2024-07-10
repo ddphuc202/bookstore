@@ -9,10 +9,11 @@ const TableOrderCustomers = () => {
     const [data, setData] = useState([]);
 
     const status = {
-        'pending': 'Chờ xác nhận',
+        'pending': 'Chờ xử lý',
         'processing': 'Đang xử lý',
         'completed': ' Thành công',
-        'cancelled': 'Đã hủy'
+        'cancelled': 'Đã hủy',
+        'delivering': 'Đang giao hàng'
     }
 
     useEffect(() => {

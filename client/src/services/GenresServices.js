@@ -1,3 +1,4 @@
+import { toast } from 'react-toastify';
 import { instance } from '../utils/AxiosCustomize';
 
 const createNewCategories = (name, navigate) => {
@@ -7,9 +8,12 @@ const createNewCategories = (name, navigate) => {
     }
 
     return instance.post('/categories', data).then(res => {
-        alert('Data add successfully!');
+        toast.success('Thêm thể loại thành công!');
         navigate('/manage/categories');
-    }).catch(err => console.log(err));
+    }).catch(err => {
+        console.log(err)
+        toast.error('Thêm thể loại thất bại!')
+    });
 }
 
 const getCategories = (setRecords) => {
@@ -30,9 +34,12 @@ const getCategoriesById = (id, setData) => {
 const updateCategoriesByID = (id, data, navigate) => {
     instance.put('/categories/' + id, data)
         .then(res => {
-            alert("Data update successfully!");
+            toast.success("Cập nhật thể loại thành công!");
             navigate('/manage/categories');
-        }).catch(err => console.log(err))
+        }).catch(err => {
+            console.log(err)
+            toast.error("Cập nhật thể loại thất bại!")
+        })
 }
 
 const deleteCategories = (id, count, setCount) => {
@@ -40,10 +47,13 @@ const deleteCategories = (id, count, setCount) => {
     if (conf) {
         instance.delete('/categories/' + id)
             .then(res => {
-                alert('Item has deleted!');
+                toast.success('Xóa thể loại thành công!');
                 count++;
                 setCount(count);
-            }).catch(err => console.log(err))
+            }).catch(err => {
+                console.log(err)
+                toast.error('Xóa thể loại thất bại!')
+            })
     }
 }
 export { createNewCategories, getCategories, getCategoriesById, updateCategoriesByID, deleteCategories } 

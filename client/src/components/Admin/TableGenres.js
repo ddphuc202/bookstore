@@ -7,6 +7,7 @@ import { getCategories, deleteCategories } from "../../services/GenresServices";
 const TableGenres = (props) => {
 
   const [records, setRecords] = useState([]);
+  const [page, setPage] = useState(1);
   const navigate = useNavigate();
 
   const [count, setCount] = useState(1);
@@ -16,6 +17,14 @@ const TableGenres = (props) => {
     deleteCategories(id, count, setCount)
   }
 
+
+  // const pageForward = () => {
+  //   setPage(page + 1);
+  // }
+
+  // const pageBack = () => {
+  //   setPage(page - 1);
+  // }
 
   useEffect(() => {
     getCategories(setRecords)

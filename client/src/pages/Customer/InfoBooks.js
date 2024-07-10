@@ -14,6 +14,8 @@ import 'swiper/css/navigation';
 import { Navigation } from 'swiper/modules';
 import { Container } from "react-bootstrap";
 import { addBookToCart } from '../../services/CartServices';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 
 const InfoBooks = () => {
@@ -58,6 +60,7 @@ const InfoBooks = () => {
 
     return (
         <>
+            <ToastContainer />
             <Header />
             <div style={{ height: "60px", backgroundImage: "url(https://bizweb.dktcdn.net/100/363/455/themes/918830/assets/background-banner.jpg?1704690471681)" }}></div>
             <br />
@@ -70,11 +73,11 @@ const InfoBooks = () => {
                             <br />
                             <Swiper navigation={true} modules={[Navigation]} className="mySwiper">
                                 <SwiperSlide >
-                                    <img style={{ marginLeft: '0px', alignItems: 'center' }} width={'515px'} height={'390px'} src={baseURL + data.thumbnailPath} alt="Ảnh" />
+                                    <img style={{ marginLeft: '0px', alignItems: 'center' }} width={'515px'} height={'400px'} src={baseURL + data.thumbnailPath} alt="Ảnh" />
                                 </SwiperSlide>
                                 {otherImages.map((image, index) => (
                                     <SwiperSlide key={index}>
-                                        <img style={{ marginLeft: '0px', alignItems: 'center' }} width={'515px'} height={'390px'} key={index} src={baseURL + image.imagePath} alt="Ảnh" />
+                                        <img style={{ marginLeft: '0px', alignItems: 'center' }} width={'515px'} height={'400px'} key={index} src={baseURL + image.imagePath} alt="Ảnh" />
                                     </SwiperSlide>
                                 ))}
                             </Swiper>
@@ -88,6 +91,10 @@ const InfoBooks = () => {
 
                         <div className="author">
                             Tác giả: <span  >{data.author}</span>
+                        </div>
+
+                        <div className="author">
+                            Nhà xuất bản: <span  >{data.publisher}</span>
                         </div>
 
                         <div className="author" style={{ marginTop: '10px' }}>

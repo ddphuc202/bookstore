@@ -4,6 +4,8 @@ import { Link } from 'react-router-dom';
 import { createNewOrder } from '../../services/OrderServices';
 import { useNavigate } from 'react-router-dom';
 import { getCustomerById } from '../../services/CustomerServices';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const MainCheckOut = () => {
 
@@ -21,6 +23,7 @@ const MainCheckOut = () => {
 
     return (
         <>
+            <ToastContainer />
             <main className="main">
                 <header className="main__header">
                     <div className="logo logo--left">
@@ -67,7 +70,7 @@ const MainCheckOut = () => {
                                                     Số điện thoại (tùy chọn)
                                                 </label>
                                                 <input name="billingPhone" id="billingPhone" type="text"
-                                                    className="form-control" value={data.phone} onChange={event => setData({ ...data, phone: event.target.value })} />
+                                                    className="form-control" value={data.phone} onChange={event => setData({ ...data, phone: event.target.value })} required />
                                             </div>
                                         </div>
 
@@ -75,10 +78,10 @@ const MainCheckOut = () => {
                                         <div className="field ">
                                             <div className="field__input-wrapper">
                                                 <label className="field__label">
-                                                    Địa chỉ (tùy chọn)
+                                                    Địa chỉ
                                                 </label>
                                                 <input name="billingAddress" id="billingAddress" type="text"
-                                                    className="form-control" value={data.address} onChange={event => setData({ ...data, address: event.target.value })} />
+                                                    className="form-control" value={data.address} onChange={event => setData({ ...data, address: event.target.value })} required />
                                             </div>
                                         </div>
                                         <br />

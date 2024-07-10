@@ -9,10 +9,28 @@ const TableOrders = (props) => {
     const [data, setData] = useState([]);
     const navigate = useNavigate();
 
+    const [page, setPage] = useState(1);
 
+    const pageBack = () => {
+        setPage(page - 1);
+    }
+
+    const pageForward = () => {
+        setPage(page + 1);
+    }
+
+
+
+    const status = {
+        "processing": "Đang xử lý",
+        "completed": "Hoàn thành",
+        "cancelled": "Đã hủy",
+        "pending": "Chờ xử lý",
+        "delivering": "Đang giao hàng"
+    }
     useEffect(() => {
-        getAllOrders(setData);
-    }, [])
+        getAllOrders(page, setData);
+    }, [page])
 
 
     return (
@@ -37,10 +55,12 @@ const TableOrders = (props) => {
                                 <td>{d.name}</td>
                                 <td>{d.phone}</td>
                                 <td>{d.address}</td>
-                                <td>{d.status}</td>
+                                <td>{status[d.status]}</td>
                                 <td>{d.total}</td>
                                 <td>
-                                    <Link to={`/manage/update-orders/${d.id}`}><FontAwesomeIcon icon={faPenToSquare} size="lg" /></Link>
+                                    {d.status === 'completed' || d.status === 'cancelled' ? (null) : (
+                                        <Link to={`/manage/update-orders/${d.id}`}><FontAwesomeIcon icon={faPenToSquare} size="lg" /></Link>
+                                    )}
                                 </td>
                             </tr>
                         ))
@@ -50,19 +70,19 @@ const TableOrders = (props) => {
             </Table>
             <div className="custom customs-btns-numbers clearfix input_number_index">
                 <button
-                    // onClick={() => pageBack()}
-                    // disabled={props.page === 1}
+                    onClick={() => pageBack()}
+                    disabled={page === 1}
                     className="btn-minus btn-cts" type="button">
                     <FontAwesomeIcon icon={faAnglesLeft} style={{ color: "#000000", marginTop: "2px" }} />
                 </button>
                 <input aria-label="Số lượng" type="text" className="qty input-text" id="qty"
                     name="quantity"
-                    // value={page}
+                    value={page}
                     disabled
                 />
                 <button
-                    // onClick={() => pageForward()}
-                    // disabled={props.page === records.totalPages}
+                    onClick={() => pageForward()}
+                    disabled={page === data.totalPages}
                     className="btn-plus btn-cts" type="button">
                     <FontAwesomeIcon icon={faAnglesRight} style={{ color: "#000000", marginTop: "5px" }} />
                 </button>

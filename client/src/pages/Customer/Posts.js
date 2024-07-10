@@ -1,3 +1,5 @@
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faPenToSquare, faTrash, faAnglesLeft, faAnglesRight } from '@fortawesome/free-solid-svg-icons'
 import Header from "../../components/Customer/Header";
 import Footer from "../../components/Customer/Footer";
 import { Link } from "react-router-dom";
@@ -8,12 +10,23 @@ import { getPost, getPostBanner } from "../../services/ArticlesServices";
 const Posts = () => {
     const [records, setRecords] = useState([]);
     const [data, setData] = useState([]);
+    const [page, setPage] = useState(1);
+
+    const pageForward = () => {
+        setPage(page + 1);
+    }
+
+    const pageBack = () => {
+        setPage(page - 1);
+    }
 
     useEffect(() => {
-        getPost(setRecords)
         getPostBanner(5, setData)
     }, [])
 
+    useEffect(() => {
+        getPost(page, setRecords)
+    }, [page])
 
     return (
         <>
@@ -53,6 +66,25 @@ const Posts = () => {
                                 ))
                                 }
                             </div>
+                            <div className="customs custom-btns-numbers clearfix input_number_index">
+                                <button
+                                    onClick={() => pageBack()}
+                                    disabled={page === 1}
+                                    className="btn-minus btn-cts" type="button">
+                                    <FontAwesomeIcon icon={faAnglesLeft} style={{ color: "#000000", marginTop: "2px" }} />
+                                </button>
+                                <input aria-label="Số lượng" type="text" className="qty input-text" id="qty"
+                                    name="quantity"
+                                    value={page}
+                                    disabled
+                                />
+                                <button
+                                    onClick={() => pageForward()}
+                                    disabled={page === records.totalPages}
+                                    className="btn-plus btn-cts" type="button">
+                                    <FontAwesomeIcon icon={faAnglesRight} style={{ color: "#000000", marginTop: "5px" }} />
+                                </button>
+                            </div>
                         </div>
 
 
@@ -89,6 +121,7 @@ const Posts = () => {
                     </div>
                 </div>
             </section>
+
             <Footer />
         </>
     )

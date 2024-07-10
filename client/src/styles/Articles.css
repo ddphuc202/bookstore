@@ -65,3 +65,56 @@
     font-weight: bold;
     color: #009900;
 }
+
+.custom-btns-numbers {
+    position: relative;
+    width: 100px;
+    margin-left: 350px;
+    display: flex;
+    justify-content: center;
+}
+
+.custom-btns-numbers button {
+    width: 30px;
+    height: 32px;
+    border: none;
+    background-color: transparent;
+    font-size: 14px;
+    color: #ee4f83;
+    padding: 0;
+    font-weight: 400;
+    float: left;
+    border-radius: 0;
+    line-height: 22px;
+    position: absolute;
+    z-index: 1;
+    right: 4px;
+    top: -2px;
+    text-align: center;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center
+}
+
+.custom-btns-numbers button.btn-minus {
+    left: 0;
+    top: 0
+}
+
+.custom-btns-numbers input {
+    float: left;
+    width: 100px;
+    height: 32px;
+    border: solid 1px #E5E5E5;
+    padding: 0 30px;
+    text-align: center;
+    font-size: 16px;
+    min-height: unset;
+    margin: 0;
+    border-radius: 5px
+}
+
+.custom-btns-numbers button.btn-minus {
+    left: 0;
+    top: 0
+}

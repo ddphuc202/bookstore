@@ -1,3 +1,4 @@
+import { toast } from 'react-toastify'
 import { instance } from "../utils/AxiosCustomize";
 const addBookToCart = (id, quantity) => {
     let data = {
@@ -6,11 +7,12 @@ const addBookToCart = (id, quantity) => {
         customerId: localStorage.getItem('userId')
     };
     instance.post('/carts/item', data).then(res => {
-        alert('Data add successfully!');
+        toast.success('Thêm vào giỏ hàng thành công!');
     }).catch(err => {
         console.log(err);
-        alert('Vui lòng đăng nhập!')
-
+        if (err.response.status === 401) {
+            toast.info('Vui lòng đăng nhập!')
+        }
     });
 };
 
@@ -84,6 +86,7 @@ const updateInputAmountOfCart = (index, id, newQuantity, data, setData) => {
 const deleteItemInCart = (id, data, setData) => {
     instance.delete('carts/item/' + id).then(res => {
         setData(data.filter(item => item.id !== id));
+        toast.success('Xóa thành công!')
     })
         .catch(err => {
             console.log(err);

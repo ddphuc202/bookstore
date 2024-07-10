@@ -1,5 +1,7 @@
 import logo from './logo.svg';
 import axios from 'axios';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import { BrowserRouter, Routes, Route, Link } from 'react-router-dom';
 import ManageBooks from './pages/Admin/ManageBooks';
 import ModalAddNewBooks from './components/Admin/ModalAddNewBooks';
@@ -32,60 +34,66 @@ import Logout from './components/Auth/Logout';
 import OrderCustomersDetail from './pages/Customer/OrderCustomersDetail';
 import ProtectedRoutes from './utils/ProtectedRoutes';
 import InfoPost from './pages/Customer/InfoPosts';
+import { useEffect } from 'react';
 
 
 function App() {
+  useEffect(() => {
+    document.title = "Khai Tâm Bookstore";
+  }, [])
   return (
 
-    // {/* Admin side */}
-    <Routes >
+    <>
+      {/* Admin side */}
+      <ToastContainer style={{ zIndex: 9999 }} />
+      <Routes >
 
-      <Route element={<ProtectedRoutes />}>
-        <Route path='/manage' element={<ManageOrders />} />
-        <Route path='/manage/update-orders/:id' element={<ModalEditOrder />} />
+        <Route element={<ProtectedRoutes />}>
+          <Route path='/manage' element={<ManageOrders />} />
+          <Route path='/manage/update-orders/:id' element={<ModalEditOrder />} />
 
-        <Route path='/manage/books' element={<ManageBooks />} />
-        <Route path='/manage/add-books' element={<ModalAddNewBooks />} />
-        <Route path='/manage/edit-books/:id' element={<ModalEditBooks />} />
+          <Route path='/manage/books' element={<ManageBooks />} />
+          <Route path='/manage/add-books' element={<ModalAddNewBooks />} />
+          <Route path='/manage/edit-books/:id' element={<ModalEditBooks />} />
 
-        <Route path='/manage/categories' element={<ManageGenres />} />
-        <Route path='/manage/add-categories' element={<ModalAddNewGenres />} />
-        <Route path='/manage/edit-categories/:id' element={<ModalEditGenres />} />
-
-
-        <Route path='/manage/posts' element={<ManageArticles />} />
-        <Route path='/manage/add-posts' element={<ModalAddNewArticles />} />
-        <Route path='/manage/edit-posts/:id' element={<ModalEditArticles />} />
+          <Route path='/manage/categories' element={<ManageGenres />} />
+          <Route path='/manage/add-categories' element={<ModalAddNewGenres />} />
+          <Route path='/manage/edit-categories/:id' element={<ModalEditGenres />} />
 
 
-        <Route path='/manage/customers' element={<ManageCustomers />} />
-        <Route path='/manage/add-customers' element={<ModalAddNewCustomers />} />
-        <Route path='/manage/edit-customers/:id' element={<ModalEditCustomers />} />
+          <Route path='/manage/posts' element={<ManageArticles />} />
+          <Route path='/manage/add-posts' element={<ModalAddNewArticles />} />
+          <Route path='/manage/edit-posts/:id' element={<ModalEditArticles />} />
 
 
-        <Route path='/test' element={<Test />} />
+          <Route path='/manage/customers' element={<ManageCustomers />} />
+          <Route path='/manage/add-customers' element={<ModalAddNewCustomers />} />
+          <Route path='/manage/edit-customers/:id' element={<ModalEditCustomers />} />
 
-      </Route>
+
+          <Route path='/test' element={<Test />} />
+
+        </Route>
 
 
 
-      // {/* Admin side */}
-      <Route path='/' element={<HomePage />} />
-      <Route path='/about-page' element={<InfoPage />} />
-      <Route path='/books' element={<Books />} />
-      <Route path='/posts' element={<Posts />} />
-      <Route path='/info-post/:id' element={<InfoPost />} />
-      <Route path='/info-book/:id' element={<InfoBook />} />
-      <Route path='/cart' element={<Cart />} />
-      <Route path='/checkout' element={<CheckOut />} />
-      <Route path='/orders' element={<OrderCustomers />} />
-      <Route path='/order-detail/:id' element={<OrderCustomersDetail />} />
+        {/* Customer side */}
+        <Route path='/' element={<HomePage />} />
+        <Route path='/about-page' element={<InfoPage />} />
+        <Route path='/books' element={<Books />} />
+        <Route path='/posts' element={<Posts />} />
+        <Route path='/info-post/:id' element={<InfoPost />} />
+        <Route path='/info-book/:id' element={<InfoBook />} />
+        <Route path='/cart' element={<Cart />} />
+        <Route path='/checkout' element={<CheckOut />} />
+        <Route path='/orders' element={<OrderCustomers />} />
+        <Route path='/order-detail/:id' element={<OrderCustomersDetail />} />
 
-      <Route path='/login' element={<Login />} />
-      <Route path='/register' element={<Register />} />
-      <Route path='/logout' element={<Logout />} />
-    </Routes>
-
+        <Route path='/login' element={<Login />} />
+        <Route path='/register' element={<Register />} />
+        <Route path='/logout' element={<Logout />} />
+      </Routes>
+    </>
   );
 }
 

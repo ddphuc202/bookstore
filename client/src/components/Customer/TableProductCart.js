@@ -6,6 +6,8 @@ import { useEffect, useState } from "react";
 import { getCartByCustomerId, updateIncreaseAmountOfCart, updateDecreaseAmountOfCart, updateInputAmountOfCart, deleteItemInCart } from "../../services/CartServices";
 import { Link } from "react-router-dom";
 import { baseURL } from "../../utils/AxiosCustomize";
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 const TableProductCart = () => {
 
     const [data, setData] = useState([]);
@@ -87,7 +89,7 @@ const TableProductCart = () => {
                     <tr>
                         <td></td>
                         <td></td>
-                        <td><span style={{ fontWeight: 'bold', fontSize: '22px', color: 'black' }} >Tổng tiền:</span></td>
+                        <td style={{ fontWeight: 'bold', fontSize: '22px', color: 'black' }} >Tổng tiền:</td>
                         <td><span style={{ fontWeight: 'bold', fontSize: '22px', color: '#009900' }}>{total.toLocaleString('vi-VN')}đ</span></td>
                     </tr>
                 </tbody>
@@ -100,9 +102,7 @@ const TableProductCart = () => {
                         </button>
                     </Link>
                 ) : (
-                    <button type="button" disabled className="btn btn-lg btn-gray btn_buy btn-buy-now">
-                        Thanh toán
-                    </button>
+                    null
                 )}
             </div>
 

@@ -9,14 +9,25 @@ const TableArticles = (props) => {
 
   const [records, setRecords] = useState([]);
   const [count, setCount] = useState(1);
+  const [page, setPage] = useState(1);
 
   const handleDelete = (id) => {
     deletePost(id, count, setCount);
   }
 
+  const pageForward = () => {
+    setPage(page + 1);
+  }
+
+  const pageBack = () => {
+    setPage(page - 1);
+  }
+
+
+
   useEffect(() => {
-    getPost(setRecords);
-  }, [count])
+    getPost(page, setRecords);
+  }, [count, page])
 
 
   return (
@@ -51,19 +62,19 @@ const TableArticles = (props) => {
       </Table>
       <div className="custom customs-btns-numbers clearfix input_number_index">
         <button
-          // onClick={() => pageBack()}
-          // disabled={props.page === 1}
+          onClick={() => pageBack()}
+          disabled={page === 1}
           className="btn-minus btn-cts" type="button">
           <FontAwesomeIcon icon={faAnglesLeft} style={{ color: "#000000", marginTop: "2px" }} />
         </button>
         <input aria-label="Số lượng" type="text" className="qty input-text" id="qty"
           name="quantity"
-          // value={page}
+          value={page}
           disabled
         />
         <button
-          // onClick={() => pageForward()}
-          // disabled={props.page === records.totalPages}
+          onClick={() => pageForward()}
+          disabled={page === records.totalPages}
           className="btn-plus btn-cts" type="button">
           <FontAwesomeIcon icon={faAnglesRight} style={{ color: "#000000", marginTop: "5px" }} />
         </button>

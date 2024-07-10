@@ -16,8 +16,12 @@ const createNewCustomer = (name, email, password, phone, address, navigate) => {
     }).catch(err => console.log(err));
 }
 
-const getCustomers = (setRecords) => {
-    return instance.get('/customers').then(res => {
+const getCustomers = (page, setRecords) => {
+    return instance.get('/customers', {
+        params: {
+            page: page
+        }
+    }).then(res => {
         setRecords(res.data)
     }).catch(err => console.log(err))
 }

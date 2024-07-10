@@ -9,6 +9,7 @@ const TableCustomers = (props) => {
 
   const [records, setRecords] = useState([]);
   const navigate = useNavigate();
+  const [page, setPage] = useState(1);
 
   const [count, setCount] = useState(1);
 
@@ -17,9 +18,17 @@ const TableCustomers = (props) => {
     deleteCustomers(id, count, setCount);
   }
 
+  const pageForward = () => {
+    setPage(page + 1);
+  }
+
+  const pageBack = () => {
+    setPage(page - 1);
+  }
+
   useEffect(() => {
-    getCustomers(setRecords);
-  }, [count])
+    getCustomers(page, setRecords);
+  }, [count, page])
 
 
   return (
@@ -30,10 +39,10 @@ const TableCustomers = (props) => {
             <th>#</th>
             <th>Tên khách hàng</th>
             <th>Email</th>
-            <th>Mật khẩu</th>
+            {/* <th>Mật khẩu</th> */}
             <th>Địa chỉ</th>
             <th>Số điện thoại</th>
-            <th>Hành động</th>
+            {/* <th>Hành động</th> */}
           </tr>
         </thead>
         <tbody>
@@ -43,13 +52,13 @@ const TableCustomers = (props) => {
                 <td>{d.id}</td>
                 <td>{d.name}</td>
                 <td>{d.email}</td>
-                <td>{d.password}</td>
+                {/* <td>{d.password}</td> */}
                 <td>{d.address}</td>
                 <td>{d.phone}</td>
-                <td>
+                {/* <td>
                   <Link to={`/manage/edit-customers/${d.id}`}><FontAwesomeIcon icon={faPenToSquare} size="lg" /></Link>
                   <button style={{ border: 'none' }} onClick={event => handleDelete(d.id)} ><FontAwesomeIcon icon={faTrash} style={{ color: "#fa2500" }} /></button>
-                </td>
+                </td> */}
               </tr>
             ))
           }
@@ -58,19 +67,19 @@ const TableCustomers = (props) => {
       </Table>
       <div className="custom customs-btns-numbers clearfix input_number_index">
         <button
-          // onClick={() => pageBack()}
-          // disabled={props.page === 1}
+          onClick={() => pageBack()}
+          disabled={page === 1}
           className="btn-minus btn-cts" type="button">
           <FontAwesomeIcon icon={faAnglesLeft} style={{ color: "#000000", marginTop: "2px" }} />
         </button>
         <input aria-label="Số lượng" type="text" className="qty input-text" id="qty"
           name="quantity"
-          // value={page}
+          value={page}
           disabled
         />
         <button
-          // onClick={() => pageForward()}
-          // disabled={props.page === records.totalPages}
+          onClick={() => pageForward()}
+          disabled={page === records.totalPages}
           className="btn-plus btn-cts" type="button">
           <FontAwesomeIcon icon={faAnglesRight} style={{ color: "#000000", marginTop: "5px" }} />
         </button>

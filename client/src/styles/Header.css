@@ -13,9 +13,10 @@ header .logo {
 header .user-name {
     height: 24px;
     position: absolute;
-    top: 33px;
+    top: 25px;
     left: 30px;
     color: #008800;
+    width: 200px;
 }
 
 header .user-header {

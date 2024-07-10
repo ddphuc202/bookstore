@@ -6,6 +6,8 @@ import image1 from '../../image/thanh-xuan-sao-ma-dau-don.png';
 import { getBooks } from '../../services/BooksServices';
 import { Link } from 'react-router-dom';
 import { addBookToCart } from '../../services/CartServices';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 const NewBooks = () => {
 
 	const [records, setRecords] = useState([]);
@@ -94,6 +96,7 @@ const NewBooks = () => {
 					</div>
 				</div>
 			</section>
+
 		</>
 	)
 }

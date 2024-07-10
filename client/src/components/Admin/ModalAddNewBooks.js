@@ -10,6 +10,7 @@ import { getCategories } from '../../services/GenresServices';
 function ModalAddNewBooks() {
     const [title, setTitle] = useState('');
     const [author, setAuthor] = useState('');
+    const [publisher, setPublisher] = useState('');
     const [description, setDescription] = useState('');
     const [price, setPrice] = useState('');
     const [discount, setDiscount] = useState('');
@@ -25,7 +26,7 @@ function ModalAddNewBooks() {
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        createNewBook(title, author, description, price, discount, quantity, categories, thumbnailFile, otherImages, navigate);
+        createNewBook(title, author, publisher, description, price, discount, quantity, categories, thumbnailFile, otherImages, navigate);
     }
 
 
@@ -72,6 +73,11 @@ function ModalAddNewBooks() {
                             </Form.Group>
 
                             <Form.Group className="mb-3" controlId="formBasicPassword">
+                                <Form.Label>Nhà xuất bản</Form.Label>
+                                <Form.Control type="text" placeholder="Nhà xuất bản" value={publisher} onChange={(event) => setPublisher(event.target.value)} />
+                            </Form.Group>
+
+                            <Form.Group className="mb-3" controlId="formBasicPassword">
                                 <Form.Label>Mô tả</Form.Label>
                                 <Form.Control as="textarea" placeholder="Mô tả" value={description} onChange={(event) => setDescription(event.target.value)} />
                             </Form.Group>
@@ -89,7 +95,7 @@ function ModalAddNewBooks() {
                             <Form.Group className="mb-3" controlId="formBasicPassword">
                                 <Form.Label>Thể loại</Form.Label>
                                 <Form.Select aria-label="Default select example" onChange={(event) => setCategories(event.target.value)}>
-                                    {Array.isArray(records) && records.map((category, index) => (
+                                    {Array.isArray(records.categories) && records.categories.map((category, index) => (
                                         <option key={index} value={category.id} > {category.name} </option>
                                     ))}
                                 </Form.Select>
@@ -111,8 +117,8 @@ function ModalAddNewBooks() {
                             <Form.Group controlId="formFileMultiple" className="mb-3">
                                 <Form.Label>Ảnh phụ</Form.Label>
                                 <Form.Control type="file" multiple onChange={(event) => handleUploadOtherImages(event)} name='otherImages' />
-                                {[...otherImages].map((otherImage) => (
-                                    <img src={URL.createObjectURL(otherImage)} width={'200px'} style={{ padding: "10px" }} />
+                                {[...otherImages].map((otherImage, index) => (
+                                    <img key={index} src={URL.createObjectURL(otherImage)} width={'200px'} style={{ padding: "10px" }} />
                                 ))}
                             </Form.Group>
                         </Form>

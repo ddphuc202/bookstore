@@ -78,7 +78,7 @@ const PostBanner = () => {
 												title={item.title}>
 												<img width="196" height="125"
 													src={baseURL + item.imagePath}
-													alt="KHÔNG CẦN PHẢI LÀ NHÀ KINH TẾ HỌC MỚI ĐỌC ĐƯỢC ECONOMIX"
+													alt={item.title}
 													className="lazyload img-responsive" />
 											</Link>
 											<div className="content_blog">
