@@ -6,29 +6,29 @@ module.exports = {
     const currentDate = new Date();
     const customers = [
       {
-        name: 'John Doe',
-        email: 'john@mail.com',
+        name: 'Nguyễn Tiến Mạnh',
+        email: 'manh@mail.com',
         password: '$2a$12$NgRrWvfDeHe14pn/0NAt2.YFbAQENDmuxoWnLbGHjku8SBj4gvlFq',
-        phone: '123456789',
-        address: '123 Main St',
+        phone: '0873847333',
+        address: '112 Đ. Trương Định, Trương Định, Hai Bà Trưng, Hà Nội',
         created_at: currentDate,
         updated_at: currentDate
       },
       {
-        name: 'John Doe 2',
-        email: 'john2@mail.com',
+        name: 'Phạm Hải Long',
+        email: 'long@mail.com',
         password: '$2a$12$NgRrWvfDeHe14pn/0NAt2.YFbAQENDmuxoWnLbGHjku8SBj4gvlFq',
-        phone: '123456789',
-        address: '123 Main St',
+        phone: '0989746923',
+        address: '8 Đ. Võ Văn Kiệt, Phường Nguyễn Thái Bình, Quận 1, TP. Hồ Chí Minh ',
         created_at: currentDate,
         updated_at: currentDate
       },
       {
-        name: 'John Doe 3',
-        email: 'john3@mail.com',
+        name: 'Nguyễn Khả Hân',
+        email: 'han@mail.com',
         password: '$2a$12$NgRrWvfDeHe14pn/0NAt2.YFbAQENDmuxoWnLbGHjku8SBj4gvlFq',
-        phone: '123456789',
-        address: '123 Main St',
+        phone: '0979367583',
+        address: '40 Đ Ông Ích Đường, Phường Khuê Trung, Quận Cẩm Lệ, TP. Đà Nẵng',
         created_at: currentDate,
         updated_at: currentDate
       }
