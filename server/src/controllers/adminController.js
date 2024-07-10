@@ -85,7 +85,7 @@ const adminController = {
             if (!deleted) {
                 return res.status(404).json({ message: 'Admin not found' });
             }
-            res.status(200).json({ message: 'Book updated successfully' });
+            res.status(200).json({ message: 'Admin deleted successfully' });
         } catch (error) {
             console.log(error);
             res.status(500).json({ message: 'Error deleting admin', error: error.message });

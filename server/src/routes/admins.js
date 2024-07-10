@@ -20,4 +20,7 @@ router.post('/', authenticate(), authorize(['super']), adminController.create);
 // PUT/update an admin
 router.put('/:id', authenticate(), authorize(['super']), adminController.update);
 
+// DELETE an admin
+router.delete('/:id', authenticate(), authorize(['super']), adminController.delete);
+
 module.exports = router;
