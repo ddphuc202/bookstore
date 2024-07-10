@@ -23,6 +23,7 @@ import Posts from './pages/Customer/Posts';
 import InfoBook from './pages/Customer/InfoBooks';
 import Test from './components/Admin/Test';
 
+import { useEffect } from 'react';
 
 import HomePage from './pages/Customer/HomePage';
 import Cart from './pages/Customer/Cart';
@@ -34,7 +35,9 @@ import Logout from './components/Auth/Logout';
 import OrderCustomersDetail from './pages/Customer/OrderCustomersDetail';
 import ProtectedRoutes from './utils/ProtectedRoutes';
 import InfoPost from './pages/Customer/InfoPosts';
-import { useEffect } from 'react';
+import ManageAdmins from './pages/Admin/ManageAdmins';
+import ModalAddNewAdmins from './components/Admin/ModalAddNewAdmins';
+import ModalEditAdmins from './components/Admin/ModalEditAdmins';
 
 
 function App() {
@@ -70,6 +73,9 @@ function App() {
           <Route path='/manage/add-customers' element={<ModalAddNewCustomers />} />
           <Route path='/manage/edit-customers/:id' element={<ModalEditCustomers />} />
 
+          <Route path='/manage/admins' element={<ManageAdmins />} />
+          <Route path='/manage/add-admins' element={<ModalAddNewAdmins />} />
+          <Route path='/manage/edit-admins/:id' element={<ModalEditAdmins />} />
 
           <Route path='/test' element={<Test />} />
 

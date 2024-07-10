@@ -39,10 +39,10 @@ const TableCustomers = (props) => {
             <th>#</th>
             <th>Tên khách hàng</th>
             <th>Email</th>
-            {/* <th>Mật khẩu</th> */}
+
             <th>Địa chỉ</th>
             <th>Số điện thoại</th>
-            {/* <th>Hành động</th> */}
+
           </tr>
         </thead>
         <tbody>
@@ -52,13 +52,10 @@ const TableCustomers = (props) => {
                 <td>{d.id}</td>
                 <td>{d.name}</td>
                 <td>{d.email}</td>
-                {/* <td>{d.password}</td> */}
+
                 <td>{d.address}</td>
                 <td>{d.phone}</td>
-                {/* <td>
-                  <Link to={`/manage/edit-customers/${d.id}`}><FontAwesomeIcon icon={faPenToSquare} size="lg" /></Link>
-                  <button style={{ border: 'none' }} onClick={event => handleDelete(d.id)} ><FontAwesomeIcon icon={faTrash} style={{ color: "#fa2500" }} /></button>
-                </td> */}
+
               </tr>
             ))
           }
