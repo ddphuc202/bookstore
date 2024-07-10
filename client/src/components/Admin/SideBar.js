@@ -36,7 +36,11 @@ const SideBar = () => {
                     Manage
                 </div>
 
-
+                {localStorage.getItem('userRole') === 'super' ? (
+                    <li className="nav-item">
+                        <Link className="nav-link" to={'/manage/admins'} style={{ textDecoration: "none" }}> <b>Admins</b></Link>
+                    </li>
+                ) : null}
 
                 <li className="nav-item">
                     <Link className="nav-link" to={'/manage/books'} style={{ textDecoration: "none" }}> <b>Books</b></Link>
