@@ -121,6 +121,17 @@ const orderController = {
     // Update a order
     update: async (req, res) => {
         try {
+            if (req.body.status && req.body.status === 'cancelled') {
+                const orderDetails = await db.OrderDetail.findAll({
+                    where: { orderId: req.params.id }
+                });
+                for (const detail of orderDetails) {
+                    await db.Book.increment('quantity', {
+                        by: detail.quantity,
+                        where: { id: detail.bookId }
+                    });
+                }
+            }
             const [updated] = await db.Order.update(req.body, {
                 where: { id: req.params.id }
             });

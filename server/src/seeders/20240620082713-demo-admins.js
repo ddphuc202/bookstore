@@ -6,7 +6,7 @@ module.exports = {
     const currentDate = new Date();
     const admins = [
       {
-        name: 'admin',
+        name: 'Super Admin',
         email: 'superadmin@khaitam.com',
         password: '$2a$12$NgRrWvfDeHe14pn/0NAt2.YFbAQENDmuxoWnLbGHjku8SBj4gvlFq',
         role: 'super',
@@ -14,21 +14,21 @@ module.exports = {
         updated_at: currentDate
       },
       {
-        name: 'admin1',
+        name: 'Admin 1',
         email: 'admin1@khaitam.com',
         password: '$2a$12$NgRrWvfDeHe14pn/0NAt2.YFbAQENDmuxoWnLbGHjku8SBj4gvlFq',
         created_at: currentDate,
         updated_at: currentDate
       },
       {
-        name: 'admin2',
+        name: 'Admin 2',
         email: 'admin2@khaitam.com',
         password: '$2a$12$NgRrWvfDeHe14pn/0NAt2.YFbAQENDmuxoWnLbGHjku8SBj4gvlFq',
         created_at: currentDate,
         updated_at: currentDate
       },
       {
-        name: 'admin3',
+        name: 'Admin 3',
         email: 'admin3@khaitam.com',
         password: '$2a$12$NgRrWvfDeHe14pn/0NAt2.YFbAQENDmuxoWnLbGHjku8SBj4gvlFq',
         created_at: currentDate,
