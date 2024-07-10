@@ -78,6 +78,20 @@ const adminController = {
         }
     },
 
+    // Delete admin
+    delete: async (req, res) => {
+        try {
+            const deleted = await db.Admin.destroy({ where: { id: req.params.id } });
+            if (!deleted) {
+                return res.status(404).json({ message: 'Admin not found' });
+            }
+            res.status(200).json({ message: 'Book updated successfully' });
+        } catch (error) {
+            console.log(error);
+            res.status(500).json({ message: 'Error deleting admin', error: error.message });
+        }
+    },
+
     // Statistic
     statistic: async (req, res) => {
         try {

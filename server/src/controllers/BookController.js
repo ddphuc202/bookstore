@@ -248,7 +248,6 @@ const booksController = {
             if (!deleted) {
                 throw new Error('Book not found');
             }
-
             res.status(200).json({ message: 'Book soft deleted successfully' });
         } catch (error) {
             res.status(500).json({ message: 'Error soft deleting book', error });

@@ -40,16 +40,12 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.ENUM('super', 'admin'),
       defaultValue: 'admin',
     },
-    isActive: {
-      type: DataTypes.BOOLEAN,
-      defaultValue: true,
-    },
-
   }, {
     sequelize,
     modelName: 'Admin',
     tableName: 'admins',
     underscored: true,
+    paranoid: true,
   });
   return Admin;
 };
