@@ -121,7 +121,7 @@ const orderController = {
     // Update a order
     update: async (req, res) => {
         try {
-            if (req.body.status && req.body.status === 'cancelled') {
+            if (req.body.status && req.body.status == 5) {
                 const orderDetails = await db.OrderDetail.findAll({
                     where: { orderId: req.params.id }
                 });
