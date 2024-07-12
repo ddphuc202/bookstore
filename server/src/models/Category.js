@@ -14,7 +14,7 @@ module.exports = (sequelize, DataTypes) => {
       Category.hasMany(models.Book, {
         foreignKey: 'categoryId',
         as: 'books',
-      })
+      });
     }
   }
   Category.init({
@@ -26,8 +26,7 @@ module.exports = (sequelize, DataTypes) => {
     sequelize,
     modelName: 'Category',
     tableName: 'categories',
-    underscored: true,
-    paranoid: true,
+    underscored: true
   });
   return Category;
 };

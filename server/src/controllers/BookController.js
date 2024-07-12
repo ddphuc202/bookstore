@@ -9,7 +9,7 @@ const booksController = {
     // Get all books for customer
     getAllForCustomer: async (req, res) => {
         try {
-            let { page = 1, limit = 8, sortBy = 'updatedAt', order = 'DESC', categoryId, search } = req.query;
+            let { page = 1, limit = 8, sortBy = 'updatedAt', order = 'DESC', categoryId = 0, search } = req.query;
             let offset = (page - 1) * limit;
             if (offset < 0) {
                 offset = 0;
@@ -70,7 +70,7 @@ const booksController = {
     // Get all books for admin
     getAllForAdmin: async (req, res) => {
         try {
-            let { page = 1, limit = 8, sortBy = 'updatedAt', order = 'DESC', categoryId, search } = req.query;
+            let { page = 1, limit = 8, sortBy = 'updatedAt', order = 'DESC', categoryId = 0, search } = req.query;
             let offset = (page - 1) * limit;
             if (offset < 0) {
                 offset = 0;
@@ -103,6 +103,7 @@ const booksController = {
             const totalPages = Math.ceil(totalBooks / limit);
 
             const books = await db.Book.findAll({
+                paranoid: false,
                 where: whereClause,
                 attributes: {
                     include: [

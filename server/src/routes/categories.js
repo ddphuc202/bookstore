@@ -17,10 +17,4 @@ router.post('/', authenticate(), authorize(['admin', 'super']), categoryControll
 // PUT/update a category
 router.put('/:id', authenticate(), authorize(['admin', 'super']), categoryController.update);
 
-// SOFT-DELETE a category
-router.delete('/:id', authenticate(), authorize(['admin', 'super']), categoryController.delete);
-
-// RESTORE a soft-deleted category
-router.post('/:id/restore', authenticate(), authorize(['admin', 'super']), categoryController.restore);
-
 module.exports = router;
