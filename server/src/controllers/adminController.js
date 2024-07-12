@@ -5,6 +5,12 @@ const adminController = {
     // Get all admins
     getAll: async (req, res) => {
         try {
+            let { page = 1, limit = 10 } = req.query;
+            let offset = (page - 1) * limit;
+            if (offset < 0) {
+                offset = 0;
+            }
+
             const totalAdmins = await db.Admin.count({
                 where: {
                     role: {
@@ -19,7 +25,10 @@ const adminController = {
                     role: {
                         [db.Sequelize.Op.not]: 'super'
                     }
-                }
+                },
+                order: [['updatedAt', 'DESC']],
+                offset: parseInt(offset),
+                limit: parseInt(limit),
             });
 
             res.status(200).json({ admins, totalPages });

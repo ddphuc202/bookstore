@@ -15,6 +15,8 @@ const orderController = {
             const totalPages = Math.ceil(totalOrders / limit);
             const orders = await db.Order.findAll({
                 order: [['createdAt', 'DESC']],
+                offset: parseInt(offset),
+                limit: parseInt(limit),
             });
             res.status(200).json({ orders, totalPages });
         } catch (error) {

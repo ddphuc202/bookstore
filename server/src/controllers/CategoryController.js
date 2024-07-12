@@ -9,12 +9,14 @@ const categoryController = {
             if (offset < 0) {
                 offset = 0;
             }
-
             const totalCategories = await db.Category.count();
             const totalPages = Math.ceil(totalCategories / limit);
 
             const categories = await db.Category.findAll({
+                paranoid: false,
                 order: [['updatedAt', 'DESC']],
+                offset: parseInt(offset),
+                limit: parseInt(limit),
             });
 
             res.status(200).json({ categories, totalPages });
@@ -26,7 +28,10 @@ const categoryController = {
     // Get category by ID
     getById: async (req, res) => {
         try {
-            const category = await db.Category.findByPk(req.params.id);
+            const category = await db.Category.findByPk(
+                req.params.id,
+                { paranoid: false }
+            );
             if (!category) {
                 return res.status(404).json({ message: 'Category not found' });
             }
@@ -73,6 +78,21 @@ const categoryController = {
             res.status(200).json({ message: 'Category deleted successfully' });
         } catch (error) {
             res.status(500).json({ message: 'Error deleting category', error });
+        }
+    },
+
+    // Restore a soft-deleted category
+    restore: async (req, res) => {
+        try {
+            const restored = await db.Category.restore({
+                where: { id: req.params.id }
+            });
+            if (!restored) {
+                throw new Error('Category not found');
+            }
+            res.status(200).json({ message: 'Category restored successfully' });
+        } catch (error) {
+            res.status(500).json({ message: 'Error restoring category', error });
         }
     },
 };

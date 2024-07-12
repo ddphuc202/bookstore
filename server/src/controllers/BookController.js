@@ -24,7 +24,7 @@ const booksController = {
             }
             const whereClause = {};
             whereClause.quantity = { [Op.gt]: 0 };
-            if (categoryId) {
+            if (categoryId != 0) {
                 whereClause.categoryId = categoryId;
             }
             if (search) {
@@ -84,7 +84,7 @@ const booksController = {
                 order = 'DESC';
             }
             const whereClause = {};
-            if (categoryId) {
+            if (categoryId != 0) {
                 whereClause.categoryId = categoryId;
             }
             if (search) {
