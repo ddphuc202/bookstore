@@ -45,7 +45,6 @@ module.exports = (sequelize, DataTypes) => {
     modelName: 'Admin',
     tableName: 'admins',
     underscored: true,
-    paranoid: true,
   });
   return Admin;
 };

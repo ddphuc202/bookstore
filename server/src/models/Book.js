@@ -85,12 +85,14 @@ module.exports = (sequelize, DataTypes) => {
         key: 'id',
       },
     },
+    deletedAt: {
+      type: DataTypes.DATE,
+    },
   }, {
     sequelize,
     modelName: 'Book',
     tableName: 'books',
     underscored: true,
-    paranoid: true,
   });
   return Book;
 };

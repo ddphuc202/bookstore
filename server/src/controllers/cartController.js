@@ -23,7 +23,6 @@ const cartItemController = {
             }
             res.status(200).json(cartItems);
         } catch (error) {
-            console.log('Error retrieving cart items', error);
             res.status(500).json({ message: 'Error retrieving cart items', error: error.message });
         }
     },
@@ -63,7 +62,6 @@ const cartItemController = {
                 res.status(201).json(newCart);
             }
         } catch (error) {
-            console.log('Error creating cart item', error);
             res.status(500).json({ message: 'Error creating cart item', error: error.message });
         }
     },
@@ -90,11 +88,10 @@ const cartItemController = {
                 where: { id: req.params.id }
             });
             if (!updated) {
-                throw new Error('Cart item not found');
+                return res.status(404).json({ message: 'Cart item not found' });
             }
             res.status(200).json({ message: 'Cart item updated successfully' });
         } catch (error) {
-            console.log('Error updating cart item', error);
             res.status(500).json({ message: 'Error updating cart item', error: error.message });
         }
     },
@@ -106,30 +103,13 @@ const cartItemController = {
                 where: { id: req.params.id }
             });
             if (!deleted) {
-                throw new Error('Cart item not found');
+                return res.status(404).json({ message: 'Cart item not found' });
             }
             res.status(200).json({ message: 'Cart item deleted successfully' });
         } catch (error) {
-            console.log('Error deleting cart item', error);
             res.status(500).json({ message: 'Error deleting cart item', error: error.message });
         }
     },
-
-    // Delete all cart items by a customer ID
-    deleteAllByCustomerId: async (req, res) => {
-        try {
-            const deleted = await db.Cart.destroy({
-                where: { customerId: req.params.id }
-            });
-            if (!deleted) {
-                throw new Error('Cart items not found');
-            }
-            res.status(200).json({ message: 'Cart items deleted successfully' });
-        } catch (error) {
-            console.log('Error deleting cart items', error);
-            res.status(500).json({ message: 'Error deleting cart items', error: error.message });
-        }
-    }
 };
 
 module.exports = cartItemController;

@@ -1,5 +1,6 @@
 const db = require('../models');
 const bcrypt = require('bcryptjs');
+const { Op } = require('sequelize');
 
 const adminController = {
     // Get all admins
@@ -14,7 +15,7 @@ const adminController = {
             const totalAdmins = await db.Admin.count({
                 where: {
                     role: {
-                        [db.Sequelize.Op.not]: 'super'
+                        [Op.not]: 'super'
                     }
                 }
             });
@@ -23,7 +24,7 @@ const adminController = {
             const admins = await db.Admin.findAll({
                 where: {
                     role: {
-                        [db.Sequelize.Op.not]: 'super'
+                        [Op.not]: 'super'
                     }
                 },
                 order: [['updatedAt', 'DESC']],
@@ -75,6 +76,9 @@ const adminController = {
     // Update admin
     update: async (req, res) => {
         try {
+            if (req.body.password) {
+                req.body.password = await bcrypt.hash(req.body.password, 12);
+            }
             const admin = await db.Admin.findByPk(req.params.id);
             if (!admin) {
                 return res.status(404).json({ message: 'Admin not found' });
@@ -87,17 +91,50 @@ const adminController = {
         }
     },
 
-    // Delete admin
-    delete: async (req, res) => {
+    // Soft-delete admin
+    softDelete: async (req, res) => {
         try {
-            const deleted = await db.Admin.destroy({ where: { id: req.params.id } });
-            if (!deleted) {
+            const deleteAt = new Date();
+            const [updated] = await db.Admin.update(
+                { deletedAt: deleteAt },
+                {
+                    where: {
+                        id: req.params.id,
+                        role: {
+                            [Op.not]: 'super'
+                        }
+                    }
+                }
+            );
+            if (!updated) {
                 return res.status(404).json({ message: 'Admin not found' });
             }
-            res.status(200).json({ message: 'Admin deleted successfully' });
+            res.status(200).json({ message: 'Book soft-deleted' });
         } catch (error) {
-            console.log(error);
             res.status(500).json({ message: 'Error deleting admin', error: error.message });
+        }
+    },
+
+    // Restore soft-deleted admin
+    restore: async (req, res) => {
+        try {
+            const [updated] = await db.Admin.update(
+                { deletedAt: null },
+                {
+                    where: {
+                        id: req.params.id,
+                        role: {
+                            [Op.not]: 'super'
+                        }
+                    }
+                }
+            );
+            if (!updated) {
+                return res.status(404).json({ message: 'Admin not found' });
+            }
+            res.status(200).json({ message: 'Admin restored' });
+        } catch (error) {
+            res.status(500).json({ message: 'Error restoring admin', error: error.message });
         }
     },
 
@@ -120,7 +157,7 @@ const adminController = {
                 where: {
                     status: 'completed',
                     createdAt: {
-                        [db.Sequelize.Op.between]: [startDate, endDate]
+                        [Op.between]: [startDate, endDate]
                     }
                 }
             });

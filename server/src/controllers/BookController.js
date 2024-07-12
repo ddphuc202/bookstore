@@ -24,6 +24,7 @@ const booksController = {
             }
             const whereClause = {};
             whereClause.quantity = { [Op.gt]: 0 };
+            whereClause.deletedAt = null;
             if (categoryId != 0) {
                 whereClause.categoryId = categoryId;
             }
@@ -240,20 +241,39 @@ const booksController = {
         }
     },
 
-    // Delete a book
-    delete: async (req, res) => {
+    // Soft-delete a book
+    softDelete: async (req, res) => {
         try {
-            const deleted = await db.Book.destroy({
-                where: { id: req.params.id }
-            });
-            if (!deleted) {
-                throw new Error('Book not found');
+            const deletedAt = new Date();
+            const [updated] = await db.Book.update(
+                { deletedAt: deletedAt },
+                { where: { id: req.params.id } }
+            );
+            if (!updated) {
+                res.status(404).json({ message: 'Book not found' });
             }
-            res.status(200).json({ message: 'Book soft deleted successfully' });
+            res.status(200).json({ message: 'Book soft-deleted' });
         } catch (error) {
-            res.status(500).json({ message: 'Error soft deleting book', error });
+            res.status(500).json({ message: 'Error soft-deleting book', error });
         }
     },
+
+    // Restore a soft-deleted book
+    restore: async (req, res) => {
+        try {
+            const [updated] = await db.Book.update(
+                { deletedAt: null },
+                { where: { id: req.params.id } }
+            );
+            if (!updated) {
+                res.status(404).json({ message: 'Book not found' });
+            }
+            res.status(200).json({ message: 'Book restored' });
+        } catch (error) {
+            res.status(500).json({ message: 'Error restoring book', error });
+        }
+    },
+
 };
 
 module.exports = booksController;

@@ -17,7 +17,4 @@ router.put('/item/:id', authenticate(), cartController.update);
 // DELETE a cart item
 router.delete('/item/:id', authenticate(), cartController.delete);
 
-// DELETE all cart items of a customer
-router.delete('/customer/:id', authenticate(), cartController.deleteAllByCustomerId);
-
 module.exports = router;

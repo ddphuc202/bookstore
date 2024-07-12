@@ -21,7 +21,10 @@ router.post('/', authenticate(), authorize(['admin', 'super']), upload.fields([{
 // PUT/update a book
 router.put('/:id', authenticate(), authorize(['admin', 'super']), upload.fields([{ name: 'thumbnail', maxCount: 1 }, { name: 'otherImages', maxCount: 4 }]), bookController.update);
 
-// DELETE a book
-router.delete('/:id', authenticate(), authorize(['admin', 'super']), bookController.delete);
+// SOFT-DELETE a book
+router.delete('/:id', authenticate(), authorize(['admin', 'super']), bookController.softDelete);
+
+// RESTORE a soft-deleted book
+router.patch('/restore/:id', authenticate(), authorize(['admin', 'super']), bookController.restore);
 
 module.exports = router;

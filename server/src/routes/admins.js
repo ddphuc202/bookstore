@@ -20,7 +20,10 @@ router.post('/', authenticate(), authorize(['super']), adminController.create);
 // PUT/update an admin
 router.put('/:id', authenticate(), authorize(['super']), adminController.update);
 
-// DELETE an admin
-router.delete('/:id', authenticate(), authorize(['super']), adminController.delete);
+// SOFT-DELETE an admin
+router.delete('/:id', authenticate(), authorize(['super']), adminController.softDelete);
+
+// RESTORE a soft-deleted admin
+router.patch('/restore/:id', authenticate(), authorize(['super']), adminController.restore);
 
 module.exports = router;

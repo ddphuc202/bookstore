@@ -85,7 +85,7 @@ const postController = {
                 where: { id: req.params.id }
             });
             if (!updated) {
-                throw new Error('Post not found');
+                return res.status(404).json({ message: 'Error updating post' });
             }
             res.status(200).json({ message: 'Post updated successfully' });
         } catch (error) {
@@ -100,7 +100,7 @@ const postController = {
                 where: { id: req.params.id }
             });
             if (!deleted) {
-                throw new Error('Post not found');
+                return res.status(404).json({ message: 'Post not found' }); // Ensure to return early
             }
             res.status(200).json({ message: 'Post deleted successfully' });
         } catch (error) {
