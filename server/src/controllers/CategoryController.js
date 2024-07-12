@@ -13,7 +13,6 @@ const categoryController = {
             const totalPages = Math.ceil(totalCategories / limit);
 
             const categories = await db.Category.findAll({
-                where: { deletedAt: [db.Sequelize.Op.not] },
                 order: [['createdAt', 'ASC']],
                 offset: parseInt(offset),
                 limit: parseInt(limit),
