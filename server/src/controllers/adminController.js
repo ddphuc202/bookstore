@@ -27,7 +27,7 @@ const adminController = {
                         [Op.not]: 'super'
                     }
                 },
-                order: [['updatedAt', 'DESC']],
+                order: [['createdAt', 'ASC']],
                 offset: parseInt(offset),
                 limit: parseInt(limit),
             });

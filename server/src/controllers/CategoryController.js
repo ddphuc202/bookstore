@@ -14,7 +14,7 @@ const categoryController = {
 
             const categories = await db.Category.findAll({
                 where: { deletedAt: [db.Sequelize.Op.not] },
-                order: [['updatedAt', 'DESC']],
+                order: [['createdAt', 'ASC']],
                 offset: parseInt(offset),
                 limit: parseInt(limit),
             });

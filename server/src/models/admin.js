@@ -40,6 +40,9 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.ENUM('super', 'admin'),
       defaultValue: 'admin',
     },
+    deletedAt: {
+      type: DataTypes.DATE,
+    },
   }, {
     sequelize,
     modelName: 'Admin',

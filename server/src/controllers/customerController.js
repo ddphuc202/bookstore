@@ -13,7 +13,7 @@ const customerController = {
             const totalCustomers = await db.Customer.count();
             const totalPages = Math.ceil(totalCustomers / limit);
             const customers = await db.Customer.findAll({
-                order: [['updatedAt', 'DESC']],
+                order: [['createdAt', 'ASC']],
                 offset: parseInt(offset),
                 limit: parseInt(limit),
             });
