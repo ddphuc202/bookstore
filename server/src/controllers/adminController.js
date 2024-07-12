@@ -142,25 +142,29 @@ const adminController = {
     statistic: async (req, res) => {
         try {
             const { month, year } = req.query;
-            const currentYear = new Date().getFullYear();
-            const currentMonth = new Date().getMonth() + 1; // getMonth() returns 0-11
+            let salesByMonth;
+            if (month && year) {
+                const currentYear = new Date().getFullYear();
+                const currentMonth = new Date().getMonth() + 1; // getMonth() returns 0-11
 
-            if (!month || !year || month < 1 || month > 12 || year < 2024 || year > currentYear || (year == currentYear && month > currentMonth)) {
-                return res.status(400).json({ message: 'Invalid month or year' });
+                if (!month || !year || month < 1 || month > 12 || year < 2024 || year > currentYear || (year == currentYear && month > currentMonth)) {
+                    return res.status(400).json({ message: 'Invalid month or year' });
+                }
+
+                const startDate = new Date(Date.UTC(year, month - 1, 1, 0, 0, 0, 0));
+                const endDate = new Date(year, month, 0, 23, 59, 59, 999);
+
+                // Sales by month
+                salesByMonth = await db.Order.sum('total', {
+                    where: {
+                        status: 'completed',
+                        createdAt: {
+                            [Op.between]: [startDate, endDate]
+                        }
+                    }
+                });
             }
 
-            const startDate = new Date(Date.UTC(year, month - 1, 1, 0, 0, 0, 0));
-            const endDate = new Date(year, month, 0, 23, 59, 59, 999);
-
-            // Sales by month
-            const salesByMonth = await db.Order.sum('total', {
-                where: {
-                    status: 'completed',
-                    createdAt: {
-                        [Op.between]: [startDate, endDate]
-                    }
-                }
-            });
 
             // Total sales
             const totalSales = await db.Order.sum('total', {
