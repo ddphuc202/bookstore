@@ -132,7 +132,7 @@ function ModalAddNewBooks() {
 
                     <Modal.Footer>
 
-                        <Button variant="primary" onClick={(event) => handleSubmit(event)}>Save changes</Button>
+                        <Button variant="primary" onClick={(event) => handleSubmit(event)}>Lưu thông tin</Button>
                     </Modal.Footer>
                 </Modal.Dialog>
             </div>

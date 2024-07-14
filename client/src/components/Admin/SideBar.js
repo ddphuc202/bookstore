@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { faCircleArrowLeft } from '@fortawesome/free-solid-svg-icons';
+import { faCircleArrowLeft, faRightFromBracket } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../../styles/SideBar.css';
@@ -101,7 +101,7 @@ const SideBar = () => {
                 <div className="text-center d-none d-md-inline">
                     <button className="rounded-circle border-0" >
                         <Link to={'/logout'}>
-                            <FontAwesomeIcon icon={faCircleArrowLeft} size="lg" style={{ color: "#8a9dbc", marginTop: "3px" }} />
+                            <FontAwesomeIcon icon={faRightFromBracket} rotation={180} size="lg" style={{ color: "#8a9dbc", marginTop: "3px" }} />
                         </Link>
                     </button>
                 </div>

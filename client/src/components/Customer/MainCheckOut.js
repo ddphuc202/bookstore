@@ -14,16 +14,20 @@ const MainCheckOut = () => {
     const navigate = useNavigate();
 
     const handleSubmit = (event) => {
+        if (!data.name || !data.phone || !data.address) {
+            toast.error("Vui lòng nhập đủ thông tin nhận hàng!")
+            return;
+        }
         if (!data.name) {
-            toast.error("Vui lòng nhập tên người nhận!")
+            toast.error("Vui lòng nhập đủ thông tin nhận hàng!")
             return;
         }
         if (!data.phone) {
-            toast.error("Vui lòng nhập số điện thoại người nhận!")
+            toast.error("Vui lòng nhập đủ thông tin nhận hàng!")
             return;
         }
         if (!data.address) {
-            toast.error("Vui lòng nhập địa chỉ người nhận!")
+            toast.error("Vui lòng nhập đủ thông tin nhận hàng!")
             return;
         }
         createNewOrder(data, navigate)

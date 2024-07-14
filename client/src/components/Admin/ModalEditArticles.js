@@ -106,7 +106,7 @@ function ModalEditArticles() {
 
                     </Modal.Body>
                     <Modal.Footer>
-                        <Button variant="primary" onClick={(event) => handleSubmit(event)}>Save update</Button>
+                        <Button variant="primary" onClick={(event) => handleSubmit(event)}>Lưu thông tin</Button>
                     </Modal.Footer>
                 </Modal.Dialog>
             </div>
