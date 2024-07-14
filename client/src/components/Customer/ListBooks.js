@@ -6,6 +6,7 @@ import { getBooks } from '../../services/BooksServices';
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { addBookToCart } from '../../services/CartServices';
+import { baseURL } from "../../utils/AxiosCustomize";
 const ListBooks = (props) => {
 
     const [records, setRecords] = useState([]);
@@ -44,7 +45,7 @@ const ListBooks = (props) => {
                                             <Link to={`/info-book/${book.id}`} className="image_thumb"
                                                 title="HỖN ĐỘN VÀ KHU VƯỜN">
                                                 <img width="199" height="199"
-                                                    src={image}
+                                                    src={baseURL + book.thumbnailPath}
                                                     alt="HỖN ĐỘN VÀ KHU VƯỜN"
                                                     className="lazyload img-responsive center-block" />
                                             </Link>

@@ -35,6 +35,7 @@ const getAdminById = (id, setData) => {
 }
 
 const updateAdminByID = (id, data, navigate) => {
+
     instance.put('/admins/' + id, data)
         .then(res => {
             toast.success("Chỉnh sửa quản trị viên thành công!");

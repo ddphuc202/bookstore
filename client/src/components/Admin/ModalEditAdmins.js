@@ -51,8 +51,8 @@ function ModalEditAdmins() {
                             </Form.Group>
 
                             <Form.Group className="mb-3" controlId="formBasicPassword">
-                                <Form.Label>Mật khẩu</Form.Label>
-                                <Form.Control type="text" value={data.password} onChange={event => setData({ ...data, password: event.target.value })} />
+                                <Form.Label>Đổi mật khẩu</Form.Label>
+                                <Form.Control type="password" value={data.password} onChange={event => setData({ ...data, password: event.target.value })} />
                             </Form.Group>
 
                             <Form.Group className="mb-3" controlId="formBasicPassword">

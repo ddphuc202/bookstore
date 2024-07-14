@@ -18,7 +18,7 @@ const TableAdmins = (props) => {
         getAdmins(setRecords);
     }, [count])
 
-
+    console.log(records)
     return (
         <div style={{ border: "solid 1px #CFCFCF", padding: "30px", borderRadius: "15px", backgroundColor: "#E0EEEE" }}>
             <Table striped bordered hover>

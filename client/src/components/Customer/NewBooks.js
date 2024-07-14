@@ -8,6 +8,7 @@ import { Link } from 'react-router-dom';
 import { addBookToCart } from '../../services/CartServices';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { baseURL } from '../../utils/AxiosCustomize';
 const NewBooks = () => {
 
 	const [records, setRecords] = useState([]);
@@ -66,7 +67,7 @@ const NewBooks = () => {
 												<Link className="image_thumb" to={`/info-book/${book.id}`}
 												>
 													<img width="199" height="199"
-														src={image1}
+														src={baseURL + book.thumbnailPath}
 
 														className="lazyload img-responsive center-block" />
 												</Link>
