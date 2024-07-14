@@ -17,7 +17,7 @@ const SideBar = () => {
                     <div className="sidebar-brand-icon rotate-n-15">
                         <i className="fas fa-laugh-wink"></i>
                     </div>
-                    <div className="sidebar-brand-text mx-3">Khai Tâm BookStore </div>
+                    <div className="sidebar-brand-text mx-3">Tiệm Sách Khai Tâm </div>
                 </a>
 
 
@@ -33,34 +33,34 @@ const SideBar = () => {
                 <hr className="sidebar-divider" />
 
                 <div className="sidebar-heading">
-                    Manage
+                    Quản Lý
                 </div>
 
                 {localStorage.getItem('userRole') === 'super' ? (
                     <li className="nav-item">
-                        <Link className="nav-link" to={'/manage/admins'} style={{ textDecoration: "none" }}> <b>Admins</b></Link>
+                        <Link className="nav-link" to={'/manage/admins'} style={{ textDecoration: "none" }}> <b>Quản Trị Viên</b></Link>
                     </li>
                 ) : null}
 
                 <li className="nav-item">
-                    <Link className="nav-link" to={'/manage/books'} style={{ textDecoration: "none" }}> <b>Books</b></Link>
+                    <Link className="nav-link" to={'/manage/books'} style={{ textDecoration: "none" }}> <b>Sách</b></Link>
                 </li>
 
 
                 <li className="nav-item">
-                    <Link className="nav-link" to={'/manage/posts'} style={{ textDecoration: "none" }}> <b>Posts</b></Link>
+                    <Link className="nav-link" to={'/manage/posts'} style={{ textDecoration: "none" }}> <b>Bài Viết</b></Link>
                 </li>
 
                 <li className="nav-item">
-                    <Link className="nav-link" to={'/manage/categories'} style={{ textDecoration: "none" }}> <b>Categories</b></Link>
+                    <Link className="nav-link" to={'/manage/categories'} style={{ textDecoration: "none" }}> <b>Thể Loại</b></Link>
                 </li>
 
                 <li className="nav-item">
-                    <Link className="nav-link" to={'/manage/customers'} style={{ textDecoration: "none" }}> <b>Customers</b></Link>
+                    <Link className="nav-link" to={'/manage/customers'} style={{ textDecoration: "none" }}> <b>Khách Hàng</b></Link>
                 </li>
 
                 <li className="nav-item">
-                    <Link className="nav-link" to={'/manage'} style={{ textDecoration: "none" }}> <b>Orders</b></Link>
+                    <Link className="nav-link" to={'/manage'} style={{ textDecoration: "none" }}> <b>Đơn Hàng</b></Link>
                 </li>
 
 
@@ -72,7 +72,7 @@ const SideBar = () => {
                 </div>
 
 
-                <li className="nav-item">
+                {/* <li className="nav-item">
                     <a className="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages"
                         aria-expanded="true" aria-controls="collapsePages">
                         <i className="fas fa-fw fa-folder"></i>
@@ -92,7 +92,7 @@ const SideBar = () => {
                     <a className="nav-link" href="tables.html">
                         <i className="fas fa-fw fa-table"></i>
                         <span>Tables</span></a>
-                </li>
+                </li> */}
 
 
                 <hr className="sidebar-divider d-none d-md-block" />

@@ -29,49 +29,60 @@ const ListBooks = (props) => {
         getBooks(props.page, props.searchBook, props.sortByBook, props.orderBook, props.categoryId, setRecords);
     }, [props])
 
-
+    console.log(records)
 
     return (
         <>
             <div className="category-products products">
                 <section className="products-view products-view-grid collection_reponsive">
                     <div className="row">
-                        {Array.isArray(records.books) && records.books.map((book, index) => (
-                            <div key={index} className="col-6 col-md-3 col-lg-3 product-col">
-                                <div className="item_product_main">
-                                    <div className="thumb">
-                                        <Link to={`/info-book/${book.id}`} className="image_thumb"
-                                            title="HỖN ĐỘN VÀ KHU VƯỜN">
-                                            <img width="199" height="199"
-                                                src={image}
-                                                alt="HỖN ĐỘN VÀ KHU VƯỜN"
-                                                className="lazyload img-responsive center-block" />
-                                        </Link>
-
-                                    </div>
-                                    <div className="info-product">
-                                        <h3 className="product-name">
-                                            <Link to={`/info-book/${book.id}`}
+                        {Array.isArray(records.books) && records.books.length > 0 ? (
+                            records.books.map((book, index) => (
+                                <div key={index} className="col-6 col-md-3 col-lg-3 product-col">
+                                    <div className="item_product_main">
+                                        <div className="thumb">
+                                            <Link to={`/info-book/${book.id}`} className="image_thumb"
                                                 title="HỖN ĐỘN VÀ KHU VƯỜN">
-                                                <b>{book.title}</b>
+                                                <img width="199" height="199"
+                                                    src={image}
+                                                    alt="HỖN ĐỘN VÀ KHU VƯỜN"
+                                                    className="lazyload img-responsive center-block" />
                                             </Link>
-                                        </h3>
-
-                                        <div className="price-box">
-                                            <span className="price">{(book.price - book.price * book.discount / 100).toLocaleString('vi-VN')}đ</span>
-                                            <span className="compare-price">{book.price.toLocaleString('vi-VN')}đ</span>
 
                                         </div>
+                                        <div className="info-product">
+                                            <h3 className="product-name">
+                                                <Link to={`/info-book/${book.id}`}
+                                                    title="HỖN ĐỘN VÀ KHU VƯỜN">
+                                                    <b>{book.title}</b>
+                                                </Link>
+                                            </h3>
 
-                                        <button onClick={() => handleSubmit(book.id)} className='btn-buy btn-left btn-views  btn-buy-now-grid' >
-                                            Thêm vào giỏ
-                                        </button>
+                                            <div className="price-box">
+                                                <span className="price"><b>{(book.price - book.price * book.discount / 100).toLocaleString('vi-VN')}đ</b></span>
+                                                {book.discount > 0 &&
+                                                    <span className="compare-price">{book.price.toLocaleString('vi-VN')}đ</span>
+                                                }
+
+
+                                            </div>
+
+                                            <button onClick={() => handleSubmit(book.id)} className='btn-buy btn-left btn-views  btn-buy-now-grid' >
+                                                Thêm vào giỏ
+                                            </button>
+                                        </div>
                                     </div>
                                 </div>
+                            ))
+                        ) : (
+                            <div style={{ border: "solid, green, 1px", height: "80px", padding: "20px", marginBottom: "20px" }}>
+                                <h2 style={{ textAlign: "center", color: "black" }}>Không tìm thấy sản phẩm nào!</h2>
                             </div>
-                        ))
+                        )
                         }
                     </div>
+
+
 
                     <div className="custom customs-btn-numbers clearfix input_number_index">
                         <button

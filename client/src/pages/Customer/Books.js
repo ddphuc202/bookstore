@@ -14,7 +14,7 @@ const Books = () => {
     const [sortBy, setSortBy] = useState([]);
     const [order, setOrder] = useState([]);
     const [page, setPage] = useState(1);
-    const [categoryId, setCategoryId] = useState();
+    const [categoryId, setCategoryId] = useState([]);
 
 
     const handleSearch = (searchValue) => {
@@ -51,6 +51,8 @@ const Books = () => {
 
     const handleCategoryId = (id) => {
         setCategoryId(id);
+        setPage(1);
+        setSearchBooks([]);
     }
 
     return (

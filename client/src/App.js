@@ -42,7 +42,7 @@ import ModalEditAdmins from './components/Admin/ModalEditAdmins';
 
 function App() {
   useEffect(() => {
-    document.title = "Khai Tâm Bookstore";
+    document.title = "Tiệm Sách Khai Tâm";
   }, [])
   return (
 

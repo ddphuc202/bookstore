@@ -55,7 +55,7 @@ const TableOrderCustomersDetail = () => {
                 </tbody>
             </Table>
 
-            <button disabled={data.status === "processing" || data.status === 'completed' || data.status === 'cancelled'} onClick={() => handleCancel()} className='btn btn-danger'> Hủy đơn hàng </button>
+            <button disabled={data.status === "processing" || data.status === 'completed' || data.status === 'cancelled' || data.status === 'delivering'} onClick={() => handleCancel()} className='btn btn-danger'> Hủy đơn hàng </button>
 
 
         </>

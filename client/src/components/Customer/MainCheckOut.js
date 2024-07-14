@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import { createNewOrder } from '../../services/OrderServices';
 import { useNavigate } from 'react-router-dom';
 import { getCustomerById } from '../../services/CustomerServices';
-import { ToastContainer } from 'react-toastify';
+import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 const MainCheckOut = () => {
@@ -14,6 +14,18 @@ const MainCheckOut = () => {
     const navigate = useNavigate();
 
     const handleSubmit = (event) => {
+        if (!data.name) {
+            toast.error("Vui lòng nhập tên người nhận!")
+            return;
+        }
+        if (!data.phone) {
+            toast.error("Vui lòng nhập số điện thoại người nhận!")
+            return;
+        }
+        if (!data.address) {
+            toast.error("Vui lòng nhập địa chỉ người nhận!")
+            return;
+        }
         createNewOrder(data, navigate)
     }
 

@@ -64,10 +64,10 @@ const NewBooks = () => {
 										<div className="item_product_main">
 											<div className="thumb">
 												<Link className="image_thumb" to={`/info-book/${book.id}`}
-													title="THANH XUÂN, SAO MÀ ĐAU ĐỚN!">
+												>
 													<img width="199" height="199"
 														src={image1}
-														alt="THANH XUÂN, SAO MÀ ĐAU ĐỚN!"
+
 														className="lazyload img-responsive center-block" />
 												</Link>
 
@@ -75,12 +75,12 @@ const NewBooks = () => {
 											<div className="info-product">
 												<div className='title-box'>
 													<h3 className="product-name"><Link to={`/info-book/${book.id}`}
-														title="THANH XUÂN, SAO MÀ ĐAU ĐỚN!"><b>{book.title}</b></Link>
+													><b>{book.title}</b></Link>
 													</h3>
 												</div>
 												<div className="price-box">
 													<span className="price"><b>{(book.price - book.price * book.discount / 100).toLocaleString('vi-VN')}đ</b></span>
-													<span className="compare-price"><b>{book.price.toLocaleString('vi-VN')}đ</b></span>
+													{book.discount > 0 && <span className="price"><b><del>{book.price.toLocaleString('vi-VN')}đ</del></b></span>}
 
 												</div>
 

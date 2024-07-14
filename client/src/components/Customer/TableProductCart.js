@@ -63,7 +63,7 @@ const TableProductCart = () => {
                                     <span>{item.book.title}</span>
                                     <p onClick={() => handleDelete(item.id)} >Xóa</p>
                                 </td>
-                                <td className="price">{item.book.price}đ</td>
+                                <td className="price">{Number(item.book.price).toLocaleString("vi-VN")}đ</td>
                                 <td>
                                     <div className="custom custom-btn-numbers clearfix input_number_index">
                                         <button

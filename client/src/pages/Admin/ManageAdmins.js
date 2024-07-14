@@ -13,7 +13,7 @@ const ManageAdmins = (props) => {
                 <div className='admin_sidebar'>
                     <SideBar />
                 </div>
-                <div className='admin-content'>
+                <div className='admin-content' style={{ width: "100%" }}>
                     <div className='button-add'>
                         <h1><b>Quản lý quản trị viên</b></h1>
                         <Link to={'/manage/add-admins'} className='btn btn-primary'>Thêm mới quản trị viên</Link>

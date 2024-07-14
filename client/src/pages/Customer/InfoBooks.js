@@ -93,7 +93,7 @@ const InfoBooks = () => {
                             Tác giả: <span  >{data.author}</span>
                         </div>
 
-                        <div className="author">
+                        <div className="author" style={{ marginTop: '10px' }}>
                             Nhà xuất bản: <span  >{data.publisher}</span>
                         </div>
 
@@ -113,12 +113,17 @@ const InfoBooks = () => {
                                         <span className="price product-price">{Number(data.price - data.price * data.discount / 100).toLocaleString('vi-VN')}đ</span>
                                     </span>
                                     <span className="old-price">
-                                        <del className="price product-price-old">
-                                            {Number(data.price).toLocaleString('vi-VN')}đ
-                                        </del>
-                                        <span className="discount">-
-                                            {data.discount} %
-                                        </span>
+                                        {data.discount > 0 &&
+                                            <del className="price product-price-old">
+                                                {Number(data.price).toLocaleString('vi-VN')}đ
+                                            </del>}
+
+
+                                        {data.discount > 0 &&
+                                            <span className="discount">-
+                                                {data.discount} %
+                                            </span>}
+
                                     </span>
                                     <span className="save-price d-none">
                                         <span className="price product-price-save"></span> so với thị trường

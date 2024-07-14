@@ -2,7 +2,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { useState, useEffect } from 'react'
 import { handleLogin } from '../../services/AuthServices';
 import { useNavigate } from 'react-router-dom';
-import { ToastContainer } from 'react-toastify';
+import { ToastContainer, toast } from 'react-toastify';
 const Login = () => {
 
     const [email, setEmail] = useState('');
@@ -12,6 +12,18 @@ const Login = () => {
 
     const handleSubmit = (event) => {
         event.preventDefault();
+        if (!email && !password) {
+            toast.error('Vui lòng nhập email và password!');
+            return;
+        }
+        if (!email) {
+            toast.error('Vui lòng nhập email!');
+            return;
+        }
+        if (!password) {
+            toast.error('Vui lòng nhập mật khẩu!');
+            return;
+        }
         handleLogin(email, password, navigate);
     }
 

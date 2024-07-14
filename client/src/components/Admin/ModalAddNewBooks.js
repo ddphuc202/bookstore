@@ -5,6 +5,7 @@ import Form from 'react-bootstrap/Form';
 import { createNewBook } from '../../services/BooksServices';
 import { useNavigate } from 'react-router-dom';
 import { getCategories } from '../../services/GenresServices';
+import { toast } from 'react-toastify';
 
 
 function ModalAddNewBooks() {
@@ -26,6 +27,10 @@ function ModalAddNewBooks() {
 
     const handleSubmit = (event) => {
         event.preventDefault();
+        if (!categories) {
+            toast.error('Vui lòng chọn thể loại sách!');
+            return;
+        }
         createNewBook(title, author, publisher, description, price, discount, quantity, categories, thumbnailFile, otherImages, navigate);
     }
 
@@ -95,6 +100,7 @@ function ModalAddNewBooks() {
                             <Form.Group className="mb-3" controlId="formBasicPassword">
                                 <Form.Label>Thể loại</Form.Label>
                                 <Form.Select aria-label="Default select example" onChange={(event) => setCategories(event.target.value)}>
+                                    <option>Chọn thể loại</option>
                                     {Array.isArray(records.categories) && records.categories.map((category, index) => (
                                         <option key={index} value={category.id} > {category.name} </option>
                                     ))}

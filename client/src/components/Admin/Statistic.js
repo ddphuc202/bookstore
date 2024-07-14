@@ -10,17 +10,34 @@ const Statistic = () => {
         statisticSales(month, year, setData)
     }, [month, year])
 
-
+    console.log(month)
+    console.log(year)
     return (
         <>
-
             <label>Chọn tháng</label>
-            <input className="form-control" type="year" style={{ width: '200px' }} value={month} onChange={event => setMonth(event.target.value)} />
+            <select className="form-control" style={{ width: '200px' }} onChange={event => setMonth(event.target.value)} >
+                <option>Tháng...</option>
+                <option value={1}>1</option>
+                <option value={2}>2</option>
+                <option value={3}>3</option>
+                <option value={4}>4</option>
+                <option value={5}>5</option>
+                <option value={6}>6</option>
+                <option value={7}>7</option>
+                <option value={8}>8</option>
+                <option value={9}>9</option>
+                <option value={10}>10</option>
+                <option value={11}>11</option>
+                <option value={12}>12</option>
+            </select>
+
             <br></br>
             <label>Chọn Năm</label>
-            <input className="form-control" type="year" placeholder="Chọn năm" style={{ width: '200px' }} value={year} onChange={event => setYear(event.target.value)} />
-
-
+            <select className="form-control" style={{ width: '200px' }} onChange={event => setYear(event.target.value)} >
+                <option>Năm...</option>
+                <option value={2024}>2024</option>
+                <option value={2023}>2023</option>
+            </select>
             <br></br>
 
             <div className="statistic">
@@ -55,7 +72,7 @@ const Statistic = () => {
                                     <div className="text-xs font-weight-bold text-success text-uppercase mb-1">
                                         Tổng Doanh Thu </div>
                                     {
-                                        data.salesByMonth && data.totalSales ?
+                                        data.totalSales ?
                                             <div className="h5 mb-0 font-weight-bold text-gray-800">{Number(data.totalSales).toLocaleString('vi-VN')}đ</div>
                                             : <div className="h5 mb-0 font-weight-bold text-gray-800">0đ</div>
                                     }
