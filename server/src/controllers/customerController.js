@@ -62,6 +62,9 @@ const customerController = {
     // Update a customer
     update: async (req, res) => {
         try {
+            if (req.body.password) {
+                req.body.password = await bcrypt.hash(req.body.password, 12);
+            }
             const [updated] = await db.Customer.update(req.body, { // array destructuring
                 where: { id: req.params.id }
             });
