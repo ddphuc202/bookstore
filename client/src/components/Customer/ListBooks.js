@@ -7,6 +7,7 @@ import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { addBookToCart } from '../../services/CartServices';
 import { baseURL } from "../../utils/AxiosCustomize";
+import { ToastContainer } from "react-toastify";
 const ListBooks = (props) => {
 
     const [records, setRecords] = useState([]);
@@ -34,6 +35,7 @@ const ListBooks = (props) => {
 
     return (
         <>
+            <ToastContainer />
             <div className="category-products products">
                 <section className="products-view products-view-grid collection_reponsive">
                     <div className="row">

@@ -173,6 +173,21 @@ const InfoBooks = () => {
                         </div>
                     </div>
                 </div>
+                <br></br>
+                <div class="col-lg-8 col-12">
+                    <h4 class="title-tab" style={{ color: "green" }}>
+                        <b>Giới thiệu sách</b>
+                    </h4>
+                    <div class="content_extab tab-data">
+                        <div class="rte product_getcontent">
+
+                            <div class="ba-text-fpt">
+                                scacbakjsbc
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
                 <br />
                 <br />
             </Container>
