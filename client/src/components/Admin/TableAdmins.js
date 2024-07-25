@@ -46,12 +46,12 @@ const TableAdmins = (props) => {
                                 <td>{d.deletedAt ? 'Ngừng hoạt động' : 'Hoạt động'}</td>
                                 <td>
                                     {d.deletedAt ? (
-                                        <button style={{ border: 'none' }} onClick={event => handleRestore(d.id)} ><FontAwesomeIcon icon={faRotateRight} style={{ color: "#fa2500" }} /></button>
+                                        <button style={{ border: 'none' }} onClick={event => handleRestore(d.id)} ><FontAwesomeIcon icon={faRotateRight} style={{ color: "green" }} /></button>
                                     ) : (
                                         <>
                                             <Link to={`/manage/edit-admins/${d.id}`} ><FontAwesomeIcon icon={faPenToSquare} size="lg" /></Link>
                                             <button style={{ border: 'none' }} onClick={event => handleDelete(d.id)} ><FontAwesomeIcon icon={faTrash} style={{ color: "#fa2500" }} /></button>
-                                            <Link to={`/manage/edit-password/${d.id}`} ><FontAwesomeIcon icon={faKey} size="lg" /></Link>
+                                            <Link to={`/manage/edit-password/${d.id}`} ><FontAwesomeIcon icon={faKey} style={{ color: "yellow" }} size="lg" /></Link>
                                         </>
                                     )}
                                 </td>

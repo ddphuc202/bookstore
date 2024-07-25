@@ -16,6 +16,9 @@ const addBookToCart = (id, quantity) => {
         if (err.response.status === 403) {
             toast.info('Vui lòng đăng nhập!')
         }
+        if (err.response.status === 400) {
+            toast.error('Số lượng sách không đủ!')
+        }
     });
 };
 

@@ -182,7 +182,9 @@ const InfoBooks = () => {
                         <div class="rte product_getcontent">
 
                             <div class="ba-text-fpt">
-                                scacbakjsbc
+                                <p>
+                                    {data.description}
+                                </p>
                             </div>
 
                         </div>
