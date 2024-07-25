@@ -4,23 +4,20 @@ import Modal from 'react-bootstrap/Modal';
 import Form from 'react-bootstrap/Form';
 import { useNavigate } from 'react-router-dom';
 import { useParams } from 'react-router-dom';
-import { getAdminById, updateAdminByID } from '../../services/AdminsServices';
+import { updatePassword } from '../../services/AdminsServices';
 
 
-function ModalEditAdmins() {
+function ModalEditPasswordAdmin() {
 
     const { id } = useParams();
-    const [data, setData] = useState([]);
+    const [password, setPassword] = useState('')
     const navigate = useNavigate();
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        updateAdminByID(id, data, navigate);
+        updatePassword(id, password, navigate);
     }
 
-    useEffect(() => {
-        getAdminById(id, setData)
-    }, [])
     return (
         <>
             <div
@@ -30,29 +27,19 @@ function ModalEditAdmins() {
 
                 <Modal.Dialog >
                     <Modal.Header >
-                        <Modal.Title>Chỉnh Sửa Quản Trị Viên</Modal.Title>
+                        <Modal.Title>Chỉnh Sửa Mật Khẩu Quản Trị Viên</Modal.Title>
                     </Modal.Header>
                     <Modal.Body>
 
                         <Form>
                             <Form.Group className="mb-3" controlId="formBasicEmail" >
                                 <Form.Label></Form.Label>
-                                <Form.Control type="text" value={data.id} hidden />
-                            </Form.Group>
-
-                            <Form.Group className="mb-3" controlId="formBasicEmail" >
-                                <Form.Label>Tên </Form.Label>
-                                <Form.Control type="text" value={data.name} onChange={event => setData({ ...data, name: event.target.value })} />
+                                <Form.Control type="text" value={id} hidden />
                             </Form.Group>
 
                             <Form.Group className="mb-3" controlId="formBasicPassword">
-                                <Form.Label>Email</Form.Label>
-                                <Form.Control type="email" value={data.email} onChange={event => setData({ ...data, email: event.target.value })} />
-                            </Form.Group>
-
-                            <Form.Group className="mb-3" controlId="formBasicPassword">
-                                <Form.Label>Số điện thoại</Form.Label>
-                                <Form.Control type="text" value={data.phone} onChange={event => setData({ ...data, phone: event.target.value })} />
+                                <Form.Label>Đổi mật khẩu</Form.Label>
+                                <Form.Control type="password" placeholder='Nhập mật khẩu mới...' value={password} onChange={event => setPassword(event.target.value)} />
                             </Form.Group>
                         </Form>
 
@@ -66,4 +53,4 @@ function ModalEditAdmins() {
         </>
     )
 }
-export default ModalEditAdmins;
+export default ModalEditPasswordAdmin;

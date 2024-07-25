@@ -46,18 +46,49 @@ const updateAdminByID = (id, data, navigate) => {
         })
 }
 
-const deleteAdmins = (id, count, setCount) => {
+const updatePassword = (id, password, navigate) => {
+    let data = {
+        password: password
+    }
+    instance.put('/admins/' + id, data)
+        .then(res => {
+            toast.success("Chỉnh sửa mật khẩu quản trị viên thành công!");
+            navigate('/manage/admins');
+        })
+        .catch(err => {
+            console.log(err)
+            toast.error('Chỉnh sửa mật khẩu quản trị viên thất bại!')
+        })
+}
+
+const deleteAdmins = (id, refresh, setRefresh) => {
     const conf = window.confirm('Bạn có muốn xóa không?');
     if (conf) {
         instance.delete('/admins/' + id)
             .then(res => {
                 toast.success('Xóa quản trị viên thành công!');
-                count++;
-                setCount(count);
+                refresh++;
+                setRefresh(refresh);
             }).catch(err => {
                 console.log(err)
                 toast.error('Xóa quản trị viên thất bại!')
 
+            })
+    }
+}
+
+const restoreAdmins = (id, refresh, setRefresh) => {
+    const conf = window.confirm('Bạn có muốn khôi phục không?');
+    if (conf) {
+        instance.patch('/admins/restore/' + id)
+            .then(res => {
+                toast.success('Khôi phục quản trị viên thành công!');
+                refresh++;
+                setRefresh(refresh);
+
+            }).catch(err => {
+                console.log(err);
+                toast.error('Khôi phục quản trị viên thất bại!')
             })
     }
 }
@@ -75,4 +106,4 @@ const statisticSales = (month, year, setData) => {
         console.log(err)
     })
 }
-export { createNewAdmin, getAdmins, getAdminById, updateAdminByID, deleteAdmins, statisticSales } 
+export { createNewAdmin, getAdmins, getAdminById, updateAdminByID, updatePassword, deleteAdmins, restoreAdmins, statisticSales } 

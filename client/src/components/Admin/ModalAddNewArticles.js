@@ -42,12 +42,12 @@ function ModalAddNewArticles() {
                     <Modal.Body>
                         <Form>
                             <Form.Group className="mb-3" controlId="formBasicEmail" >
-                                <Form.Label>Title</Form.Label>
+                                <Form.Label>Tiêu đề</Form.Label>
                                 <Form.Control type="text" placeholder="Tiêu đề bài viết" value={title} onChange={(event) => setTitle(event.target.value)} />
                             </Form.Group>
 
                             <Form.Group className="mb-3" controlId="formBasicPassword">
-                                <Form.Label>Content</Form.Label>
+                                <Form.Label>Nội dung</Form.Label>
                                 <Form.Control as="textarea" placeholder="Nội dung" value={content} onChange={(event) => setContent(event.target.value)} />
                             </Form.Group>
                         </Form>

@@ -1,30 +1,20 @@
-
-import Table from 'react-bootstrap/Table';
-import 'bootstrap/dist/css/bootstrap.min.css';
 import { useEffect, useState } from "react";
-import { Link, useParams } from "react-router-dom";
-import { getOrderDetail, cancelStatusOrder } from '../../services/OrderServices';
-import { baseURL } from '../../utils/AxiosCustomize';
-import { ToastContainer } from 'react-toastify';
-const TableOrderCustomersDetail = () => {
+import { useParams } from "react-router-dom";
+import Table from 'react-bootstrap/Table';
+import { getOrderDetail } from "../../services/OrderServices";
+import { baseURL } from "../../utils/AxiosCustomize";
+
+const TableOrderDetail = () => {
 
     const { id } = useParams();
-    const [data, setData] = useState([]);
-    const [refresh, setRefresh] = useState(0);
-
-
-    const handleCancel = () => {
-        cancelStatusOrder(id, refresh, setRefresh);
-    }
+    const [data, setData] = useState([])
 
     useEffect(() => {
         getOrderDetail(id, setData)
-    }, [refresh])
-
+    }, [])
 
     return (
         <>
-            <ToastContainer />
             <Table className='table table-hover' >
                 <thead>
                     <tr>
@@ -52,11 +42,7 @@ const TableOrderCustomersDetail = () => {
 
                 </tbody>
             </Table>
-
-            <button disabled={data.status === "processing" || data.status === 'completed' || data.status === 'cancelled' || data.status === 'delivering'} onClick={() => handleCancel()} className='btn btn-danger'> Hủy đơn hàng </button>
-
-
         </>
     )
 }
-export default TableOrderCustomersDetail;
+export default TableOrderDetail;

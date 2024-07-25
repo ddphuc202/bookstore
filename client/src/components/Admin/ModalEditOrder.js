@@ -41,6 +41,11 @@ function ModalEditOrder() {
                             </Form.Group>
 
                             <Form.Group className="mb-3" controlId="formBasicEmail" >
+                                <Form.Label>Mã vận đơn</Form.Label>
+                                <Form.Control type="text" value={data.trackingNumber} onChange={event => setData({ ...data, trackingNumber: event.target.value })} />
+                            </Form.Group>
+
+                            <Form.Group className="mb-3" controlId="formBasicEmail" >
                                 <Form.Label>Tên thể loại</Form.Label>
                                 <Form.Select aria-label="Default select example" value={data.status} onChange={event => setData({ ...data, status: event.target.value })}>
 

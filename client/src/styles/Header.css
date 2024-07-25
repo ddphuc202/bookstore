@@ -71,6 +71,21 @@ header .cart-head svg {
     margin: 5px
 }
 
+header .order-head {
+    width: 24px;
+    height: 24px;
+    position: absolute;
+    top: 28px;
+    right: -20px;
+    cursor: pointer
+}
+
+header .order-head svg {
+    width: 24px;
+    height: 24px;
+    margin: 5px
+}
+
 .nav-horizontal>ul.item_big {
     margin-left: 50px;
 }

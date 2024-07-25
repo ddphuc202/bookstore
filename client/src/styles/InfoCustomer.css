@@ -1,0 +1,38 @@
+.title-account {
+    color: black;
+}
+
+.block-account p {
+    color: black
+}
+
+.block-account ul {
+    list-style: none;
+    padding-left: 0;
+}
+
+.block-account ul li {
+    margin-bottom: 10px;
+}
+
+.title-info {
+    color: black;
+}
+
+.title-info:hover {
+    color: green;
+    text-decoration: none;
+}
+
+.title-head {
+    color: black;
+    margin-bottom: 20px;
+}
+
+.content-main p {
+    color: black;
+}
+
+.title-info:active {
+    color: green;
+}

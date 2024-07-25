@@ -76,7 +76,7 @@ const SideBarCheckOut = () => {
 
                                                         </th>
                                                         <td className="product__quantity visually-hidden"><em>Số lượng:</em> {item.quantity} </td>
-                                                        <td className="product__price"> {item.book.price.toLocaleString('vi-VN')}đ </td>
+                                                        <td className="product__price"><b> {Number(item.book.price).toLocaleString('vi-VN')}đ </b></td>
 
                                                     </tr>
                                                     <br />
@@ -107,7 +107,7 @@ const SideBarCheckOut = () => {
                                             </th>
                                             <td></td>
 
-                                            <td className="total-line__price">{total.toLocaleString('vi-VN')}₫</td>
+                                            <td className="total-line__price"><b>{Number(total).toLocaleString('vi-VN')}₫</b></td>
                                         </tr>
 
 
@@ -123,7 +123,7 @@ const SideBarCheckOut = () => {
                                             <td></td>
                                             <td className="total-line__price">
                                                 <span className="payment-due__price"
-                                                >{total.toLocaleString('vi-VN')}₫</span>
+                                                ><b>{Number(total).toLocaleString('vi-VN')}₫</b></span>
                                             </td>
                                         </tr>
                                     </tfoot>

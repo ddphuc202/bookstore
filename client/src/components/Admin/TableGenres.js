@@ -49,7 +49,7 @@ const TableGenres = (props) => {
                 <td>{d.name}</td>
                 <td>
                   <Link to={`/manage/edit-categories/${d.id}`} ><FontAwesomeIcon icon={faPenToSquare} size="lg" /></Link>
-                  <button style={{ border: 'none' }} onClick={event => handleDelete(d.id)} ><FontAwesomeIcon icon={faTrash} style={{ color: "#fa2500" }} /></button>
+                  {/* <button style={{ border: 'none' }} onClick={event => handleDelete(d.id)} ><FontAwesomeIcon icon={faTrash} style={{ color: "#fa2500" }} /></button> */}
                 </td>
               </tr>
             ))

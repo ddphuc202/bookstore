@@ -1,6 +1,6 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUser } from "@fortawesome/free-regular-svg-icons";
-import { faCartShopping } from "@fortawesome/free-solid-svg-icons";
+import { faCartShopping, faRectangleList } from "@fortawesome/free-solid-svg-icons";
 import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
 import Logo from '../../image/Khai_Tam.png';
 import { Link } from "react-router-dom";
@@ -63,7 +63,7 @@ const Header = () => {
                         </div>
 
                         <div className="user-header">
-                            <Link to={'/orders'} ><FontAwesomeIcon icon={faUser} style={{ color: "#000000", }} /></Link>
+                            <Link to={'/info-customer'} ><FontAwesomeIcon icon={faUser} style={{ color: "#000000", }} /></Link>
                             {!localStorage.getItem('token') ? (
                                 <div className="account-header">
                                     <Link to="/login">Đăng nhập</Link>
@@ -77,6 +77,9 @@ const Header = () => {
                         </div>
                         <Link className="cart-head" to={'/cart'} title="Giỏ hàng">
                             <FontAwesomeIcon icon={faCartShopping} style={{ color: "#000000", }} />
+                        </Link>
+                        <Link className="order-head" to={'/orders'} title="Đơn hàng">
+                            <FontAwesomeIcon icon={faRectangleList} style={{ color: "#000000", }} />
                         </Link>
                         <div className="user-name">
                             {

@@ -73,7 +73,7 @@ const InfoBooks = () => {
                             <br />
                             <Swiper navigation={true} modules={[Navigation]} className="mySwiper">
                                 <SwiperSlide >
-                                    <img style={{ marginLeft: '0px', alignItems: 'center' }} width={'515px'} height={'400px'} src={baseURL + data.thumbnailPath} alt="Ảnh" />
+                                    <img style={{ marginLeft: '50px', marginTop: "50px", alignItems: 'center' }} width={'315px'} src={baseURL + data.thumbnailPath} alt="Ảnh" />
                                 </SwiperSlide>
                                 {otherImages.map((image, index) => (
                                     <SwiperSlide key={index}>

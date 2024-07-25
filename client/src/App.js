@@ -38,6 +38,9 @@ import InfoPost from './pages/Customer/InfoPosts';
 import ManageAdmins from './pages/Admin/ManageAdmins';
 import ModalAddNewAdmins from './components/Admin/ModalAddNewAdmins';
 import ModalEditAdmins from './components/Admin/ModalEditAdmins';
+import ManageOrderDetail from './pages/Admin/ManageOrderDetail';
+import ModalEditPasswordAdmin from './components/Admin/ModalEditPasswordAdmin';
+import InfoCustomer from './pages/Customer/InfoCustomer';
 
 
 function App() {
@@ -72,10 +75,12 @@ function App() {
           <Route path='/manage/customers' element={<ManageCustomers />} />
           <Route path='/manage/add-customers' element={<ModalAddNewCustomers />} />
           <Route path='/manage/edit-customers/:id' element={<ModalEditCustomers />} />
+          <Route path='/manage/order-detail/:id' element={<ManageOrderDetail />} />
 
           <Route path='/manage/admins' element={<ManageAdmins />} />
           <Route path='/manage/add-admins' element={<ModalAddNewAdmins />} />
           <Route path='/manage/edit-admins/:id' element={<ModalEditAdmins />} />
+          <Route path='/manage/edit-password/:id' element={<ModalEditPasswordAdmin />} />
 
           <Route path='/test' element={<Test />} />
 
@@ -94,6 +99,7 @@ function App() {
         <Route path='/checkout' element={<CheckOut />} />
         <Route path='/orders' element={<OrderCustomers />} />
         <Route path='/order-detail/:id' element={<OrderCustomersDetail />} />
+        <Route path='/info-customer' element={<InfoCustomer />} />
 
         <Route path='/login' element={<Login />} />
         <Route path='/register' element={<Register />} />

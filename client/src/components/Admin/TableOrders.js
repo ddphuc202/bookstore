@@ -1,5 +1,5 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faPenToSquare, faTrash, faAnglesLeft, faAnglesRight } from '@fortawesome/free-solid-svg-icons'
+import { faPenToSquare, faCircleInfo, faAnglesLeft, faAnglesRight } from '@fortawesome/free-solid-svg-icons'
 import Table from 'react-bootstrap/Table';
 import { useEffect, useState } from 'react';
 import { Link, Route, useNavigate } from 'react-router-dom';
@@ -20,7 +20,6 @@ const TableOrders = (props) => {
     }
 
 
-
     const status = {
         "processing": "Đang xử lý",
         "completed": "Hoàn thành",
@@ -34,6 +33,7 @@ const TableOrders = (props) => {
 
 
     return (
+
         <div style={{ border: "solid 1px #CFCFCF", padding: "30px", borderRadius: "15px", backgroundColor: "#E0EEEE" }}>
             <Table striped bordered hover>
                 <thead>
@@ -42,6 +42,7 @@ const TableOrders = (props) => {
                         <th>Tên khách hàng</th>
                         <th>Số điện thoại</th>
                         <th>Địa chỉ</th>
+                        <th>Mã vận đơn</th>
                         <th>Tình trạng</th>
                         <th>Tổng tiền</th>
                         <th>Hành động</th>
@@ -55,12 +56,14 @@ const TableOrders = (props) => {
                                 <td>{d.name}</td>
                                 <td>{d.phone}</td>
                                 <td>{d.address}</td>
-                                <td>{status[d.status]}</td>
-                                <td>{d.total}</td>
+                                <td>{d.trackingNumber}</td>
+                                <td className={`status-${d.status}`}><b>{status[d.status]}</b></td>
+                                <td>{Number(d.total).toLocaleString('vi-VN')}đ</td>
                                 <td>
                                     {d.status === 'completed' || d.status === 'cancelled' ? (null) : (
                                         <Link to={`/manage/update-orders/${d.id}`}><FontAwesomeIcon icon={faPenToSquare} size="lg" /></Link>
                                     )}
+                                    <Link to={`/manage/order-detail/${d.id}`}><FontAwesomeIcon icon={faCircleInfo} size="lg" style={{ color: "#134cae", marginLeft: "5px" }} /></Link>
                                 </td>
                             </tr>
                         ))
@@ -87,7 +90,8 @@ const TableOrders = (props) => {
                     <FontAwesomeIcon icon={faAnglesRight} style={{ color: "#000000", marginTop: "5px" }} />
                 </button>
             </div>
-        </div>
+        </div >
+
     )
 }
 export default TableOrders;

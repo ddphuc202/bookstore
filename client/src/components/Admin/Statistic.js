@@ -10,8 +10,7 @@ const Statistic = () => {
         statisticSales(month, year, setData)
     }, [month, year])
 
-    console.log(month)
-    console.log(year)
+
     return (
         <>
             <label>Chọn tháng</label>

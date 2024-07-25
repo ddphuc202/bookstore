@@ -19,7 +19,7 @@ body .button-add {
 .customs-btns-numbers {
   position: relative;
   width: 100px;
-  margin-left: 650px;
+  margin-left: 700px;
   display: flex;
   justify-content: center;
 }
@@ -67,4 +67,24 @@ body .button-add {
 .customs-btns-numbers button.btn-minus {
   left: 0;
   top: 0
+}
+
+tbody .status-completed {
+  color: #009900
+}
+
+tbody .status-cancelled {
+  color: #DD0000
+}
+
+tbody .status-pending {
+  color: #EEEE00
+}
+
+tbody .status-processing {
+  color: #FFB90F
+}
+
+tbody .status-delivering {
+  color: cornflowerblue
 }
