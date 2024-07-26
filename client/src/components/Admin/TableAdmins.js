@@ -1,6 +1,6 @@
 import Table from 'react-bootstrap/Table';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faPenToSquare, faTrash, faAnglesLeft, faAnglesRight, faRotateRight, faKey } from '@fortawesome/free-solid-svg-icons'
+import { faPenToSquare, faTrash, faAnglesLeft, faAnglesRight, faRotateRight, faKey } from '@fortawesome/free-solid-svg-icons';
 import { useEffect, useState } from 'react';
 import { baseURL } from '../../utils/AxiosCustomize';
 import { Link } from 'react-router-dom';
@@ -12,15 +12,15 @@ const TableAdmins = (props) => {
 
     const handleDelete = (id) => {
         deleteAdmins(id, refresh, setRefresh);
-    }
+    };
 
     const handleRestore = (id) => {
         restoreAdmins(id, refresh, setRefresh);
-    }
+    };
 
     useEffect(() => {
         getAdmins(setRecords);
-    }, [refresh])
+    }, [refresh]);
 
     return (
         <div style={{ border: "solid 1px #CFCFCF", padding: "30px", borderRadius: "15px", backgroundColor: "#E0EEEE" }}>
@@ -62,6 +62,6 @@ const TableAdmins = (props) => {
 
             </Table>
         </div>
-    )
-}
+    );
+};
 export default TableAdmins;
