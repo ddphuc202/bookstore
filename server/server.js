@@ -1,7 +1,7 @@
 require('dotenv').config();
 const app = require('./src/app');
 
-const port = process.env.PORT || 6969;
+const port = process.env.PORT || 3030;
 const hostname = process.env.HOSTNAME;
 
 const server = app.listen(port, () => {
@@ -9,8 +9,6 @@ const server = app.listen(port, () => {
 });
 
 process.on('SIGINT', () => {
-    server.close(() => {
-        console.log('Server closed');
-    })
+    console.log('Server closing...');
+    server.close();
 });
-
