@@ -36,10 +36,11 @@ const getCustomerById = (id, setData) => {
         .catch(err => console.log(err))
 }
 
-const updateCustomerByID = (id, data) => {
+const updateCustomerByID = (id, data, navigate) => {
     instance.put('/customers/' + id, data)
         .then(res => {
             toast.success("Cập nhật thông tin thành công!");
+            navigate("/info-customer")
         }).catch(err => {
             console.log(err)
             toast.error("Cập nhật thông tin thất bại!")

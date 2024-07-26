@@ -121,6 +121,7 @@ const Posts = () => {
                     </div>
                 </div>
             </section>
+            <br></br>
 
             <Footer />
         </>

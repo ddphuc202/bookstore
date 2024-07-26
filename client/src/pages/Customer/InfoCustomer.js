@@ -26,6 +26,8 @@ const InfoCustomer = () => {
                         <div class="content-main">
                             <p><b>Họ tên:</b> {data.name}</p>
                             <p><b>Email: </b>  {data.email} </p>
+                            <p><b>Số điện thoại: </b> {data.phone}</p>
+                            <p><b>Địa chỉ: </b> {data.address}</p>
                         </div>
                     </div>
                 </div>

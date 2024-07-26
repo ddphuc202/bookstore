@@ -3,13 +3,15 @@ import SidebarInfoCustomer from "../../components/Customer/SidebarInfoCustomer";
 import Footer from "../../components/Customer/Footer";
 import { useEffect, useState } from "react";
 import { getCustomerById, updateCustomerByID } from "../../services/CustomerServices";
+import { useNavigate } from "react-router-dom";
 
 const ChangeInfoCustomer = () => {
 
     const [data, setData] = useState([])
+    const navigate = useNavigate();
 
     const handleClick = (event) => {
-        updateCustomerByID(localStorage.getItem("userId"), data)
+        updateCustomerByID(localStorage.getItem("userId"), data, navigate)
     }
 
     useEffect(() => {
