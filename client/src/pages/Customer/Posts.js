@@ -21,7 +21,7 @@ const Posts = () => {
     }
 
     useEffect(() => {
-        getPostBanner(5, setData)
+        getPostBanner(2, setData)
     }, [])
 
     useEffect(() => {

@@ -48,7 +48,7 @@ function ModalAddNewArticles() {
 
                             <Form.Group className="mb-3" controlId="formBasicPassword">
                                 <Form.Label>Nội dung</Form.Label>
-                                <Form.Control as="textarea" placeholder="Nội dung" value={content} onChange={(event) => setContent(event.target.value)} />
+                                <Form.Control as="textarea" style={{ height: "100px" }} placeholder="Nội dung" value={content} onChange={(event) => setContent(event.target.value)} />
                             </Form.Group>
                         </Form>
 

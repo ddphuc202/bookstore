@@ -34,6 +34,16 @@ function ModalAddNewBooks() {
         createNewBook(title, author, publisher, description, price, discount, quantity, categories, thumbnailFile, otherImages, navigate);
     }
 
+    const handleQuantity = (event) => {
+        let value = event.target.value;
+        if (value < 1) {
+            toast.info("Số lượng tồn kho phải lớn hơn 0!")
+            value = 1
+            return
+        }
+        setQuantity(value)
+    }
+
 
     const handleUploadThumbnail = (event) => {
         if (event.target && event.target.files && event.target.files[0]) {
@@ -84,7 +94,7 @@ function ModalAddNewBooks() {
 
                             <Form.Group className="mb-3" controlId="formBasicPassword">
                                 <Form.Label>Mô tả</Form.Label>
-                                <Form.Control as="textarea" placeholder="Mô tả" value={description} onChange={(event) => setDescription(event.target.value)} />
+                                <Form.Control as="textarea" style={{ height: "100px" }} placeholder="Mô tả" value={description} onChange={(event) => setDescription(event.target.value)} />
                             </Form.Group>
 
                             <Form.Group className="mb-3" controlId="formBasicPassword">
@@ -109,7 +119,7 @@ function ModalAddNewBooks() {
 
                             <Form.Group className="mb-3" controlId="formBasicPassword">
                                 <Form.Label>Tồn kho</Form.Label>
-                                <Form.Control type="number" placeholder="Tồn kho" value={quantity} onChange={(event) => setQuantity(event.target.value)} />
+                                <Form.Control type="number" placeholder="Tồn kho" value={quantity} onChange={(event) => handleQuantity(event)} />
                             </Form.Group>
 
                             <Form.Group controlId="formFile" className="mb-3" >

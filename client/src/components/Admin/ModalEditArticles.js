@@ -67,7 +67,7 @@ function ModalEditArticles() {
 
                             <Form.Group className="mb-3" controlId="formBasicPassword">
                                 <Form.Label>Nội dung</Form.Label>
-                                <Form.Control as="textarea" value={data.content} onChange={event => setData({ ...data, content: event.target.value })} />
+                                <Form.Control as="textarea" style={{ height: "100px" }} value={data.content} onChange={event => setData({ ...data, content: event.target.value })} />
                             </Form.Group>
 
                             <Form.Group controlId="formFile" className="mb-3" >

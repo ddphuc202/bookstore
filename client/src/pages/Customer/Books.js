@@ -16,6 +16,8 @@ const Books = () => {
     const [page, setPage] = useState(1);
     const [categoryId, setCategoryId] = useState([]);
 
+    const [active, setActive] = useState('default')
+
 
     const handleSearch = (searchValue) => {
         setSearchBooks(searchValue);
@@ -29,24 +31,28 @@ const Books = () => {
         setOrder('');
         setPage(1);
         setSearchBooks([]);
+        setActive('default')
     }
 
     const handleSortBy = () => {
         setSortBy('created_at')
         setOrder('DESC')
         setPage(1);
+        setActive('new')
     }
 
     const handleAsc = () => {
         setSortBy('price')
         setOrder('ASC')
         setPage(1);
+        setActive('lowToHigh')
     }
 
     const handleDesc = () => {
         setSortBy('price')
         setOrder('DESC')
         setPage(1);
+        setActive('highToLow')
     }
 
     const handleCategoryId = (id) => {
@@ -76,16 +82,16 @@ const Books = () => {
 
                                     <span className="lazyload sort-icon">Sắp xếp theo </span>
                                     <ul>
-                                        <li className="btn-quick-sort default active">
+                                        <li className={`btn-quick-sort default ${active === 'default' ? 'active' : ''}`} >
                                             <a onClick={() => handleDefault()} >Mặc định</a>
                                         </li>
-                                        <li className="btn-quick-sort created-desc">
+                                        <li className={`btn-quick-sort created-desc ${active === 'new' ? 'active' : ''}`}>
                                             <a onClick={() => handleSortBy()} >Sách mới</a>
                                         </li>
-                                        <li className="btn-quick-sort price-desc">
+                                        <li className={`btn-quick-sort price-desc ${active === 'lowToHigh' ? 'active' : ''}`}>
                                             <a onClick={() => handleAsc()} >Giá thấp - cao</a>
                                         </li>
-                                        <li className="btn-quick-sort price-asc">
+                                        <li className={`btn-quick-sort price-asc ${active === 'highToLow' ? 'active' : ''}`}>
                                             <a onClick={() => handleDesc()} >Giá cao - thấp</a>
                                         </li>
                                     </ul>

@@ -7,6 +7,7 @@ import { useParams } from 'react-router-dom';
 import { getBookById, updateBookByID } from '../../services/BooksServices';
 import { getCategories } from '../../services/GenresServices';
 import { baseURL } from '../../utils/AxiosCustomize';
+import { toast } from 'react-toastify';
 
 
 function ModalEditBooks() {
@@ -28,6 +29,16 @@ function ModalEditBooks() {
     const handleSubmit = (event) => {
         event.preventDefault();
         updateBookByID(id, data, thumbnailFile, previewOtherImages, navigate)
+    }
+
+    const handleQuantity = (event) => {
+        let value = event.target.value;
+        if (value < 1) {
+            toast.info("Số lượng tồn kho phải lớn hơn 0!")
+            value = 1;
+            return
+        }
+        setData({ ...data, quantity: value })
     }
 
 
@@ -98,7 +109,7 @@ function ModalEditBooks() {
 
                             <Form.Group className="mb-3" controlId="formBasicPassword">
                                 <Form.Label>Mô tả</Form.Label>
-                                <Form.Control as="textarea" value={data.description} onChange={event => setData({ ...data, description: event.target.value })} />
+                                <Form.Control as="textarea" style={{ height: "100px" }} value={data.description} onChange={event => setData({ ...data, description: event.target.value })} />
                             </Form.Group>
 
                             <Form.Group className="mb-3" controlId="formBasicPassword">
@@ -125,7 +136,7 @@ function ModalEditBooks() {
 
                             <Form.Group className="mb-3" controlId="formBasicPassword">
                                 <Form.Label>Tồn kho</Form.Label>
-                                <Form.Control type="number" value={data.quantity} onChange={event => setData({ ...data, quantity: event.target.value })} />
+                                <Form.Control type="number" value={data.quantity} onChange={event => handleQuantity(event)} />
                             </Form.Group>
                         </Form>
 
