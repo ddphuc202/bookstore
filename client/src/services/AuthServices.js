@@ -15,8 +15,10 @@ const handleLogin = (email, password, navigate) => {
             localStorage.setItem('userRole', user.userRole);
             localStorage.setItem('userName', user.userName);
             if (localStorage.getItem('userRole') === 'customer') {
+                toast.success("Đăng nhập thành công!")
                 navigate('/');
             } else {
+                toast.success("Đăng nhập thành công!")
                 navigate('/manage');
             }
 
@@ -34,10 +36,10 @@ const handleRegister = (name, email, password, address, phone, navigate) => {
         phone: phone
     };
     instance.post('/register', data).then(res => {
-        toast.success('Đăng ký thành công');
+        alert('Đăng ký thành công');
         navigate('/login');
     }).catch(err => {
-        toast.error('Đăng ký thất bại');
+        alert('Đăng ký thất bại');
     })
 }
 

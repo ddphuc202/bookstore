@@ -42,14 +42,14 @@ const updateCategoriesByID = (id, data, navigate) => {
         })
 }
 
-const deleteCategories = (id, count, setCount) => {
+const deleteCategories = (id, refresh, setRefresh) => {
     const conf = window.confirm('Do you want to delete?');
     if (conf) {
         instance.delete('/categories/' + id)
             .then(res => {
                 toast.success('Xóa thể loại thành công!');
-                count++;
-                setCount(count);
+                refresh++;
+                setRefresh(refresh);
             }).catch(err => {
                 console.log(err)
                 toast.error('Xóa thể loại thất bại!')

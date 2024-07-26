@@ -11,11 +11,11 @@ const TableCustomers = (props) => {
   const navigate = useNavigate();
   const [page, setPage] = useState(1);
 
-  const [count, setCount] = useState(1);
+  const [refresh, setRefresh] = useState(1);
 
 
   const handleDelete = (id) => {
-    deleteCustomers(id, count, setCount);
+    deleteCustomers(id, refresh, setRefresh);
   }
 
   const pageForward = () => {
@@ -28,7 +28,7 @@ const TableCustomers = (props) => {
 
   useEffect(() => {
     getCustomers(page, setRecords);
-  }, [count, page])
+  }, [refresh, page])
 
 
   return (

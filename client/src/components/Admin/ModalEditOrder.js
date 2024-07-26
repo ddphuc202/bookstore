@@ -46,7 +46,7 @@ function ModalEditOrder() {
                             </Form.Group>
 
                             <Form.Group className="mb-3" controlId="formBasicEmail" >
-                                <Form.Label>Tên thể loại</Form.Label>
+                                <Form.Label>Tình trạng</Form.Label>
                                 <Form.Select aria-label="Default select example" value={data.status} onChange={event => setData({ ...data, status: event.target.value })}>
 
                                     {data.status === 'pending' && (

@@ -30,7 +30,9 @@ const TableOrderDetail = () => {
                             <tr key={i}>
                                 <td>
                                     <img width={"200px"} src={baseURL + detail.book.thumbnailPath}></img>
+                                    <br></br>
                                     <span>{detail.book.title} </span>
+
                                 </td>
 
                                 <td className='price' style={{ verticalAlign: "middle" }}>{Number(detail.price).toLocaleString('vi-VN')}đ</td>

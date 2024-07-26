@@ -62,14 +62,14 @@ const changePassword = (id, password, navigate) => {
         })
 }
 
-const deleteCustomers = (id, count, setCount) => {
+const deleteCustomers = (id, refresh, setRefresh) => {
     const conf = window.confirm('Do you want to delete?');
     if (conf) {
         instance.delete('/customers/' + id)
             .then(res => {
                 alert('Item has deleted!');
-                count++;
-                setCount(count);
+                refresh++;
+                setRefresh(refresh);
             }).catch(err => console.log(err))
     }
 }

@@ -53,7 +53,7 @@ function App() {
 
     <>
       {/* Admin side */}
-      <ToastContainer style={{ zIndex: 9999 }} />
+      <ToastContainer />
       <Routes >
 
         <Route element={<ProtectedRoutes />}>

@@ -8,11 +8,11 @@ import { getPost, deletePost } from '../../services/ArticlesServices';
 const TableArticles = (props) => {
 
   const [records, setRecords] = useState([]);
-  const [count, setCount] = useState(1);
+  const [refresh, setRefresh] = useState(1);
   const [page, setPage] = useState(1);
 
   const handleDelete = (id) => {
-    deletePost(id, count, setCount);
+    deletePost(id, refresh, setRefresh);
   }
 
   const pageForward = () => {
@@ -27,7 +27,7 @@ const TableArticles = (props) => {
 
   useEffect(() => {
     getPost(page, setRecords);
-  }, [count, page])
+  }, [refresh, page])
 
 
   return (

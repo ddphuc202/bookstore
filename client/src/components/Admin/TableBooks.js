@@ -81,7 +81,7 @@ const TableBooks = (props) => {
                 <td>{d.author}</td>
                 <td>{d.publisher}</td>
                 <td>{d.description}</td>
-                <td>{d.price}</td>
+                <td>{Number(d.price).toLocaleString("vi-VN")}đ</td>
                 <td>{d.discount}</td>
                 <td>{d.category.name}</td>
                 <td>{d.quantity}</td>

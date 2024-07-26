@@ -99,14 +99,14 @@ const updateBookByID = (id, data, thumbnailFile, previewOtherImages, navigate) =
         });
 }
 
-const deleteBooks = (id, count, setCount) => {
+const deleteBooks = (id, refresh, setRefresh) => {
     const conf = window.confirm('Bạn có muốn xóa?');
     if (conf) {
         instance.delete('/books/' + id)
             .then(res => {
                 toast.success('Sách xóa thành công!');
-                count++;
-                setCount(count);
+                refresh++;
+                setRefresh(refresh);
             }).catch(err => {
                 console.log(err)
                 toast.error('Xóa sách thất bại!')

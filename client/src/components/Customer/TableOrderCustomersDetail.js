@@ -40,6 +40,7 @@ const TableOrderCustomersDetail = () => {
                             <tr key={i}>
                                 <td>
                                     <img width={"200px"} src={baseURL + detail.book.thumbnailPath}></img>
+                                    <br></br>
                                     <span>{detail.book.title} </span>
                                 </td>
 

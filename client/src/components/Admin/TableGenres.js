@@ -10,11 +10,11 @@ const TableGenres = (props) => {
   const [page, setPage] = useState(1);
   const navigate = useNavigate();
 
-  const [count, setCount] = useState(1);
+  const [refresh, setRefresh] = useState(1);
 
 
   const handleDelete = (id) => {
-    deleteCategories(id, count, setCount)
+    deleteCategories(id, refresh, setRefresh)
   }
 
 
@@ -28,7 +28,7 @@ const TableGenres = (props) => {
 
   useEffect(() => {
     getCategories(setRecords)
-  }, [count])
+  }, [refresh])
 
 
   return (

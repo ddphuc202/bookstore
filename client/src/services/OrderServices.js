@@ -10,9 +10,8 @@ const createNewOrder = (data, navigate) => {
         address: data.address
     };
     instance.post('/orders', dataForm).then(res => {
-        const idOrder = res.data.id;
         alert('Đặt hàng thành công!');
-        navigate(`/order-detail/${idOrder}`);
+        navigate(`/orders`);
     }).catch(err => console.log(err));
 };
 

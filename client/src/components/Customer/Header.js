@@ -38,14 +38,14 @@ const Header = () => {
 
                                         </li>
                                         <li className="nav-item has-child   has-mega">
-                                            <Link className="a-img caret-down" to="/books" title="Sách Nhã Nam">
+                                            <Link className="a-img caret-down" to="/books" title="Sách Khai Tâm">
                                                 Sách Khai Tâm
                                             </Link>
 
                                         </li>
 
                                         <li className="nav-item ">
-                                            <Link className="a-img" to="/about-page" title="Về Nhã Nam">
+                                            <Link className="a-img" to="/about-page" title="Về Khai Tâm">
                                                 Về Khai Tâm
                                             </Link>
                                         </li>

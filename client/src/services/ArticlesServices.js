@@ -67,14 +67,14 @@ const updatePostByID = (id, data, imageFile, navigate) => {
         })
 }
 
-const deletePost = (id, count, setCount) => {
+const deletePost = (id, refresh, setRefresh) => {
     const conf = window.confirm('Do you want to delete?');
     if (conf) {
         instance.delete('/posts/' + id)
             .then(res => {
                 toast.success('Xóa bài viết thành công!');
-                count++;
-                setCount(count);
+                refresh++;
+                setRefresh(refresh);
             }).catch(err => {
                 console.log(err)
                 toast.error('Xóa bài viết thất bại!')

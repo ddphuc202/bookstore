@@ -83,7 +83,7 @@ const MainCheckOut = () => {
                                             <div className="field__input-wrapper field__input-wrapper--connected"
                                                 data-define="{phoneInput: new InputPhone(this)}">
                                                 <label className="field__label">
-                                                    Số điện thoại (tùy chọn)
+                                                    Số điện thoại
                                                 </label>
                                                 <input name="billingPhone" id="billingPhone" type="text"
                                                     className="form-control" value={data.phone} onChange={event => setData({ ...data, phone: event.target.value })} required />
@@ -104,7 +104,7 @@ const MainCheckOut = () => {
                                         <br />
                                         <br />
                                         <div>
-                                            <button className='btn btn-primary' onClick={() => handleSubmit()}>
+                                            <button className='btn btn-success' onClick={() => handleSubmit()}>
                                                 <h5 style={{ marginTop: "5px" }}>ĐẶT HÀNG</h5>
                                             </button>
                                         </div>
