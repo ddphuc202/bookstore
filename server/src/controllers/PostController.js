@@ -77,7 +77,6 @@ const postController = {
                 const currentImagePath = path.join(__dirname, '../public/images/' + currentImage.image);
                 fs.unlink(currentImagePath, (err) => {
                     if (err) console.log('Error deleting image: ', currentImagePath);
-                    else console.log('Successfully deleted image: ', currentImagePath);
                 });
                 postData.image = req.file.filename;
             }
@@ -96,6 +95,13 @@ const postController = {
     // Delete a post
     delete: async (req, res) => {
         try {
+            const currentImage = await db.Post.findByPk(req.params.id, {
+                attributes: ['image']
+            });
+            const currentImagePath = path.join(__dirname, '../public/images/' + currentImage.image);
+            fs.unlink(currentImagePath, (err) => {
+                if (err) console.log('Error deleting image', currentImagePath);
+            });
             const deleted = await db.Post.destroy({
                 where: { id: req.params.id }
             });

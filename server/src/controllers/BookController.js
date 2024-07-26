@@ -205,7 +205,6 @@ const booksController = {
                 const thumbnailPath = path.join(__dirname, '../public', process.env.IMAGE_PATH, currentThumbnail.thumbnail);
                 fs.unlink(thumbnailPath, (err) => {
                     if (err) console.log('Error deleting thumbnail: ', thumbnailPath);
-                    else console.log('Successfully deleted thumbnail: ', thumbnailPath);
                 });
                 bookData.thumbnail = req.files.thumbnail[0].filename;
             }
@@ -218,7 +217,6 @@ const booksController = {
                     const imagePath = path.join(__dirname, '../public', process.env.IMAGE_PATH, image.image);
                     fs.unlink(imagePath, (err) => {
                         if (err) console.log('Error deleting image: ', imagePath);
-                        else console.log('Successfully deleted image: ', imagePath);
                     });
                 });
                 await db.BookImage.destroy({ where: { bookId: req.params.id } });
