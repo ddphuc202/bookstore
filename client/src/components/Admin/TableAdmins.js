@@ -51,7 +51,7 @@ const TableAdmins = (props) => {
                                         <>
                                             <Link to={`/manage/edit-admins/${d.id}`} ><FontAwesomeIcon icon={faPenToSquare} size="lg" /></Link>
                                             <button style={{ border: 'none' }} onClick={event => handleDelete(d.id)} ><FontAwesomeIcon icon={faTrash} style={{ color: "#fa2500" }} /></button>
-                                            <Link to={`/manage/edit-password/${d.id}`} ><FontAwesomeIcon icon={faKey} style={{ color: "yellow" }} size="lg" /></Link>
+                                            <Link to={`/manage/edit-password/${d.id}`} ><FontAwesomeIcon icon={faKey} style={{ color: "#FFAA1D" }} size="lg" /></Link>
                                         </>
                                     )}
                                 </td>

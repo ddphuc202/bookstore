@@ -17,7 +17,7 @@ const addBookToCart = (id, quantity) => {
             toast.info('Vui lòng đăng nhập!')
         }
         if (err.response.status === 400) {
-            toast.error('Số lượng sách không đủ!')
+            toast.error('Vượt quá số lượng sách tồn kho!')
         }
     });
 };
@@ -40,10 +40,14 @@ const updateIncreaseAmountOfCart = (index, id, data, setData) => {
     let dataUpdate = {
         quantity: newData[index].quantity
     };
-    instance.put('carts/item/' + id, dataUpdate).then(res => {
-        setData(newData);
-    });
-
+    instance.put('carts/item/' + id, dataUpdate)
+        .then(res => {
+            setData(newData);
+        })
+        .catch(err => {
+            console.log(err);
+            toast.error('Vượt quá số lượng sách tồn kho!')
+        })
 };
 
 const updateDecreaseAmountOfCart = (index, id, data, setData) => {
@@ -73,20 +77,19 @@ const updateInputAmountOfCart = (index, id, newQuantity, data, setData) => {
     if (newData[index].quantity < 0) {
         newData[index].quantity = 1
     }
+    if (newData[index].quantity == 0) {
+        deleteItemInCart(id, data, setData);
+    }
     let dataUpdate = {
         quantity: newData[index].quantity
     };
     instance.put('carts/item/' + id, dataUpdate).then(res => {
-        if (newData[index].quantity == 0) {
-            deleteItemInCart(id, data, setData);
-        } else {
-            setData(newData);
-        }
-    }).catch(err => { console.log(err); });
+        setData(newData);
+    }).catch(err => {
+        console.log(err);
+        toast.error('Vượt quá số lượng sách tồn kho!')
+    });
 
-    if (newData[index].quantity == 0) {
-        deleteItemInCart(id, data, setData);
-    }
 };
 
 const deleteItemInCart = (id, data, setData) => {

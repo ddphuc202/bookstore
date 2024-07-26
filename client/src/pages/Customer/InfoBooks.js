@@ -43,6 +43,17 @@ const InfoBooks = () => {
         }
     };
 
+    const handleQuantityChange = (event) => {
+        let value = parseInt(event.target.value);
+
+        if (isNaN(value) || value < 1) {
+            value = 1;
+        } else if (value > data.quantity) {
+            value = data.quantity;
+        }
+        setQuantity(value);
+    };
+
     useEffect(() => {
         getBookById(id, setData)
     }, [])
@@ -97,10 +108,6 @@ const InfoBooks = () => {
                             Nhà xuất bản: <span  >{data.publisher}</span>
                         </div>
 
-                        <div className="author" style={{ marginTop: '10px' }}>
-                            {data.description}
-                        </div>
-
                         <div className="group-action-button">
                             <div className="group-power">
 
@@ -151,7 +158,7 @@ const InfoBooks = () => {
                                                 <FontAwesomeIcon icon={faMinus} style={{ color: "#000000", marginTop: "5px" }} />
                                             </button>
                                             <input aria-label="Số lượng" type="text" className="qty input-text" id="qty"
-                                                name="quantity" value={quantity} onChange={(event) => setQuantity(event.target.value)} />
+                                                name="quantity" value={quantity} onChange={event => handleQuantityChange(event)} />
                                             <button
                                                 onClick={handlePlusClick}
                                                 className="btn-plus btn-cts" type="button">

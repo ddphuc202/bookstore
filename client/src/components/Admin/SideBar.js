@@ -8,8 +8,6 @@ import '../../styles/SideBar.css';
 const SideBar = () => {
     return (
         <>
-
-
             <ul className="navbar-nav bg-gradient-success sidebar sidebar-dark accordion" id="accordionSidebar">
 
 
@@ -17,17 +15,11 @@ const SideBar = () => {
                     <div className="sidebar-brand-icon rotate-n-15">
                         <i className="fas fa-laugh-wink"></i>
                     </div>
-                    <div className="sidebar-brand-text mx-3">Tiệm Sách Khai Tâm </div>
+                    <div className="sidebar-brand-text mx-3"><Link className="nav-link" to={'/manage'} style={{ textDecoration: "none" }}> <b>Tiệm Sách Khai Tâm</b></Link> </div>
                 </a>
 
 
                 <hr className="sidebar-divider my-0" />
-
-
-                <li className="nav-item">
-                    <a className="nav-link" href="">
-                        <span>Dashboard</span></a>
-                </li>
 
 
                 <hr className="sidebar-divider" />
@@ -66,10 +58,6 @@ const SideBar = () => {
 
                 <hr className="sidebar-divider" />
 
-
-                <div className="sidebar-heading">
-                    Addons
-                </div>
 
 
                 {/* <li className="nav-item">
