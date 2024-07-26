@@ -68,7 +68,7 @@ const updatePostByID = (id, data, imageFile, navigate) => {
 }
 
 const deletePost = (id, refresh, setRefresh) => {
-    const conf = window.confirm('Do you want to delete?');
+    const conf = window.confirm('Bạn có muốn xóa bài viết?');
     if (conf) {
         instance.delete('/posts/' + id)
             .then(res => {

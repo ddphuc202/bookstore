@@ -35,7 +35,7 @@ const ChangePasswordCustomer = () => {
                 return;
             }
 
-            changePassword(localStorage.getItem("userId"), password, navigate);
+            changePassword(localStorage.getItem("userId"), confirmPass, navigate);
         });
     }
 
