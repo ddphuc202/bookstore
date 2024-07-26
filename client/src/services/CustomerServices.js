@@ -1,3 +1,4 @@
+import { toast } from 'react-toastify';
 import { instance } from '../utils/AxiosCustomize';
 
 const createNewCustomer = (name, email, password, phone, address, navigate) => {
@@ -11,7 +12,7 @@ const createNewCustomer = (name, email, password, phone, address, navigate) => {
     }
 
     instance.post('/customers', data).then(res => {
-        alert('Data add successfully!');
+        toast.success('Tạo người dùng thành công!');
         navigate('/manage/customers');
     }).catch(err => console.log(err));
 }
@@ -35,12 +36,30 @@ const getCustomerById = (id, setData) => {
         .catch(err => console.log(err))
 }
 
-const updateCustomerByID = (id, data, navigate) => {
+const updateCustomerByID = (id, data) => {
     instance.put('/customers/' + id, data)
         .then(res => {
-            alert("Data update successfully!");
-            navigate('/manage/customers');
-        }).catch(err => console.log(err))
+            toast.success("Cập nhật thông tin thành công!");
+        }).catch(err => {
+            console.log(err)
+            toast.error("Cập nhật thông tin thất bại!")
+        })
+}
+
+const changePassword = (id, password, navigate) => {
+
+    let data = {
+        password: password
+    }
+    instance.put("/customers/" + id, data)
+        .then(res => {
+            toast.success("Cập nhật mật khẩu thành công!")
+            navigate("/info-customer")
+        })
+        .catch(err => {
+            console.log(err)
+            toast.error("Cập nhật mật khẩu thất bại!")
+        })
 }
 
 const deleteCustomers = (id, count, setCount) => {
@@ -54,4 +73,4 @@ const deleteCustomers = (id, count, setCount) => {
             }).catch(err => console.log(err))
     }
 }
-export { createNewCustomer, getCustomers, getCustomerById, updateCustomerByID, deleteCustomers } 
+export { createNewCustomer, getCustomers, getCustomerById, updateCustomerByID, changePassword, deleteCustomers } 
