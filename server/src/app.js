@@ -4,9 +4,6 @@ const express = require('express');
 const configStaticFiles = require('./config/staticFiles');
 const configCORS = require('./config/cors');
 
-// Import middlewares
-const compression = require('compression');
-
 // Import routes
 const authRoutes = require('./routes/auth');
 const adminRoutes = require('./routes/admins');
@@ -23,7 +20,6 @@ const app = express();
 // Init middlewares
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use(compression());
 
 // Config 
 app.use(configStaticFiles);

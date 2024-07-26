@@ -14,7 +14,7 @@ const booksController = {
             if (offset < 0) {
                 offset = 0;
             }
-            const validSortBy = ['updatedAt', 'price'];
+            const validSortBy = ['updatedAt', 'createdAt', 'price'];
             if (!validSortBy.includes(sortBy)) {
                 sortBy = 'updatedAt';
             }
