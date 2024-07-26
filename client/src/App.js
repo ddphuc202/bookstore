@@ -41,6 +41,8 @@ import ModalEditAdmins from './components/Admin/ModalEditAdmins';
 import ManageOrderDetail from './pages/Admin/ManageOrderDetail';
 import ModalEditPasswordAdmin from './components/Admin/ModalEditPasswordAdmin';
 import InfoCustomer from './pages/Customer/InfoCustomer';
+import ChangeInfoCustomer from './pages/Customer/ChangeInfoCustomer';
+import ChangePasswordCustomer from './pages/Customer/ChangePasswordCustomer';
 
 
 function App() {
@@ -100,6 +102,8 @@ function App() {
         <Route path='/orders' element={<OrderCustomers />} />
         <Route path='/order-detail/:id' element={<OrderCustomersDetail />} />
         <Route path='/info-customer' element={<InfoCustomer />} />
+        <Route path='/change-info' element={<ChangeInfoCustomer />} />
+        <Route path='/change-password' element={<ChangePasswordCustomer />} />
 
         <Route path='/login' element={<Login />} />
         <Route path='/register' element={<Register />} />

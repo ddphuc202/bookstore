@@ -43,6 +43,17 @@ const InfoBooks = () => {
         }
     };
 
+    const handleQuantityChange = (event) => {
+        let value = parseInt(event.target.value);
+
+        if (isNaN(value) || value < 1) {
+            value = 1;
+        } else if (value > data.quantity) {
+            value = data.quantity;
+        }
+        setQuantity(value);
+    };
+
     useEffect(() => {
         getBookById(id, setData)
     }, [])
@@ -77,7 +88,7 @@ const InfoBooks = () => {
                                 </SwiperSlide>
                                 {otherImages.map((image, index) => (
                                     <SwiperSlide key={index}>
-                                        <img style={{ marginLeft: '0px', alignItems: 'center' }} width={'515px'} height={'400px'} key={index} src={baseURL + image.imagePath} alt="Ảnh" />
+                                        <img style={{ marginLeft: '50px', marginTop: "50px", alignItems: 'center' }} width={'315px'} key={index} src={baseURL + image.imagePath} alt="Ảnh" />
                                     </SwiperSlide>
                                 ))}
                             </Swiper>
@@ -95,10 +106,6 @@ const InfoBooks = () => {
 
                         <div className="author" style={{ marginTop: '10px' }}>
                             Nhà xuất bản: <span  >{data.publisher}</span>
-                        </div>
-
-                        <div className="author" style={{ marginTop: '10px' }}>
-                            {data.description}
                         </div>
 
                         <div className="group-action-button">
@@ -151,7 +158,7 @@ const InfoBooks = () => {
                                                 <FontAwesomeIcon icon={faMinus} style={{ color: "#000000", marginTop: "5px" }} />
                                             </button>
                                             <input aria-label="Số lượng" type="text" className="qty input-text" id="qty"
-                                                name="quantity" value={quantity} onChange={(event) => setQuantity(event.target.value)} />
+                                                name="quantity" value={quantity} onChange={event => handleQuantityChange(event)} />
                                             <button
                                                 onClick={handlePlusClick}
                                                 className="btn-plus btn-cts" type="button">
