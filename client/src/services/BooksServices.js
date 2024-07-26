@@ -113,4 +113,21 @@ const deleteBooks = (id, count, setCount) => {
             })
     }
 }
-export { createNewBook, getBooks, getBookById, updateBookByID, deleteBooks, getBooksAdmin } 
+
+const restoreBook = (id, refresh, setRefresh) => {
+    const conf = window.confirm('Bạn có muốn khôi phục không?');
+    if (conf) {
+        instance.patch('/books/restore/' + id)
+            .then(res => {
+                toast.success('Khôi phục sách thành công!');
+                refresh++;
+                setRefresh(refresh);
+
+            }).catch(err => {
+                console.log(err);
+                toast.error('Khôi phục sách thất bại!')
+            })
+    }
+}
+
+export { createNewBook, getBooks, getBookById, updateBookByID, deleteBooks, restoreBook, getBooksAdmin } 

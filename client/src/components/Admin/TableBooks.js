@@ -1,12 +1,11 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faPenToSquare, faTrash, faAnglesLeft, faAnglesRight, faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons'
+import { faPenToSquare, faTrash, faAnglesLeft, faAnglesRight, faRotateLeft, faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons'
 import Table from 'react-bootstrap/Table';
 import { useEffect, useState } from 'react';
 import { Link, Route, useNavigate } from 'react-router-dom';
-import { getBooksAdmin, deleteBooks } from '../../services/BooksServices'
+import { getBooksAdmin, deleteBooks, restoreBook } from '../../services/BooksServices'
 import { baseURL } from '../../utils/AxiosCustomize';
 const TableBooks = (props) => {
-
 
   const [records, setRecords] = useState([]);
 
@@ -16,11 +15,15 @@ const TableBooks = (props) => {
   const [order, setOrder] = useState([]);
   const [categoryId, setCategoryId] = useState();
 
-  const [count, setCount] = useState(1);
+  const [refresh, setRefresh] = useState(1);
 
 
   const handleDelete = (id) => {
-    deleteBooks(id, count, setCount);
+    deleteBooks(id, refresh, setRefresh);
+  }
+
+  const handleRestore = (id) => {
+    restoreBook(id, refresh, setRefresh)
   }
 
   const pageForward = () => {
@@ -33,7 +36,7 @@ const TableBooks = (props) => {
 
   useEffect(() => {
     getBooksAdmin(page, search, sortBy, order, categoryId, setRecords);
-  }, [page, search, count])
+  }, [page, search, refresh])
 
 
 
@@ -83,8 +86,15 @@ const TableBooks = (props) => {
                 <td>{d.category.name}</td>
                 <td>{d.quantity}</td>
                 <td>
-                  <Link to={`/manage/edit-books/${d.id}`} ><FontAwesomeIcon icon={faPenToSquare} size="lg" /></Link>
-                  <button style={{ border: 'none' }} onClick={event => handleDelete(d.id)} ><FontAwesomeIcon icon={faTrash} style={{ color: "#fa2500" }} /></button>
+                  {
+                    d.deletedAt ? (
+                      <button style={{ border: 'none' }} onClick={event => handleRestore(d.id)} ><FontAwesomeIcon icon={faRotateLeft} style={{ color: "green" }} /></button>
+                    ) : (
+                      <>
+                        <Link to={`/manage/edit-books/${d.id}`} ><FontAwesomeIcon icon={faPenToSquare} size="lg" /></Link>
+                        <button style={{ border: 'none' }} onClick={event => handleDelete(d.id)} ><FontAwesomeIcon icon={faTrash} style={{ color: "#fa2500" }} /></button>
+                      </>
+                    )}
                 </td>
               </tr>
             ))
