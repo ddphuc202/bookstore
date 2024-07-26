@@ -1,7 +1,6 @@
 const express = require('express');
 
 // Import config
-const configViewEngine = require('./config/viewEngine');
 const configStaticFiles = require('./config/staticFiles');
 const configCORS = require('./config/cors');
 
@@ -27,9 +26,8 @@ app.use(express.urlencoded({ extended: true }));
 app.use(compression());
 
 // Config 
-configViewEngine(app);
-configStaticFiles(app);
-configCORS(app);
+app.use(configStaticFiles);
+app.use(configCORS());
 
 // Routes
 app.use('/', authRoutes);
