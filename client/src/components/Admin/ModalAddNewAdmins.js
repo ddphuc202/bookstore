@@ -18,7 +18,7 @@ function ModalAddNewAdmins() {
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        if (!name || !email || password || !phone) {
+        if (!name || !email || !password || !phone) {
             toast.error("Vui lòng nhập đầy đủ thông tin!")
             return
         }
