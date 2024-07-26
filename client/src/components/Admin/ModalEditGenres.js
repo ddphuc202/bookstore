@@ -5,6 +5,7 @@ import Form from 'react-bootstrap/Form';
 import { useNavigate } from 'react-router-dom';
 import { useParams } from 'react-router-dom';
 import { getCategoriesById, updateCategoriesByID } from '../../services/GenresServices';
+import { toast } from 'react-toastify';
 
 
 function ModalEditGenres() {
@@ -14,6 +15,10 @@ function ModalEditGenres() {
 
     const handleSubmit = (event) => {
         event.preventDefault();
+        if (!data.name) {
+            toast.error("Vui lòng nhập đầy đủ thông tin!")
+            return
+        }
         updateCategoriesByID(id, data, navigate);
     }
 

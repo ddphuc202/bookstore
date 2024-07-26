@@ -5,6 +5,7 @@ import Form from 'react-bootstrap/Form';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { createNewPost } from '../../services/ArticlesServices';
+import { toast } from 'react-toastify';
 
 function ModalAddNewArticles() {
     const [title, setTitle] = useState('');
@@ -17,6 +18,10 @@ function ModalAddNewArticles() {
 
     const handleSubmit = (event) => {
         event.preventDefault();
+        if (!title || !content) {
+            toast.error("Vui lòng nhập đầy đủ thông tin!")
+            return
+        }
         createNewPost(title, content, imageFile, navigate);
     }
 

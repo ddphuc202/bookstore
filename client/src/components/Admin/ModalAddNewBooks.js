@@ -27,6 +27,10 @@ function ModalAddNewBooks() {
 
     const handleSubmit = (event) => {
         event.preventDefault();
+        if (!title || !author || !publisher || !description || !price || !quantity || !discount) {
+            toast.error("Vui lòng nhập đầy đủ thông tin sách!")
+            return;
+        }
         if (!categories) {
             toast.error('Vui lòng chọn thể loại sách!');
             return;

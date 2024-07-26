@@ -6,6 +6,7 @@ import { baseURL } from '../../utils/AxiosCustomize';
 import { useNavigate } from 'react-router-dom';
 import { useParams } from 'react-router-dom';
 import { updatePostByID, getPostById } from '../../services/ArticlesServices';
+import { toast } from 'react-toastify';
 
 
 function ModalEditArticles() {
@@ -20,6 +21,10 @@ function ModalEditArticles() {
 
     const handleSubmit = (event) => {
         event.preventDefault();
+        if (!data.title || !data.content) {
+            toast.error("Vui lòng nhập đầy đủ thông tin!")
+            return
+        }
         updatePostByID(id, data, imageFile, navigate)
     }
 

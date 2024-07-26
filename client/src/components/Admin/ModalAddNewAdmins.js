@@ -5,6 +5,7 @@ import Form from 'react-bootstrap/Form';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { createNewAdmin } from '../../services/AdminsServices';
+import { toast } from 'react-toastify';
 
 function ModalAddNewAdmins() {
     const [name, setName] = useState('');
@@ -17,6 +18,10 @@ function ModalAddNewAdmins() {
 
     const handleSubmit = (event) => {
         event.preventDefault();
+        if (!name || !email || password || !phone) {
+            toast.error("Vui lòng nhập đầy đủ thông tin!")
+            return
+        }
         createNewAdmin(name, email, password, phone, navigate);
     }
 
