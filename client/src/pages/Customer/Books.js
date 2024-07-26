@@ -35,7 +35,7 @@ const Books = () => {
     }
 
     const handleSortBy = () => {
-        setSortBy('created_at')
+        setSortBy('createdAt')
         setOrder('DESC')
         setPage(1);
         setActive('new')
