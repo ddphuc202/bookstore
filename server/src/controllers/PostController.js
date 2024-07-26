@@ -7,7 +7,7 @@ const postController = {
     // Get all posts
     getAll: async (req, res) => {
         try {
-            let { page = 1, limit = 9, search } = req.query;
+            let { page = 1, limit = 6 } = req.query;
             let offset = (page - 1) * limit;
             if (offset < 0) {
                 offset = 0;
