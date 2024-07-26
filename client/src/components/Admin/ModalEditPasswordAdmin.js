@@ -5,6 +5,7 @@ import Form from 'react-bootstrap/Form';
 import { useNavigate } from 'react-router-dom';
 import { useParams } from 'react-router-dom';
 import { updatePassword } from '../../services/AdminsServices';
+import { toast } from 'react-toastify';
 
 
 function ModalEditPasswordAdmin() {
@@ -15,6 +16,10 @@ function ModalEditPasswordAdmin() {
 
     const handleSubmit = (event) => {
         event.preventDefault();
+        if (!password) {
+            toast.error("Vui lòng nhập đầy đủ thông tin!")
+            return
+        }
         updatePassword(id, password, navigate);
     }
 

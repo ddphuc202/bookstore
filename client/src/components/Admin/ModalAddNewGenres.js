@@ -4,6 +4,7 @@ import Modal from 'react-bootstrap/Modal';
 import Form from 'react-bootstrap/Form';
 import { useNavigate } from 'react-router-dom';
 import { createNewCategories } from '../../services/GenresServices';
+import { toast } from 'react-toastify';
 
 function ModalAddNewGenres() {
     const [name, setName] = useState('');
@@ -12,6 +13,10 @@ function ModalAddNewGenres() {
 
     const handleSubmit = (event) => {
         event.preventDefault();
+        if (!name) {
+            toast.error("Vui lòng nhập đầy đủ thông tin!")
+            return
+        }
         createNewCategories(name, navigate);
     }
 
